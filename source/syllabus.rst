@@ -11,7 +11,10 @@ MWF: 4-5:00pm, KEC 1001
 Instructors
 ~~~~~~~~~~~
 
-Lance Albertson and Jordane Evans -- email: cs312@osuosl.org phone: 541-737-9975
+Lance Albertson and Jordan Evans
+
+* email: cs312@osuosl.org
+* phone: 541-737-9975
 
 Office Hours
 ~~~~~~~~~~~~
