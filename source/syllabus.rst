@@ -109,7 +109,7 @@ this class (C or lower).
 Grading
 ~~~~~~~
 
-* 1 midterms (40 pts ) -- *20% of grade*
+* 1 midterm (40 pts ) -- *20% of grade*
 * 1 final (40 pts) -- *20% of grade*
 * 6 Assignments (6 x 20 pts) -- *60% of grade*
 
