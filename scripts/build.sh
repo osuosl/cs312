@@ -2,7 +2,7 @@
 
 # Update repo
 git checkout master
-git pull -q --ff-only
+git pull -q
 
 # Enable venv
 if [ ! -d venv ]; then
