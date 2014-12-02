@@ -10,15 +10,17 @@ Internet services. Security issues.
 Instructors
 ~~~~~~~~~~~
 
-* `Carlos Jensen <cjensen@eecs.oregonstate.edu>`_
 * `Lance Albertson <lance@osuosl.org>`_
 * `Jordan Evans <jordane@osuosl.org>`_
+* `Carlos Jensen <cjensen@eecs.oregonstate.edu>`_ *(Instructor on record only)*
+
+Instructor email: cs312@osuosl.org
 
 Location:
-  KEC 1001
+  MWF: 4-5:00pm, KEC 1001
 
 Office Hours:
-  TBA
+  By appointment only.
 
 Textbook (required):
   *System Administration Handbook (4th Edition)* by Evi Nemeth et al

@@ -6,12 +6,17 @@ Syllabus
 Location
 ~~~~~~~~
 
-KEC 1001
+MWF: 4-5:00pm, KEC 1001
+
+Instructors
+~~~~~~~~~~~
+
+Lance Albertson and Jordane Evans -- email: cs312@osuosl.org phone: 541-737-9975
 
 Office Hours
 ~~~~~~~~~~~~
 
-TBA
+By appointment only.
 
 Class Mailing List
 ~~~~~~~~~~~~~~~~~~
@@ -91,14 +96,43 @@ Course Objectives
 Attendance Policy
 ~~~~~~~~~~~~~~~~~
 
-Grade Evaluation
-~~~~~~~~~~~~~~~~
+**There are no make-up quizzes or exams unless you arrange with me ahead of time
+with a valid excuse.** Attendance is **MANDATORY** the first week, if you do not
+attend 2 of the 3 classes, **you will be dropped from the course**.
 
-Grading Scale
-~~~~~~~~~~~~~
+**In general:** Students who do not attend lectures tend to do very poorly in
+this class (C or lower).
+
+Grading
+~~~~~~~
+
+* 2 midterms (2 x 30 pts ) -- *30% of grade*
+* 1 final (40 pts) -- *20% of grade*
+* 5 Assignments (5 x 20 pts) -- *50% of grade*
+
+=========== =====
+Points      Grade
+=========== =====
+**200-180** **A**
+179-175     A-
+174-170     B+
+**169-160** *B*
+159-155*    B-
+154-150     C+
+**149-140** **C**
+139-135     C-
+134-130     D+
+**129-120** **D**
+**119-0**   **F**
+=========== =====
 
 Academic Dishonesty
 ~~~~~~~~~~~~~~~~~~~
+
+Policies regarding academic honesty can be found `here`_ and compliance is
+expected for this course.
+
+.. _here: http://arcweb.sos.state.or.us/pages/rules/oars_500/oar_576/576_015.html
 
 Students with Disabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
