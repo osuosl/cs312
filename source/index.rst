@@ -1,17 +1,40 @@
-.. CS312 documentation master file, created by
-   sphinx-quickstart on Wed Nov 26 16:43:57 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+CS 312 - Linux System Administration
+====================================
 
-Welcome to CS312's documentation!
-=================================
+Catalog Description
+~~~~~~~~~~~~~~~~~~~
+
+Introduction to LINUX system administration. Network administration and routing.
+Internet services. Security issues.
+
+Instructors
+~~~~~~~~~~~
+
+* `Carlos Jensen <cjensen@eecs.oregonstate.edu>`_
+* `Lance Albertson <lance@osuosl.org>`_
+* `Jordan Evans <jordane@osuosl.org>`_
+
+Location:
+  KEC 1001
+
+Office Hours:
+  TBA
+
+Textbook (required):
+  *System Administration Handbook* by Evi Nemeth et al
+
+Prerequisites:
+  CS 311, CS 344 or instructor approval
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-
+   syllabus
+   calendar
+   assignments
+   resources
 
 Indices and tables
 ==================
