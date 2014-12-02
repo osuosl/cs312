@@ -19,7 +19,12 @@ Class Mailing List
 Course Content
 ~~~~~~~~~~~~~~
 
-* Linux basics: *single system fundamentals, OS installation, user management*
+* Linux basics:
+
+  * Single system fundamentals
+  * OS installation
+  * User management
+
 * Development Methodologies:
 
   * Contribution to the growing DevOps ecosystem
