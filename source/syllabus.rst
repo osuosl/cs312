@@ -109,9 +109,9 @@ this class (C or lower).
 Grading
 ~~~~~~~
 
-* 2 midterms (2 x 30 pts ) -- *30% of grade*
+* 1 midterms (40 pts ) -- *20% of grade*
 * 1 final (40 pts) -- *20% of grade*
-* 5 Assignments (5 x 20 pts) -- *50% of grade*
+* 6 Assignments (6 x 20 pts) -- *60% of grade*
 
 =========== =====
 Points      Grade
