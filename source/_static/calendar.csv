@@ -1,40 +1,40 @@
-Date,Lecture / Activity,Assigned Reading
+Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
-M 1/5,History & Background,
+M 1/5,Class Intro,
 W 1/7,History & Background,
 F 1/9,History & Background,
 ,**Week 2**,
 M 1/12,Linux Basics,
-W 1/14,Linux Basics,
+W 1/14,Linux Basics,HW#1 Assigned
 F 1/16,Linux Basics,
 ,**Week 3**,
 M 1/19,No Class / MLK,
 W 1/21,Linux Basics,
-F 1/23,Development Methods / Continuous Integration,
+F 1/23,Development Methods / Continuous Integration,HW#1 Due
 ,**Week 4**,
-M 1/26,Development Methods / Continuous Integration,
+M 1/26,Development Methods / Continuous Integration,HW#2 Assigned
 W 1/28,Development Methods / Continuous Integration,
-F 1/30,Configuration Management,
+F 1/30,Midterm,
 ,**Week 5**,
-M 2/2,Configuration Management,
-W 2/4,Configuration Management,
+M 2/2,Configuration Management,HW#2 Due
+W 2/4,Configuration Management,HW#3 Assigned
 F 2/6,Configuration Management,
 ,**Week 6**,
-M 2/9,Monitoring & Performance Monitoring,
-W 2/11,Monitoring & Performance Monitoring,
-F 2/13,Monitoring & Performance Monitoring,
+M 2/9,Configuration Management,
+W 2/11,Monitoring & Performance Monitoring,HW#3 Due
+F 2/13,Monitoring & Performance Monitoring,HW#4 Assigned
 ,**Week 7**,
-M 2/16,High Availability Strategies,
-W 2/18,High Availability Strategies,
-F 2/20,High Availability Strategies,
+M 2/16,Monitoring & Performance Monitoring,
+W 2/18,High Availability Strategies,HW#4 Due
+F 2/20,High Availability Strategies,HW#5 Assigned
 ,**Week 8**,
 M 2/23,High Availability Strategies,
-W 2/25,Containerization / Virtualization,
-F 2/27,Containerization / Virtualization,
+W 2/25,High Availability Strategies,
+F 2/27,Containerization / Virtualization,HW#5 Due; HW#6 Assigned
 ,**Week 9**,
 M 3/2,Containerization / Virtualization,
-W 3/4,Distributed Systems & Service Discovery,
-F 3/6,Distributed Systems & Service Discovery,
+W 3/4,Containerization / Virtualization,
+F 3/6,Distributed Systems & Service Discovery,HW#6 Due
 ,**Week 10 (Dead week)**,
 M 3/9,Distributed Systems & Service Discovery,
 W 3/11,Distributed Systems & Service Discovery,
