@@ -59,7 +59,7 @@ Textbook (required)
 Prerequisites
 ~~~~~~~~~~~~~
 
-CS 311, CS 344 or instructor approval
+CS 311, CS 344, or instructor approval
 
 Course Objectives
 ~~~~~~~~~~~~~~~~~

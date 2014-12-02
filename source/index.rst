@@ -24,7 +24,7 @@ Textbook (required):
   *System Administration Handbook (4th Edition)* by Evi Nemeth et al
 
 Prerequisites:
-  CS 311, CS 344 or instructor approval
+  CS 311, CS 344, or instructor approval
 
 Class pages:
 ~~~~~~~~~~~~
