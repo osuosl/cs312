@@ -24,22 +24,27 @@ Course Content
 
   * Contribution to the growing DevOps ecosystem
   * Continuous Integration & Deployment
+
 * Configuration Management
 
   * Historical Context
   * Modern Configuration Management basics
+
 * Monitoring
 
   * Service Monitoring tools
   * Performance Monitoring tools
+
 * High Availability
 
   * Load balancing strategies
   * Setting up services to minimize downtime
+
 * Virtualization & Containerization
 
   * Public and Private cloud technologies
   * Use cases between virtualization and containers
+
 * Distributed Systems & Service Discovery
 
   * Current and future approaches of distributed and scalable system
