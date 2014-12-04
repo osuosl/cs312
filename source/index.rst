@@ -12,7 +12,6 @@ Instructors
 
 * `Lance Albertson <lance@osuosl.org>`_
 * `Jordan Evans <jordane@osuosl.org>`_
-* `Carlos Jensen <cjensen@eecs.oregonstate.edu>`_ *(Instructor on record only)*
 
 Instructor email: cs312@osuosl.org
 
