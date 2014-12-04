@@ -3,6 +3,15 @@
 Syllabus
 ========
 
+Course Description
+~~~~~~~~~~~~~~~~~~
+
+Introduction to Linux System Administration and `DevOps`_ methodologies. The
+goal of this course is to provide the foundation of knowledge with the tools
+and technologies used in managing today's highly scalable and agile systems.
+
+.. _DevOps: http://en.wikipedia.org/wiki/DevOps
+
 Location
 ~~~~~~~~
 
