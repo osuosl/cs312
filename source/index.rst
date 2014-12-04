@@ -1,11 +1,23 @@
 CS 312 - Linux System Administration
 ====================================
 
-Catalog Description
-~~~~~~~~~~~~~~~~~~~
+Course Description
+~~~~~~~~~~~~~~~~~~
 
-Introduction to LINUX system administration. Network administration and routing.
-Internet services. Security issues.
+Introduction to Linux System Administration and `DevOps`_ methodologies. The
+goal of this course is to provide the foundation of knowledge with the tools and
+technologies used in managing today's highly scalable and agile systems.
+
+Topics that will be discussed will include:
+
+* Linux Basics
+* Configuration Management
+* System Monitoring
+* High Availability System Architecture
+* Virtualization and Containerization
+* Distributed Systems and Service Discovery
+
+.. _DevOps: http://en.wikipedia.org/wiki/DevOps
 
 Instructors
 ~~~~~~~~~~~
