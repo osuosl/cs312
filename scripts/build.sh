@@ -15,6 +15,7 @@ pip install -r requirements.txt
 
 # Build docs
 SPHINXOPTS="-W" make -e html
+SPHINXOPTS="-W" make -e slides
 
 # Disable venv
 deactivate
