@@ -4,15 +4,15 @@ Welcome to CS312
 Welcome
 ~~~~~~~
 
-:Instructors: Lance Albertson, Jordan Evans
+**Instructors:** Lance Albertson, Jordan Evans
 
 * KEC 1001
 * Course Email: cs312@osuosl.org
 * Office Hours: by appointment
 
-:TA: TBA
+**TA:** TBA
 
-:Class mailing list: TBA
+**Class mailing list:** TBA
 
 Textbook
 ~~~~~~~~
