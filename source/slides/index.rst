@@ -1,10 +1,9 @@
 CS312
 =====
 
-Contents:
-
 .. toctree::
     :maxdepth: 1
+    :hidden:
     :glob:
 
     *
