@@ -1,3 +1,5 @@
+.. _00_intro:
+
 Welcome to CS312
 ================
 
@@ -8,6 +10,7 @@ Welcome
 
 * KEC 1001
 * Course Email: cs312@osuosl.org
+* Course website: http://cs312.osuosl.org
 * Office Hours: by appointment
 
 **TA:** TBA
