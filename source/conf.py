@@ -29,7 +29,16 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ['sphinx.ext.intersphinx']
+
+# Intersphinx mappings
+intersphinx_mapping = {
+    'slides': ('http://cs312.osuosl.org/slides/', None),
+    'site': ('http://cs312.osuosl.org/', None),
+}
+
+# Ensure we get the latest copy of the wiki code on each run
+intersphinx_cache_limit = 0
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

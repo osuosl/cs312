@@ -14,8 +14,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Build docs
-SPHINXOPTS="-W" make -e html
-SPHINXOPTS="-W" make -e slides
+# If we've already built the env, make warnings errors
+if [ -e build/html/objects.inv -a -e build/html/slides/objects.inv ] ; then
+  SPHINXOPTS="-W" make -e slides
+  SPHINXOPTS="-W" make -e html
+else
+# Otherwise build without errors since the interwiki file doesn't exist yet and
+# it will fail as a warning.
+  make slides
+  make html
+fi
 
 # Disable venv
 deactivate
