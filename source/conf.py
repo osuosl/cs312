@@ -68,7 +68,7 @@ release = '1.0'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = []
+exclude_patterns = [ 'slides/*' ]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -259,3 +259,22 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# -- Hieroglyph Slide Configuration ------------
+
+extensions += [
+    'hieroglyph',
+]
+
+slide_theme = 'single-level'
+slide_levels = 3
+
+# Place custom static assets in the _static directory and uncomment
+# the following lines to include them
+
+# slide_theme_options = {
+#     'custom_css': 'custom.css',
+#     'custom_js': 'custom.js',
+# }
+
+# ----------------------------------------------

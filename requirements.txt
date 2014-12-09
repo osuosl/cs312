@@ -4,6 +4,8 @@ Pygments==2.0.1
 Sphinx==1.2.3
 argparse==1.2.1
 docutils==0.12
+hieroglyph==0.6.5
 pyparsing==2.0.3
+six==1.8.0
 sphinx-rtd-theme==0.1.6
 wsgiref==0.1.2
