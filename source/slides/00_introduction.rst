@@ -22,10 +22,10 @@ Textbook
 
 *System Administration Handbook (4th Edition)* by Evi Nemeth et al
 
-* You are responsible for any material presented in class, even if not covered
+* You are responsible for any material presented in-class, even if not covered
   by the textbook.
 * You are responsible for all assigned reading from the book, even if it is not
-  discussed in class
+  discussed in-class
 
 Measurable Student Learning Outcomes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +90,7 @@ Participate:
 - Laptop use is generally a distraction for you and for others
 - **If you have a good reason for needing a laptop, please come see us**
 - We will post slides a day ahead of time so you can print and bring them along
-- The **only** exception will be days we do in class group work. Those will be
+- The **only** exception will be days we do in-class group work. Those will be
   posted on the calendar ahead of time.
 
 Students with Disabilities
