@@ -106,7 +106,7 @@ obtained approval through DAS should contact DAS immediately at 737-4098.
 Student Conduct
 ~~~~~~~~~~~~~~~
 
-- Link to the State of Expectations for Student Conduct, i.e., cheating policies
+- State of Expectations for Student Conduct, i.e., cheating policies
 
   - http://studentlife.oregonstate.edu/studentconduct/
 
