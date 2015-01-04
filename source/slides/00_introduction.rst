@@ -57,16 +57,6 @@ Measurable Student Learning Outcomes
 CS312 - Important Logistics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Some Rules:
-
-**Attendance mandatory for 1st week**
-
-- **You will be dropped** if you are not here, or can give us an acceptable
-  excuse -- **strictly enforced**
-- You can register again if there are free spots, but you may pay late
-  registration fee
-- After 1st week, attendance linked to participation
-
 Be on time:
 
 - 50 min sessions are very short. We will start on time, if you are late you won't
