@@ -1,0 +1,9 @@
+div.figure p.caption {
+    position: relative;
+}
+
+article.center-title > h2 {
+    position: relative;
+    align: center;
+    text-align: center;
+}
