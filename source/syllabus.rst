@@ -109,8 +109,7 @@ Attendance Policy
 ~~~~~~~~~~~~~~~~~
 
 **There are no make-up quizzes or exams unless you arrange with me ahead of time
-with a valid excuse.** Attendance is **MANDATORY** the first week, if you do not
-attend 2 of the 3 classes, **you will be dropped from the course**.
+with a valid excuse.**
 
 **In general:** Students who do not attend lectures tend to do very poorly in
 this class (C or lower).
