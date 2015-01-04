@@ -109,7 +109,7 @@ Attendance Policy
 ~~~~~~~~~~~~~~~~~
 
 **There are no make-up quizzes or exams unless you arrange with me ahead of time
-with a valid excuse.**
+with a valid reason.**
 
 **In general:** Students who do not attend lectures tend to do very poorly in
 this class (C or lower).
