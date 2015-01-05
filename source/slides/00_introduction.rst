@@ -351,3 +351,15 @@ Linus Torvalds
 * Invented Git
 * Maintains the Linux Kernel
 
+
+Readings
+========
+
+Readings
+~~~~~~~~
+
+Please read the following sections by 1/9. They should largely be review:
+
+* Chapter 1
+* Chapter 2 (Up to and including regular expressions)
+* Chapter 22 SSH subsection (pg 926-930)
