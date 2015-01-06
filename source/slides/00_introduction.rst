@@ -358,8 +358,6 @@ Readings
 Readings
 ~~~~~~~~
 
-Please read the following sections by 1/9. They should largely be review:
+Please read the following section by 1/7:
 
 * Chapter 1
-* Chapter 2 (Up to and including regular expressions)
-* Chapter 22 SSH subsection (pg 926-930)
