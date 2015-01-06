@@ -1,7 +1,7 @@
 Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
 M 1/5,:slides:ref:`00_intro`,
-W 1/7,History & Background,
+W 1/7,History & Background,:ref:`readings`
 F 1/9,History & Background,:ref:`readings`
 ,**Week 2**,
 M 1/12,Linux Basics,
