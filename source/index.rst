@@ -49,3 +49,4 @@ Class pages:
    calendar
    assignments
    resources
+   readings
