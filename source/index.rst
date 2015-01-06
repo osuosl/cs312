@@ -49,4 +49,3 @@ Class pages:
    calendar
    assignments
    resources
-   slides
