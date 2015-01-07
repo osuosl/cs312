@@ -337,14 +337,20 @@ Users won't be active in new group until they "log back in"
 What are files?
 ---------------
 
-* Nearly everything
-* Files have:
-    * Owner
-    * Group
-    * Permissions
-    * inode
-    * Size
-    * Filename
+* Nearly everything in metadata
+
+Files have:
+
+============= ==========================
+
+Owner         atime, ctime, mtime
+Group         POSIX ACLs
+Permissions   Spinlock
+Inode         i_ino
+Size          read, write and link count
+Filename
+
+============= ==========================
 
 .. code-block:: bash
 
@@ -353,6 +359,30 @@ What are files?
     2884381 drwxrwxr-x 5 user user 4096 Nov  6 11:46 Documents
     2629156 -rw-rw-r-- 1 user user    0 Nov 13 14:09 file.txt
     2884382 drwxrwxr-x 2 user user 4096 Nov  6 13:22 Pictures
+
+More file metadata
+------------------
+
+.. rst-class:: codeblock-sm
+
+::
+
+  $ ll
+  crw-rw-rw- 1 root  tty   5, 0 Jan  6 13:45 /dev/tty
+  brw-rw---- 1 root  disk  8, 0 Dec 21 14:12 /dev/sda
+  srw-rw-rw- 1 root  root  0    Dec 21 14:13 /var/run/acpid.socket
+  prw------- 1 lance lance 0    Jan  5 17:44 /var/run/screen/S-lance/12138.ramereth
+  lrwxrwxrwx 1 root  root  4    Nov 25 09:26 /var/run -> /run
+
+  $ stat /etc/services
+    File: `/etc/services'
+    Size: 19303       Blocks: 40         IO Block: 4096   regular file
+  Device: fc00h/64512d  Inode: 525111      Links: 1
+  Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+  Access: 2015-01-07 08:22:43.768316048 -0800
+  Modify: 2012-05-03 09:01:30.934310452 -0700
+  Change: 2012-05-03 09:01:30.982310456 -0700
+   Birth: -
 
 File extensions
 ---------------
