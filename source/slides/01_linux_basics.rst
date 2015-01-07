@@ -171,6 +171,18 @@ You name it, there's a `distro out there`_!
 
 .. _distro out there: http://lwn.net/Distributions/
 
+What we'll be using
+-------------------
+
+**CentOS 6**
+
+Why?
+
+* Provides a nice balance between distro philosophies
+* Very common in the enterprise
+* Somewhat easier to understand and use
+* We have more experience with it
+
 Linux Basics
 ============
 
@@ -186,7 +198,7 @@ What are users?
     $ w         # who is here and what are they doing?
     $ id        # user ID, group ID, and groups you're in
 
-* Not just people: Apache, Mailman, ntp
+* Not just people: Apache, Mailman, ntp aka "system users"
 
 Users have
 ----------
@@ -216,7 +228,7 @@ Managing users
 
     # GECOS: full name, office number and building, office phone extension,
     # home phone number (General Electric Comprehensive Operating System)
-    $ chfn # change GECOS information; only works sometimes
+    $ chfn # change GECOS information
     $ finger # tells you someone's GECOS info
 
 Passwords
@@ -226,7 +238,7 @@ Passwords
 
 .. code-block:: bash
 
-    test@x230 ~ $ ls -l /etc/ | grep shadow
+    user@localhost ~ $ ls -l /etc/ | grep shadow
     -rw-r-----  1 root shadow   1503 Nov 12 17:37 shadow
 
     $ sudo su -
@@ -236,7 +248,7 @@ Passwords
     sys:*:15630:0:99999:7:::
     mail:*:15630:0:99999:7:::
 
-    # name:hash:time last changed: min days between changes: max days 
+    # name:hash:time last changed: min days between changes: max days
     #    between changes:days to wait before expiry or disabling:day of
     #    account expiry
 
@@ -251,34 +263,64 @@ Root/Superuser
 .. figure:: ../_static/xkcd149.png
     :align: center
 
+Sudo
+----
+
+Consult ``man 5 sudoers`` for more information:
+
+.. rst-class:: codeblock-sm
+
+::
+
+  # User alias specification
+  User_Alias  CS312_ADMIN = lance, jordane
+  User_Alias  CS312_STUDENT = john, jane
+
+  # Runas alias specification
+  Runas_Alias ADMIN = root, sysadmin
+  Runas_Alias STUDENT = httpd
+
+  # Host alias specification
+  Host_Alias OSU_NET = 128.193.0.0/16
+  Host_Alias SERVERS = www, db
+
+  # Cmnd alias specification
+  Cmnd_Alias KILL = /bin/kill
+  Cmnd_Alias SU = /bin/su
+
+  #  User privilege specification
+  root          ALL = (ALL) ALL
+  CS312_ADMIN   ALL = NOPASSWD: ALL
+  CS312_STUDENT OSU_NET = (STUDENT) KILL, SU
+
 Acting as another user
 ----------------------
 
 .. code-block:: bash
 
-    $ su $USER          # become user, with THEIR password
+    $ su joe            # become user joe, with THEIR password
     $ su                # become root, with root's password
     $ sudo su -         # use user password instead of root's
-    $ sudo su $USER     # become $USER with your password
+    $ sudo su joe       # become user joe with your password
 
 .. figure:: ../_static/xkcd838.png
-    :scale: 80%
+  :align: center
+  :scale: 80%
 
-If someone has permissions errors:
-    * Check that they or their group owns the files
-    * Check that they have the flag +x to execute
-
+A dash after ``su`` provides an environment similar to what the user would
+expect. Typically a good practice to always use ``su -``
 
 What are groups?
 ----------------
 
-* Manage permissions for groups of users
+Manage permissions for groups of users
 
 .. code-block:: bash
 
     $ groupadd
     $ usermod
     $ groupmod
+    $ gpasswd
     $ cat /etc/group
         root:x:0:
         daemon:x:1:
@@ -287,6 +329,8 @@ What are groups?
         adm:x:4:
         tty:x:5:
     # group name:password or placeholder:GID:member,member,member
+
+Users won't be active in new group until they "log back in"
 
 What are files?
 ---------------
@@ -301,11 +345,11 @@ What are files?
 
 .. code-block:: bash
 
-    test@x230 ~ $ ls -il
+    user@localhost ~ $ ls -il
     total 8
-    2884381 drwxrwxr-x 5 test test 4096 Nov  6 11:46 Documents
-    2629156 -rw-rw-r-- 1 test test    0 Nov 13 14:09 file.txt
-    2884382 drwxrwxr-x 2 test test 4096 Nov  6 13:22 Pictures
+    2884381 drwxrwxr-x 5 user user 4096 Nov  6 11:46 Documents
+    2629156 -rw-rw-r-- 1 user user    0 Nov 13 14:09 file.txt
+    2884382 drwxrwxr-x 2 user user 4096 Nov  6 13:22 Pictures
 
 File extensions
 ---------------
@@ -319,10 +363,10 @@ File extensions
 
     $ file $FILENAME # tells you about the filetype
 
-    test@x230 ~ $ file file.txt
+    user@localhost ~ $ file file.txt
     file.txt: ASCII text
 
-    test@x230 ~ $ file squirrel.jpg
+    user@localhost ~ $ file squirrel.jpg
     squirrel.jpg: JPEG image data, JFIF standard 1.01
 
 ls -l
@@ -338,9 +382,9 @@ ls -l
 .. code-block:: bash
 
     $ ls -l
-    drwxrwxr-x 5 test test 4096 Nov  6 11:46 Documents
-    -rw-rw-r-- 1 test test    0 Nov 13 14:09 file.txt
-    drwxrwxr-x 2 test test 4096 Nov  6 13:22 Pictures
+    drwxrwxr-x 5 user user 4096 Nov  6 11:46 Documents
+    -rw-rw-r-- 1 user user    0 Nov 13 14:09 file.txt
+    drwxrwxr-x 2 user user 4096 Nov  6 13:22 Pictures
 
 chmod and octal permissions
 ---------------------------
@@ -380,17 +424,17 @@ user & group
     # Change the owner of /mydir and subfiles to "root".
     $ chown -hR root /mydir
 
-    # Make the group devops own the bootcamp dir
-    $ chgrp -R devops /home/$yourusername/bootcamp
+    # Make the group devops own the foo dir
+    $ chgrp -R devops /home/user/foo
 
 Types of files
 --------------
 
 .. code-block:: bash
 
-    drwxrwxr-x      5 test    test      4096    Nov  6 11:46 Documents
-    -rw-rw-r--      1 test    test         0    Nov 13 14:09 file.txt
-    drwxrwxr-x      2 test    test      4096    Nov  6 13:22 Pictures
+    drwxrwxr-x      5 user    user      4096    Nov  6 11:46 Documents
+    -rw-rw-r--      1 user    user         0    Nov 13 14:09 file.txt
+    drwxrwxr-x      2 user    user      4096    Nov  6 13:22 Pictures
     ----------     -------  -------  -------- ------------ -------------
         |             |        |         |         |             |
         |             |        |         |         |         File Name
@@ -410,9 +454,10 @@ ACLs
 ----
 
 * Access control lists
-* Not recommended; hard to maintain
-* Typically how other OSes manage permissions
+* Provides more fine grained control
+* Requires filesystem support and mounted with acl flag
 * Support depends on OS and filesystem
+* Can make file management complicated if not done carefully
 
 Package Management
 ------------------
@@ -431,8 +476,17 @@ Package Management
 Popular Linux Package Managers
 ------------------------------
 
-* .deb / APT + dpkg (used by Debian, Ubuntu, Linux Mint)
-* .rpm / YUM + rpm (used by RedHat, CentOS, Fedora)
+**.deb**
+
+* apt - Debian package manager with repo support
+* dpkg - low level package manager tool used by apt
+* Used by Debian, Ubuntu, Linux Mint and others
+
+**.rpm**
+
+* yum - RPM Package manager with repo support
+* rpm - low level package manager tool used by yum
+* Used by RedHat, CentOS, Fedora and others
 
 RPM & yum (RedHat, CentOS, Fedora)
 ----------------------------------
