@@ -302,7 +302,7 @@ Acting as another user
 
     $ su joe            # become user joe, with THEIR password
     $ su                # become root, with root's password
-    $ sudo su -         # use user password instead of root's
+    $ sudo su -         # become root, with your password
     $ sudo su joe       # become user joe with your password
 
 .. figure:: ../_static/xkcd838.png
