@@ -1,17 +1,151 @@
 .. _01_linux_basics:
 
-Linux Basics
-============
-
-And a little more history...
+Distribution History
+====================
 
 Today's topics
 --------------
 
-* More Linux history and background
+* Linux Distribution History
 * Linux basics: users, basic commands and permissions
 * Files
 * Package management
+
+Announcements
+-------------
+
+* Please bring your laptop on Friday
+
+What is a Linux Distribution?
+-----------------------------
+
+  *"A Linux distribution (often called a distro for short) is an operating
+  system made as a collection of software based around the Linux kernel and
+  often around a package management system."* [Wikipedia-distro]
+
+* Assortment of application and utility software packaged in a way that it meets
+  users' needs
+* Typically composed of: Linux Kernel, GNU tools & libraries, window system &
+  manager and a desktop environment
+* Types range from personal desktop, server, supercomputers, embedded to
+  container distributions
+
+.. [Wikipedia-distro] http://en.wikipedia.org/wiki/Linux_distribution
+
+Linux beyond the kernel
+-----------------------
+
+- Linus had a kernel, but no userland
+- Early distributions were created and shared by universities
+- Linux GPL conversion finished by v0.99 which opened up commercial use
+
+.. image:: ../_static/sls-screenshot.png
+  :align: right
+  :width: 50%
+
+- Soft Landing Systems: SLS Linux
+
+  * First widely used distribution
+  * Popular but buggy and unstable
+  * Change in binary format from a.out to ELF caused stir
+
+Frustration turns into Distributions
+------------------------------------
+
+* Patrick Volkerding and Ian Murdock both frustrated with SLS
+* Frustrations:
+
+  * Buggy as hell!
+  * Closed nature of SLS preventing improvements from being added
+* Decided to each create their own distributions
+
+Early Distributions
+-------------------
+
+* Slackware
+* Debian
+* Red Hat
+* SuSE
+
+Slackware
+---------
+
+* Patrick Volkerding modified SLS and created the first "fork" distribution
+  Slackware
+* First version released on June 7, 1993
+* SuSE was forked from Slackware
+* Prides itself being the mode *"Unix-like Linux Distribution"*
+* Oldest maintained distribution
+
+Debian
+------
+
+  *"This is just to announce the imminent completion of a brand-new Linux
+  release, which I'm calling the Debian Linux Release. This is a release that I
+  have put together basically from scratch; in other words, I didn't simply make
+  some changes to SLS and call it a new release. I was inspired to put together
+  this release after running SLS and generally being dissatisfied with much of
+  it, and after much altering of SLS I decided that it would be easier to start
+  from scratch."* [Debian-Ian-Murdock] - August 17, 1993
+
+.. [Debian-Ian-Murdock] http://groups.google.com/group/comp.os.linux.development/msg/a32d4e2ef3bcdcc6
+
+Red Hat
+-------
+
+* Marc Ewing started Red Hat Linux in 1994
+* Was working on writing applications for UNIX but couldn't afford a UNIX
+  workstation ($10k!)
+* Discovered Linux, spent more time fixing Linux than working on the original
+  project
+* Decided to *".. work on putting together a better Linux Distribution"*
+* Became first billion dollar open source public company
+* Fedora/CentOS are community driven distributions based on Red Hat
+
+SuSe
+----
+
+* Created by Roland Dyroff, Thomas Fehr, Burchard Steinbild and Hubert Mantel
+* SuSe stands for Software und System-Entwicklung in German (Software and
+  Systems Development)
+* Started as a UNIX consulting company but did not pan out
+* Originally a German translation of Slackware
+* Became frustrated with Slackware's closed development, decided to create its
+  own distribution and switched to using RPM
+* Created YaST, an easy-to-use installation & configuration tool
+
+Different approaches
+--------------------
+
+* Philosophy
+
+  * `Debian Manifesto`_ - vision for a free and open distribution
+    developed and maintained communally
+* Software and Package management: apt/deb, yum/rpm
+* Upstream software changes and configuration
+* Installation scripts
+* Freedom to create a system how they like it
+
+.. _Debian Manifesto: https://www.debian.org/doc/manuals/project-history/ap-manifesto.en.html
+
+Filling the niches
+------------------
+
+Each distribution fills a specific niche
+
+:Gentoo: source based meta distribution used to create ChromeOS
+:Android: Mobile platform using the Linux kernel but its own unique userland
+:OpenWRT: Embedded wifi router distribution
+:LTSP: Thin client distribution used in some K12 schools
+:Tails: Security and privacy focused disto that is livecd/usb based
+:CoreOS: Specialize in massive container deployments
+
+You name it, there's a `distro out there`_!
+
+.. _distro out there: http://lwn.net/Distributions/
+
+Linux Basics
+============
 
 What are users?
 ---------------
@@ -365,3 +499,8 @@ Low level package management. No dependency checking or central repository.
 
   # Listing all files in a DEB package
   $ dpkg-query -L tree
+
+Resources
+---------
+
+* http://www.linuxjournal.com/article/10724
