@@ -25,8 +25,8 @@ What is a Linux Distribution?
 
 * Assortment of application and utility software packaged in a way that it meets
   users' needs
-* Typically composed of: Linux Kernel, GNU tools & libraries, window system &
-  manager and a desktop environment
+* Typically composed of: Linux Kernel, package manager, GNU tools & libraries,
+  window system & manager and a desktop environment
 * Types range from personal desktop, server, supercomputers, embedded to
   container distributions
 
@@ -57,6 +57,7 @@ Frustration turns into Distributions
 
   * Buggy as hell!
   * Closed nature of SLS preventing improvements from being added
+
 * Decided to each create their own distributions
 
 Early Distributions
@@ -93,7 +94,7 @@ Slackware
   Slackware
 * First version released on June 7, 1993
 * SuSE was forked from Slackware
-* Prides itself being the mode *"Unix-like Linux Distribution"*
+* Prides itself being the most *"Unix-like Linux Distribution"*
 * Oldest maintained distribution
 
 Debian
@@ -148,6 +149,7 @@ Different approaches
 
   * `Debian Manifesto`_ - vision for a free and open distribution
     developed and maintained communally
+
 * Software and Package management: apt/deb, yum/rpm
 * Upstream software changes and configuration
 * Installation scripts
@@ -338,6 +340,7 @@ What are files?
 * Nearly everything
 * Files have:
     * Owner
+    * Group
     * Permissions
     * inode
     * Size
@@ -355,13 +358,13 @@ File extensions
 ---------------
 
 * ``.jpg``, ``.txt``, ``.doc``
-
 * Really more of a recommendation
-    * File contains information about its encoding
+* File contains information about its encoding
 
 .. code-block:: bash
 
-    $ file $FILENAME # tells you about the filetype
+    # Tells you about the filetype using magic file data, not file extension
+    $ file $FILENAME
 
     user@localhost ~ $ file file.txt
     file.txt: ASCII text
