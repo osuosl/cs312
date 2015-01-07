@@ -641,6 +641,10 @@ Friday's Topics
 * Git
 * Setting up your class environment (Openstack)
 
+**Readings:**
+
+* Chapter 3-4 & 7 by Jan 12th
+
 Resources
 ---------
 
