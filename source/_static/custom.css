@@ -7,3 +7,16 @@ article.center-title > h2 {
     align: center;
     text-align: center;
 }
+
+table.citation {
+    font-size: 0.6em;
+    margin-top: 30px;
+}
+
+img.align-right {
+    margin-top: 1em;
+}
+
+.codeblock-sm {
+    font-size: 0.8em;
+}
