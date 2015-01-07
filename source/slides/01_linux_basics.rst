@@ -62,6 +62,21 @@ Frustration turns into Distributions
 Early Distributions
 -------------------
 
+.. image:: ../_static/slackware-logo.jpg
+  :align: right
+  :width: 40%
+
+.. image:: ../_static/debian-logo.png
+  :align: right
+
+.. image:: ../_static/redhat-logo.png
+  :align: right
+  :width: 40%
+
+.. image:: ../_static/opensuse-logo.png
+  :align: right
+  :width: 30%
+
 * Slackware
 * Debian
 * Red Hat
@@ -69,6 +84,10 @@ Early Distributions
 
 Slackware
 ---------
+
+.. image:: ../_static/slackware-logo.jpg
+  :align: right
+  :width: 40%
 
 * Patrick Volkerding modified SLS and created the first "fork" distribution
   Slackware
@@ -93,6 +112,10 @@ Debian
 Red Hat
 -------
 
+.. image:: ../_static/redhat-logo.png
+  :align: right
+  :width: 40%
+
 * Marc Ewing started Red Hat Linux in 1994
 * Was working on writing applications for UNIX but couldn't afford a UNIX
   workstation ($10k!)
@@ -104,6 +127,10 @@ Red Hat
 
 SuSe
 ----
+
+.. image:: ../_static/opensuse-logo.png
+  :align: right
+  :width: 30%
 
 * Created by Roland Dyroff, Thomas Fehr, Burchard Steinbild and Hubert Mantel
 * SuSe stands for Software und System-Entwicklung in German (Software and
