@@ -634,6 +634,13 @@ Low level package management. No dependency checking or central repository.
   # Listing all files in a DEB package
   $ dpkg-query -L tree
 
+Friday's Topics
+---------------
+
+* Editors
+* Git
+* Setting up your class environment (Openstack)
+
 Resources
 ---------
 
