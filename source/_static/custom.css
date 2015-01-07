@@ -12,3 +12,7 @@ table.citation {
     font-size: 0.6em;
     margin-top: 30px;
 }
+
+img.align-right {
+    margin-top: 1em;
+}
