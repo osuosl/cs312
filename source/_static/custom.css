@@ -16,3 +16,7 @@ table.citation {
 img.align-right {
     margin-top: 1em;
 }
+
+.codeblock-sm {
+    font-size: 0.8em;
+}
