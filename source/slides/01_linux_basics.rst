@@ -521,6 +521,26 @@ Popular Linux Package Managers
 * rpm - low level package manager tool used by yum
 * Used by RedHat, CentOS, Fedora and others
 
+Yum vs. Apt
+-----------
+
+**Yum**
+
+* XML repository format
+* Automatic metadata syncing
+* Supports a plugin module system to make it extensible
+* Checks all dependencies before downloading
+
+**Apt**
+
+* Upgrade and Dist-Upgrade
+
+  * Dist-Upgrade applies intelligent upgrading decisions during a major system
+    upgrade
+
+* Can completely remove all files including config files
+* Provides more features in the package format
+
 RPM & yum (RedHat, CentOS, Fedora)
 ----------------------------------
 
@@ -618,3 +638,4 @@ Resources
 ---------
 
 * http://www.linuxjournal.com/article/10724
+* http://www.linuxadvocates.com/2013/03/yum-vs-apt-which-is-best.html
