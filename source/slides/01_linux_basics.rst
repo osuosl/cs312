@@ -82,6 +82,9 @@ Early Distributions
 * Debian
 * Red Hat
 * SuSE
+* `Linux Distribution Timeline`_
+
+.. _Linux Distribution Timeline: http://futurist.se/gldt/
 
 Slackware
 ---------
@@ -650,3 +653,4 @@ Resources
 
 * http://www.linuxjournal.com/article/10724
 * http://www.linuxadvocates.com/2013/03/yum-vs-apt-which-is-best.html
+* http://futurist.se/gldt/
