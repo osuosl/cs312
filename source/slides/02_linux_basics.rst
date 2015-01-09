@@ -11,148 +11,6 @@ Topics
 * Git
 * Openstack Setup
 
-Package Management
-------------------
-
-*Take care of installation and removal of software*
-
-**Core Functionality:**
-
-* Install, Upgrade & uninstall packages easily
-* Resolve package dependencies
-* Install packages from a central repository
-* Search for information on installed packages and files
-* Pre-built binaries (usually)
-* Find out which package provides a required library or file
-
-Popular Linux Package Managers
-------------------------------
-
-**.deb**
-
-* apt - Debian package manager with repo support
-* dpkg - low level package manager tool used by apt
-* Used by Debian, Ubuntu, Linux Mint and others
-
-**.rpm**
-
-* yum - RPM Package manager with repo support
-* rpm - low level package manager tool used by yum
-* Used by RedHat, CentOS, Fedora and others
-
-Yum vs. Apt
------------
-
-**Yum**
-
-* XML repository format
-* Automatic metadata syncing
-* Supports a plugin module system to make it extensible
-* Checks all dependencies before downloading
-
-**Apt**
-
-* Upgrade and Dist-Upgrade
-
-  * Dist-Upgrade applies intelligent upgrading decisions during a major system
-    upgrade
-
-* Can completely remove all files including config files
-* Provides more features in the package format
-
-RPM & yum (RedHat, CentOS, Fedora)
-----------------------------------
-
-.. image:: ../_static/rpm.png
-    :align: right
-    :width: 30%
-
-**RPM**
-
-  Binary file format which includes metadata about the package and the
-  application binaries as well.
-
-.. image:: ../_static/yum.png
-    :align: right
-    :width: 30%
-
-**Yum**
-
-  RPM package manager used to query a central repository and resolve RPM
-  package dependencies.
-
-Yum Commands (Redhat, CentOS, Fedora)
--------------------------------------
-
-.. code-block:: bash
-
-  # Searching for a package
-  $ yum search tree
-
-  # Information about a package
-  $ yum info tree
-
-  # Installing a package
-  $ yum install tree
-
-  # Upgrade all packages to a newer version
-  $ yum upgrade
-
-  # Uninstalling a package
-  $ yum remove tree
-
-  # Cleaning the RPM database
-  $ yum clean all
-
-Apt (Debian, Ubuntu)
---------------------
-
-.. note:: You can also use aptitude as a front-end to dpkg instead of apt-get.
-
-.. code-block:: bash
-
-  # Update package cache database
-  $ apt-get update
-
-  # Searching for a package
-  $ apt-cache search tree
-
-  # Information about a package
-  $ apt-cache show tree
-
-  # Installing a package
-  $ apt-get install tree
-
-  # Upgrade all packages to a newer version
-  $ apt-get upgrade
-  $ apt-get dist-upgrade
-
-  # Uninstalling a package
-  $ apt-get remove tree
-  $ apt-get purge tree
-
-Dpkg Commands
--------------
-
-Low level package management. No dependency checking or central repository.
-
-.. code-block:: bash
-
-  # Install or upgrade a DEB file
-  $ dpkg -i tree_1.6.0-1_amd64.deb
-
-  # Removing a DEB package
-  $ dpkg -r tree
-
-  # Purging a DEB package
-  $ dpkg -P tree
-
-  # Querying the DPKG database
-  $ dpkg-query -l tree
-
-  # Listing all files in a DEB package
-  $ dpkg-query -L tree
-
 Editors
 =======
 
@@ -172,7 +30,7 @@ Text Editors
 * ed -> Vi -> Vim
 * Stallman -> lisp -> emacs
 
-.. figure:: /static/xkcd_378.png
+.. figure:: ../_static/xkcd_378.png
     :align: center
     :scale: 85%
 
@@ -181,7 +39,7 @@ Avoid Pico/Nano, Notepad++, SublimeText
 Emacs
 -----
 
-.. figure:: /static/emacs_logo.jpeg
+.. figure:: ../_static/emacs_logo.jpeg
     :align: right
 
 .. note::
@@ -201,7 +59,7 @@ programs you were using and then go on editing with them.
 Vim
 ---
 
-.. figure:: /static/vim_logo.jpeg
+.. figure:: ../_static/vim_logo.jpeg
     :align: right
 
 .. note::
@@ -233,7 +91,7 @@ How to choose
 Modes
 -----
 
-.. figure:: /static/vim_modes.png
+.. figure:: ../_static/vim_modes.png
     :align: center
     :scale: 75%
 
@@ -252,7 +110,7 @@ Commands
     Search / replace
     Text manipulation, ie: cw, dw, c$, yy / p, x, .
 
-.. figure:: /static/vim_cheatsheet.gif
+.. figure:: ../_static/vim_cheatsheet.gif
     :scale: 75%
 
 Moving Around
@@ -294,7 +152,7 @@ Learning Resources
 * ``$ vimtutor``
 * http://vim-adventures.com/
 
-.. figure:: /static/learning_curves.jpg
+.. figure:: ../_static/learning_curves.jpg
     :align: center
     :scale: 140%
 
@@ -415,7 +273,7 @@ Emacs Cheat Sheet
 
 |
 
-.. figure:: static/emacs.png
+.. figure:: ../_static/emacs.png
 
 Emacs Configuration
 -------------------
@@ -465,14 +323,17 @@ Editor questions?
 Git
 ===
 
-.. figure:: /static/Linus_Torvalds.jpeg
+Git
+---
+
+.. figure:: ../_static/Linus_Torvalds.jpeg
     :align: left
 
 git, noun. Brit.informal.
 1. an unpleasant or contemptible person.
 
 Setting up Git
-==============
+--------------
 
 * In VM:
 
@@ -481,10 +342,11 @@ Setting up Git
     $ sudo yum install git
     $ git config --global user.name "My Name"
     $ git config --global user.email "myself@gmail.com"
-    $ git config --global core.editor "nano"
+    $ git config --global core.editor "emacs"
+    $ git config --global push.default "current" # Or "nothing"
 
 Using Git Locally
-=================
+-----------------
 
 ``$ git init``
 
@@ -505,14 +367,16 @@ Using Git Locally
   the `git book <http://git-scm.com/book/en/Git-Basics-Undoing-Things>`_ explains
   well
 
-* Did I remember to commit that?
-``$ git status``
+* Did I remember to commit that?::
+    
+    $ git status
 
-* What commits have I made lately?
-``$ git log``
+* What commits have I made lately?::
+
+    $ git log
 
 What Not To Do
-==============
+--------------
 
 * Don't delete the .git files
 
@@ -535,20 +399,18 @@ What Not To Do
 
 * Don't commit secrets...
 
+* If you do commit secrets, `reset them`_
+
+.. _reset them: https://jordan-wright.github.io/blog/2014/12/30/why-deleting-sensitive-information-from-github-doesnt-save-you/
+
 .. note:: Yes, there are ways to sort of take them down off of GitHub, but
     somebody might have cloned your repo while it had the secrets in. Once
     someone has a piece of information, you can't just take it away.
 
-.. figure:: /static/dont_do_this.jpg
-    :scale: 50%
-    :align: right
-
-http://arstechnica.com/security/2013/01/psa-dont-upload-your-important-passwords-to-github/
-
 Daily workflow
-==============
+--------------
 
-.. figure:: /static/gitflow.png
+.. figure:: ../_static/gitflow.png
     :scale: 75%
     :align: right
 
@@ -558,3 +420,88 @@ Larger projects have more complex workflows
 
 .. note:: The picture is of the Git Flow branching model, and you'll probably
     see it every single time anyone explains Git branching and merging to you.
+
+Openstack
+=========
+
+You need:
+
+* Your laptop
+* SSH Key (we can generate one while setting up)
+* SSH (Windows users should use `putty`_
+* Your ONID username and ID #
+
+.. _putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_login.png
+
+UserName: ONID username
+Password: ID # (change this)
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_change_password.png
+
+If you don't change your password, an automated script will be emailing you!
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_overview.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_security.png
+
+Next we need to set up a key pair. Click on Security (the page
+in this picture) and then on Key Pairs
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_key_pairs_first.png
+
+Click on Import Key Pair if you already have an SSH key
+pair
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_key_pairs_import.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_key_pairs_import_filled_out_form.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_key_pairs_first_key_pair_added.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_instances.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_add_instance.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_instance_added.png
+
+Setting Up
+----------
+
+.. figure:: ../_static/openstack_add_floating_ip.png
+
+
