@@ -4,3 +4,9 @@ Resources
 =========
 
 Here are some helpful links and resources:
+
+.. toctree::
+  :maxdepth: 1
+
+  openstack
+  ssh_keys
