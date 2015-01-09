@@ -401,15 +401,15 @@ Ground Rules
 
 * Do not attempt to login to other machines without
   explicit permission
+* Please follow the OSU `Acceptable Use of University Computing Resources`_
 * Do not do anything illegal (no torrenting)
 * Do not attempt to disrupt other machines or services (no DOS/DDOS)
 * Use common sense. If you would get mad at something done to you,
   don't do it to others
 * Ken Thompson gave an interesting talk `on trust`_. Read it.
 
+.. _Acceptable Use of University Computing Resources: http://fa.oregonstate.edu/gen-manual/acceptable-use-university-computing-resources
 .. _on trust: http://cm.bell-labs.com/who/ken/trust.html
-
-
 
 Setting Up
 ----------
