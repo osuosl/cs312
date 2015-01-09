@@ -2,7 +2,7 @@ Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
 M 1/5,:slides:ref:`00_intro`,
 W 1/7,:slides:ref:`01_linux_basics`,:ref:`Ch. 1 <readings>`
-F 1/9,"Editors, Git & Openstack setup (Bring Laptop!)",:ref:`Ch. 2 and pg 926-930 <readings>`
+F 1/9,":slides:ref:`Editors, Git & Openstack setup (Bring Laptop!) <02_linux_basics>`",:ref:`Ch. 2 and pg 926-930 <readings>`
 ,**Week 2**,
 M 1/12,Linux Basics,":ref:`Ch. 3-4, 7 <readings>`"
 W 1/14,Linux Basics,HW#1 Assigned
