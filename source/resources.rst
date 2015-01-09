@@ -9,3 +9,4 @@ Here are some helpful links and resources:
   :maxdepth: 1
 
   openstack
+  ssh_keys
