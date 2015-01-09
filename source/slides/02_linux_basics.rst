@@ -154,7 +154,7 @@ Learning Resources
 
 .. figure:: ../_static/learning_curves.jpg
     :align: center
-    :scale: 140%
+    :scale: 120%
 
 Regular expressions
 -------------------
@@ -206,8 +206,6 @@ Emacs Buffers
 * Each file gets a buffer
 * Special buffers begin and end with ``*``
 
-|
-
 ::
 
     C-x b switch buffers (type a new name to open a new buffer)
@@ -222,8 +220,6 @@ Emacs Buffers
 Emacs Modes
 -----------
 
-|
-
 * **NOT** like Vim Modes
 * Each buffer has:
 
@@ -232,8 +228,6 @@ Emacs Modes
 
 Major Modes
 -----------
-
-|
 
 * Major Modes determine functionality of buffer, e.g.:
 
@@ -246,8 +240,6 @@ Major Modes
 Minor Modes
 -----------
 
-|
-
 * Minor modes add functionality that multiple modes might use, e.g.:
 
   * linum-mode (line numbers)
@@ -255,8 +247,6 @@ Minor Modes
 
 Fun Emacs Magic
 ---------------
-
-|
 
 ::
 
@@ -268,14 +258,11 @@ Fun Emacs Magic
 Emacs Cheat Sheet
 -----------------
 
-|
-
 .. figure:: ../_static/emacs.png
+  :align: center
 
 Emacs Configuration
 -------------------
-
-|
 
 * ``.emacs``, ``.emacs.d/init.el``
 * ``M-x``
@@ -287,8 +274,6 @@ Emacs Configuration
 
 Emacs Resources
 ---------------
-
-|
 
 * `Emacs Manual`_
 
@@ -302,8 +287,6 @@ Emacs Resources
 
 Editor questions?
 -----------------
-
-|
 
 * Open an editor, find a cheat sheet, try to add some text
 * Modify the text: "``disemvowel``" it
@@ -328,6 +311,7 @@ Git
 
 .. figure:: ../_static/Linus_Torvalds.jpeg
     :align: left
+    :width: 90%
 
 git, noun. Brit.informal.
 1. an unpleasant or contemptible person.
@@ -398,7 +382,7 @@ Daily workflow
 --------------
 
 .. figure:: ../_static/gitflow.png
-    :scale: 75%
+    :scale: 65%
     :align: right
 
 Pull -> Work -> Add changes -> Commit -> Push
@@ -442,6 +426,7 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_login.png
+  :align: center
 
 UserName: ONID username
 Password: ID # (change this)
@@ -450,6 +435,7 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_change_password.png
+  :align: center
 
 If you don't change your password, an automated script will be emailing you!
 
@@ -457,12 +443,14 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_overview.png
+  :align: center
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_security.png
-   :width: 70%
+  :width: 100%
+  :align: center
 
 Next we need to set up a key pair. Click on Security (the page
 in this picture) and then on Key Pairs
@@ -471,6 +459,7 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_key_pairs_first.png
+  :align: center
 
 Click on Import Key Pair if you already have an SSH key
 pair
@@ -479,29 +468,38 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_key_pairs_import.png
+  :align: center
+  :width: 80%
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_key_pairs_import_filled_out_form.png
+  :align: center
+  :width: 80%
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_key_pairs_first_key_pair_added.png
+  :align: center
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_instances.png
+  :align: center
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_add_instance.png
+  :align: center
+  :width: 80%
 
 Setting Up
 ----------
 
 .. figure:: ../_static/openstack_instance_added.png
+  :align: center
 

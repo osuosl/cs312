@@ -228,6 +228,7 @@ Managing users
 
 .. figure:: ../_static/xkcd215.png
     :align: center
+    :width: 85%
 
 .. code-block:: bash
 
@@ -310,7 +311,7 @@ Acting as another user
 
 .. figure:: ../_static/xkcd838.png
   :align: center
-  :scale: 80%
+  :scale: 75%
 
 A dash after ``su`` provides an environment similar to what the user would
 expect. Typically a good practice to always use ``su -``
