@@ -334,18 +334,9 @@ Using Git Locally
 
 ``$ git init``
 
-.. note:: This initializes a git repo. Use `man git-init` for more info.
-
 ``$ git add <filename>``
 
-.. note:: This puts <filename> into the staging area. It isn't committed yet.
-    Use ``git diff`` to see what changes aren't yet in staging.
-
 ``$ git commit -m "I did a thing!"``
-
-.. note:: This actually makes the commit. Use ``git status`` to see what's in
-    staging but not yet committed. Use ``git show`` or ``git log`` to see
-    recent commits.
 
 * Undo things?
   the `git book <http://git-scm.com/book/en/Git-Basics-Undoing-Things>`_ explains
@@ -358,6 +349,16 @@ Using Git Locally
 * What commits have I made lately?::
 
     $ git log
+
+
+.. note::
+  This initializes a git repo. Use `man git-init` for more info.
+
+  This puts <filename> into the staging area. It isn't committed yet.  Use ``git
+  diff`` to see what changes aren't yet in staging.
+
+  This actually makes the commit. Use ``git status`` to see what's in staging
+  but not yet committed. Use ``git show`` or ``git log`` to see recent commits.
 
 What Not To Do
 --------------
