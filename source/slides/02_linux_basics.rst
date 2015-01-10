@@ -82,10 +82,10 @@ How to choose
 * What can the people around you help with?
 * Try both; choose one and get good at it
 * Have a good answer when people ask why you made that choice
-    * "Because it's familiar" is tolerated
-    * "Because I was initially taught it" is common but accepted (honesty)
-    * "Because ``$usecase``" provokes argument but more respected
-    * "Because I tried both and picked this one" is rare but good
+    * *Because it's familiar* is tolerated
+    * *Because I was initially taught it* is common but accepted (honesty)
+    * *Because ``$usecase``* provokes argument but more respected
+    * *Because I tried both and picked this one* is rare but good
 * Your use case as a sysadmin or developer
 
 Modes
@@ -418,7 +418,6 @@ Ground Rules
   explicit permission
 * Do not do anything illegal (no torrenting)
 * Do not attempt to disrupt other machines or services (no DOS/DDOS)
-* Don't expose unnecessary services to the public web (learn your firewall!)
 * Use common sense. If you would get mad at something done to you,
   don't do it to others
 * Ken Thompson gave an interesting talk `on trust`_. Read it.
