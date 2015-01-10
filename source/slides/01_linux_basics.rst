@@ -589,6 +589,28 @@ Yum Commands (Redhat, CentOS, Fedora)
   # Cleaning the RPM database
   $ yum clean all
 
+RPM Commands
+------------
+
+Low level package management. No dependency checking or central repository.
+
+.. code-block:: bash
+
+  # Install an RPM file
+  $ rpm -i tree-1.5.3-2.el6.x86_64.rpm
+
+  # Upgrade an RPM file
+  $ rpm -Uvh tree-1.5.3-3.el6.x86_64.rpm
+
+  # Uninstall an RPM package
+  $ rpm -e tree
+
+  # Querying the RPM database
+  $ rpm -qa tree
+
+  # Listing all files in an RPM package
+  $ rpm -ql tree
+
 Apt (Debian, Ubuntu)
 --------------------
 
