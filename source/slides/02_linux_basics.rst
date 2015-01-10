@@ -406,6 +406,8 @@ Ground Rules
 * Do not attempt to disrupt other machines or services (no DOS/DDOS)
 * Use common sense. If you would get mad at something done to you,
   don't do it to others
+* Don't hog the resources (compiling things from time to time is fine,
+  just don't run a build farm).
 * Ken Thompson gave an interesting talk `on trust`_. Read it.
 
 .. _Acceptable Use of University Computing Resources: http://fa.oregonstate.edu/gen-manual/acceptable-use-university-computing-resources
