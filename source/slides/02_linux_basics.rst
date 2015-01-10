@@ -48,11 +48,11 @@ Emacs
     name from Editor MACros for TECO editor, originally Tape Editor and
     COrrector at MIT in the '60s
 
-But, along the way, I wrote a text editor, Emacs. The interesting idea about
+*But, along the way, I wrote a text editor, Emacs. The interesting idea about
 Emacs was that it had a programming language, and the user's editing commands
 would be written in that interpreted programming language, so that you could
 load new commands into your editor while you were editing. You could edit the
-programs you were using and then go on editing with them.
+programs you were using and then go on editing with them.*
 
  -- Richard Stallman, http://www.gnu.org/gnu/rms-lisp.html
 
@@ -164,9 +164,6 @@ You should know basic substitution:
 ::
 
     :%s/foo/bar/g
-
-On IRC, Hamper does rudimentary regex in the form ``s/foo/bar/`` applying only
-to the most recent comment.
 
 This is **not** `shell globbing`_
 
@@ -293,12 +290,15 @@ Emacs Resources
 
 |
 
-* Emacs manual (``C-h r`` in emacs or `https://www.gnu.org/software/emacs/manual/`)
+* `Emacs Manual`_
 
   * GNU sells printed manuals as well
 
-* Emacs Wiki (`https://www.emacswiki.org`)
+* `Emacs Wiki`_
 * Emacs Tutorial (``C-h t`` inside emacs)
+
+.. _Emacs Manual: https://www.gnu.org/software/emacs/manual/
+.. _Emacs Wiki: http://emacswiki.org/
 
 Editor questions?
 -----------------
@@ -378,34 +378,21 @@ Using Git Locally
 What Not To Do
 --------------
 
-* Don't delete the .git files
-
-.. note:: If you kill them, git loses its memory :(
-
+* Don't delete the .git directory
 * Avoid redundant copies of the same work in one revision
 * Don't make "oops, undoing that" commits.
+
     * Use git commit --amend or git revert
 
-.. note:: Amending is fine as long as you haven't pushed yet. It's generally a
-    bad idea to amend or rebase work that you've already shared with others,
-    unless you really know what you're doing.
-
 * Don't wait too long between commits
-    * You can squash them all together later
 
-.. note:: Commit every time you think you might want to return to the current 
-    state. You can revert back to any previous commit, but there is no way to
-    magically add a commit in where you forgot to make one.
+    * You can squash them all together later
 
 * Don't commit secrets...
 
 * If you do commit secrets, `reset them`_
 
 .. _reset them: https://jordan-wright.github.io/blog/2014/12/30/why-deleting-sensitive-information-from-github-doesnt-save-you/
-
-.. note:: Yes, there are ways to sort of take them down off of GitHub, but
-    somebody might have cloned your repo while it had the secrets in. Once
-    someone has a piece of information, you can't just take it away.
 
 Daily workflow
 --------------
@@ -423,6 +410,25 @@ Larger projects have more complex workflows
 
 Openstack
 =========
+
+Ground Rules
+------------
+
+* Do not attempt to login to other machines without
+  explicit permission
+* Do not do anything illegal (no torrenting)
+* Do not attempt to disrupt other machines or services (no DOS/DDOS)
+* Don't expose unnecessary services to the public web (learn your firewall!)
+* Use common sense. If you would get mad at something done to you,
+  don't do it to others
+* Ken Thompson gave an interesting talk `on trust`_. Read it.
+
+.. _on trust: http://cm.bell-labs.com/who/ken/trust.html
+
+
+
+Setting Up
+----------
 
 You need:
 
@@ -457,6 +463,7 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_security.png
+   :width: 70%
 
 Next we need to set up a key pair. Click on Security (the page
 in this picture) and then on Key Pairs
@@ -498,10 +505,4 @@ Setting Up
 ----------
 
 .. figure:: ../_static/openstack_instance_added.png
-
-Setting Up
-----------
-
-.. figure:: ../_static/openstack_add_floating_ip.png
-
 
