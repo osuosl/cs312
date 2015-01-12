@@ -3,7 +3,7 @@
 Linux Basics (Day 3)
 ====================
 
-Filesystems, system booting and OS Installation
+Filesystems, system booting and services
 
 Filesystem
 ==========
@@ -694,3 +694,12 @@ Shutting Down
   Broadcast message from root@localhost (pts/0) (Fri Jan 31 00:40:29 2014):
 
   hello world
+
+Readings
+--------
+
+* Jan 14th, Ch. 6, 8.9, 12.1
+* Jan 16th Ch. 8.1-8.8
+* Friday -- **Bring your laptop!**
+
+  * Install Virtualbox (we'll go over this on Wed)
