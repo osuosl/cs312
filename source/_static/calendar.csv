@@ -4,7 +4,7 @@ M 1/5,:slides:ref:`00_intro`,
 W 1/7,:slides:ref:`01_linux_basics`,:ref:`Ch. 1 <readings>`
 F 1/9,":slides:ref:`02_linux_basics`",:ref:`Ch. 2 and pg 926-930 <readings>`
 ,**Week 2**,
-M 1/12,:slides:ref:`03_linux_basics`,":ref:`Ch. 3-4, 7 <readings>`"
+M 1/12,":slides:ref:`03_linux_basics`",":ref:`Ch. 3-4, 7 <readings>`"
 W 1/14,Linux Basics,":ref:`Ch. 6, 8.9, 12.1 <readings>`, HW#1 Assigned"
 F 1/16,Linux Basics,":ref:`Ch. 8.1-8.8 <readings>`"
 ,**Week 3**,
