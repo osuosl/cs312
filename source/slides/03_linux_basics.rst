@@ -208,23 +208,22 @@ state of the kernel and running processes.
 
 .. code-block:: bash
 
-    # Which Linux kernel version are you running?
-    $ cat /proc/version
-    Linux version 3.5.0-17-generic (buildd@allspice) (gcc version 4.7.2
-    (Ubuntu/Linaro 4.7.2-2ubuntu1) ) #28-Ubuntu SMP Tue Oct 9 19:31:23 UTC 2012
-
-Learn about system's hardware
-
-.. code-block:: bash
-
-    $ less /proc/cpuinfo
-    $ less /proc/meminfo
-
-Some parts of /proc can be written as well as read...
+  # Which Linux kernel version are you running?
+  $ cat /proc/version
+  Linux version 2.6.32-504.3.3.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org)
+  (gcc version 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) ) #1 SMP Wed Dec 17
+  01:55:02 UTC 2014
 
 .. code-block:: bash
 
-    $ echo 3 > /proc/sys/vm/drop_caches # drop caches
+  # Learn about system's hardware
+  $ less /proc/cpuinfo
+  $ less /proc/meminfo
+
+.. code-block:: bash
+
+  # Some parts of /proc can be written as well as read...
+  $ echo 3 > /proc/sys/vm/drop_caches # drop caches
 
 \/sys
 -----
