@@ -5,38 +5,6 @@ Linux Basics (Day 3)
 
 Filesystems, system booting and OS Installation
 
-Before we begin
----------------
-
-.. code-block:: bash
-
-  $ sudo yum install man man-pages man-pages-overrides
-  $ man hier # a massive man page explaining the filesystem hierarchy
-
-.. code-block:: bash
-
-  $ echo $PATH
-  /usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:\
-  /home/centos/bin
-
-``$PATH`` is used as a colon-delimited list of places to look for binaries by
-your shell
-
-.. code-block:: bash
-
-  $ which pwd
-  /bin/pwd
-
-The ``which`` command tells you which binary it is running for a given name.
-
-Special File permissions
-------------------------
-
-* Sticky bit
-* setuid
-* setgid
-* Security
-
 Filesystem
 ==========
 
@@ -52,29 +20,15 @@ What's a filesystem?
 
     -- (http://en.wikipedia.org/wiki/Filesystem)
 
-Filesystem can mean:
---------------------
+Which Filesystem to choose
+--------------------------
 
-- **How the system's files are arranged on the disk**
-- How the disk actually holds the files
-
-  - FAT and NTFS are old but Windows-compatible
-  - ext4 is standard, ext3 is older, xfs is being used less
-
-    - journaling tracks changes before write
-
-  - ZFS is awesome, but has meh Linux support (but getting better)
-  - btrfs is similar to ZFS, but less mature
-  - sysadmins will encounter NFS and its competitors like Gluster
-
-.. note::
-  Moving from Windows?
-
-  - Binaries, not executables.
-  - Directories, not folders.
-  - Read, not load.
-  - Symbolic links, not shortcuts.
-  - Write, not save.
+* ext4 -- pretty standard now, rock solid, medium performance
+* ext3 -- Still ok, but not good for large filesystems
+* ext2 -- Legacy, only useful in special use cases (i.e. use drives, /boot)
+* xfs -- Great performance (multi-threaded, great for large filesystems)
+* brtfs -- ZFS-like filesystem for Linux. Has lots of potential but not quite
+  ready for production
 
 The File System
 ---------------
@@ -89,6 +43,64 @@ The File System
   bin     dev   lib         media  proc  sbin     sys  var
   boot    etc   lib64       mnt    root  selinux  tmp
   cgroup  home  lost+found  opt    run   srv      usr
+
+Installed programs and utilities
+--------------------------------
+
+.. code-block:: bash
+
+  /bin                /usr/sbin
+  /sbin               /usr/local/bin
+  /usr/bin            /usr/local/sbin
+
+``PATH`` environment variable
+
+.. code-block:: bash
+
+  $ echo $PATH
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+``which`` command
+
+.. code-block:: bash
+
+  $ which bash
+  /bin/bash
+
+Where are drives mounted?
+----------------------------
+
+* Raw device appears under ``/dev``.
+
+.. code-block:: bash
+
+  $ dmesg | tail
+  [260930.208715]  sdb: sdb1
+  [260930.320756] sd 6:0:0:0: >[sdb] Asking for cache data failed
+  [260930.320765] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
+  [260930.320771] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
+
+* USB filesystem under ``/media``, main disk ``/``
+* You can manually mount devices with ``mount``
+
+  * "Everything's a file"
+  * ``umount`` to unmount
+
+* ``/etc/fstab`` tells things where to mount
+* ``/etc/mtab`` shows where things are currently mounted
+
+Three Tiers of Filesystem Hierarchy
+-----------------------------------
+
+.. image:: ../_static/hierarchy.jpg
+    :align: right
+    :scale: 70%
+
+* ``/``, essential for system booting and mounting ``/usr``.
+* ``/usr``, read-only system data for normal system operation.
+* ``/usr/local``, locally-installed software.
+
+  * Package managers usually install under ``/`` and ``/usr``.
 
 \/bin & \/sbin
 --------------
@@ -191,8 +203,28 @@ People were running out of disk space so:
 \/proc
 ------
 
-* Special filesystem ``procfs`` contains a file-representation of
-  the current state of the kernel and running processes.
+Special filesystem ``procfs`` contains a file-representation of the current
+state of the kernel and running processes.
+
+.. code-block:: bash
+
+    # Which Linux kernel version are you running?
+    $ cat /proc/version
+    Linux version 3.5.0-17-generic (buildd@allspice) (gcc version 4.7.2
+    (Ubuntu/Linaro 4.7.2-2ubuntu1) ) #28-Ubuntu SMP Tue Oct 9 19:31:23 UTC 2012
+
+Learn about system's hardware
+
+.. code-block:: bash
+
+    $ less /proc/cpuinfo
+    $ less /proc/meminfo
+
+Some parts of /proc can be written as well as read...
+
+.. code-block:: bash
+
+    $ echo 3 > /proc/sys/vm/drop_caches # drop caches
 
 \/sys
 -----
@@ -208,15 +240,11 @@ People were running out of disk space so:
 * Typically contains run-time data
 * Cache
 
-Devices
--------
-
-* TODO
-
 User-Specific Data & Configuration
 ----------------------------------
 
 * Data stored at ``/home/<username>``
+
   * Desktop environment creates folders Documents, Pictures, Videos, etc.
 * Configurations in dotfiles within home (``/.``)
 
@@ -254,23 +282,41 @@ Creating filesystems
 
 .. code-block:: bash
 
-  $ mkfs
+  $ mkfs -t ext4 /dev/sdb1
+  $ mkfs.ext4 /dev/sdb1
+  # Each FS has their own options. Look at man mkfs.<filesystem>
 
 Mounting filesystems
 
 .. code-block:: bash
 
-  $ mount
+  $ mount /dev/sdb1 /data
   # -t for type
   # -o for options
   # requires device path and mount point
+  $ umount /data
 
-Loopback devices
+More filesystem commands
+------------------------
+
+Tuning filesystems
 
 .. code-block:: bash
 
-  $ losetup
-  $ /dev/loop*
+  $ tune2fs -m 0 /dev/sda1
+  # -m Reserved Blocks Percentage
+  # -l List contents of the superblock
+
+Resizing filesystems online
+
+.. code-block:: bash
+
+  $ resize2fs /dev/sda1
+  $ xfs_growfs /data
+
+* ext* requires a clean filesystem
+* ext can be shrunk, while xfs cannot
+* XFS uses the mountpoint for growing online
 
 devfs
 -----
@@ -313,7 +359,14 @@ Filesystem Consistency
 
 * Filesystem is **consistent** if all metadata is intact
 
-  * ``fsck`` is FileSystem Consistency Check
+  * ``fsck`` or ``fsck.<filesystem>`` is FileSystem Consistency Check
+  * Always check filesystem manual page for filesystem specific checks
+
+.. code-block:: bash
+
+  $ fsck.ext4 -C 0 /dev/sda1
+  # -C 0 displays progress output to stdout
+  # Always do this in an "offline" state, i.e. single user mode
 
 More about Journaling
 ---------------------
@@ -333,15 +386,23 @@ More about Journaling
 Booting
 =======
 
-Boot steps
-----------
+.. figure:: ../_static/xkcd-fight.png
+    :align: center
+    :scale: 100%
 
-* POST
-* Bootloader
-* Kernel
-* [Ramdisk] -- initrd
-* init
-* Everything else
+Steps in boot process
+---------------------
+
+.. image:: ../_static/booting.png
+    :align: right
+    :scale: 70%
+
+#. Kernel initialization
+#. Hardware configuration
+#. System processes
+#. Operator intervention (single-user)
+#. Execution of start-up scripts
+#. Multi-user operation
 
 POST
 ----
@@ -352,6 +413,25 @@ POST
 
   * ensures it is accessible
   * does **not** load drivers
+
+BIOS/UEFI
+---------
+
+* PCs vs Proprietary hardware
+
+  * BIOS, UEFI, OpenBoot PROM, etc
+* BIOS
+
+  * **B**\ asic **I**\ nput/**O**\ utput **S**\ ystem
+  * Very simple compared to OpenBoot PROM / UEFI
+  * Select devices to boot from
+  * MBR (first 512 bytes)
+
+* UEFI
+
+  * **U**\ nified **E**\ xtensible **F**\ irmware **I**\ nterface
+  * Successor to BIOS
+  * Flexible pre-OS environment including network booting
 
 Bootloader
 ----------
@@ -370,12 +450,25 @@ Bootloader
 * LILO (LInux LOader) is an uncommon alternative
 * syslinux, isolinux are often used for usb/cd images
 
-GRUB
-----
+Boot Loaders (Grub)
+-------------------
 
-* Version 2 vs 0.97 (and 0.98)
-* 2 is more complex, but does more
-* 0.97/8 is simple and easy to use
+* **Gr**\ and **U**\ nified **B**\ ootloader
+* Dynamic fixes during booting
+* Can read the filesystem
+* Index based – ``(hd0,0) = sda1``
+* Grub "version 1" vs. "version 2"
+
+  * Version 2 has more features, but more complicated
+  * Latest Debian, Ubuntu and Fedora use v2
+
+.. code::
+
+  grub> root (hd0,0)    (Specify where your /boot partition resides)
+  grub> setup (hd0)     (Install GRUB in the MBR)
+  grub> quit            (Exit the GRUB shell)
+
+  grub-install
 
 GRUB Configuration
 ------------------
@@ -405,6 +498,23 @@ GRUB Configuration
 * ``root`` -- boot partition
 * ``kernel`` -- your linux kernel!
 * ``initrd`` -- initial ram disk which is mounted to help you boot
+
+Bootstrapping
+-------------
+
+* *Pull itself up by its own bootstraps*
+* Automatic and manual booting
+* Driver Loading
+* Period of vulnerability
+
+  * configuration errors
+  * missing hardware
+  * damaged filesystems
+
+* ``init`` -- **Always Process ID (PID) #1**
+
+  * First process to start
+  * Either a binary or can be a simple script (even a bash shell!)
 
 initrd
 ------
@@ -437,7 +547,150 @@ real init
   * alternatives: systemv, openrc, bsd-style, upstart
   * your Centos 6 VM uses upstart, Centos 7 uses systemd
 
-OS Installation
-===============
+Single User Mode
+----------------
 
-TODO
+.. image:: ../_static/single-user-mode.png
+    :align: right
+    :scale: 60%
+
+* What is it used for?
+
+  * Troubleshoot problems
+  * Manual Filesystem Checks
+  * Booting with bare services
+  * Fix boot problems
+  * Add “single” to kernel option
+
+* Solaris/BSD
+
+  * ``boot -s``
+
+Startup Script Tasks
+--------------------
+
+.. figure:: ../_static/fsck.jpg
+    :align: center
+    :scale: 75%
+
+* Setting up hostname & timezone
+* Checking disks with fsck
+* Mounting system's disks
+* Configuring network interfaces
+* Starting up daemons & network services
+
+System-V Boot Style
+-------------------
+
+* Linux derived from System-V originally
+* Alternative init systems
+
+  * **systemd** - Fedora 15+, Redhat 7+ and Debian* (dependency driven)
+  * **upstart** - Ubuntu, Redhat 6 (event driven, faster boot times)
+
+Run levels:
+
+================= =============================
+level 0           sys is completely down (halt)
+level 1 or S      single-user mode
+level 2 through 5 multi-user levels
+level 6           reboot level
+================= =============================
+
+/etc/inittab
+------------
+
+* Tells init what to do on each level
+* Starts ``getty`` (terminals, serial console)
+* Commands to be run or kept running
+* ``inittab`` not used with systemd or upstart
+
+.. code::
+
+  # The default runlevel.
+  id:2:initdefault:
+
+  # What to do in single-user mode.
+  ~~:S:wait:/sbin/sulogin
+
+  # What to do when CTRL-ALT-DEL is pressed.
+  ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+
+  # terminals
+  1:2345:respawn:/sbin/getty 38400 tty1
+  T0:23:respawn:/sbin/getty -L ttyS0 9600 vt100
+
+init.d Scripts
+--------------
+
+* One script for one service/daemon
+* Start up services such as sshd, httpd, etc
+* Commands
+
+  * start, stop, reload, restart
+* sshd init script
+
+.. code-block:: bash
+
+  $ service sshd status
+  openssh-daemon (pid  1186) is running...
+
+  $ service sshd restart
+  Stopping sshd:                                             [  OK  ]
+  Starting sshd:                                             [  OK  ]
+
+Starting services on boot
+-------------------------
+
+* rc\ **level**\ .d (rc0.d, rc1.d)
+* S = start, K = stop/kill
+* Numbers to set sequence (S55sshd)
+* chkconfig / update-rc.d
+
+  * Easy way to enable/disable services in RH/Debian
+* Other distributions work differently
+
+.. code-block:: bash
+
+  $ chkconfig --list sshd
+  sshd            0:off 1:off 2:on  3:on  4:on  5:on  6:off
+
+  $ chkconfig sshd off
+
+  $ chkconfig --list sshd
+  sshd            0:off 1:off 2:off 3:off 4:off 5:off 6:off
+
+Configuring init.d Scripts
+--------------------------
+
+* /etc/sysconfig (RH) or /etc/defaults (Debian)
+* source Bash scripts
+* Daemon arguments
+* Networking settings
+* Other distributions are vastly different
+
+.. code-block:: bash
+
+  $ cat /etc/sysconfig/ntpd
+  # Drop root to id 'ntp:ntp' by default.
+  OPTIONS="-u ntp:ntp -p /var/run/ntpd.pid -g"
+
+Shutting Down
+-------------
+
+* Not Windows, don't reboot to fix issue
+* Can take a long time (i.e. servers)
+* Reboot only to
+
+  * load new kernel
+  * new hardware
+  * system-wide configuration changes
+* ``shutdown``, ``reboot``, ``halt``, ``init``
+* ``wall`` - send system-wide message to all users
+
+.. code-block:: bash
+
+  $ wall hello world
+  Broadcast message from root@localhost (pts/0) (Fri Jan 31 00:40:29 2014):
+
+  hello world
