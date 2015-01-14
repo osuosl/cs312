@@ -3,7 +3,4 @@
 Assignments
 ===========
 
-Homework 1
-----------
-
-Homework 1 is available :download:`here <_static/hw/homework1.pdf>`
+* :download:`Homework 1 <_static/hw/homework1.pdf>` -- Due at 4pm, Fri Jan 23
