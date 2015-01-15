@@ -111,7 +111,7 @@ Useful Symbols
     $ true || echo 'never gets here'
     $ false && echo 'never gets here'
 
-    $ echo 'this now an error message' 2>&1 | grep -v error
+    $ echo 'this now an error message' 1>&2 | grep -v error
     this is now an error message
 
     !$ # last argument to last command
