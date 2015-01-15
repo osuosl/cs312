@@ -1,4 +1,4 @@
-.. 04_troubleshooting_bash
+.. _04_troubleshooting_bash:
 
 Troubleshooting and Bash
 ========================
@@ -127,7 +127,7 @@ More Useful Symbols
 
 .. code-block:: bash
 
-    $ for x in 1 2 3; do echo $x; done
+    $ for x in 1 2 3; do echo $x; done # Use seq for longer sequences
     1
     2
     3
@@ -147,8 +147,10 @@ Combining These Together
     $ blocks="10.0.0.0/24"
     $ set -a ips
     $ ips=`fping -g 10.0.0.0/24 2>&1 | grep unreachable | tr \\  \\n`
-    $ for ip in $ips; do nmap -p 22 $ip && ips=`echo ${ips//$ip} \
-      | tr -s \\n`
+    $ for ip in $ips; do
+    $   nmap -p 22 $ip && ips=`echo ${ips//$ip} \
+        | tr -s \\n`
+    $ done
     $ echo $ips
 
 Function Definitions
@@ -237,3 +239,10 @@ Every char in ``$IFS`` bash considers a seperator between words.
     
     echo $var1
     echo $var2
+
+Advanced Bash Scripting Guide
+-----------------------------
+
+The `advanced bash scripting guide <http://www.tldp.org/LDP/abs/html/>`_ is very useful.
+
+In particular, `part 5 <http://www.tldp.org/LDP/abs/html/part5.html>`_ contains a lot of useful information.
