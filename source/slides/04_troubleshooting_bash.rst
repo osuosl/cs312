@@ -7,7 +7,6 @@ Troubleshooting
 ---------------
 
 * This is a lot like debugging a problem in code
-* 
 
 General Steps
 -------------
@@ -105,39 +104,39 @@ Basics
 Useful Symbols
 --------------
 
-* ``|`` Pipe -- redirects stdout of left to stdin of right
+.. code-block:: bash
 
-  * ``grep 'searchstring' files/* | less``
+    $ grep 'searchstring' files/* | less
 
-* ``&&`` and ``||`` -- Logical AND and OR
+    $ true || echo 'never gets here'
+    $ false && echo 'never gets here'
 
-  * ``true || echo "never gets here"``
-  * ``false && echo 'runs if false fails, which it always does'``
+    $ echo 'this now an error message' 2>&1 | grep -v error
+    this is now an error message
 
-* ``2>`` and ``1>`` -- Redirect STDERR and STDOUT
-
-  * ``fping -g 10.0.0.0/24 2>&1 | grep unreachable`` Normally ``fping`` outputs
-    an error message for each unreachable host. ``2>&1`` redirects STDERR to STDOUT
-    so we can grep it
+    !$ # last argument to last command
+    $ cat /dir
+    cat: /dir/: Is a directory
+    $ cd !$
+    cd /dir
+    $ pwd
+    /dir
 
 More Useful Symbols
 -------------------
 
-* ``!$`` -- Last argument to last command
+.. code-block:: bash
 
-  * ``cat /dir/; cd !$`` Did you use ``cat`` when you meant ``cd``? Easy fix!
+    $ for x in 1 2 3; do echo $x; done
+    1
+    2
+    3
 
-* ``for; do; done`` -- for loop
+    $ var='this is a var'; echo ${var//this is } # Deletes 'this is '
+    a var
 
-  * ``for x in $(find . -type f); do echo $x is a file; done``
-
-* ``${var//}`` -- Delete text from var
-
-  * ``var="this is a var"; echo ${var//this is }``
-
-* ``$()`` and `````` -- Run this as another bash command, and insert its output in place
-
-  * ``ls -l `which bash```
+    $ ls -l `which bash`
+    -rwxr-xr-x 1 root root 1029624 Nov 12 15:08 /bin/bash
 
 Combining These Together
 ------------------------
@@ -148,7 +147,8 @@ Combining These Together
     $ blocks="10.0.0.0/24"
     $ set -a ips
     $ ips=`fping -g 10.0.0.0/24 2>&1 | grep unreachable | tr \\  \\n`
-    $ for ip in $ips; do nmap -p 22 $ip && ips=`echo ${ips//$ip} | tr -s \\n`
+    $ for ip in $ips; do nmap -p 22 $ip && ips=`echo ${ips//$ip} \
+      | tr -s \\n`
     $ echo $ips
 
 Function Definitions
@@ -188,6 +188,8 @@ Internal Variables
    ``$UID``, User ID
    ``$USER``,Username
 
+You should also read the EXPANSION section of the bash man page.
+
 Useful Userland Utils
 ---------------------
 
@@ -217,7 +219,7 @@ Useful Userland Utils
 IFS
 ---
 
-* Every char in ``$IFS`` bash considers a seperator between words.
+Every char in ``$IFS`` bash considers a seperator between words.
 
 .. code-block:: bash
 
