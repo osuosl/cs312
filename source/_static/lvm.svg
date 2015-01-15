@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="624" width="620">
+<defs>
+<linearGradient id="g" y2="-113" gradientUnits="userSpaceOnUse" y1="584" x2="-85" x1="583">
+<stop stop-color="#acf" offset="0"/><stop stop-color="#acf" stop-opacity="0" offset="1"/>
+</linearGradient>
+<linearGradient id="e" gradientUnits="userSpaceOnUse" x1="40" y1="70" y2="300" x2="200">
+<stop stop-color="#7bf" offset="0"/><stop stop-color="#7bf" stop-opacity="0" offset="1"/>
+</linearGradient>
+</defs>
+<rect height="622" width="618" stroke="#000" y="1" x="1" stroke-width="2" fill="url(#g)"/>
+<g id="a" stroke="#000" stroke-width="2">
+<path d="m68 293h82v48.6h-82z" fill="#afc6e9"/>
+<path d="m68 341h82v48.6h-82z" fill="#5f8dd3"/>
+<path d="m68 388h82v48.6h-82z" fill="#2c5aa0"/>
+</g>
+<use x="257" xlink:href="#a"/>
+<use x="441" xlink:href="#a"/>
+<path stroke="#012" stroke-width="4" d="m27 27.6h553v235h-553z" fill="#5f8dd3"/>
+<path stroke="#5f8dd3" fill="none" stroke-width="4" d="m11 513h165v99h-165z" fill-opacity=".4"/>
+<g id="b" font-size="14" font-family="Ubuntu,sans-serif">
+<path d="m40 71h166v180h-166z" stroke="#000" stroke-width="3" fill="url(#e)"/>
+<text y="90" x="51">PV</text>
+<g id="d">
+<g id="c">
+<path stroke="#000" stroke-width="2" d="m127 115h66v36.5h-66z" fill="#afc6e9"/>
+<text y="131" x="151">PP</text>
+<text y="145" x="140">32 MB</text>
+</g>
+<use y="87" xlink:href="#c"/><use y="43.5" xlink:href="#c"/>
+</g>
+<use x="-75" xlink:href="#d"/>
+</g>
+<use x="360" xlink:href="#b"/><use x="180" xlink:href="#b"/>
+<path d="m325 293-22.4-52-0.02-86h-256v86l21.1 52m441 0-26-52v-86h76v86l32 52m-441 0 50-52v-42.6h178v42.6l29.1 52" fill-opacity=".4" stroke="#000" stroke-width="2" fill="#123"/>
+<g font-size="14" font-family="sans-serif">
+<text y="105" x="50">hdisk1<tspan dx="134">hdisk2</tspan><tspan dx="134">hdisk3</tspan></text>
+<use xlink:href="#s" stroke="#000"/><text id="s"  fill="#def" font-weight="bold" y="48" x="41">VG<tspan y="62" x="41">myvg</tspan></text>
+<g font-family="Ubuntu Mono,monospace">
+<text y="312" x="78">LV<tspan dx="242">LV</tspan><tspan dx="170">LV</tspan></text>
+<text y="360" x="78">FS<tspan dx="242">FS</tspan><tspan dx="170">FS</tspan></text>
+<text y="327" x="74">/dev/hlv<tspan x="328">/dev/srvlv</tspan><tspan x="514">/dev/data</tspan></text>
+<text fill="#def" y="408" x="78">MP<tspan x="334">MP</tspan><tspan x="518">MP</tspan>
+<tspan dy="14" x="80">/home/<tspan x="336">/var/www</tspan><tspan x="520">/data/</tspan></tspan></text>
+<text y="375" x="78">jfs<tspan x="334">ext3</tspan><tspan x="518">jfs2</tspan></text>
+<text transform="translate(66 455)"><tspan>ls /home</tspan><tspan x="0" dy="14">user01</tspan><tspan x="0" dy="14">user02</tspan><tspan x="0" dy="14">user03</tspan><tspan y="0" x="258">ls /var/www</tspan><tspan x="258" dy="14">example.org</tspan><tspan x="258" dy="14">foo.org</tspan><tspan x="258" dy="14">localhost</tspan><tspan y="0" x="444">ls /data</tspan><tspan x="444" dy="14">notizen.txt</tspan><tspan x="444" dy="14">startsrv.sh</tspan><tspan x="444" dy="14">foo.bar</tspan></text>
+<text font-size="12" transform="translate(19 531)"><tspan>PP: Physical Partition</tspan><tspan x="0" dy="14">PV: Physical Volume</tspan><tspan x="0" dy="14">VG: Volume Group</tspan><tspan x="0" dy="14">LV: Logical Volume</tspan><tspan x="0" dy="14">FS: Filesystem</tspan><tspan x="0" dy="14">MP: Mounting Point</tspan></text>
+</g>
+<text y="546" x="184" font-size="33">LVM<tspan x="184" dy="38">Logical Volume Manager</tspan></text>
+</g></svg>
