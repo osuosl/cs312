@@ -71,7 +71,9 @@ LVM Example
 LVM Visualized
 --------------
 
-.. insert graphic here
+.. figure:: ../_static/lvm-visual.png
+  :align: center
+  :width: 75%
 
 LVM commands
 ------------
