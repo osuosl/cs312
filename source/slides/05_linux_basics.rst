@@ -333,7 +333,7 @@ Exercise #1
 -----------
 
 * Use the ks configuration `ks.cfg`_ from the previous slide and install the
-  system
+  system on VirtualBox (or other VM software)
 * http://cs312.osuosl.org/_static/ks.cfg
 
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
@@ -342,7 +342,7 @@ Exercise #2
 -----------
 
 * Using `Github Gists`_, create a ``ks.cfg`` file using the previous
-  configuration `ks.cfg`_
+  configuration `ks.cfg`_ (delete previous VM)
 * Modify it to do the following instead:
 
   * Remove ``autopart`` and replace it with a 512M swap partition and the rest
