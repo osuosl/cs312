@@ -1,4 +1,4 @@
-.. _04_troubleshooting_bash:
+.. _04_linux_basics:
 
 Troubleshooting and Bash
 ========================
