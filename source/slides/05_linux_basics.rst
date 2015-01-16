@@ -297,7 +297,8 @@ LVM and Kickstart
   part /boot --fstype="ext4" --size=512
 
   # Create a PV partition using the rest of the disk
-  # 100 implies 100% in this case instead of size in MB
+  # 100 implies 100% in this case instead of size in MB because --grow is
+  # specified
   part pv.01 --grow --size=100
 
   # Create a VG named lvm
