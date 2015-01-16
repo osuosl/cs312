@@ -191,6 +191,10 @@ Ideal Requirements
 * TFTP boot server
 * HTTP or NFS server for serving kickstart files
 
+.. image:: ../_static/pxelinux-boot.png
+  :align: center
+  :width: 60%
+
 Automated install steps
 -----------------------
 
@@ -203,6 +207,10 @@ Automated install steps
 
 Automated install steps
 -----------------------
+
+.. image:: ../_static/centos-install.png
+  :align: right
+  :width: 55%
 
 #. System boots up, tries to get an IP address and attempts to download the ks
    file.
