@@ -283,6 +283,7 @@ Can set any arbitrary environment variables in crontab
   have!
 * ``$PATH`` can be different depending on the user
 * Generally safer to use absolute paths
+* Likely not sourcing ``~/.{shell}rc`` files
 
 Software RAID (mdadm)
 =====================
@@ -423,7 +424,6 @@ More information about an md device
      Raid Devices : 2
     Total Devices : 2
       Persistence : Superblock is persistent
-
       Update Time : Wed Jan 21 22:28:43 2015
             State : clean
    Active Devices : 2
