@@ -9,8 +9,8 @@ W 1/14,":slides:ref:`04_linux_basics`",":ref:`Ch. 6, 8.9, 12.1 <readings>`, :dow
 F 1/16,":slides:ref:`05_linux_basics`",":ref:`Ch. 8.1-8.8 <readings>`"
 ,**Week 3**,
 M 1/19,No Class / MLK,
-W 1/21,Linux Basics,
-F 1/23,Development Methods / Continuous Integration,HW#1 Due
+W 1/21,":slides:ref:`06_linux_basics`",
+F 1/23,Development Methods / Continuous Integration,":ref:`Ch. 9,11 <readings>`, HW#1 Due"
 ,**Week 4**,
 M 1/26,Development Methods / Continuous Integration,HW#2 Assigned
 W 1/28,Development Methods / Continuous Integration,
