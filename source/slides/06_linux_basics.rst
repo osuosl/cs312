@@ -267,3 +267,187 @@ Can set any arbitrary environment variables in crontab
 
 Software RAID (mdadm)
 =====================
+
+mdadm
+-----
+
+* Utility to create, assemble, report on and monitor software RAID arrays
+* Utilizes the md kernel driver
+* Can use raw partitions, but we prefer making partitions
+* Adds metadata to the disk
+
+When should you use mdadm?
+--------------------------
+
+* Lower cost of hardware
+* Standardize RAID using one method
+* Others?
+
+Formatting and Booting
+----------------------
+
+* Use ``fdisk`` to set the filesystem type to ``fd Linux raid auto``
+
+  * Assists with auto-building on boot
+
+* ``/boot`` needs to either be a RAID1 or a regular partition
+
+  * Grub1/2 can't read RAID5 md devices
+  * After grub boots, the initrd will take care of building the mdadm array for
+    the rootfs
+
+Creating a RAID1
+----------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  $ yum install mdadm
+
+  # Note: I created loop1/2 using dd and losetup
+  $ fdisk /dev/loop1
+
+  $ mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/loop1 /dev/loop2
+  mdadm: Note: this array has metadata at the start and
+      may not be suitable as a boot device.  If you plan to
+      store '/boot' on this device please ensure that
+      your boot-loader understands md/v1.x metadata, or use
+      --metadata=0.90
+  Continue creating array? y
+  mdadm: Defaulting to version 1.2 metadata
+  mdadm: array /dev/md0 started.
+
+  $ cat /proc/mdstat
+  Personalities : [raid1]
+  md0 : active raid1 loop2[1] loop1[0]
+        20416 blocks super 1.2 [2/2] [UU]
+
+  unused devices: <none>
+
+/etc/mdadm.conf
+---------------
+
+If the partition is set to ``fd``, the kernel should automatically detect it
+and build the array based on the metadata on the partition.
+
+.. code-block:: bash
+
+  # Show metadata about arrays using md devices
+  $ mdadm --detail --scan
+  ARRAY /dev/md0 metadata=1.2 name=mdadm:0 UUID=ead812c6:ee734fb3:fcb6264d:e3a00c40
+
+  # Add it to the config file (not required, but useful)
+  $ mdadm --detail --scan >> /etc/mdadm.conf
+
+  # Stop the array
+  $ mdadm --stop /dev/md0
+  mdadm: stopped /dev/md0
+
+  # Start (assemble) the array
+  $ mdadm --assemble /dev/md0
+  mdadm: /dev/md0 has been started with 2 drives.
+
+Monitoring mdadm
+----------------
+
+* ``mdmonitor`` service on CentOS; ``mdadm`` on Debian
+* Runs ``mdadm --monitor`` and reads ``mdadm.conf``
+* Needs either ``MAILADDR`` or ``PROGRAM`` set in ``mdadm.conf`` to run properly
+* Program to run when it detects an event
+
+Dealing with failures
+---------------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  # Simulate a disk failure
+  $ mdadm /dev/md0 -f /dev/loop1
+  mdadm: set /dev/loop1 faulty in /dev/md0
+
+  $ tail /var/log/messages
+  Jan 21 22:27:05 mdadm kernel: md/raid1:md0: Disk failure on loop1, disabling device.
+  Jan 21 22:27:05 mdadm kernel: md/raid1:md0: Operation continuing on 1 devices.
+
+  # Hot remove the disk
+  $ mdadm /dev/md0 -r /dev/loop1
+  mdadm: hot removed /dev/loop1 from /dev/md0
+
+  # Check the status of the array
+  $ cat /proc/mdstat
+  Personalities : [raid1]
+  md0 : active raid1 loop2[1]
+        20416 blocks super 1.2 [2/1] [_U]
+
+  unused devices: <none>
+
+  # Hot add the drive back
+  $ mdadm /dev/md0 -a /dev/loop1
+  mdadm: added /dev/loop1
+
+More information about an md device
+-----------------------------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  $ mdadm -D /dev/md0
+  /dev/md0:
+          Version : 1.2
+    Creation Time : Wed Jan 21 22:13:57 2015
+       Raid Level : raid1
+       Array Size : 20416 (19.94 MiB 20.91 MB)
+    Used Dev Size : 20416 (19.94 MiB 20.91 MB)
+     Raid Devices : 2
+    Total Devices : 2
+      Persistence : Superblock is persistent
+
+      Update Time : Wed Jan 21 22:28:43 2015
+            State : clean
+   Active Devices : 2
+  Working Devices : 2
+   Failed Devices : 0
+    Spare Devices : 0
+
+             Name : mdadm:0  (local to host mdadm)
+             UUID : ead812c6:ee734fb3:fcb6264d:e3a00c40
+           Events : 39
+
+      Number   Major   Minor   RaidDevice State
+         2       7        1        0      active sync   /dev/loop1
+         1       7        2        1      active sync   /dev/loop2
+
+Block device metadata
+---------------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  $ mdadm -E /dev/loop1
+  /dev/loop1:
+            Magic : a92b4efc
+          Version : 1.2
+      Feature Map : 0x0
+       Array UUID : ead812c6:ee734fb3:fcb6264d:e3a00c40
+             Name : mdadm:0  (local to host mdadm)
+    Creation Time : Wed Jan 21 22:13:57 2015
+       Raid Level : raid1
+     Raid Devices : 2
+   Avail Dev Size : 40896 (19.97 MiB 20.94 MB)
+       Array Size : 20416 (19.94 MiB 20.91 MB)
+    Used Dev Size : 40832 (19.94 MiB 20.91 MB)
+      Data Offset : 64 sectors
+     Super Offset : 8 sectors
+     Unused Space : before=0 sectors, after=64 sectors
+            State : clean
+      Device UUID : bac67523:e1f44d96:a64c1322:50135cf9
+      Update Time : Wed Jan 21 22:28:43 2015
+    Bad Block Log : 512 entries available at offset 48 sectors
+         Checksum : 92d13b09 - correct
+           Events : 39
+     Device Role : Active device 0
+     Array State : AA ('A' == active, '.' == missing, 'R' == replacing)
