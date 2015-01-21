@@ -1,13 +1,13 @@
 .. _06_linux_basics:
 
-Syslog, Cron, mdadm and other tools
-===================================
+Syslog, Cron & Software RAID
+============================
 
 Class reminders
 ---------------
 
-* HW #1 due on Friday at start of class
-* Midterm week from Friday
+* HW #1 due THIS Friday at start of class
+* Midterm week from Friday (1/30)
 
 Automated OS Install followup
 -----------------------------
@@ -107,6 +107,13 @@ Rsyslog
 * Builtin-in SSL support for TCP remote logging
 * More easily extensible with plugins (i.e. mysql, hdfs, etc)
 * Easier to use with config management software
+* syslog-ng
+
+  * Started opensource, shifted towards commercial license
+  * Developed by a company (Balabit)
+  * `rsyslog vs. syslog-ng`_
+
+.. _rsyslog vs. syslog-ng: http://www.rsyslog.com/doc/rsyslog_ng_comparison.html
 
 Rsyslog config
 --------------
@@ -160,6 +167,10 @@ Rsyslog remote logging
   $template DailyPerHostLogs,"/var/log/HOSTS/%HOSTNAME%/%YEAR%-%MONTH%-%DAY%.log"
   # Send all logs using the template
   *.* -?DailyPerHostLogs
+
+Rsyslog also supports `TLS/SSL over TCP`_.
+
+.. _TLS/SSL over TCP: http://www.rsyslog.com/doc/rsyslog_tls.html
 
 Userspace tools: logger
 -----------------------
@@ -283,9 +294,9 @@ Can set any arbitrary environment variables in crontab
 
 * cron environments don't have the same env vars that regular users
   have!
+* Likely not sourcing ``~/.{shell}rc`` files
 * ``$PATH`` can be different depending on the user
 * Generally safer to use absolute paths
-* Likely not sourcing ``~/.{shell}rc`` files
 
 Software RAID (mdadm)
 =====================
