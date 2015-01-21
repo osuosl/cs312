@@ -217,6 +217,8 @@ Other cron-like services
 Crontab format
 --------------
 
+*Taken from 'man 5 crontab'*
+
 .. rst-class:: codeblock-sm
 
 .. code-block:: bash
