@@ -12,3 +12,4 @@ Readings
    Jan 12th, "Ch. 3-4 & 7"
    Jan 14th, "Ch. 6, 8.9, 12.1"
    Jan 16th, "Ch. 8.1-8.8"
+   Jan 13rd, "Ch. 11"
