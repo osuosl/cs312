@@ -246,7 +246,7 @@ Crontab format
 Managing user crontabs
 ----------------------
 
-**Never edit the user files directly in ``/var/spool/cron``**
+**Never edit the user files directly in** ``/var/spool/cron``
 
 .. code-block:: bash
 
