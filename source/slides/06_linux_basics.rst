@@ -184,6 +184,7 @@ Cron
 Cron: Schedule commands
 -----------------------
 
+* Typically also known as *vixie-cron* (why?)
 * Run commands a specific times or intervals
 * "crontab" or "cron table" -- configuration file
 * Various methods for configuring
@@ -194,6 +195,24 @@ Cron: Schedule commands
 
 * Configuration gets automatically reloaded every minute
 * ``man 5 crontab`` extremely useful!
+
+Other cron-like services
+------------------------
+
+* **anacron**
+
+  * Jobs that don't assume the system is running continuously
+  * Control the daily, hourly, weekly or monthly jobs
+
+* **fcron**
+
+  * Alternative to vixie-cron, also has anacron features
+  * More featureful, can set nice level or do things based on load average
+
+* **systemd timers**
+
+  * A lot more features
+  * Doesn't use traditional crontabs
 
 Crontab format
 --------------
