@@ -181,5 +181,89 @@ Userspace tools: logger
 Cron
 ====
 
+Cron: Schedule commands
+-----------------------
+
+* Run commands a specific times or intervals
+* "crontab" or "cron table" -- configuration file
+* Various methods for configuring
+
+  * User crontabs -- stored in ``/var/spool/cron``, managed via ``crontab -e``
+  * Predefined hourly, daily, and monthly directories
+  * ``/etc/cron.d`` folder
+
+* Configuration gets automatically reloaded every minute
+* ``man 5 crontab`` extremely useful!
+
+Crontab format
+--------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  # Example of job definition:
+  # .---------------- minute (0 - 59)
+  # |  .------------- hour (0 - 23)
+  # |  |  .---------- day of month (1 - 31)
+  # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+  # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+  # |  |  |  |  |
+  # *  *  *  *  * user-name command to be executed
+
+  # minute hour dom month weekday command
+
+  # run five minutes after midnight, every day
+  5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out 2>&1
+  # run at 2:15pm on the first of every month -- output mailed to paul
+  15 14 1 * *     $HOME/bin/monthly
+  # run at 10 pm on weekdays, annoy Joe
+  0 22 * * 1-5    mail -s "It’s 10pm" joe%Joe,%%Where are your kids?%
+  23 0-23/2 * * * echo "run 23 minutes after midn, 2am, 4am ..., everyday"
+  5 4 * * sun     echo "run at 5 after 4 every sunday"
+
+Managing user crontabs
+----------------------
+
+**Never edit the user files directly in ``/var/spool/cron``**
+
+.. code-block:: bash
+
+  # Edit the current user crontab
+  $ crontab -e
+
+  # Edit user john's crontab
+  $ crontab -e -u john
+
+Other Crontab files
+-------------------
+
+.. csv-table::
+  :header: File/Directory, Description
+
+  /etc/crontab, Primary system crontab file
+  /etc/cron.d/, Arbitrary crontab formatted files
+  /etc/anacrontab, "system crontab that manages cron.daily, weekly, hourly and monthly"
+  /etc/cron.daily/, Scripts that will run daily
+  /etc/cron.hourly/, Scripts that will run hourly
+  /etc/cron.monthly/, Scripts that will run monthly
+  /etc/cron.weekly/, Scripts that will run weekly
+
+Crontab environment variables
+-----------------------------
+
+Can set any arbitrary environment variables in crontab
+
+.. csv-table::
+  :header: Variable, Description
+
+  MAILTO, Email address to send stdout/stderr output to
+  SHELL, Default shell to use
+
+* cron environments don't have the same env vars that regular users
+  have!
+* ``$PATH`` can be different depending on the user
+* Generally safer to use absolute paths
+
 Software RAID (mdadm)
 =====================
