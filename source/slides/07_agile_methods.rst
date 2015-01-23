@@ -29,7 +29,7 @@ First, lets talk about waterfall in order to contrast agile methodologies:
 
 * One cycle
 * Sequential
-* Entire project progesses through stages
+* Entire project progresses through stages
 
 .. figure:: ../_static/waterfall.png
 
@@ -138,8 +138,8 @@ Sprint Planning Meeting
 * Typically 1-2 hours per week of sprint length (so 4-8 hours)
 * Identify any issues that block stories from being completed
 
-Standup (Daily Meeting)
------------------------
+Stand-up (Daily Meeting)
+------------------------
 
 * Very short; typically 15 minutes
 * Development team members go around, briefly mention tasks they are working on
@@ -182,7 +182,7 @@ Criticisms
 
 * Poor documentation (often out of date or nonexistent)
 * Moving goalposts; no well defined target
-* Large number of meetingts near beginning/end of sprint (but few in between)
+* Large number of meetings near beginning/end of sprint (but few in between)
 * encourages "box checking"; focuses too much on time-estimations
 
 Kanban
