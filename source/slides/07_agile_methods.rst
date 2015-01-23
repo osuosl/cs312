@@ -3,6 +3,13 @@
 Agile Methodologies
 ===================
 
+Importance to Ops
+-----------------
+
+* Encourages DevOps and team integration
+* Agile methods acknowledge unplannable events
+* Brings Ops earlier into the cycle than other methodologies
+
 Agile Methodologies
 -------------------
 
@@ -45,6 +52,15 @@ group of features rather than the entire project
 Scrum
 =====
 
+History
+-------
+
+* Invented in 1986 by Hirotaka Takeuchi and Ikujiro Nonaka
+* Parallel as opposed to sequential process
+* Designed to increase flexibility
+* Rose to prominence in the 2000s with the creation of Scrum master
+  certification
+
 Summary
 -------
 
@@ -73,8 +89,8 @@ Product Owner (Scrum)
   * Prioritizing development efforts
   * Worries about scheduling, deadlines, funding, etc.
 
-In general, a product owner shields the rest of the team from
-non-technical issues that could hamper development of the product.
+*In general, a product owner shields the rest of the team from*
+*non-technical issues that could hamper development of the product.*
 
 Development Team
 ----------------
@@ -160,6 +176,14 @@ Summary
 * Sprint Review
 * Sprint Retrospective
 * New Sprint planning
+
+Criticisms
+----------
+
+* Poor documentation (often out of date or nonexistent)
+* Moving goalposts; no well defined target
+* Large number of meetingts near beginning/end of sprint (but few in between)
+* encourages "box checking"; focuses too much on time-estimations
 
 Kanban
 ======
