@@ -216,4 +216,5 @@ Scrumban
 
 * A modified version of scrum to fit operations better
 * A number of story points are saved for unplannable issues
-* 
+* Kanban board is used to track tasks
+* Introspects unplanned vs planned work
