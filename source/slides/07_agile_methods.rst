@@ -45,6 +45,15 @@ group of features rather than the entire project
 Scrum
 =====
 
+Summary
+-------
+
+* Sprint planning
+* Sprint happens
+* Sprint Review
+* Sprint Retrospective
+* New Sprint planning
+
 Scrum
 -----
 
@@ -143,6 +152,14 @@ Retrospective Meeting
 * Facilitated by scrum master
 * Development Team members only, no leadership
 
+Summary
+-------
+
+* Sprint planning
+* Sprint happens
+* Sprint Review
+* Sprint Retrospective
+* New Sprint planning
 
 Kanban
 ======
