@@ -187,8 +187,7 @@ Work In Process
 
 * Pull signal instead of scheduled
 * Measured in cycle-time (how long from beginning to end?)
-* Measures a teams work through-put, which allows prioritization and
-  setting deadlines
+* Measures a teams work through-put
 * Often examined using queueing theory or traffic flow analysis
 * Littles Lemma: Cycle Time = Queue length / Avg time spent in queue
 
@@ -211,3 +210,10 @@ Adaptation
 * Kanban is a self-introspecting process designed to adapt as the situation
   changes
 * Focuses on reducing Cycle Time and WIP limits
+
+Scrumban
+--------
+
+* A modified version of scrum to fit operations better
+* A number of story points are saved for unplannable issues
+* 
