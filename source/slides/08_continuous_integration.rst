@@ -41,6 +41,8 @@ Buildbot
 --------
 
 .. figure:: ../_static/buildbot.png
+  :align: center
+  :width: 100%
 
 
 Drone
