@@ -114,6 +114,12 @@ with a valid reason.**
 **In general:** Students who do not attend lectures tend to do very poorly in
 this class (C or lower).
 
+Late homework policy
+~~~~~~~~~~~~~~~~~~~~
+
+Any homework that is turned in past the deadline will incur a -10% dock in grade
+per day including weekend days.
+
 Grading
 ~~~~~~~
 
