@@ -41,7 +41,7 @@ Buildbot
 --------
 
 .. figure:: ../_static/buildbot.png
-   :scale: 60%
+
 
 Drone
 -----
@@ -158,3 +158,8 @@ Travis CI
 `Travis CI Demo`_
 
 .. _Travis CI Demo: https://travis-ci.org/osuosl-cookbooks/osl-haproxy
+
+Reminders
+---------
+
+Bring your laptop on Wednesday!
