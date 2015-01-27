@@ -1,4 +1,4 @@
-.. _continuous_integration:
+.. _08_continuous_integration:
 
 Continuous Integration
 ======================
