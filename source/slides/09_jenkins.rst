@@ -90,6 +90,7 @@ Github Hooks
 #. Using your public IP, set the hook URL: i.e.
    ``http://140.211.168.XXX:8080/github-webhook/``
 #. Click **Add Service**
+#. Add and push an empty commit to your fork: ``git commit --allow-empty``
 #. Click the jenkins service
 #. Click **Test Service**
 #. Back on jenkins, click on **Github Hook Log**
@@ -97,7 +98,7 @@ Github Hooks
 Add tests!
 ----------
 
-Make a branch and add the following ``.travis.yml`` config:
+Commit and push the following ``.travis.yml`` config on your fork:
 
 .. code-block:: yaml
 
@@ -123,4 +124,4 @@ Pull request
 ------------
 
 * Make a pull request (on your own repo) with the fix
-* Work? Yay! Merge!
+* Work? Yay!
