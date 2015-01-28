@@ -57,31 +57,67 @@ Installing plugins
 Fork repo
 ---------
 
-* Fork this repo: TODO
+* Fork this repo: https://github.com/osuosl/cs312-demo
 
 Create a jenkins job
 --------------------
+
+What we'll do today:
 
 * Clone the repo
 * Run a script
 * Manually run job
 
+Steps to add job
+----------------
+
+#. Click **create new jobs**
+#. Choose **Freestyle project** and name it ``cs312-demo``
+#. Add your fork's URL to **Github project**
+#. Click **Git** and add URL
+#. Check **Build when a change is pushed to GitHub** under **Build Triggers**
+#. Click **Save**
+#. Click **Build Now**
+
+*Does it work? Check the output!*
+
 Github Hooks
 ------------
 
-* Integrate with Jenkins
-* Test job: Commit to the repo and push
-
-Travis CI Setup
----------------
-
-* <Instructions here>
+#. Go to your fork and click on **Settings**
+#. Click on **Webhooks & Services**
+#. Click on **Add service**, search for **Jenkins (GitHub plugin)**
+#. Using your public IP, set the hook URL: i.e.
+   ``http://140.211.168.XXX:8080/github-webhook/``
+#. Click **Add Service**
+#. Click the jenkins service
+#. Click **Test Service**
+#. Back on jenkins, click on **Github Hook Log**
 
 Add tests!
 ----------
 
-* Do rubocop setup
-* It breaks!
+Make a branch and add the following ``.travis.yml`` config:
+
+.. code-block:: yaml
+
+  language: ruby
+  sudo: false
+  cache: bundler
+  rvm:
+    - 2.2
+  install:
+    - bundle install --retry=3
+  script:
+    - bundle exec rubocop
+
+
+Travis CI Setup
+---------------
+
+#. Goto https://travis-ci.org and login
+#. Search for ``cs312-demo`` (you might need to force a sync)
+#. Click enable and **Build only if .travis.yml is present**
 
 Pull request
 ------------
