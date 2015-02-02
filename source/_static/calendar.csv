@@ -16,7 +16,7 @@ M 1/26,":slides:ref:`08_continuous_integration`",
 W 1/28,":slides:ref:`09_jenkins`",":download:`HW#2 Assigned <_static/hw/homework2.pdf>`; Bring laptops!"
 F 1/30,Midterm,
 ,**Week 5**,
-M 2/2,Configuration Management,
+M 2/2,":slides:ref:`10_cfg_mgt`",
 W 2/4,Configuration Management,"HW#2 Due"
 F 2/6,Configuration Management,"HW#3 Assigned"
 ,**Week 6**,
