@@ -120,6 +120,24 @@ CM Platform Comparison
 
 - Each platform offers its own level of complexity
 
+Push vs. Pull
+-------------
+
+* Pull
+
+  * Clients poll a centralized master periodically for updates (i.e. Chef,
+    Puppet, Cfengine)
+  * Pros: Full automation capabilities, increased scalability
+  * Cons: configuration management specific DSL, difficult to send immediate
+    changes
+
+* Push
+
+  * Server calls client and can execute an immediate remote execution usually
+    using ssh (i.e. Salt, Ansible)
+  * Pros: Control, simplicity, can send commands immediately
+  * Cons: Lack of full automation, Lack of scalability
+
 DevOps workflow in an agency environment
 ----------------------------------------
 
