@@ -177,7 +177,7 @@ Workflow @ Squishy
   - CI runs all tests in the tests directory on every push
 
 * Code review by another team member, approve merge/pull request
-* Push to master with all tests passsing triggers a deploy to staging via bin/deploy.sh
+* Push to master with all tests passing triggers a deploy to staging via bin/deploy.sh
 * Deployment to production is currently manual
 
 What works?  What doesn't?
