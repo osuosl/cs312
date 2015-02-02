@@ -102,6 +102,21 @@ Chef Example
     action [:enable, :start]
   end
 
+Ansible Example
+---------------
+
+- Install apache and start the service
+- Uses YAML file format for configuration
+
+.. code-block:: yaml
+
+  - hosts: all
+    tasks:
+      - name: 1. Install Apache
+        yum: name=httpd state=present
+      - name: 2. Start Apache Service
+        service: name=httpd state=running enabled=yes
+
 CM Platform Comparison
 ----------------------
 
