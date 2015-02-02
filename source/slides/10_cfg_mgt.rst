@@ -42,28 +42,28 @@ Infrastructure as code
 CM Platforms
 ------------
 
-- CFengine
+**CFengine**
 
-  - Lightweight agent system. Manages configuration of a large number of
-    computers using the client–server paradigm or stand-alone.
+* Lightweight agent system. Manages configuration of a large number of computers
+  using the client–server paradigm or stand-alone.
 
-- Puppet
+**Puppet**
 
-  - Puppet consists of a custom declarative language to describe system
-    configuration, distributed using the client–server paradigm.
+* Puppet consists of a custom declarative language to describe system
+  configuration, distributed using the client–server paradigm.
 
 CM Platforms (part 2)
 ---------------------
 
-- Chef
+**Chef**
 
-  - Chef is a configuration management tool written in Ruby, and uses a pure
-    Ruby DSL for writing configuration "recipes". Also a client-server model.
+- Chef is a configuration management tool written in Ruby, and uses a pure Ruby
+  DSL for writing configuration "recipes". Also a client-server model.
 
-- Ansible
+**Ansible**
 
-  - Combines multi-node deployment, ad-hoc task execution, and configuration
-    management in one package. Utilizes SSH with little to no remote agents.
+- Combines multi-node deployment, ad-hoc task execution, and configuration
+  management in one package. Utilizes SSH with little to no remote agents.
 
 Puppet Example
 --------------
