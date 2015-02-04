@@ -357,7 +357,7 @@ Resource Examples
       group 'wwwdata'
       mode 0644 # like chmod (the 0 means octal in ruby)
       notifies :restart, 'service[apache2]'
-      variables :some_other_var => 'example'
+      variables(some_other_var: 'example')
     end
 
 Templates
