@@ -4,6 +4,18 @@
 Chef Basics
 ===========
 
+HW2 Kickstart explanation
+-------------------------
+
+*Why can I install httpd after the system is installed but not during
+kickstart?*
+
+* The kickstart/anaconda install environment doesn't include external repos by
+  default.
+* It can only install packages from the ISO image, which doesn't include httpd.
+* The httpd package is included in the base repository for CentOS.
+* Normally you want to add the Base and Updates repo in the kickstart.
+
 Terminology
 ===========
 
