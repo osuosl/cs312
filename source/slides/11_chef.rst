@@ -53,6 +53,8 @@ Even More Terminology
 *Serverspec*
     A testing framework for integration testing.
 
+*Chefspec*
+    A unit testing framework for chef.    
 
 Ruby Syntax Primer
 ------------------
@@ -86,7 +88,7 @@ Python
 
     def sum(a,b):
         return a+b
-    print(sum(3,5)) # prints "8"
+    print(sum(3,5)) # prints '8'
 
 Parentheses are not required in function calls in Ruby
 
@@ -96,7 +98,7 @@ Parentheses are not required in function calls in Ruby
     def sum(a,b)
       return a+b
     end
-    puts sum 3 5 # prints "8"
+    puts sum 3 5 # prints '8'
 
 
 Ruby Syntax Primer
@@ -129,7 +131,7 @@ Python
 
     arr = []
     if arr:
-        print("the code never gets here")
+        print('the code never gets here')
     else:
         fill_arr(arr)
 
@@ -139,9 +141,9 @@ Ruby
 
     arr = []
     if arr # this is the typecasting exception
-        puts "Well, this is unexpected"
+        puts 'Well, this is unexpected'
     else
-        puts "The code never gets here!"
+        puts 'The code never gets here!'
     end
 
 Wait, What?
@@ -153,7 +155,7 @@ Wait, What?
 
 * If you descend from ``Object`` (and not through ``FalseClass`` or ``NilClass``), you typecast to ``true``.
 
-  - Gotchas: ``{}, [], '', "",``
+  - Gotchas: ``{}, [], '', '',``
 
     + Use ``.empty?``
 
@@ -163,7 +165,7 @@ Wait, What?
     if arr.empty?
       fill_arr arr
     else
-      puts "the code never gets here"
+      puts 'the code never gets here'
     end
 
 Syntactic Sugar
@@ -173,12 +175,12 @@ Ruby has a lot of syntactic sugar
 
 .. code-block:: ruby
 
-    var = "test"
-    %w[a b #{var}] # same as ["a", "b", '#{var}']
-    %W[a b #{var}] # same as ["a", "b", "test"]
+    var = 'test'
+    %w[a b #{var}] # same as ['a', 'b', '#{var}']
+    %W[a b #{var}] # same as ['a', 'b', 'test']
     1 + 2 # sugar for 1.+(2)
     1.+(2) # sugar for 1.send(:+, 2)
-    puts key1: 34, key2: 42 # outputs "{:key1 => 34, :key2 => 42}"
+    puts key1: 34, key2: 42 # outputs '{:key1 => 34, :key2 => 42}'
 
 
 Procs
@@ -189,22 +191,22 @@ In Ruby, a proc (procedure), is similar to a function in Python that has not bee
 .. code-block:: python
 
     def bar():
-        print("hello!")
+        print('hello!')
     def foo(bar):
         bar()
-    foo(bar) # prints "hello!"
+    foo(bar) # prints 'hello!'
 
 in Ruby, this is:
 
 .. code-block:: ruby
 
     bar = proc do
-      puts "hello!"
+      puts 'hello!'
     end
     def foo(bar)
       bar.call
     end
-    foo bar # prints "hello!"
+    foo bar # prints 'hello!'
 
 Blocks
 ------
@@ -218,8 +220,8 @@ A block is just an unnamed proc.
     end
 
     foo do
-      puts "hello!"
-    end # prints "hello!"
+      puts 'hello!'
+    end # prints 'hello!'
 
 The ``foo(&block)`` declaration tells ruby that this argument takes a block which will be passed in later, and to convert that block into a proc
 
@@ -230,7 +232,7 @@ You will notice chef syntax looks a lot like the last slide.
 
 .. code-block:: ruby
 
-    package "vim" do
+    package 'vim' do
       action :upgrade
     end
 
@@ -242,9 +244,9 @@ You will notice chef syntax looks a lot like the last slide.
     def package(n,&b) # n is just a regular old string
       b.call.curry[n]
     end
-    package "vim" do
+    package 'vim' do
       action :upgrade
-    end  # prints "apt-get ugprade vim"
+    end  # prints 'apt-get ugprade vim'
 
 In Chef ``action`` and other options are actually just symbols that get processed later.
 
@@ -407,9 +409,9 @@ Files
 
 .. code-block:: ruby
 
-    remote_file "/root/.bashrc" do
-      owner "root"
-      group "root"
+    remote_file '/root/.bashrc' do
+      owner 'root'
+      group 'root'
       mode 0644
     end
 
