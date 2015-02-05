@@ -555,9 +555,9 @@ Berksfile
 
     source 'https://supermarket.chef.io'
 
-    cookbook "omnibus_updater"
-    cookbook "munin"
-    cookbook "runit", "1.5.10"
+    cookbook 'omnibus_updater'
+    cookbook 'munin'
+    cookbook 'runit', '1.5.10'
 
     metadata
 
