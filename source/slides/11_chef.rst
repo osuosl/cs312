@@ -1,6 +1,6 @@
 .. _11_chef:
 
-===========
+
 Chef Basics
 ===========
 
@@ -17,7 +17,7 @@ kickstart?*
 * Normally you want to add the Base and Updates repo in the kickstart.
 
 Terminology
-===========
+-----------
 
 *Client*
     A client is identified by a key pair, used for authorization.
@@ -33,7 +33,7 @@ Terminology
 
 
 Terminology (cont)
-==================
+------------------
 
 
 *Foodcritic*
@@ -43,7 +43,7 @@ Terminology (cont)
     A popular ruby linting tool, similar to pep8.
 
 Even More Terminology
-=====================
+---------------------
 
 *Test Kitchen*
     A framework for automatically bringing up machines, running chef, and then running tests.
@@ -53,7 +53,7 @@ Even More Terminology
 
 
 Ruby Syntax Primer
-==================
+------------------
 
 * Dynamic, strongly typed (*mostly* no implicit casting)
 * Very implicit syntax
@@ -76,7 +76,7 @@ in Ruby
     end
 
 Ruby Syntax Primer
-==================
+------------------
 
 Python
 
@@ -98,7 +98,7 @@ Parentheses are not required in function calls in Ruby
 
 
 Ruby Syntax Primer
-==================
+------------------
 
 Python
 
@@ -119,7 +119,7 @@ Ruby
     end
 
 Ruby Syntax Primer
-==================
+------------------
 
 Python
 
@@ -143,7 +143,7 @@ Ruby
     end
 
 Wait, What?
-===========
+-----------
 
 * Only ``nil`` and ``false`` tyepcast to a ``falsey`` value in Ruby
 
@@ -165,7 +165,7 @@ Wait, What?
     end
 
 Syntactic Sugar
-===============
+---------------
 
 Ruby has a lot of syntactic sugar
 
@@ -180,7 +180,7 @@ Ruby has a lot of syntactic sugar
 
 
 Procs
-=====
+-----
 
 In Ruby, a proc (procedure), is similar to a function in Python that has not been called, i.e
 
@@ -205,7 +205,7 @@ in Ruby, this is:
     foo bar # prints "hello!"
 
 Blocks
-======
+------
 
 A block is just an unnamed proc.
 
@@ -222,7 +222,7 @@ A block is just an unnamed proc.
 The ``foo(&block)`` declaration tells ruby that this argument takes a block which will be passed in later, and to convert that block into a proc
 
 Fake Chef
-=========
+---------
 
 You will notice chef syntax looks a lot like the last slide.
 
@@ -247,7 +247,7 @@ You will notice chef syntax looks a lot like the last slide.
 In Chef ``action`` and other options are actually just symbols that get processed later.
 
 One Last Thing
-==============
+--------------
 
 ``do end`` and ``{}`` are equivalent. Use ``do end`` for multiline blocks, and ``{}`` for single lines:
 
@@ -260,7 +260,7 @@ One Last Thing
     end
 
 Chef Components
-===============
+---------------
 
 * Cookbooks
 * Nodes
@@ -269,7 +269,7 @@ Chef Components
 * Data Bags
 
 Cookbooks
-=========
+---------
 
 The major components are:
 
@@ -280,7 +280,7 @@ The major components are:
 * Lightweight Resource-Providers (we won't cover this)
 
 Attributes
-==========
+----------
 
 Can be defined in any of the following:
 
@@ -297,7 +297,7 @@ There are 4 levels of attributes:
 * Automatic (special)
 
 Attributes (Cookbook)
-=====================
+---------------------
 
 * Found in the ``attributes/`` dir in the root of a cookbook.
 
@@ -318,7 +318,7 @@ Attributes can be accessed in a recipe like the following
     node['my_cookbook']['package_i_want']
 
 Resources (Cookbook)
-=====================
+---------------------
 
 * These are the workhorses of chef
 * Most things that you can do are defined via resources. Chef has a syntax for resources
@@ -333,7 +333,7 @@ Resources (Cookbook)
 * Universal options include ``action, subscribes, notifies, only_if, not_if``
 
 Resource Examples
-=================
+-----------------
 
 .. code-block:: ruby
 
@@ -357,7 +357,7 @@ Resource Examples
     end
 
 Templates
-=========
+---------
 
 * Located in ``templates/``, usually in ``templates/default``. All template file names should end in ``.erb``
 * ERB has two useful rules.
@@ -372,7 +372,7 @@ Templates
 * ``@some_other_var`` is a variable passed from the recipe
 
 ERB Examples
-============
+------------
 
 .. code-block:: erb
 
@@ -396,7 +396,7 @@ will render as
     3
 
 Files
-=====
+-----
 
 * Just like templates (but no ERB)
 * Live in ``files/default/``
@@ -412,7 +412,7 @@ Files
     end
 
 Nodes
-=====
+-----
 
 * Node data
 * Stored in JSON
@@ -434,7 +434,7 @@ Nodes
 
 
 Roles
-=====
+-----
 
 * Node data that applies to >1 node
 * Have their own attributes, run lists
@@ -455,7 +455,7 @@ Roles
     }
 
 Environments
-============
+------------
 
 * Only have attributes
 * Name accessed via ``node['chef_environment']``
@@ -476,7 +476,7 @@ Environments
     }
 
 Data Bags
-=========
+---------
 
 * Data that doesn't fit in nodes, roles, or environments
 * Can be encrypted
@@ -498,7 +498,7 @@ Data Bags
     }
 
 Test Kitchen
-============
+------------
 
 * Helps make VMs, run chef, run tests
 * Has plugin system for vagrant, openstack, virtualbox, etc
@@ -508,7 +508,7 @@ Test Kitchen
 * No reference documentation!
 
 Kitchen YAML Example
-====================
+--------------------
 
 .. code-block:: yaml
 
@@ -530,7 +530,7 @@ Kitchen YAML Example
           - recipe[mycookbook]
 
 Kitchen Commands
-================
+----------------
 
 These are the useful ones
 
@@ -544,7 +544,7 @@ These are the useful ones
 * diagnose
 
 Berksfile
-=========
+---------
 
 * Test-kitchen will automatically pull in cookbooks from Berksfile
 * Secretly just ruby
@@ -566,7 +566,7 @@ Berksfile
     metadata
 
 Gemfile
-=======
+-------
 
 * Does double duty
 
@@ -586,7 +586,7 @@ Gemfile
     gem 'serverspec'
 
 Tests
-=====
+-----
 
 * Live in ``tests/integration/#{platform}/#{testframework}``
 * We like serverspec.
