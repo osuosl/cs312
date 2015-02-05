@@ -39,8 +39,10 @@ Terminology (cont)
 *Foodcritic*
     A linting tool for chef.
 
-*Rubocop*
+`Rubocop`_
     A popular ruby linting tool, similar to pep8.
+
+.. _Rubocop: https://github.com/bbatsov/rubocop
 
 Even More Terminology
 ---------------------
