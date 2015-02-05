@@ -556,13 +556,7 @@ Berksfile
     source 'https://supermarket.chef.io'
 
     cookbook "omnibus_updater"
-    cookbook "aliases", git: "git@github.com:osuosl-cookbooks/aliases"
-    cookbook "firewall", git: "git@github.com:osuosl-cookbooks/firewall"
-    cookbook "nagios", git: "git@github.com:osuosl-cookbooks/nagios"
-    cookbook "monitoring", git: "git@github.com:osuosl-cookbooks/monitoring"
     cookbook "munin"
-    cookbook "osl-munin", git: "git@github.com:osuosl-cookbooks/osl-munin"
-    cookbook "osl-nginx", git: "git@github.com:osuosl-cookbooks/osl-nginx"
     cookbook "runit", "1.5.10"
 
     metadata
