@@ -327,8 +327,8 @@ Resources (Cookbook)
 
 .. code-block:: ruby
 
-    resource "name" do
-      option "option_value"
+    resource 'name' do
+      option 'option_value'
     end
 
 * Common resources used include: package, service, file, template,
@@ -339,23 +339,23 @@ Resource Examples
 
 .. code-block:: ruby
 
-    package "apache2" do
+    package 'apache2' do
       action :install
     end
 
-    package "apache2" # the default action is :install
+    package 'apache2' # the default action is :install
 
-    service "apache2" do
+    service 'apache2' do
       action [:start, :enable]
     end
 
-    template "/etc/apache2/sites-available/mysite.conf" do
-      source "mysite.conf.erb"
-      owner "wwwdata"
-      group "wwwdata"
+    template '/etc/apache2/sites-available/mysite.conf' do
+      source 'mysite.conf.erb'
+      owner 'wwwdata'
+      group 'wwwdata'
       mode 0644 # like chmod (the 0 means octal in ruby)
-      notifies :restart, "service[apache2]"
-      variables :some_other_var => "example"
+      notifies :restart, 'service[apache2]'
+      variables :some_other_var => 'example'
     end
 
 Templates
