@@ -307,7 +307,7 @@ Attributes (Cookbook)
 
     default['my_cookbook']['package_i_want'] = 'vim'
 
-* Can be defined in ``recipes``, but generally shouldn't be.
+* Often defined in recipes as well:
 
 .. code-block:: ruby
 
