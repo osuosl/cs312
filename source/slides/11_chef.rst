@@ -594,7 +594,7 @@ Tests
 
     set :background, :exec
 
-    %w[haskell haskell-min].each do |p| # this is for laziness
+    %w(haskell haskell-min).each do |p|
       describe package(p) do # p is haskell or haskell-min
           it { should be_installed.with_version('1-4.0.el6') }
       end
