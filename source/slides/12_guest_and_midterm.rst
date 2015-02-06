@@ -12,14 +12,14 @@ Vagranftiles are... *ok*
 
 .. code-block:: ruby
 
-  # Single box with default options.
-  #
-  Vagrant::Config.run do |config|
-    config.vm.box = 'precise32'
-    config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
-  end
+    # Single box with default options.
+    #
+    Vagrant::Config.run do |config|
+      config.vm.box = 'precise32'
+      config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
+    end
 
-`Complex`_ Vagrantfiles are not
+`Complex`_ Vagrantfiles are not ok
 
 .. _Complex: https://github.com/stackforge/openstack-chef-repo/blob/master/Vagrantfile-aio-neutron
 
@@ -30,19 +30,19 @@ Testing and Vagrantfiles are not clear:
 
 .. code-block:: ruby
 
-  Vagrant.configure('2') do |config|
-    config.vm.box = 'precise64'
-    config.vm.box_url = 'http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box'
+    Vagrant.configure('2') do |config|
+      config.vm.box = 'precise64'
+      config.vm.box_url = 'http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box'
 
-    config.vm.provision :shell, inline: <<-EOF
-      sudo ufw allow 22
-      yes | sudo ufw enable
-    EOF
+      config.vm.provision :shell, inline: <<-EOF
+        sudo ufw allow 22
+        yes | sudo ufw enable
+      EOF
 
-    config.vm.provision :serverspec do |spec|
-      spec.pattern = '*_spec.rb'
+      config.vm.provision :serverspec do |spec|
+        spec.pattern = '*_spec.rb'
+      end
     end
-  end
 
 What is going on here?
 
@@ -82,12 +82,12 @@ When Test-kitchen is *NOT* Magic!
 
 .. code-block:: ruby
 
-  >>>>>> Converge failed on instance <mysql-ubuntu14>.
-  >>>>>> Please see .kitchen/logs/mysql-ubuntu14.log for more details
-  >>>>>> ------Exception-------
-  >>>>>> Class: Kitchen::ActionFailed
-  >>>>>> Message: curve name mismatched (`*��ZlEC+�t6�R�M(m8������(' with `')
-  >>>>>> ----------------------
+    >>>>>> Converge failed on instance <mysql-ubuntu14>.
+    >>>>>> Please see .kitchen/logs/mysql-ubuntu14.log for more details
+    >>>>>> ------Exception-------
+    >>>>>> Class: Kitchen::ActionFailed
+    >>>>>> Message: curve name mismatched (`*��ZlEC+�t6�R�M(m8������(' with `')
+    >>>>>> ----------------------
 
 Test-kitchen used cryptic error message. It's super effective!
 
