@@ -126,3 +126,45 @@ Test Kitchen Plugins (cont)
 Midterm Notes
 =============
 
+Midterm Notes
+-------------
+
+Average: 67.9
+Median: 66
+
+Hard Questions (50% or fewer got these right)
+---------------------------------------------
+
+* What file typically contains user's hashed and salted passwords?
+* Describe what ``yum`` and ``rpm`` are and what their primary differences are
+* What does ``initrd`` stand for? What is its primary purpose?
+* True/False: Git is a centralized version control system
+* What does the special variable ``$$`` store?
+
+Really Hard Questions (<= 25%)
+------------------------------
+
+* What type of file has the following permissions: ``crw-rw-rw-``?
+* Name and describe three of the five components of LVM
+* Describe what ``kickstart`` and ``anaconda`` are.
+
+Really Hard Questions
+---------------------
+
+* Correctly order the following install steps for an automated install:
+
+  * Download Linux Kernel/initrd image
+  * Boot from network device (e.g PXE)
+  * Using the kickstart file, install the system
+  * Finish the install and reboot or shutdown the system
+  * Get an IP address and information on where the boot server is
+  * Grab the initial boot image
+
+
+Really Hard Questions
+---------------------
+
+* Describe the following crontab interval: ``20 2 * * 3``
+* What file could you look at to see the state of software raid on a Linux system?
+* Who is Ken Thompson? Name at least two things he invented
+* Is it possible for the ``df`` utility to report utilization over 100%? Explain
