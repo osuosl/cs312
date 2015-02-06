@@ -1,4 +1,4 @@
-.. _12_guest_and_midterm:
+.. _12_chef_midterm_notes
 
 Geoffrey Corey
 ==============
@@ -80,7 +80,7 @@ Kitchen YAML Example
 When Test-kitchen is *NOT* Magic!
 ---------------------------------
 
-.. code-block:: ruby
+.. code-block::
 
     >>>>>> Converge failed on instance <mysql-ubuntu14>.
     >>>>>> Please see .kitchen/logs/mysql-ubuntu14.log for more details
