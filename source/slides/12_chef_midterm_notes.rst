@@ -1,4 +1,4 @@
-.. _12_chef_midterm_notes
+.. _12_chef_midterm_notes:
 
 
 Midterm Notes
