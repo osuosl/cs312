@@ -120,7 +120,7 @@ Test Kitchen Plugins (cont)
 
 * Docker (obligatory reference)
 
-.. figure:: http://i.imgur.com/pAhrLmL.jpg
+.. figure:: ../_static/docker.jpg
    :align: center
 
 Midterm Notes
