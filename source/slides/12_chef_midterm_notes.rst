@@ -127,7 +127,7 @@ Kitchen YAML Example
 When Test-kitchen is *NOT* Magic!
 ---------------------------------
 
-.. code-block::
+.. code-block:: none
 
     >>>>>> Converge failed on instance <mysql-ubuntu14>.
     >>>>>> Please see .kitchen/logs/mysql-ubuntu14.log for more details
