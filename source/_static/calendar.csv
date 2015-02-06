@@ -18,9 +18,9 @@ F 1/30,Midterm,
 ,**Week 5**,
 M 2/2,":slides:ref:`10_cfg_mgt`",
 W 2/4,":slides:ref:`11_chef`","HW#2 Due"
-F 2/6,Configuration Management,"HW#3 Assigned"
+F 2/6,":slides:ref:`12_chef_midterm_notes`",
 ,**Week 6**,
-M 2/9,Configuration Management,
+M 2/9,Configuration Management,"HW#3 Assigned"
 W 2/11,Monitoring & Performance Monitoring,
 F 2/13,Monitoring & Performance Monitoring,"HW#3 Due; HW#4 Assigned"
 ,**Week 7**,
