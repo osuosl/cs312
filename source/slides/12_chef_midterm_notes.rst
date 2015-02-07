@@ -55,7 +55,7 @@ Guest Speaker
 Vagrant
 -------
 
-Vagranftiles are... *ok*
+Vagrantfiles are... *ok*
 
 .. code-block:: ruby
 
