@@ -51,7 +51,7 @@ environment is installed.
 
 .. code-block:: bash
 
-  $ yum install git
+  $ sudo yum install git
   $ git clone https://github.com/osuosl/cs312-testcookbook.git
 
 Foodcritic
@@ -285,7 +285,7 @@ Test Kitchen commands
 
 .. code-block:: bash
 
-  $ kitchen list
+  $ kitchen list # only works if you have vagrant installed
   Instance           Driver   Provisioner  Last Action
   default-centos-66  Vagrant  ChefSolo     <Not Created>
   wiki-centos-66     Vagrant  ChefSolo     <Not Created>
