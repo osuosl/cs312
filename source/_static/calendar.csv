@@ -20,22 +20,22 @@ M 2/2,":slides:ref:`10_cfg_mgt`",
 W 2/4,":slides:ref:`11_chef`","HW#2 Due"
 F 2/6,":slides:ref:`12_chef_midterm_notes`",
 ,**Week 6**,
-M 2/9,Configuration Management,"HW#3 Assigned"
-W 2/11,Monitoring & Performance Monitoring,
-F 2/13,Monitoring & Performance Monitoring,"HW#3 Due; HW#4 Assigned"
+M 2/9,":slides:ref:`13_chedfk_tk`","Bring laptops!"
+W 2/11,Configuration Management,"Bring laptops!; HW#3 Assigned"
+F 2/13,Monitoring & Performance Monitoring,
 ,**Week 7**,
-M 2/16,Monitoring & Performance Monitoring,
-W 2/18,High Availability Strategies,
-F 2/20,High Availability Strategies,"HW#4 Due; HW#5 Assigned"
+M 2/16,Monitoring & Performance Monitoring,"HW#4 Assigned"
+W 2/18,High Availability Strategies,"HW#3 Due"
+F 2/20,Guest Speaker: Brandon Philips - CoreOS,
 ,**Week 8**,
-M 2/23,High Availability Strategies,
-W 2/25,High Availability Strategies,
-F 2/27,Containerization / Virtualization,"HW#5 Due; HW#6 Assigned"
+M 2/23,High Availability Strategies,"HW#4 Due"
+W 2/25,High Availability Strategies,"HW#5 Assigned"
+F 2/27,Containerization / Virtualization,
 ,**Week 9**,
-M 3/2,Containerization / Virtualization,
-W 3/4,Containerization / Virtualization,
-F 3/6,Distributed Systems & Service Discovery,"HW#6 Due"
+M 3/2,Containerization / Virtualization,"HW#6 Assigned"
+W 3/4,Containerization / Virtualization,"HW#5 Due"
+F 3/6,Distributed Systems & Service Discovery,
 ,**Week 10 (Dead week)**,
-M 3/9,Distributed Systems & Service Discovery,
+M 3/9,Distributed Systems & Service Discovery,"HW#6 Due"
 W 3/11,Distributed Systems & Service Discovery,
 F 3/13,Review,
