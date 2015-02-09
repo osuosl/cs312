@@ -391,9 +391,70 @@ Tasks
 Fix default recipe
 ------------------
 
+Make sure it matches the tests written for it
+
+* emacs should not be installed
+* ``/root/.bashrc`` should have some specific content
+* Should have a directory at ``/root/mysupermostfavoritedirectory``
+
+Solution
+--------
+
+File in ``files/default/bashrc`` with content we need.
+
+.. code-block:: ruby
+
+  package 'emacs' do
+    action :remove
+  end
+
+  cookbook_file '/root/.bashrc' do
+    owner 'root'
+    group 'root'
+    source 'bashrc'
+    action :create
+  end
+
+  directory '/root/mysupermostfavoritedirectory' do
+    owner 'root'
+    group 'root'
+    action :create
+  end
+
+Tests for wiki recipe
+---------------------
+
 1. nginx package, service
 2. Existence of webroot and index.html
-3. Everything in the ``http`` recipe that is included
+3. What else?
+
+Solution
+--------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: ruby
+
+  require 'serverspec'
+
+  set :backend, :exec
+
+  describe package('nginx') do
+    it { should be_installed }
+  end
+
+  describe service('nginx') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+
+  describe file('/var/www/wiki.osuosl.org') do
+    it { should be_directory }
+  end
+
+  describe file('/var/www/wiki.osuosl.org/build/html/index.html') do
+    it { should be_file }
+  end
 
 Fix foodcritic issues
 ---------------------
@@ -406,3 +467,9 @@ Fix rubocop issues
 
 1. All files under recipes
 
+Wednesday
+---------
+
+* Bring laptops again!
+* More on Chef cookbooks
+* Homework assigned tomorrow (We'll email the list)
