@@ -122,6 +122,51 @@ After Fix
 
   chef_gem "chef-rewind"
 
+Rubocop
+-------
+
+  *Role models are important.
+  -- Officer Alex J. Murphy / RoboCop*
+
+* https://github.com/bbatsov/rubocop
+* Static Ruby code analyzer
+* Enforces most of the best practices used in Ruby
+
+Basic usage:
+
+.. rst-class:: codeblock-sm
+
+::
+
+  $ rubocop recipes/default.rb
+  Inspecting 1 file
+  C
+
+  Offenses:
+
+  recipes/default.rb:21:1: C: %w-literals should be delimited by ( and )
+  %w[ vim git curl wget bind-utils emacs ].each do |p|
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Configuring Rubocop
+-------------------
+
+Sometimes you want to ignore certain rules or files for specific reasons:
+
+``.rubocop.yml``
+
+.. code-block:: yaml
+
+  AllCops:
+    Include:
+      - '**/Berksfile'
+      - '**/Cheffile'
+    Exclude:
+      - 'metadata.rb'
+  Lint/AmbiguousRegexpLiteral:
+    Exclude:
+      - 'test/integration/**/*.rb'
+
 Test Kitchen
 ------------
 
