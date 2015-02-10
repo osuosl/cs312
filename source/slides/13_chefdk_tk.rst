@@ -349,7 +349,7 @@ Openstack Env Variables
   export OS_USERNAME=albertsl
   export OS_PASSWORD=<your openstack password>
   export OS_TENANT_NAME=albertsl-cs312
-  export OS_AUTH_URL=http://studentcloud.osuosl.org/5000/v2.0/
+  export OS_AUTH_URL=http://studentcloud.osuosl.org:5000/v2.0/
   export OS_PUBLIC_SSH_KEY=<openstack ssh public key full path location>
   export OS_PRIVATE_SSH_KEY=<openstack ssh private key full path location>
   # This should be called whatever you just imported
