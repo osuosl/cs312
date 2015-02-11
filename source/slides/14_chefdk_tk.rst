@@ -271,7 +271,7 @@ Community Cookbooks
 -------------------
 
 To use a community cookbook, first find the cookbook on
-the `chef supermarket`. Then you simply add a ``depends`` in the
+the `chef supermarket`_. Then you simply add a ``depends`` in the
 metadata and a ``cookbook`` in the Berksfile.
 
 .. _chef supermarket: https://supermarket.chef.io
