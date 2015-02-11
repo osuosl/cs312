@@ -124,27 +124,6 @@ Test Kitchen commands
     kitchen verify [INSTANCE|REGEXP|all]    # Verify one or more instances
     kitchen version                         # Print Kitchen's version information
 
-Openstack Env Variables
------------------------
-
-* Example: user: ``albertsl`` tenant: ``albertsl-cs312``
-* Add this to your ``~/.bashrc`` file then run ``source ~/.bashrc``
-
-.. rst-class:: codeblock-sm
-
-.. code-block:: bash
-
-  # OpenStack Variables
-  export OS_USERNAME=albertsl
-  export OS_PASSWORD=<your openstack password>
-  export OS_TENANT_NAME=albertsl-cs312
-  export OS_AUTH_URL=http://studentcloud.osuosl.org:5000/v2.0/
-  export OS_PUBLIC_SSH_KEY=<openstack ssh public key full path location>
-  export OS_PRIVATE_SSH_KEY=<openstack ssh private key full path location>
-  # This should be called whatever you just imported
-  export OS_SSH_KEYPAIR=<ssh keypair name>
-  export OS_FLAVOR_REF=cs312
-
 Serverspec
 ----------
 
@@ -176,6 +155,38 @@ Tasks
 3. Write the missing tests for the ``wiki`` recipe
 4. Fix all foodcritic issues
 5. Fix all rubocop issues
+
+Setup ChefDK VM
+---------------
+
+1. Create a new openstack VM using the ``chefdk`` image
+2. Login as the ``centos`` user
+3. Create ssh keys using ``ssh-keygen``
+4. Copy and paste the public key (i.e. ``~/.ssh/id_rsa.pub``) as a second key
+   into your Openstack account. Name it ``chefdk``.
+5. Add the Openstack bash variables to your ``~/.bashrc`` and also add the
+   ``tkc`` alias. Source the file ``source ~/.bashrc``
+6. Install git
+7. Clone https://github.com/osuosl/cs312-testcookbook.git
+8. Cd into the cookbook and run ``tkc test default``.
+
+Bash variables
+--------------
+
+Add this to your ``~/.bashrc`` file then run ``source ~/.bashrc``
+
+.. code-block:: bash
+
+  # OpenStack Variables
+  export OS_USERNAME=albertsl
+  export OS_PASSWORD=<your openstack password>
+  export OS_TENANT_NAME=albertsl-cs312
+  export OS_AUTH_URL=http://studentcloud.osuosl.org:5000/v2.0/
+  export OS_PUBLIC_SSH_KEY=/home/centos/.ssh/id_rsa.pub
+  export OS_PRIVATE_SSH_KEY=/home/centos/.ssh/id_rsa
+  export OS_SSH_KEYPAIR=chefdk
+  export OS_FLAVOR_REF=cs312
+  alias tkc="KITCHEN_YAML=.kitchen.cloud.yml kitchen"
 
 Fix default recipe
 ------------------
