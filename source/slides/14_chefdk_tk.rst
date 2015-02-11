@@ -256,9 +256,27 @@ Fix rubocop issues
 
 1. All files under recipes
 
-Wednesday
----------
+Community Cookbooks
+-------------------
 
-* Bring laptops again!
-* More on Chef cookbooks
-* Homework assigned tomorrow (We'll email the list)
+To use a community cookbook, first find the cookbook on
+the `chef supermarket`. Then you simply add a ``depends`` in the
+metadata and a ``cookbook`` in the Berksfile.
+
+.. _chef supermarket: https://supermarket.chef.io
+
+Community Cookbooks
+-------------------
+
+.. code-block:: ruby
+
+   name 'cs312-testcookbook'
+   ...
+   depends 'magic_shell'
+
+.. code-block:: ruby
+
+   source 'https://supermarket.chef.io'
+   ...
+   cookbook 'magic_shell'
+
