@@ -132,8 +132,6 @@ Passive: NSCA
 * Remote host uses ``send_nsca`` which sends output to NSCA daemon running on
   Nagios server
 
-
-
 When are Passive checks useful?
 -------------------------------
 
@@ -163,11 +161,94 @@ CheckMK Architecture
 
   Image from http://mathias-kettner.com/check_mk.html
 
-Examples
---------
+Plugins
+-------
 
-Potential issues with Nagios
-----------------------------
+.. rst-class:: codeblock-sm
+
+::
+
+  # Install EPEL repo first!
+  $ yum install nrpe nagios-plugins*
+  $ cd /usr/lib64/nagios/plugins
+  $ ./check_ssh localhost
+  SSH OK - OpenSSH_5.3 (protocol 2.0) | time=0.120962s;;;0.000000;10.000000
+
+  $ ./check_disk -w 15% -c 10%
+  DISK OK - free space: / 8556 MB (89% inode=94%); /dev/shm 245 MB (100% inode=99%);|
+  /=978MB;8539;9041;0;10046 /dev/shm=0MB;208;220;0;245
+
+  $ ./check_http -H osuosl.org
+  HTTP OK: HTTP/1.1 200 OK - 20687 bytes in 0.008 second response time
+  |time=0.007503s;;;0.000000 size=20687B;;;0
+
+NRPE Configuration
+------------------
+
+.. rst-class:: codeblock-sm
+
+::
+
+  # In nrpe.conf on the remote host
+  command[check_users]=/usr/lib64/nagios/plugins/check_users -w 5 -c 10
+  command[check_load]=/usr/lib64/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
+  command[check_hda1]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% \
+    -p /dev/hda1
+
+  # Command ran on the nagios server
+  check_nrpe -H remotehost.example.org -c check_load
+
+Nagios Configuration Overview
+-----------------------------
+
+.. figure:: ../_static/nagiosconfig.png
+  :align: center
+  :width: 65%
+
+  Nagios configuration visualized
+
+Nagios Config components
+------------------------
+
+* Main configuration file: ``/etc/nagios/nagios.cfg``
+
+  * Configures how the daemon operates
+
+* Resource file(s): User defined macros (i.e. notification commands)
+* Object definition files
+
+  * Define ``hosts``, ``services``, ``hostgroups``, ``contacts``,
+    ``contactgroups``, ``commands``
+
+* CGI configuration file: How the web interface is setup
+
+Object definitions
+------------------
+
+::
+
+  # Host definition
+  define host {
+    host_name      foo
+    alias          foo.example.org
+    address        10.0.0.100
+    use            generic-host
+    hostgroups     nrpe-hosts,ping-hosts
+    contact_groups admins
+  }
+
+  # Service definition
+  define service {
+    use                 generic-service
+    hostgroup_name      nrpe-hosts
+    service_description SSH
+    check_command       check_ssh
+  }
+
+Resources
+---------
+
+* http://nagios.sourceforge.net/docs/nagioscore/3/en/toc.html
 
 HW2 Review
 ==========
