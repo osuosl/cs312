@@ -172,4 +172,47 @@ Potential issues with Nagios
 HW2 Review
 ==========
 
+* Class Average: 13.83
+* Median: 15.50
 
+Difficult Questions
+-------------------
+
+
+Give the command to extend the logical volume described in #1 by 200GB to make
+it a total of 300GB in size.
+
+.. rst-class:: build
+
+  ::
+
+    lvextend -L +200G /dev/vg_cs312/data
+
+Kickstart question:
+
+.. rst-class:: build
+
+  .. code-block:: bash
+
+    part /boot --fstype=ext4 --size=512
+    part pv.01 --grow --size=100
+    volgroup vg_cs312 pv.01
+    logvol swap --vgname=vg_cs312 --name=swap --fstype=swap --size=1024
+    logvol / --vgname=vg_cs312 --name=root --fstype=ext4 --grow --size=100
+    services --enabled=httpd
+    %packages --nobase
+    sudo
+    bash-completion
+    httpd
+    %end
+
+Difficult Questions
+-------------------
+
+Install and setup jenkins in an openstack virtual machine. Describe
+the process and the exact commands you ran to setup jenkins.
+
+.. rst-class:: build
+
+  * Describe steps after installing it?
+  * Setup Security? Setup User?
