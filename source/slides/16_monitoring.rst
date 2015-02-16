@@ -113,13 +113,44 @@ Lessons
 * Measuring correlations is better than nothing
 * Low specificity alarms are bad, highly sensitive alarms are worse
 
+Time Series Data
+----------------
+
+Collecting time series data can be very interesting. A time series
+is **a sequence of data measured over a period of time**.
+
+Some time series data software attempts to integrate monitoring,
+but a lot of them are better used alongside monitoring solutions
+like Nagios.
+
+Time Series Data is often collected using tools based on `RRD`_
+
+.. _RRD: http://en.wikipedia.org/wiki/RRDtool
+
+Why Time Series Data is Important
+---------------------------------
+
+* Collects history of data (Nagios doesn't!)
+* Allows for data analysis
+* Can be used to correlate events
+* Performance monitoring and long-term performance gains
+* Discovering trends in data
+
 Learning More
 -------------
 
-* `Discrete Fourier Transforms`_
-* `Holt-Winters Exponential Smoothing`_
-* `Monitorama Videos`_
+* `Graphite`_
+* `InfluxDB`_
+* `OpenTSDB`_
+* `kairosDB`_
+* `Practical Anomaly Detection`_
+* `Time Series Aggregator`_
+* `Seasonal or Periodic Time Series`_
 
-.. _Discrete Fourier Transforms: http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform
-.. _Holt-Winters Exponential Smoothing: http://en.wikipedia.org/wiki/Exponential_smoothing#Double_exponential_smoothing
-.. _Monitorama Videos: https://vimeo.com/monitorama
+.. _Graphite: http://graphite.wikidot.com/
+.. _InfluxDB: http://influxdb.com/
+.. _OpenTSDB: http://opentsdb.net/
+.. _kairosDB: https://github.com/kairosdb/kairosdb
+.. _Practical Anomaly Detection: https://blog.twitter.com/2015/introducing-practical-and-robust-anomaly-detection-in-a-time-series
+.. _Time Series Aggregator: https://blog.twitter.com/2014/tsar-a-timeseries-aggregator
+.. _Seasonal or Periodic Time Series: http://www.r-bloggers.com/seasonal-or-periodic-time-series/
