@@ -104,7 +104,7 @@ How does this matter?
   could include:
 
   - Measuring number of connections from the raw table
-  - Alerting when that number goes over a treshold
+  - Alerting when that number goes over a threshold
 
 Lessons
 -------
