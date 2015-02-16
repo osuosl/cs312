@@ -1,0 +1,92 @@
+.. _16_monitoring:
+
+Monitoring
+==========
+
+Definitions
+-----------
+
+* Specificity
+* Sensitivity
+* Expected Value
+
+Specificity
+-----------
+
+* Complement to the False-Negative Rate
+* Measures true negatives against identified negatives
+* Often called the True-Negative Rate
+
+Sensitivity
+-----------
+
+* Complement to the False-Positive Rate
+* Measures true positives against identifed positives
+* Often called the True-Positive Rate
+
+Car Alarms
+----------
+
+* Car alarms have a low sensitivity rate (They don't go off when they should)
+* They also have a low specificity rate (They go off when they shouldn't)
+
+Smoke Alarms
+------------
+
+* Smoke alarms have a high sensitivity rate (they go off when there is smoke)
+* Smoke alarms have a high specificity rate (there is usually smoke when
+  they go off)
+
+Expected Value
+--------------
+
+Let **X** be a random variable, then **E(X)** is the mean of X.
+**E(i)** for some **i** in **X** is the probability of **i** ocurring
+multiplied by the value of **i**
+
+Suppose **X** is the results of a fair 6-sided die, then **E(X)** is
+**3.5**. **E(1) = 1/6**, **E(2) = 2/6 = 1/3**, and so on.
+
+Note that **E(X) = sum(E(i) for all in in X)**, or
+
+**1/6 + 2/6 + 3/6 + 4/6 + 5/6 + 6/6 = 21/6 = 3 and 3/6 = 3.5**
+
+
+Example
+-------
+
+Suppose you have a server you know gets a lot of network connections.
+
+Thinking ahead, you bumped **nf_conntrack_max**, and have a nagios check
+that determines if you can open a new connection. Additionally, you
+have monitoring that graphs ``netstat -i -a | tail -n +3 | wc -l`` so
+you know the number of connections over time.
+
+Example
+-------
+
+One day you wake up to an alert that says ``ip_conntrack: table
+full, dropping packet error``. You quickly check your graph of connections
+and observe.. that the connections are significantly lower than the max.
+
+What you know
+
+* How many connections to your various network devices, via ``netstat``, say
+  **63**
+* Your table is full, and packets are being dropped
+* Your max is greater than the number of connections you see, the max is
+  currently **65535**
+
+Example
+-------
+
+It turns out that your monitoring via ``netstat`` was incorrect
+
+``netstat`` doesn't list all connections! It doesn't list NAT'd or
+routed connections at all. Instead, lets look at the routing table
+in ``/proc``!
+
+.. code-block:: bash
+
+    $ cat /proc/net/nf_conntrack_max
+    65535
