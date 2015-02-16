@@ -58,8 +58,10 @@ Example
 Suppose you have a server you know gets a lot of network connections.
 
 Thinking ahead, you bumped **nf_conntrack_max**, and have a nagios check
-that determines if you can open a new connection. Additionally, you
-have monitoring that graphs ``netstat -i -a | tail -n +3 | wc -l`` so
+that determines if you can open a new connection.
+
+Additionally, you have monitoring that graphs
+``netstat -i -a | tail -n +3 | wc -l`` so
 you know the number of connections over time.
 
 Example
