@@ -21,7 +21,7 @@ Sensitivity
 -----------
 
 * Complement to the False-Positive Rate
-* Measures true positives against identifed positives
+* Measures true positives against identified positives
 * Often called the True-Positive Rate
 
 Car Alarms
@@ -41,7 +41,7 @@ Expected Value
 --------------
 
 Let **X** be a random variable, then **E(X)** is the mean of X.
-**E(i)** for some **i** in **X** is the probability of **i** ocurring
+**E(i)** for some **i** in **X** is the probability of **i** occurring
 multiplied by the value of **i**
 
 Suppose **X** is the results of a fair 6-sided die, then **E(X)** is
