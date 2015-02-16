@@ -47,7 +47,7 @@ multiplied by the value of **i**
 Suppose **X** is the results of a fair 6-sided die, then **E(X)** is
 **3.5**. **E(1) = 1/6**, **E(2) = 2/6 = 1/3**, and so on.
 
-Note that **E(X) = sum(E(i) for all in in X)**, or
+Note that **E(X) = sum(E(i) for all i in X)**, or
 
 **1/6 + 2/6 + 3/6 + 4/6 + 5/6 + 6/6 = 21/6 = 3 and 3/6 = 3.5**
 
