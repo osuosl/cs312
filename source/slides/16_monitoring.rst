@@ -90,3 +90,36 @@ in ``/proc``!
 
     $ cat /proc/net/nf_conntrack_max
     65535
+
+Example
+-------
+
+How does this matter?
+
+* If **E(i)** is relatively large, that is bad
+* Even when you can monitor problems, you can't monitor always
+  monitor all causal events, both due to realism and human error
+* When your monitoring fails to alert, or even measure an event,
+  you need to be monitoring a causal event. A better alert in this case
+  could include:
+
+  - Measuring number of connections from the raw table
+  - Alerting when that number goes over a treshold
+
+Lessons
+-------
+
+* Measuring causes is better than correlations
+* Measuring correlations is better than nothing
+* Low specificity alarms are bad, highly sensitive alarms are worse
+
+Learning More
+-------------
+
+* `Discrete Fourier Transforms`_
+* `Holt-Winters Exponential Smoothing`_
+* `Monitorama Videos`_
+
+.. _Discrete Fourier Transforms: http://en.wikipedia.org/wiki/Discrete-time_Fourier_transform
+.. _Holt-Winters Exponential Smoothing: http://en.wikipedia.org/wiki/Exponential_smoothing#Double_exponential_smoothing
+.. _Monitorama Videos: https://vimeo.com/monitorama
