@@ -1,3 +1,5 @@
+.. _17_dns:
+
 Introductory DNS
 ================
 
