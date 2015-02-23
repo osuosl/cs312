@@ -3,6 +3,25 @@
 High Availability Strategies
 ============================
 
+
+Notes
+-----
+
+* CoreOS image added to openstack
+
+  * username is ``core``
+
+* Questions for Brandon?
+
+  * `Mailing List and IRC`_ (try these first!)
+  * email Brandon at ``brandon@ifup.org``
+
+* Homework 3 is being graded now
+* Homework 4 due Wednesday
+* Homework 5 assigned Wednesday
+
+.. _Mailing List and IRC: https://coreos.com/community/
+
 Terminology
 -----------
 
