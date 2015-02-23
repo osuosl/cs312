@@ -131,6 +131,7 @@ Scaling
 
 .. figure:: ../_static/scaling.png
    :align: center
+   :width: 90%
 
 Single Point of Failure
 -----------------------
