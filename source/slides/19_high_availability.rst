@@ -7,7 +7,7 @@ High Availability Strategies
 Notes
 -----
 
-* CoreOS image added to openstack
+* CoreOS image added to OpenStack
 
   * username is ``core``
 
@@ -37,7 +37,7 @@ Redundancy
 Often measured as the number of nodes that can fail before a failure scenario
 occurs
 
-Closely tied to reliability (more redundant sytems usually have higher
+Closely tied to reliability (more redundant systems usually have higher
 reliability)
 
 Reliability
@@ -60,7 +60,7 @@ Downtime Measuring Example
 
 Consider the following scenario:
 
-You run an openstack cluster. One day, your authentication API goes down.
+You run an OpenStack cluster. One day, your authentication API goes down.
 
 None of your customers can log in or interact with any of the other APIs.
 
