@@ -174,11 +174,16 @@ Many places will do fire drills, where a system in staging/pre-production
 is purposefully taken down so that failure scenarios can be observed, and single
 points of failure can be identified and fixed.
 
+You can read more about Netflix does this `here`_.
+
+.. _here: http://techblog.netflix.com/2012/07/chaos-monkey-released-into-wild.html
+
 Virtual IP
 ----------
 
 * Doesn't correspond to a particular physical nic
-* Shared between many nics across different machines
+* Shared between many nics across different machines (and one nic can have
+  multiple addrs)
 * Can be moved across any other ip on the same subnet
 * Variety of implementations, ``carp`` and ``ucarp`` derived from OpenBSD
 
