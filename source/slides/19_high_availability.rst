@@ -26,13 +26,13 @@ Reliability
 
 The percentage of uptime vs total time.
 
-* ideal is typically 5 9s, ``99.999%``
+* ideal is typically five 9s, ``99.999%``
 
   * This gives less than fifty three minutes of downtime per year
 
 * A reasonably good goal is ``99.9%``
 
-  * This allows for 100x more downtime than 5 9s.
+  * This allows for 100x more downtime than five 9s.
 
 * Measuring uptime/downtime is **hard**
 
