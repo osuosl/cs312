@@ -136,6 +136,24 @@ Scaling
 Single Point of Failure
 -----------------------
 
+Traditionally a point with 0 redundancy, often instead means the point
+in the system with the lowest redundancy value.
+
+Examples:
+
+  * Single load balancer with multiple web nodes
+  * Single database node
+  * Network switch
+  * Non-redundant power
+
+Single Point of Failure
+-----------------------
+
+Identifying SPOFs is a hard task.
+
+Many places will do fire drills, where a system in staging/pre-production
+is purposefully taken down so that failure scenarios can be observed, and single
+points of failure can be identified and fixed.
 
 Virtual IP
 ----------
