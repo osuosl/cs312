@@ -18,8 +18,8 @@ Redundancy
 Often measured as the number of nodes that can fail before a failure scenario
 occurs
 
-* Closely tied to reliability (more redundant sytems usually have higher
-  reliability)
+Closely tied to reliability (more redundant sytems usually have higher
+reliability)
 
 Reliability
 -----------
