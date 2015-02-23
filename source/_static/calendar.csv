@@ -28,7 +28,7 @@ M 2/16,":slides:ref:`16_monitoring`",
 W 2/18,":slides:ref:`17_dns`","HW#3 Due; :download:`HW#4 Assigned <_static/hw/homework4.pdf>`"
 F 2/20,":download:`Guest Speaker: Brandon Philips - CoreOS <_static/18_coreos.pdf>`",
 ,**Week 8**,
-M 2/23,High Availability Strategies,
+M 2/23,":slides:ref"`19_high_availability`","
 W 2/25,High Availability Strategies,"HW#4 Due; HW#5 Assigned"
 F 2/27,Containerization / Virtualization,
 ,**Week 9**,
