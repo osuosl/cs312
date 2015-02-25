@@ -29,7 +29,7 @@ W 2/18,":slides:ref:`17_dns`","HW#3 Due; :download:`HW#4 Assigned <_static/hw/ho
 F 2/20,":download:`Guest Speaker: Brandon Philips - CoreOS <_static/18_coreos.pdf>`",
 ,**Week 8**,
 M 2/23,":slides:ref:`19_high_availability`",
-W 2/25,High Availability Strategies,"HW#4 Due; HW#5 Assigned"
+W 2/25,":slides:ref:`20_docker_and_systemd`","HW#4 Due; :download:`HW#5 Assigned <_static/hw/homework5.pdf>`"
 F 2/27,Containerization / Virtualization,
 ,**Week 9**,
 M 3/2,Containerization / Virtualization,"HW#6 Assigned"
