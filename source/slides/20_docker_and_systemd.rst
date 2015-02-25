@@ -32,7 +32,7 @@ Dockerfiles
    MAINTAINER,Lets you set the author metadata.
    RUN,Runs command inside the docker image that is being built.
    CMD,The command to run for ``docker run`` after container is built. Only one allowed.
-   EXPOSE,Ports to expose for when docker links are being used. Does not expost ports to the host.
+   EXPOSE,Ports to expose for when docker links are being used. Does not expose ports to the host.
 
 Dockerfiles
 -----------
