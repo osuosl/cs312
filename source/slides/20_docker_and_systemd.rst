@@ -106,7 +106,9 @@ Example Dockerfile
 What happens when our server reboots? We lose our container! Lets fix this by adding a SystemD
 unit file and running it with fleet:
 
-.. code-block:: none
+.. rst-class:: codeblock-sm
+
+::
 
     [Unit]
     Description=znc service
@@ -115,7 +117,8 @@ unit file and running it with fleet:
     [Service]
     ExecStartPre=-/usr/bin/docker kill cs312/znc
     ExecStartPre=-/usr/bin/docker rm cs312/znc
-    ExecStart=/usr/bin/docker run --rm --name znc -d -v /home/core/znc:/var/lib/znc -p 6667:6667 cs312/znc
+    ExecStart=/usr/bin/docker run --rm --name znc -d -v /home/core/znc:/var/lib/znc \
+    -p 6667:6667 cs312/znc
     ExecStop=/usr/bin/docker stop cs312/znc
 
 Example Dockerfile
