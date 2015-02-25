@@ -143,6 +143,17 @@ Example Dockerfile
 Check the logs::
 
     $ fleetctl journal znc
+    -- Logs begin at Sat 2015-02-21 21:59:02 UTC, end at Wed 2015-02-25 22:08:45 UTC. --
+    Feb 25 21:45:37 zidane systemd[1]: Starting znc service...
+    Feb 25 21:45:37 zidane docker[12896]: znc
+    Feb 25 21:45:38 zidane docker[12904]: znc
+    Feb 25 21:45:38 zidane systemd[1]: Started znc service.
+    Feb 25 21:45:38 zidane docker[12914]: Checking for list of available modules...
+    Feb 25 21:45:38 zidane docker[12914]: Opening config [/var/lib/znc/.znc/configs/znc.conf]...
+    Feb 25 21:45:38 zidane docker[12914]: Binding to port [6667]...
+    Feb 25 21:45:38 zidane docker[12914]: Loading user [cs312]
+    Feb 25 21:45:38 zidane docker[12914]: Staying open for debugging [pid: 1]
+    Feb 25 21:45:38 zidane docker[12914]: ZNC 1.4 - http://znc.in
 
 Fleet & Etcd
 ------------
