@@ -51,6 +51,7 @@ Dockerfiles
 .. csv-table::
    :header: Instruction,Explanation
 
+   USER,User to run all subsequent commands as
    VOLUME,Used for mount points
    WORKDIR,Default working dir for other commands
    ONBUILD,Trigger when container is used as a base for other containers.
@@ -85,6 +86,7 @@ This is a good start, but we should also:
 .. code-block:: none
 
     <snip>
+    USER znc
     EXPOSE 6667
     VOLUME ["/var/lib/znc"]
     CMD ["znc", "-f"]
@@ -117,7 +119,7 @@ unit file and running it with fleet:
     [Service]
     ExecStartPre=-/usr/bin/docker kill cs312/znc
     ExecStartPre=-/usr/bin/docker rm cs312/znc
-    ExecStart=/usr/bin/docker run --rm --name znc -d -v /home/core/znc:/var/lib/znc \
+    ExecStart=/usr/bin/docker run --name znc -d -v /home/core/znc:/var/lib/znc \
     -p 6667:6667 cs312/znc
     ExecStop=/usr/bin/docker stop cs312/znc
 
