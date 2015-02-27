@@ -203,7 +203,7 @@ Pros/Cons
 *What else?*
 
 HAProxy
--------
+=======
 
 HAProxy Terminology
 -------------------
@@ -236,6 +236,8 @@ HAProxy Example Configuration
       server mybackendserver 10.0.0.1:80
     # server <name> <ip>:<port> [options]
 
+Check out the docs! http://www.haproxy.org/
+
 HAProxy Example Configuration
 -----------------------------
 
@@ -260,3 +262,10 @@ HAProxy Example Configuration
 
     backend unrecognized_site
       server others 10.0.255.1:80
+
+Monday
+======
+
+* Bring your laptops!
+* HW3 will be handed back
+
