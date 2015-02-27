@@ -205,3 +205,59 @@ Pros/Cons
 
 HAProxy
 -------
+
+HAProxy Terminology
+-------------------
+
+**frontend**
+    This defines how HAProxy should forward traffic to backends
+
+**backend**
+    A set of servers that receives traffic from HAProxy
+
+**listen**
+    A simpler version of frontend and backends
+
+HAProxy Example Configuration
+-----------------------------
+
+::
+
+    frontend http
+      maxconn 2000
+      bind 0.0.0.0:80
+      default_backend servers
+
+    frontend https
+      maxconn 2000
+      bind 0.0.0.0:443 ssl crt /etc/pki/tls/mycert.pem
+      default_backend servers
+
+    backend http_servers
+      server mybackendserver 10.0.0.1:80
+    # server <name> <ip>:<port> [options]
+
+HAProxy Example Configuration
+-----------------------------
+
+::
+
+    frontend http
+      maxconn 2000
+      bind 0.0.0.0:80
+      acl cs312 hdr(host) cs312.osuosl.org
+      acl osl hdr(host) osuosl.org
+      use_backend cs312_servers if cs312
+      use_backend osl_servers if osl
+      default_backend unrecognized_site
+
+    backend cs312_servers
+      server cs312-1 10.0.0.1:80
+      server cs312-2 10.0.0.2:80
+
+    backend osl_servers
+      server osl-1 10.0.1.1:80
+      server osl-2 10.0.1.2:80
+
+    backend unrecognized_site
+      server others 10.0.255.1:80
