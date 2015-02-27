@@ -128,9 +128,12 @@ Common Load Balancer Features
   :widths: 40, 90
 
   Asymmetric load, Ratio to be manually assigned to a backend server
-  Priority Activation, Add or remove backend servers based on the load or other metrics
-  SSL Offload & Acceleration, Specialized hardware to offload SSL CPU demand on high traffic sites
-  DDoS attack protection, Mitigate using SYN cookies and verifying a full TCP handshake before sending off to the backend server
+  Priority Activation, "Add or remove backend servers based on the load or other
+  metrics"
+  SSL Offload & Acceleration, "Specialized hardware to offload SSL CPU demand on
+  high traffic sites"
+  DDoS attack protection, "Mitigate using SYN cookies and verifying a full TCP
+  handshake before sending off to the backend server"
 
 Common Load Balancer Features
 -----------------------------
@@ -138,11 +141,14 @@ Common Load Balancer Features
 .. csv-table::
   :widths: 40, 90
 
-  HTTP compression, Gzip compresses the HTTP objects to reduce bandwidth but can increase CPU usage
-  TCP offload, Consolidate multiple HTTP requests from multiple clients into a single TCP socket to the backend servers
-  Health checking, Balance pools the backend application server to see if its functioning correctly
-  HTTP caching, Balancer stores the static content in memory to serve the content faster
-
+  HTTP compression, "Gzip compresses the HTTP objects to reduce bandwidth but
+  can increase CPU usage"
+  TCP offload, "Consolidate multiple HTTP requests from multiple clients into a
+  single TCP socket to the backend servers"
+  Health checking, "Balance pools the backend application server to see if its
+  functioning correctly"
+  HTTP caching, "Balancer stores the static content in memory to serve the
+  content faster"
 
 Persistence
 -----------
