@@ -30,7 +30,7 @@ F 2/20,":download:`Guest Speaker: Brandon Philips - CoreOS <_static/18_coreos.pd
 ,**Week 8**,
 M 2/23,":slides:ref:`19_high_availability`",
 W 2/25,":slides:ref:`20_docker_and_systemd`","HW#4 Due; :download:`HW#5 Assigned <_static/hw/homework5.pdf>`"
-F 2/27,Containerization / Virtualization,
+F 2/27,":slides:ref:`21_loadbalancer`",
 ,**Week 9**,
 M 3/2,Containerization / Virtualization,"HW#6 Assigned"
 W 3/4,Containerization / Virtualization,"HW#5 Due"
