@@ -153,8 +153,55 @@ Common Load Balancer Features
 Persistence
 -----------
 
+* HTTP sessions
+* Want to keep a connection with the same backend to maintain sessions
+* Using memcached for storing sessions can help this
+* Cookies
+
+Software Load Balancers
+-----------------------
+
+**HAProxy**
+  High performance software based load balancer that uses TCP. Been around since
+  2000 and used by Github, Reddit, Twitter, etc. Recently added SSL support but
+  does no caching.
+
+**Varnish**
+  HTTP accelerator and static cache server. Focuses specifically on HTTP and can
+  act as a load balancer similar to HAProxy. Used by Wikipedia, Facebook and
+  Twitter to name a few.
+
+Software Load Balancers
+-----------------------
+
+**Nginx**
+  Webserver that can also act as a load balancer and a caching system. It
+  generally has a low memory footprint.
+
+**Apache**
+  Webserver that can act as a load balancer via the ``mod_proxy`` module.
+  Provides an easy way to set up but tends to use more memory than the others.
+
+Proprietary Load Balancers
+--------------------------
+
+* BIG-IP (F5 Networks)
+* NetScaler (Citrix)
+
 Pros/Cons
 ---------
+
+**Pros**
+  * Helps you scale more easily
+  * Gives you more flexibility on how to route your web traffic
+  * Deal with backend outages more gracefully
+
+**Cons**
+  * Makes troubleshooting more complicated
+  * Potential single point of failure
+  * Configuration can be more complicated
+
+*What else?*
 
 HAProxy
 -------
