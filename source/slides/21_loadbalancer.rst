@@ -102,8 +102,7 @@ Scheduling Algorithms
   The first server with available connection slots receives the connection. The
   servers are chosen from the lowest numeric identifier to the highest, which
   defaults to the server's position in the farm.  Once a server reaches its
-  maxconn value, the next server is used. It does not make sense to use this
-  algorithm without setting maxconn.
+  maxconn value, the next server is used.
 
 Scheduling Algorithms
 ---------------------
@@ -132,8 +131,8 @@ Common Load Balancer Features
   metrics"
   SSL Offload & Acceleration, "Specialized hardware to offload SSL CPU demand on
   high traffic sites"
-  DDoS attack protection, "Mitigate using SYN cookies and verifying a full TCP
-  handshake before sending off to the backend server"
+  DDoS attack protection, "Mitigate DDoS attacks using SYN cookies and verifying
+  a full TCP handshake before sending off to the backend server"
 
 Common Load Balancer Features
 -----------------------------
@@ -156,15 +155,15 @@ Persistence
 * HTTP sessions
 * Want to keep a connection with the same backend to maintain sessions
 * Using memcached for storing sessions can help this
-* Cookies
+* *What other issues?*
 
 Software Load Balancers
 -----------------------
 
 **HAProxy**
-  High performance software based load balancer that uses TCP. Been around since
-  2000 and used by Github, Reddit, Twitter, etc. Recently added SSL support but
-  does no caching.
+  High performance software based load balancer that uses TCP and can be used
+  for multiple protocols. Been around since 2000 and used by Github, Reddit,
+  Twitter, etc. Recently added SSL support but does no caching.
 
 **Varnish**
   HTTP accelerator and static cache server. Focuses specifically on HTTP and can
