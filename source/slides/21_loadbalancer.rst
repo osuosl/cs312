@@ -232,7 +232,7 @@ HAProxy Example Configuration
       bind 0.0.0.0:443 ssl crt /etc/pki/tls/mycert.pem
       default_backend servers
 
-    backend http_servers
+    backend servers
       server mybackendserver 10.0.0.1:80
     # server <name> <ip>:<port> [options]
 
