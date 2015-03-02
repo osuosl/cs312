@@ -163,21 +163,67 @@ Let's try taking down the ``www2`` backend and see what happens.
 Changing the balancing algorithm
 --------------------------------
 
-::
+.. code-block:: diff
 
-  backend servers
-      balance roundrobin
-      server www1 140.211.168.121:80 check
-      server www2 140.211.168.130:80 check
+   backend servers
+  +    balance roundrobin
+       server www1 140.211.168.121:80 check
+       server www2 140.211.168.130:80 check
 
 
 Adjusting the weighting
 -----------------------
 
-::
+.. code-block:: diff
 
-  backend servers
-      balance roundrobin
-      server www1 140.211.168.121:80 weight 50 check
-      server www2 140.211.168.130:80 weight 100 check
+   backend servers
+       balance roundrobin
+  +    server www1 140.211.168.121:80 weight 50 check
+  +    server www2 140.211.168.130:80 weight 100 check
+
+Creating an ACL
+---------------
+
+ACLs enable you to direct traffic based on incoming traffic.
+
+.. code-block:: diff
+
+   frontend http
+       bind 0.0.0.0:80
+  +    acl url_www1 path_beg /www1
+  +    acl url_www2 path_beg /www2
+       default_backend servers
+
+`HAProxy ACLs`_
+
+.. _HAProxy ACLs: http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#7.1
+
+Redirect traffic using an ACL
+-----------------------------
+
+Let's send traffic for the sub directory **/www1** to **www1** and **/www2** to
+**www2**.
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: diff
+
+   frontend http
+       bind 0.0.0.0:80
+       acl url_www1 path_beg /www1
+       acl url_www2 path_beg /www2
+  +    use_backend www1 if url_www1
+  +    use_backend www2 if url_www2
+       default_backend servers
+
+   backend servers
+       balance roundrobin
+       server www1 140.211.168.121:80 weight 50 check
+       server www2 140.211.168.130:80 weight 100 check
+
+  +backend www1
+  +  server www1 140.211.168.121:80 weight 50 check
+  +
+  +backend www2
+  +  server www2 140.211.168.130:80 weight 50 check
 
