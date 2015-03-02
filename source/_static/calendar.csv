@@ -32,7 +32,7 @@ M 2/23,":slides:ref:`19_high_availability`",
 W 2/25,":slides:ref:`20_docker_and_systemd`","HW#4 Due; :download:`HW#5 Assigned <_static/hw/homework5.pdf>`"
 F 2/27,":slides:ref:`21_loadbalancer`",
 ,**Week 9**,
-M 3/2,Containerization / Virtualization,
+M 3/2,":slides:ref:`22_haproxy`",
 W 3/4,Containerization / Virtualization,"HW#5 Due; HW#6 Assigned"
 F 3/6,Distributed Systems & Service Discovery,
 ,**Week 10 (Dead week)**,
