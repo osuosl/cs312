@@ -26,7 +26,6 @@ Install HAProxy
   $ yum install haproxy
   $ service haproxy start
 
-
 Logging on HAProxy
 ------------------
 
@@ -226,4 +225,17 @@ Let's send traffic for the sub directory **/www1** to **www1** and **/www2** to
   +
   +backend www2
   +  server www2 140.211.168.130:80 weight 50 check
+
+Health Checks
+-------------
+
+Let's add a health check.
+
+.. code-block:: diff
+
+   backend servers
+       balance roundrobin
+  +    option httpchk GET /www1/
+       server www1 140.211.168.121:80 weight 50 check
+       server www2 140.211.168.130:80 weight 100 check
 
