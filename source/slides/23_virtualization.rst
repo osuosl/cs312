@@ -252,6 +252,71 @@ Neutron Visualized
 
   Adam Jollans - IBM - SCALE 13x
 
+Glance - Image Service
+----------------------
+
+**Manages VM Images**
+  * Catalog of images
+  * Search and registration
+  * Fetch and delivery
+
+**Key components**
+  * API, Registry
+  * Database
+
+**Authentication**
+  * Keystone
+
+**Storage of VM Images**
+  * Swift
+  * Local file system
+
+Glance Visualized
+-----------------
+
+.. figure:: ../_static/glance.png
+  :width: 70%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Swift - Object Storage Service
+------------------------------
+
+**Manages Unstructured Object Storage**
+  * Highly Scalable
+  * Durable - three times replication
+  * Distributed
+
+**Key Components**
+  * Proxy / API
+  * Rings
+
+    * Accounts, Containers and Objects
+
+  * Data stores
+
+**Authentication**
+  * Keystone
+
+Swift Visualized
+----------------
+
+.. figure:: ../_static/swift.png
+  :width: 50%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Provision a VM on OpenStack
+----------------------------
+
+.. figure:: ../_static/openstack-provision.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
 References
 ----------
 
