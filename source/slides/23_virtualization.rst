@@ -37,7 +37,7 @@ Types of Hypervisors
     operating systems from the host operating system
   * Examples include: VMWare Workstation and VirtualBox
 
-*Where does KVM fall under?*
+*Which hypervisor type does KVM fall under?*
 
 Virtualization Framework Generalized
 ------------------------------------
