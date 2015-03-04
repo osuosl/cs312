@@ -1,0 +1,260 @@
+.. _23_virtualization:
+
+Virtualization
+==============
+
+History, KVM and Openstack
+
+History of Virtualization
+-------------------------
+
+.. figure:: ../_static/virtualization-history.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Virtualization Framework Generalized
+------------------------------------
+
+.. figure:: ../_static/virt-framework.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Virtualization Framework - KVM
+------------------------------
+
+.. figure:: ../_static/virt-kvm.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+KVM
+---
+
+Open Source hypervisor based on Linux
+
+**KVM**
+  * Kernel-Based Virtual Machine
+  * Kernel module that turns Linux into a virtual machine monitor
+  * Merged into mainline Linux
+
+**QEMU**
+  * Emulator used for I/O device virtualization
+  * Avi Kivity began the development of KVM at Qumranet in the mid-2000s
+
+Processors Supported
+--------------------
+
+* x86 with virtualization extensions
+* Intel VT-x
+* AMD (AMD-V)
+* POWER8
+* IBM z Systems
+* ARM64
+
+KVM Visualized
+--------------
+
+.. figure:: ../_static/kvm-layers.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Xen
+---
+
+Micro-kernel hypervisor for Linux or BSD
+
+* Originated as a research project at the University of Cambridge
+* Publicly released in 2003 under the GPLv2
+
+**Domains**
+  * Dom0 -- Domain that has privileged access to hardware
+  * DomU -- Unprivileged domains (VMs)
+
+**Types of Virtualization**
+  * Paravirtualization -- Simulates real hardware (PV Guests)
+  * Hardware Virtual Machine (HVM) -- uses cpu supported virtualization
+
+Xen Visualized
+---------------
+
+.. figure:: ../_static/xen.png
+  :width: 100%
+  :align: center
+
+KVM vs. Xen
+-----------
+
+.. csv-table::
+  :header: KVM, Xen
+
+  Less mature, More mature
+  Runs like a normal unix app, Blackbox feel for how it works
+  Always been in mainline, Had trouble getting into mainline Linux
+  Requires CPU support, Doesn't require CPU support
+  Development is very active and growing, Development has slowed a bit
+  "Used by newer cloud providers (i.e. GCE, DigitalOcean)", "Used by Amazon EC2"
+
+Libvirt -- KVM management
+-------------------------
+
+Libvirt is an open source API daemon that standardizes management of various
+virtualization platforms.
+
+.. figure:: ../_static/libvirt.png
+  :width: 60%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Libvirt Features
+----------------
+
+* Manages multiple hypervisors
+* Powerful CLI tool, but can be complex to use
+* Provides a network daemon to provide API access and remote access
+* Base tool for other management tools:
+
+  * OpenStack, oVirt, virt-manager, Kimchi to just name a few...
+
+OpenStack
+---------
+
+Open source cloud computing platform
+
+* Started in 2010 as a joint venture with NASA and Rackspace
+* Has a modular architecture
+* Very complicated, but has the potential to scale very well
+* Development ongoing, API's/Architecture changes on each release
+* Open Development, Design and Community governance
+* Combines compute, storage and network into one suite
+* Multi-site
+
+OpenStack Visualized
+--------------------
+
+.. figure:: ../_static/openstack.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Nova - Compute Service
+----------------------
+
+**Manages the VM life cycle**
+  * Starting and Stopping VMs
+  * Scheduling and monitoring VMs
+  * Uses libvirt directly
+
+**Key components**
+  * API
+  * Database
+  * Scheduler -- where to put the VMs?
+  * Compute nodes and plugins
+
+**VM Images**
+  * Uses Glance and Swift
+
+Nova Visualized
+---------------
+
+.. figure:: ../_static/nova.png
+  :width: 70%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Keystone - Authentication Service
+---------------------------------
+
+**Manages Security**
+  * Service for all other modules
+  * Authentication
+  * Authorization
+
+**Key Components**
+  * API
+  * Backends
+
+    * Token
+    * Catalog
+    * Policy
+    * Identity
+
+Keystone Visualized
+-------------------
+
+.. figure:: ../_static/keystone.png
+  :width: 70%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Cinder - Block Storage Service
+------------------------------
+
+**Manages persistent block storage**
+  * Provides volumes to running instances
+  * Pluggable driver architecture
+
+    * LVM, iSCSI and other storage backends
+
+  * Can provide High Availability depending on implementation
+
+**Key Components**
+  * API, Queue
+  * Database, Scheduler
+  * Storage plug-ins
+
+**Authentication**
+  * Keystone
+
+Cinder Visualized
+-------------------
+
+.. figure:: ../_static/cinder.png
+  :width: 50%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Neutron - Networking Service
+----------------------------
+
+**Manages Networking Connectivity**
+  * Provides networking as a service for VMs
+  * Pluggable driver architecture
+  * Flat Networks / VLANs
+  * Floating IPs
+  * Software Defined Networking (SDN)
+
+**Key Components**
+  * API, Queue
+  * Database, Scheduler
+  * Agent, Networking plug-ins
+
+**Authentication**
+  * Keystone
+
+Neutron Visualized
+-------------------
+
+.. figure:: ../_static/neutron.png
+  :width: 45%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+References
+----------
+
+* `KVM, OpenStack, and the Open Cloud -- Adam Jollans`__
+
+.. __: http://www.socallinuxexpo.org/scale/13x/presentations/kvm-openstack-and-open-cloud
