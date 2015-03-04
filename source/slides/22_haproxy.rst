@@ -239,3 +239,4 @@ Let's add a health check.
        server www1 140.211.168.121:80 weight 50 check
        server www2 140.211.168.130:80 weight 100 check
 
+Also read up on ``http-check expect``.
