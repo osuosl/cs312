@@ -14,6 +14,31 @@ History of Virtualization
 
   Adam Jollans - IBM - SCALE 13x
 
+Hypervisors
+-----------
+
+Software, firmware or hardware that creates and runs virtual machines.
+
+* A computer that runs virtual machines are called *host machines*
+* Each virtual machine is typically called a *guest machine*
+* Hypervisor presents the guest machine with a virtual operating platform that
+  resembles a real machine
+
+Types of Hypervisors
+--------------------
+
+**Type 1 - native or bare-metal hypervisor**
+  * Hypervisors that directly run and control the hardware on the host system and
+    manage the guest systems
+  * Examples include: Xen, VMWare ESX Server and Microsoft Hyper-V
+
+**Type 2 - hosted hypervisor**
+  * Hypervisors run on a conventional operating system and abstract guest
+    operating systems from the host operating system
+  * Examples include: VMWare Workstation and VirtualBox
+
+*Where does KVM fall under?*
+
 Virtualization Framework Generalized
 ------------------------------------
 
