@@ -44,6 +44,7 @@ Open Source hypervisor based on Linux
 
 **QEMU**
   * Emulator used for I/O device virtualization
+  * Runs as a user-space process
   * Avi Kivity began the development of KVM at Qumranet in the mid-2000s
 
 Processors Supported
@@ -64,6 +65,54 @@ KVM Visualized
   :align: center
 
   Adam Jollans - IBM - SCALE 13x
+
+KVM Command Line
+----------------
+
+KVM has **a lot** of options
+
+.. code-block:: bash
+
+  # Create a virtual disk file
+  $ qemu-img create -f qcow2 disk.img 10g
+
+  # Start a VM up and boot to an ISO
+  $ qemu-system-x86_64 -hda disk.img -cdrom \
+    /path/to/CentOS-6.6-x86_64-minimal.iso -boot d -m 1024m
+
+KVM on OpenStack
+----------------
+
+.. rst-class:: codeblock-sm
+
+::
+
+  /usr/libexec/qemu-kvm -name instance-00000baa -S -M rhel6.6.0 -cpu
+  Westmere,+rdtscp,+pdpe1gb,+dca,+pcid,+pdcm,+xtpr,+tm2,+est,+smx,+vmx,+ds_cpl,+monitor,+dtes64,+pclmuldq,+pbe,+tm,+ht,+ss,+acpi,+ds,+vme
+  -enable-kvm -m 512 -realtime mlock=off -smp 1,sockets=1,cores=1,threads=1 -uuid
+  96bea55c-6d58-4dcf-bc52-09aed81c0cee -smbios type=1,manufacturer=RDO
+  Project,product=OpenStack
+  Nova,version=2014.1.3-3.el6,serial=44454c4c-3400-1051-8059-c7c04f534b31,uuid=96bea55c-6d58-4dcf-bc52-09aed81c0cee
+  -nodefconfig -nodefaults -chardev
+  socket,id=charmonitor,path=/var/lib/libvirt/qemu/instance-00000baa.monitor,server,nowait
+  -mon chardev=charmonitor,id=monitor,mode=control -rtc base=utc,driftfix=slew
+  -no-kvm-pit-reinjection -no-shutdown -device
+  piix3-usb-uhci,id=usb,bus=pci.0,addr=0x1.0x2 -drive
+  file=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/disk,if=none,id=drive-virtio-disk0,format=qcow2,cache=none
+  -device
+  virtio-blk-pci,scsi=off,bus=pci.0,addr=0x4,drive=drive-virtio-disk0,id=virtio-disk0,bootindex=1
+  -drive
+  file=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/disk.swap,if=none,id=drive-virtio-disk1,format=qcow2,cache=none
+  -device
+  virtio-blk-pci,scsi=off,bus=pci.0,addr=0x5,drive=drive-virtio-disk1,id=virtio-disk1
+  -netdev tap,fd=35,id=hostnet0,vhost=on,vhostfd=39 -device
+  virtio-net-pci,netdev=hostnet0,id=net0,mac=fa:16:3e:35:5f:f4,bus=pci.0,addr=0x3
+  -chardev
+  file,id=charserial0,path=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/console.log
+  -device isa-serial,chardev=charserial0,id=serial0 -chardev pty,id=charserial1
+  -device isa-serial,chardev=charserial1,id=serial1 -device usb-tablet,id=input0
+  -vnc 10.1.0.114:11 -k en-us -vga cirrus -device
+  virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x6 -msg timestamp=on
 
 Xen
 ---
