@@ -34,8 +34,10 @@ F 2/27,":slides:ref:`21_loadbalancer`",
 ,**Week 9**,
 M 3/2,":slides:ref:`22_haproxy`",
 W 3/4,":slides:ref:`23_virtualization`","HW#5 Due; :download:`HW#6 Assigned <_static/hw/homework6.pdf>`"
-F 3/6,Distributed Systems & Service Discovery,
+F 3/6,":slides:ref:`24_virtualization`",
 ,**Week 10 (Dead week)**,
 M 3/9,Distributed Systems & Service Discovery,
-W 3/11,Distributed Systems & Service Discovery,"HW#6 Due"
+W 3/11,Distributed Systems & Service Discovery,"HW#6 Due on 3/12 at 4pm"
 F 3/13,Review,
+,**Week 11 (Finals Week)**,
+TH 3/19,Final at 2-4pm in KEC 1001
