@@ -214,3 +214,73 @@ Primary and Secondary Nodes
 * Primary node is where the VM runs
 * Secondary node is where its disk is replicated via DRBD. VM can be migrated
   over to it.
+
+Cloud/System Image
+------------------
+
+*A copy of an operating system including the entire state of the computer system
+stored in a non-volatile form such as a file.*
+
+* A single file represents an entire filesystem
+* Typically support extra features such as Copy-on-Write
+* Snapshot support
+
+Image Formats
+-------------
+
+**qcow/qcow2**
+  * Used by QEMU/KVM
+  * Stands for "QEMU Copy On Write"
+**VHD (Virtual Hard Disk)**
+  * Format created by Connectix which was later acquired by Microsoft
+  * Used primarily by Hyper-V
+
+Image Formats
+-------------
+
+**VMDK (Virtual Machine Disk)**
+  * Initially developed by VMWare
+  * An open format and used by VirtualBox, QEMU and Parellels
+**AMI (Amazon Machine Image)**
+  * Disk image format used on EC2
+  * Compress, encrypted, signed and split into a series of 10MB checks and
+    uploaded on S3
+  * Contains an XML manifest file
+  * Does not contain kernel image
+
+Image files vs Block Devices
+----------------------------
+
+.. csv-table::
+  :header: "Image Files", "Block Devices"
+
+  "Easy to move around and create", "Requires use of LVM or other block device tools"
+  "Can have a performance hit", "Typically has better performance"
+  "Offer more features such as compression", "You can't 'overcommit' space with LVM"
+
+Creating Images
+---------------
+
+*Various tools exist to create images. Some are distribution specific while
+others aren't.*
+
+**Oz**
+  * Python CLI app that uses KVM to install a virtual machine image
+  * Typically used to create RHEL-based images, but has support for Debian and
+    Windows.
+  * Uses an XML file format
+**VMBuilder**
+  * CLI tool that is typically used to create Debian or Ubuntu images
+
+Creating Images
+---------------
+
+**BoxGrinder**
+  * CLI tool that only works on Fedora but works on other RHEL systems
+**VeeWee**
+  * CLI tool to create Vagrant boxes, but can also create KVM images
+**Packer**
+  * CLI tool for creating machine images for multiple platforms
+**imagefactory**
+  * Tool that integrates with Oz to automate building, converting and uploading
+    of images to different cloud providers.
