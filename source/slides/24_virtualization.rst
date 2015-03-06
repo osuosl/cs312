@@ -34,8 +34,8 @@ Examples:
 Platform as a Service
 ---------------------
 
-*A platform that provides customers to develop, run and manage web applications
-without the complexity of building and maintaining the underlying
+*A platform that provides customers the ability to develop, run and manage web
+applications without the complexity of building and maintaining the underlying
 infrastructure*
 
 Typically layered on top of IaaS
