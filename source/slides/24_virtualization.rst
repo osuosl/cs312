@@ -8,9 +8,12 @@ IaaS/PaaS/SaaS, Ganeti, Cloud Images and Packer
 <Name> as a Service
 -------------------
 
-* IaaS -- Infrastructure as a Service
-* Paas -- Platform as a Service
-* SaaS -- Software as a Service
+**IaaS**
+  Infrastructure as a Service
+**Paas**
+  Platform as a Service
+**SaaS**
+  Software as a Service
 
 Infrastructure as a Service
 ---------------------------
