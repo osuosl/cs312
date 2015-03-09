@@ -61,3 +61,31 @@ Byzantine Fault occurs.
 Service Discovery
 =================
 
+Automated & Distributed Systems
+-------------------------------
+
+* Systems turn from pets to cattle
+* We no longer really care which systems are up, we just want
+  at least ``$X`` of them running at a time
+* Why care at all where or how they run?
+
+  * They still have to find each other!
+
+Service Discovery
+-----------------
+
+DHCP is a form of specialized service discovery. Why?
+
+Service Discovery
+-----------------
+
+etcd, zookeeper, consul
+
+* Typically arbitrary key-value stores (but *not* databases)
+
+  * Why not nosql?
+
+* Abstract the bootstrapping problem to just the service-discovery cluster
+* CoreOS attempts to solve bootstrapping with `etcd discovery`_
+
+.. _etcd discovery: https://discovery.etcd.io/
