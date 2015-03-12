@@ -73,6 +73,10 @@ Components of Nagios
   * Daemons that handle remote checks
   * NRPE: Active checking daemon
   * NSCA: Passive checking daemon (just listens for data)
+    The client must:
+
+    * Run the check (and schedule it)
+    * Send the data to NSCA using ``send_nsca``
 
 Passive vs. Active
 ------------------
