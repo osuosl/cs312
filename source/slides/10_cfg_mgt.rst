@@ -151,7 +151,7 @@ Push vs. Pull
   * Server calls client and can execute an immediate remote execution usually
     using ssh (i.e. Salt, Ansible)
   * Pros: Control, simplicity, can send commands immediately
-  * Cons: Lack of full automation, Lack of scalability
+  * Cons: Automation requires more work, Lack of scalability
 
 DevOps workflow in an agency environment
 ----------------------------------------
