@@ -58,7 +58,7 @@ Setting up logging for HAProxy
   # Add this into the file
   local2.*    /var/log/haproxy.log
 
-  $ service rsyslog reload
+  $ service rsyslog restart
 
 `haproxy logging documentation`_
 
