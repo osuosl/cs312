@@ -70,9 +70,9 @@ Components of Nagios
 
 * NRPE/NSCA
 
-  * Daemons that actually execute the plugin on a server
+  * Daemons that handle remote checks
   * NRPE: Active checking daemon
-  * NSCA: Passive checking daemon
+  * NSCA: Passive checking daemon (just listens for data)
 
 Passive vs. Active
 ------------------
