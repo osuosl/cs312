@@ -12,7 +12,7 @@ Welcome
 :Course website: http://cs312.osuosl.org
 :Office Hours: by appointment
 :TA: TBA
-:Class list: TBA
+:Class list: cs312-w16@ENGR.ORST.EDU
 
 Textbook
 ~~~~~~~~
