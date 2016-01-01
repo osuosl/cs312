@@ -41,8 +41,14 @@ Course Content
   * Single system fundamentals
   * OS installation
   * User management
+  * DNS & DHCP
+  * Systemd
+  * Syslog, cron & software RAID
+  * Linux networking and debugging
+  * NFS
+  * Email servers
 
-* Development Methodologies:
+* DevOps Methodologies:
 
   * Contribution to the growing DevOps ecosystem
   * Continuous Integration & Deployment
@@ -123,9 +129,10 @@ per day including weekend days.
 Grading
 ~~~~~~~
 
-* 1 midterm (40 pts ) -- *20% of grade*
+* 2 midterms (2 x 20 pts ) -- *20% of grade*
 * 1 final (40 pts) -- *20% of grade*
-* 6 Assignments (6 x 20 pts) -- *60% of grade*
+* 3 Projects (3 x 15 pts) -- *22.5% of grade*
+* 6 Assignments (5 x 15 pts) -- *37.5% of grade*
 
 =========== =====
 Points      Grade
@@ -142,6 +149,20 @@ Points      Grade
 **129-120** **D**
 **119-0**   **F**
 =========== =====
+
+Projects
+~~~~~~~~
+
+Projects are intended to be hands-on and require additional time to complete.
+Students **are allowed** to collaborate together on projects, however they will
+need to each turn in their projects individually with individual results.
+Students are limited to teams of up to three students.
+
+Homework
+~~~~~~~~
+
+Homework will be assigned during the term, however collaboration **is not
+allowed**.
 
 Academic Dishonesty
 ~~~~~~~~~~~~~~~~~~~
