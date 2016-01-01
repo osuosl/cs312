@@ -33,6 +33,8 @@ By appointment only.
 Class Mailing List
 ~~~~~~~~~~~~~~~~~~
 
+cs312-w16@ENGR.ORST.EDU
+
 Course Content
 ~~~~~~~~~~~~~~
 
