@@ -121,6 +121,65 @@ Goals
 - Teach modern Development and Operations practices
 - Survey of important and useful techniques used 
 
+System Administration
+=====================
+
+Systems Administrators
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Responsible for systems (typically servers) running code, applications,
+  and services
+
+  - Keeping applications running (they crash, sometimes a lot)
+  - Updates
+  - Security
+  - Monitoring (performance, uptime, etc)
+  - Logging
+  - Often on-call
+
+* Automates significant amounts of work with infrastructure
+
+  - This enables a small team to administer hundreds or thousands of
+    servers
+
+* involved in infrastructure architecture and decisions
+* can be involved in QA/Development work as well
+
+Systems Engineers
+~~~~~~~~~~~~~~~~~
+
+* Responsible for creating the platforms code is run on
+
+  - Work at a lower-level
+  - Generally make infrastructure decisions for others
+  - Often have expertise with some particular sub-system (networking, filesystems, etc)
+  - Not necessarily on-call, but can be
+
+* Sometimes intermixed with Systems Administrators who want Engineer in their title
+
+DevOps Engineers
+~~~~~~~~~~~~~~~~
+
+* Newer position
+* Mix of Systems (Operations) and Development work
+* Involved where the application and its platform meet
+* Responsibilities include a mix of both Ops and Dev, usually:
+
+  - General infrastructure/automation
+  - Continuous Integration and Testing
+  - Developer Environments/Workflow
+  - Logging
+  - Often on-call
+
+Release Engineers
+~~~~~~~~~~~~~~~~~
+
+* Mix of QA and Operations
+* Typically responsible for Continuous Integration and Build System
+* Testing
+* Sometimes involved in building development environments
+* Automate pain points of development process (building, testing, releasing, deploying)
+
 DevOps History
 ==============
 
