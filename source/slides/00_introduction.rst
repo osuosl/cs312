@@ -131,8 +131,7 @@ Systems Administrators
   and services
 
   - Keeping applications running (they crash, sometimes a lot)
-  - Updates
-  - Security
+  - Updates, Security
   - Monitoring (performance, uptime, etc)
   - Logging
   - Often on-call
