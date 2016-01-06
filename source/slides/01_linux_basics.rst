@@ -1,6 +1,6 @@
 .. _01_linux_basics:
 
-Distribution History
+Linux Basics (Day 1)
 ====================
 
 Today's topics
