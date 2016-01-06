@@ -1,43 +1,43 @@
 Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
-M 1/5,:slides:ref:`00_intro`,
-W 1/7,:slides:ref:`01_linux_basics`,:ref:`Ch. 1 <readings>`
-F 1/9,":slides:ref:`02_linux_basics`",:ref:`Ch. 2 and pg 926-930 <readings>`
+M 1/4,Welcome to CS312,
+W 1/6,Linux Basics (Day 1),
+F 1/8,Linux Basics (Day 2),
 ,**Week 2**,
-M 1/12,":slides:ref:`03_linux_basics`",":ref:`Ch. 3-4, 7 <readings>`"
-W 1/14,":slides:ref:`04_linux_basics`",":ref:`Ch. 6, 8.9, 12.1 <readings>`, :download:`HW#1 Assigned <_static/hw/homework1.pdf>`"
-F 1/16,":slides:ref:`05_linux_basics`",":ref:`Ch. 8.1-8.8 <readings>`"
+M 1/11,Linux Basics (Day 3),HW #1 Assigned
+W 1/13,Troubleshooting and Bash,
+F 1/15,DNS & DHCP,
 ,**Week 3**,
-M 1/19,No Class / MLK,
-W 1/21,":slides:ref:`06_linux_basics`",
-F 1/23,":slides:ref:`07_agile_methods`",":ref:`Ch. 9,11 <readings>`, HW#1 Due"
+M 1/18,No Class / MLK,HW #1 Due
+W 1/20,"Syslog, Cron & Software RAID",Project #1 Assigned
+F 1/22,Midterm #1,
 ,**Week 4**,
-M 1/26,":slides:ref:`08_continuous_integration`",
-W 1/28,":slides:ref:`09_jenkins`",":download:`HW#2 Assigned <_static/hw/homework2.pdf>`; Bring laptops!"
-F 1/30,Midterm,
+M 1/25,Storage & Automated Install,HW #2 Assigned
+W 1/27,SystemD,
+F 1/29,Linux Networking / Network debugging,HW #2 Due
 ,**Week 5**,
-M 2/2,":slides:ref:`10_cfg_mgt`",
-W 2/4,":slides:ref:`11_chef`","HW#2 Due"
-F 2/6,":slides:ref:`12_chef_midterm_notes`",
+M 2/1,NFS / Email,Project #1 Due / HW #3 Assigned
+W 2/3,Continuous Integration,
+F 2/5,Config Management,
 ,**Week 6**,
-M 2/9,":slides:ref:`13_chefdk_tk`","Bring laptops!"
-W 2/11,":slides:ref:`14_chefdk_tk`","Bring laptops!; :download:`HW#3 Assigned <_static/hw/homework3.pdf>`"
-F 2/13,":slides:ref:`15_nagios`",
+M 2/8,Config Management,HW #3 Due
+W 2/10,Config Management,Project #2 Assigned
+F 2/12,Midterm #2,
 ,**Week 7**,
-M 2/16,":slides:ref:`16_monitoring`",
-W 2/18,":slides:ref:`17_dns`","HW#3 Due; :download:`HW#4 Assigned <_static/hw/homework4.pdf>`"
-F 2/20,":download:`Guest Speaker: Brandon Philips - CoreOS <_static/18_coreos.pdf>`",
+M 2/15,Monitoring: Nagios,HW #4 Assigned
+W 2/17,Monitoring Concepts,
+F 2/19,Guest Speaker: TBA,HW #4 Due
 ,**Week 8**,
-M 2/23,":slides:ref:`19_high_availability`",
-W 2/25,":slides:ref:`20_docker_and_systemd`","HW#4 Due; :download:`HW#5 Assigned <_static/hw/homework5.pdf>`"
-F 2/27,":slides:ref:`21_loadbalancer`",
+M 2/22,High Availability / Load Balancers,Project #2 Due
+W 2/24,HAProxy,Project #3 Assigned
+F 2/26,Virtualization,HW #5 Assigned
 ,**Week 9**,
-M 3/2,":slides:ref:`22_haproxy`",
-W 3/4,":slides:ref:`23_virtualization`","HW#5 Due; :download:`HW#6 Assigned <_static/hw/homework6.pdf>`"
-F 3/6,":slides:ref:`24_virtualization`",
+M 3/1,Virtualization,
+W 3/3,Containers,
+F 3/5,Distributed Systems,HW #5 Due
 ,**Week 10 (Dead week)**,
-M 3/9,":slides:ref:`25_service_discovery`",
-W 3/11,Review,"HW#6 Due on 3/12 at 4pm"
-F 3/13,Review,
+M 3/8,TBA,Project #3 Due
+W 3/10,Review,
+F 3/12,Review,
 ,**Week 11 (Finals Week)**,
-TH 3/19,Final at 2-4pm in KEC 1001
+R 3/17,Final at 2-4pm in KEC 1001 (Tentative),
