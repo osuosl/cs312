@@ -1,8 +1,8 @@
 Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
-M 1/4,Welcome to CS312,
+M 1/4,:slides:ref:`00_intro`,
 W 1/6,Linux Basics (Day 1),
-F 1/8,Linux Basics (Day 2),
+F 1/8,Linux Basics (Day 2),:ref:`Ch. 1 <readings>`
 ,**Week 2**,
 M 1/11,Linux Basics (Day 3),HW #1 Assigned
 W 1/13,Troubleshooting and Bash,

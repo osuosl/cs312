@@ -12,7 +12,7 @@ Welcome
 :Course website: http://cs312.osuosl.org
 :Office Hours: by appointment
 :TA: TBA
-:Class list: TBA
+:Class list: cs312-w16@ENGR.ORST.EDU
 
 Textbook
 ~~~~~~~~
@@ -121,6 +121,65 @@ Goals
 - Teach modern Development and Operations practices
 - Survey of important and useful techniques used 
 
+System Administration
+=====================
+
+Systems Administrators
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Responsible for systems (typically servers) running code, applications,
+  and services
+
+  - Keeping applications running (they crash, sometimes a lot)
+  - Updates, Security
+  - Monitoring, Logging
+
+Systems Administrators
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Automates significant amounts of work with infrastructure
+
+  - This enables a small team to administer hundreds or thousands of
+    servers
+
+* involved in infrastructure architecture and decisions
+* can be involved in QA/Development work as well
+
+Systems Engineers
+~~~~~~~~~~~~~~~~~
+
+* Responsible for creating the platforms code is run on
+
+  - Work at a lower-level
+  - Generally make infrastructure decisions for others
+  - Often have expertise with some particular sub-system (networking, filesystems, etc)
+  - Not necessarily on-call, but can be
+
+* Sometimes intermixed with Systems Administrators who want Engineer in their title
+
+DevOps Engineers
+~~~~~~~~~~~~~~~~
+
+* Newer position
+* Mix of Systems (Operations) and Development work
+* Involved where the application and its platform meet
+* Responsibilities include a mix of both Ops and Dev, usually:
+
+  - General infrastructure/automation
+  - Continuous Integration and Testing
+  - Developer Environments/Workflow
+  - Logging
+  - Often on-call
+
+Release Engineers
+~~~~~~~~~~~~~~~~~
+
+* Mix of QA and Operations
+* Typically responsible for Continuous Integration and Build System
+* Testing
+* Sometimes involved in building development environments
+* Automate pain points of development process (building, testing, releasing, deploying)
+
 DevOps History
 ==============
 
@@ -138,47 +197,25 @@ What is it?
 Definition of Devops
 ~~~~~~~~~~~~~~~~~~~~
 
-- Software Engineering (Dev)
-- Technology Operations (Ops)
-- Quality Assurance (QA)
+- Means a lot of things to a lot of people
+- It is a buzzword
+- We use it to mean Operations people who do non-zero amounts of Dev work
+  or Devs who do a non-zero amount of ops
+- And don't forget QA!
 
-.. figure:: ../_static/Devops.svg
-    :scale: 80%
-    :align: center
+Examples
+~~~~~~~~
 
-    Wikipedia (cc)
+Chef, a configuration management tool
 
-The old view
-~~~~~~~~~~~~
+- Jordan uses it to do ops work (ops work)
+- He also contributes code to chef-client (dev work)
 
-:"Dev": side being the *"makers"*
-:"Ops":
-  side being the *"people that deal with the creation after its birth”*
+Jenkins is used for Continuous Integration
 
-.. figure:: ../_static/silo-fire.jpg
-    :scale: 50%
-    :align: right
-
-    photo by http://thoriseador.deviantart.com/ (CC)
-
-This siloed environment has created much harm in the industry and the core
-reason behind creating Devops.
-
-**Burn down those silos!**
-
-History of Devops
-~~~~~~~~~~~~~~~~~
-
-- mid-2000s
-
-    "*Hey, our methodology of running systems seems to still be in a pretty
-    primitive state despite years of effort.  Let’s start talking about doing it
-    better"*
-
-- Velocity Conf 2008/2009 - increased presentations on *"Agile System
-  Administration*"
-- Agile 2008 Conf - "Agile Infrastructure" BOF -- nobody showed up!
-- 2009 DevOpsDays in Ghent, Belgium - Patrick Debois
+- Devs use it to test their code regularly (dev/qa work)
+- QA Engineers use it to ensure code quality (qa work)
+- Ops use it to ensure the developers' code is runnable (ops/qa)
 
 The Agile Approach
 ~~~~~~~~~~~~~~~~~~
@@ -217,11 +254,11 @@ Better Tools enable Devops
 
 Explosion of new tools over the past few years:
 
-  - Release tools (jenkins, travisci, etc)
+  - Release tools (jenkins, travis-ci, etc)
   - Config Management (puppet, chef, ansible, cfengine)
-  - Orchestration (zookeeper, noah, mesos)
+  - Orchestration (zookeeper, mesos)
   - Monitoring & Metrics (statsd, graphite, etc)
-  - Virtualization & containerization (AWS, Openstack, vagrant, docker)
+  - Virtualization & containerization (AWS, Openstack, vagrant, docker, CoreOS)
 
 It's not NoOps
 ~~~~~~~~~~~~~~
@@ -237,41 +274,6 @@ A (Very) Brief History of Linux
 
 .. The following rst-class applies to the slide below it,
    not the current slide.
-.. rst-class:: center-title
-	       
-Brian Kernighan
-~~~~~~~~~~~~~~~
-
-.. figure:: ../_static/kernighan.jpg
-   :align: center
-	
-   Photo by Ben Lowe, CC BY 2.0, https://www.flickr.com/photos/blowe/7984191331/
-
-Brian Kernighan
-~~~~~~~~~~~~~~~
-
-* Co-inventor of C
-* Co-inventor of AWK
-* Developer of UNIX
-
-.. rst-class:: center-title
-
-Dennis Ritchie
-~~~~~~~~~~~~~~
-
-.. figure:: ../_static/ritchie.jpg
-   :align: center
-
-   Photo by Japan Foundation
-
-
-Dennis Ritchie
-~~~~~~~~~~~~~~
-
-* Co-inventor of C
-* Developer of UNIX
-* Ported UNIX to several platforms
-
 .. rst-class:: center-title
 
 Ken Thompson
@@ -358,6 +360,6 @@ Readings
 Readings
 ~~~~~~~~
 
-Please read the following section by 1/7:
+Please read the following section by 1/8:
 
 * Chapter 1
