@@ -1,10 +1,10 @@
 Date,Lecture / Activity,Assignments / Reading
 ,**Week 1**,
 M 1/4,:slides:ref:`00_intro`,
-W 1/6,Linux Basics (Day 1),
-F 1/8,Linux Basics (Day 2),:ref:`Ch. 1 <readings>`
+W 1/6,:slides:ref:`01_linux_basics`
+F 1/8,Linux Basics (Day 2),":ref:`Ch. 1, Ch. 2, Ch 22 (SSH) <readings>`"
 ,**Week 2**,
-M 1/11,Linux Basics (Day 3),HW #1 Assigned
+M 1/11,Linux Basics (Day 3),":ref:`Ch. 3-4 & 7 <readings>`, HW #1 Assigned"
 W 1/13,Troubleshooting and Bash,
 F 1/15,DNS & DHCP,
 ,**Week 3**,

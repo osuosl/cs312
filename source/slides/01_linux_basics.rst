@@ -1,6 +1,6 @@
 .. _01_linux_basics:
 
-Distribution History
+Linux Basics (Day 1)
 ====================
 
 Today's topics
@@ -38,27 +38,6 @@ Linux beyond the kernel
 - Linus had a kernel, but no userland
 - Early distributions were created and shared by universities
 - Linux GPL conversion finished by v0.99 which opened up commercial use
-
-.. image:: ../_static/sls-screenshot.png
-  :align: right
-  :width: 50%
-
-- Soft Landing Systems: SLS Linux
-
-  * First widely used distribution
-  * Popular but buggy and unstable
-  * Change in binary format from a.out to ELF caused stir
-
-Frustration turns into Distributions
-------------------------------------
-
-* Patrick Volkerding and Ian Murdock both frustrated with SLS
-* Frustrations:
-
-  * Buggy as hell!
-  * Closed nature of SLS preventing improvements from being added
-
-* Decided to each create their own distributions
 
 Early Distributions
 -------------------
@@ -179,7 +158,7 @@ You name it, there's a `distro out there`_!
 What we'll be using
 -------------------
 
-**CentOS 6**
+**CentOS 7**
 
 Why?
 
@@ -614,51 +593,10 @@ Low level package management. No dependency checking or central repository.
 Apt (Debian, Ubuntu)
 --------------------
 
-.. note:: You can also use aptitude as a front-end to dpkg instead of apt-get.
+* Similar commands to rpm/yum
+* See comparisons `here`_
 
-.. code-block:: bash
-
-  # Update package cache database
-  $ apt-get update
-
-  # Searching for a package
-  $ apt-cache search tree
-
-  # Information about a package
-  $ apt-cache show tree
-
-  # Installing a package
-  $ apt-get install tree
-
-  # Upgrade all packages to a newer version
-  $ apt-get upgrade
-  $ apt-get dist-upgrade
-
-  # Uninstalling a package
-  $ apt-get remove tree
-  $ apt-get purge tree
-
-Dpkg Commands
--------------
-
-Low level package management. No dependency checking or central repository.
-
-.. code-block:: bash
-
-  # Install or upgrade a DEB file
-  $ dpkg -i tree_1.6.0-1_amd64.deb
-
-  # Removing a DEB package
-  $ dpkg -r tree
-
-  # Purging a DEB package
-  $ dpkg -P tree
-
-  # Querying the DPKG database
-  $ dpkg-query -l tree
-
-  # Listing all files in a DEB package
-  $ dpkg-query -L tree
+.. _here: https://help.ubuntu.com/community/SwitchingToUbuntu/FromLinux/RedHatEnterpriseLinuxAndFedora
 
 Friday's Topics
 ---------------
@@ -669,7 +607,7 @@ Friday's Topics
 
 **Readings:**
 
-* Chapter 3-4 & 7 by Jan 12th
+* Chapter 3-4 & 7 by Jan 11th
 
 Resources
 ---------

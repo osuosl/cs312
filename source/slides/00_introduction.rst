@@ -363,3 +363,4 @@ Readings
 Please read the following section by 1/8:
 
 * Chapter 1
+* Chapter 2, Chapter 22 SSH Section (pg 926-930)
