@@ -7,4 +7,4 @@ Readings
    :header: Due Date, Reading
    :widths: 20,80
 
-    TBA, TBA
+    January 8th, Chapter 1
