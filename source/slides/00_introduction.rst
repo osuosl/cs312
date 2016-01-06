@@ -360,6 +360,6 @@ Readings
 Readings
 ~~~~~~~~
 
-Please read the following section by 1/6:
+Please read the following section by 1/8:
 
 * Chapter 1
