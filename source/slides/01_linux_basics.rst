@@ -607,7 +607,8 @@ Friday's Topics
 
 **Readings:**
 
-* Chapter 3-4 & 7 by Jan 12th
+* Chapter 2, Chapter 22 SSH Section (pg 926-930) by Jan 8th
+* Chapter 3-4 & 7 by Jan 11th
 
 Resources
 ---------
