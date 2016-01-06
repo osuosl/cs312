@@ -132,9 +132,10 @@ Systems Administrators
 
   - Keeping applications running (they crash, sometimes a lot)
   - Updates, Security
-  - Monitoring (performance, uptime, etc)
-  - Logging
-  - Often on-call
+  - Monitoring, Logging
+
+Systems Administrators
+~~~~~~~~~~~~~~~~~~~~~~
 
 * Automates significant amounts of work with infrastructure
 
