@@ -411,7 +411,7 @@ Ground Rules
 * Ken Thompson gave an interesting talk `on trust`_. Read it.
 
 .. _Acceptable Use of University Computing Resources: http://fa.oregonstate.edu/gen-manual/acceptable-use-university-computing-resources
-.. _on trust: http://cm.bell-labs.com/who/ken/trust.html
+.. _on trust: https://www.win.tue.nl/~aeb/linux/hh/thompson/trust.html
 
 Setting Up
 ----------
