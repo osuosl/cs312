@@ -420,7 +420,7 @@ You need:
 
 * Your laptop
 * SSH Key (we can generate one while setting up)
-* SSH (Windows users should use `putty`_
+* SSH (Windows users should use `putty`_)
 * Your ONID username and ID #
 * The Openstack Web UI is `here <https://studentcloud.osuosl.org>`_
 
