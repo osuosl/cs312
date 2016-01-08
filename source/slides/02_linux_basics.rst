@@ -436,6 +436,8 @@ Make sure to add a passphrase.
 
 On Windows, we will let openstack generate one for you during the process
 
+Also see :site:ref:`ssh_keys` for more detailed instructions
+
 Setting Up
 ----------
 
