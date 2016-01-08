@@ -6,7 +6,6 @@ Linux Basics (Day 2)
 Topics
 ------
 
-* Packages (leftover from Wednesday)
 * Editors
 * Git
 * Openstack Setup
