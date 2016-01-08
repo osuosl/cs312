@@ -435,11 +435,20 @@ Setting Up
 UserName: ONID username
 Password: ID # (change this)
 
-Setting Up
-----------
+Changing your password
+----------------------
 
-.. figure:: ../_static/openstack_change_password.png
-  :align: center
+On Linux or OSX, install ``python-keystoneclient`` with pip::
+
+    $ pip install python-keystoneclient
+
+Then use ``keystone`` to change your password::
+
+    $ keystone --os-username <username> --os-password <your id> --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
+    password-update --new-password <new password>
+
+If you're on Windows, spin up a VM on Openstack, then follow the above steps.
+
 
 If you don't change your password, an automated script will be emailing you!
 
