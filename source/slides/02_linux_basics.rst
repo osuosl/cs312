@@ -444,8 +444,9 @@ On Linux or OSX, install ``python-keystoneclient`` with pip::
 
 Then use ``keystone`` to change your password::
 
-    $ keystone --os-username <username> --os-password <your id> --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
-    password-update --new-password <new password>
+    $ keystone --os-username <username> --os-password <your id> \
+      --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
+      password-update --new-password <new password>
 
 If you're on Windows, spin up a VM on Openstack, then follow the above steps.
 
