@@ -61,10 +61,20 @@ in class.
 Change your password
 --------------------
 
-Make sure you change your password. Goto ``Settings -> Change Password``.
+On Linux or OSX, install ``python-keystoneclient`` with pip::
 
-.. image:: _static/openstack_change_password.png
-  :width: 70%
+    $ pip install python-keystoneclient
+
+Then use ``keystone`` to change your password::
+
+    $ keystone --os-username <username> --os-password <your id> \
+    --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
+    password-update --new-password <new password>
+
+**DO NOT** Use a password you have used elsewhere
+
+If you're using Windows, spin up a VM on Openstack, then follow the above instructions.
+Make sure you change your password. Goto ``Settings -> Change Password``.
 
 Add your ssh key
 ----------------

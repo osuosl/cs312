@@ -411,7 +411,7 @@ Ground Rules
 * Ken Thompson gave an interesting talk `on trust`_. Read it.
 
 .. _Acceptable Use of University Computing Resources: http://fa.oregonstate.edu/gen-manual/acceptable-use-university-computing-resources
-.. _on trust: http://cm.bell-labs.com/who/ken/trust.html
+.. _on trust: https://www.win.tue.nl/~aeb/linux/hh/thompson/trust.html
 
 Setting Up
 ----------
@@ -420,11 +420,22 @@ You need:
 
 * Your laptop
 * SSH Key (we can generate one while setting up)
-* SSH (Windows users should use `putty`_
+* SSH (Windows users should use `putty`_)
 * Your ONID username and ID #
 * The Openstack Web UI is `here <https://studentcloud.osuosl.org>`_
 
 .. _putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+
+SSH Key Generation
+------------------
+
+On OSX, Linux::
+
+    $ ssh-keygen -t rsa -b 4096
+
+Make sure to add a passphrase.
+
+On Windows, we will let openstack generate one for you during the process
 
 Setting Up
 ----------
@@ -435,13 +446,22 @@ Setting Up
 UserName: ONID username
 Password: ID # (change this)
 
-Setting Up
-----------
+Changing your password
+----------------------
 
-.. figure:: ../_static/openstack_change_password.png
-  :align: center
+On Linux or OSX, install ``python-keystoneclient`` with pip::
 
-If you don't change your password, an automated script will be emailing you!
+    $ pip install python-keystoneclient
+
+Then use ``keystone`` to change your password::
+
+    $ keystone --os-username <username> --os-password <your id> \
+      --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
+      password-update --new-password <new password>
+
+**DO NOT** Use a password you have used elsewhere
+
+If you're using Windows, spin up a VM on Openstack, then follow the above instructions.
 
 Setting Up
 ----------
@@ -467,6 +487,8 @@ Setting Up
 
 Click on Import Key Pair if you already have an SSH key
 pair
+
+Windows users click on Create Key Pair and download the private key
 
 Setting Up
 ----------
