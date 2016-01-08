@@ -426,6 +426,17 @@ You need:
 
 .. _putty: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
 
+SSH Key Generation
+------------------
+
+On OSX, Linux::
+
+    $ ssh-keygen -t rsa -b 4096
+
+Make sure to add a passphrase.
+
+On Windows, we will let openstack generate one for you during the process
+
 Setting Up
 ----------
 
@@ -448,10 +459,9 @@ Then use ``keystone`` to change your password::
       --os-auth-url http://studentcloud.osuosl.org:35357/v2.0/ \
       password-update --new-password <new password>
 
-If you're on Windows, spin up a VM on Openstack, then follow the above steps.
+**DO NOT** Use a password you have used elsewhere
 
-
-If you don't change your password, an automated script will be emailing you!
+If you're using Windows, spin up a VM on Openstack, then follow the above instructions.
 
 Setting Up
 ----------
@@ -477,6 +487,8 @@ Setting Up
 
 Click on Import Key Pair if you already have an SSH key
 pair
+
+Windows users click on Create Key Pair and download the private key
 
 Setting Up
 ----------
