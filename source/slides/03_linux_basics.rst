@@ -711,8 +711,5 @@ Shutting Down
 Readings
 --------
 
-* Jan 13th, Ch. 6, 8.9, 12.1
-* Jan 15th Ch. 8.1-8.8
-* Friday -- **Bring your laptop!**
-
-  * Install Virtualbox (we'll go over this on Wed)
+* Jan 13th, Ch. 6, 5, 8, 12.6 & 12.9
+* Jan 15th Ch. 14.7, 17
