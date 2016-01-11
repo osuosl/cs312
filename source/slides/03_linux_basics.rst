@@ -144,6 +144,10 @@ People were running out of disk space so:
     lrwxrwxrwx. 1 root root 9 Oct 20 00:09 /lib64 -> usr/lib64
     lrwxrwxrwx. 1 root root 8 Oct 20 00:09 /sbin -> usr/sbin
 
+* See also: `The Case for the /usr Merge`__
+
+.. __: http://www.freedesktop.org/wiki/Software/systemd/TheCaseForTheUsrMerge/
+
 \/usr (Modern Context)
 ----------------------
 
