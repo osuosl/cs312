@@ -484,15 +484,7 @@ Boot Loaders (Grub)
 * Grub "version 1" vs. "version 2"
 
   * Version 2 has more features, but more complicated
-  * Latest Debian, Ubuntu and Fedora use v2
-
-.. code::
-
-  grub> root (hd0,0)    (Specify where your /boot partition resides)
-  grub> setup (hd0)     (Install GRUB in the MBR)
-  grub> quit            (Exit the GRUB shell)
-
-  grub-install
+  * Latest RedHat/CentOS, Debian, Ubuntu and Fedora use v2
 
 GRUB Configuration
 ------------------
@@ -500,17 +492,19 @@ GRUB Configuration
 * CentOS 7 (your VMs) use GRUB 2
 * Main configuration is in ``/boot/grub2/grub.cfg``
 * kernels and initrds live in ``/boot``
+* Configured via ``/etc/sysconfig/grub``
+* Config generated via ``grub2-mkconfig``
 
 ::
 
     menuentry 'CentOS Linux (3.10.0-123.13.2.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-123.9.3.el7.x86_64-advanced-7c6fc4d5-965b-4824-80d6-d93dc649c4d9' {
-    	load_video
-    	set gfxpayload=keep
-    	insmod gzio # also part_msdos, ext2
-    	set root='hd0,msdos1'
-	search --no-floppy --fs-uuid --set=root 782935aa-7e68-4087-a50a-3aebacbb0277
-    	linux16 /vmlinuz-3.10.0-123.13.2.el7.x86_64 root=/dev/mapper/centos_util-root ro rd.lvm.lv=centos_util/root rd.lvm.lv=centos_util/swap vconsole.keymap=us crashkernel=auto  vconsole.font=latarcyrheb-sun16 biosdevname=0 rhgb quiet LANG=en_US.UTF-8
-    	initrd16 /initramfs-3.10.0-123.13.2.el7.x86_64.img
+      load_video
+      set gfxpayload=keep
+      insmod gzio # also part_msdos, ext2
+      set root='hd0,msdos1'
+      search --no-floppy --fs-uuid --set=root 782935aa-7e68-4087-a50a-3aebacbb0277
+      linux16 /vmlinuz-3.10.0-123.13.2.el7.x86_64 root=/dev/mapper/centos_util-root ro rd.lvm.lv=centos_util/root rd.lvm.lv=centos_util/swap vconsole.keymap=us crashkernel=auto  vconsole.font=latarcyrheb-sun16 biosdevname=0 rhgb quiet LANG=en_US.UTF-8
+      initrd16 /initramfs-3.10.0-123.13.2.el7.x86_64.img
     }
 
 GRUB Configuration
