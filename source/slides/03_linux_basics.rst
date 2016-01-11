@@ -82,7 +82,7 @@ Where are drives mounted?
   [260930.32] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
   [260930.32] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
 
-* USB filesystem under ``/media``, main disk ``/``
+* we call ``/`` root or the root of the filesystem
 * You can manually mount devices with ``mount``
 
   * *"Everything's a file"*
