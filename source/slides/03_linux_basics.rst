@@ -128,6 +128,22 @@ People were running out of disk space so:
 * Now manually installed (without package manager) binaries go in
   ``/usr/local/bin`` and ``/usr/local/sbin``.
 
+\/usr Merge
+-----------
+
+* Moving of top-level ``/bin`` directories into ``/usr``
+* Simplifies compatibility with other Unixes
+* Reduces complexity of the system
+* Easier separation between vendor-supplied OS resources
+* Systemd heavily relies on this
+* CentOS 7 supports this::
+
+    $ ll /{sbin,bin,lib}*
+    lrwxrwxrwx. 1 root root 7 Oct 20 00:09 /bin -> usr/bin
+    lrwxrwxrwx. 1 root root 7 Oct 20 00:09 /lib -> usr/lib
+    lrwxrwxrwx. 1 root root 9 Oct 20 00:09 /lib64 -> usr/lib64
+    lrwxrwxrwx. 1 root root 8 Oct 20 00:09 /sbin -> usr/sbin
+
 \/usr (Modern Context)
 ----------------------
 
