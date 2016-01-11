@@ -23,12 +23,15 @@ What's a filesystem?
 Which Filesystem to choose
 --------------------------
 
-* ext4 -- pretty standard now, rock solid, medium performance
-* ext3 -- Still ok, but not good for large filesystems
-* ext2 -- Legacy, only useful in special use cases (i.e. use drives, /boot)
-* xfs -- Great performance (multi-threaded, great for large filesystems)
-* brtfs -- ZFS-like filesystem for Linux. Has lots of potential but not quite
-  ready for production
+.. csv-table::
+  :widths: 5, 30
+
+  ext4, "pretty standard now, rock solid, medium performance"
+  ext3, "Still ok, but not good for large filesystems"
+  ext2, "Legacy, only useful in special use cases (i.e. use drives, /boot)"
+  xfs, "Great performance (multi-threaded, great for large filesystems)"
+  brtfs, "ZFS-like filesystem for Linux. Has lots of potential but not quite
+  ready for production"
 
 The File System
 ---------------
@@ -40,9 +43,8 @@ The File System
 .. code-block:: bash
 
   $ ls /
-  bin     dev   lib         media  proc  sbin     sys  var
-  boot    etc   lib64       mnt    root  selinux  tmp
-  cgroup  home  lost+found  opt    run   srv      usr
+  bin  boot  data  dev  etc  home  lib  lib64  lost+found  media  
+  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  util  var
 
 Installed programs and utilities
 --------------------------------
@@ -72,18 +74,18 @@ Where are drives mounted?
 
 * Raw device appears under ``/dev``.
 
-.. code-block:: bash
+::
 
   $ dmesg | tail
-  [260930.208715]  sdb: sdb1
-  [260930.320756] sd 6:0:0:0: >[sdb] Asking for cache data failed
-  [260930.320765] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
-  [260930.320771] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
+  [260930.20]  sdb: sdb1
+  [260930.32] sd 6:0:0:0: >[sdb] Asking for cache data failed
+  [260930.32] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
+  [260930.32] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
 
-* USB filesystem under ``/media``, main disk ``/``
+* we call ``/`` root or the root of the filesystem
 * You can manually mount devices with ``mount``
 
-  * "Everything's a file"
+  * *"Everything's a file"*
   * ``umount`` to unmount
 
 * ``/etc/fstab`` tells things where to mount
@@ -101,6 +103,9 @@ Three Tiers of Filesystem Hierarchy
 * ``/usr/local``, locally-installed software.
 
   * Package managers usually install under ``/`` and ``/usr``.
+  * Most distributions with systemd symlink ``/bin`` to ``usr/bin``.
+
+See also ``man hier``
 
 \/bin & \/sbin
 --------------
@@ -123,6 +128,26 @@ People were running out of disk space so:
 * Now manually installed (without package manager) binaries go in
   ``/usr/local/bin`` and ``/usr/local/sbin``.
 
+\/usr Merge
+-----------
+
+* Moving of top-level ``/bin`` directories into ``/usr``
+* Simplifies compatibility with other Unixes
+* Reduces complexity of the system
+* Easier separation between vendor-supplied OS resources
+* Systemd heavily relies on this
+* CentOS 7 supports this::
+
+    $ ll /{sbin,bin,lib}*
+    lrwxrwxrwx. 1 root root 7 Oct 20 00:09 /bin -> usr/bin
+    lrwxrwxrwx. 1 root root 7 Oct 20 00:09 /lib -> usr/lib
+    lrwxrwxrwx. 1 root root 9 Oct 20 00:09 /lib64 -> usr/lib64
+    lrwxrwxrwx. 1 root root 8 Oct 20 00:09 /sbin -> usr/sbin
+
+* See also: `The Case for the /usr Merge`__
+
+.. __: http://www.freedesktop.org/wiki/Software/systemd/TheCaseForTheUsrMerge/
+
 \/usr (Modern Context)
 ----------------------
 
@@ -134,6 +159,7 @@ People were running out of disk space so:
 
 .. csv-table::
   :header: Location, Description
+  :widths: 10, 30
 
   /usr/bin,Packages installed by package manager
   /usr/sbin,Packages installed by package manager
@@ -145,19 +171,13 @@ People were running out of disk space so:
 
 .. csv-table::
   :header: Location, Description
+  :widths: 10, 30
 
   /usr/include,Include files for the C compiler
   /usr/lib,Object libraries (including dynamic libs); some unusual binaries
   /usr/lib64,64-bit libraries
   /usr/libexec,Executables used with libraries; not used much
   /usr/local,Programs (and their configuration) locally installed by user go here
-
-\/usr (Modern Context)
-----------------------
-
-.. csv-table::
-  :header: Location, Description
-
   /usr/share,Application data; typically examples and documentation
   /usr/src/linux,Kernel source goes here
 
@@ -396,7 +416,12 @@ Steps in boot process
     :align: right
     :scale: 70%
 
-#. Kernel initialization
+#. Hardware (POST)
+#. Bootloader (GRUB, NTLDR, etc)
+
+As far as Linux cares:
+
+3. Kernel initialization
 #. Hardware configuration
 #. System processes
 #. Operator intervention (single-user)
@@ -459,44 +484,35 @@ Boot Loaders (Grub)
 * Grub "version 1" vs. "version 2"
 
   * Version 2 has more features, but more complicated
-  * Latest Debian, Ubuntu and Fedora use v2
-
-.. code::
-
-  grub> root (hd0,0)    (Specify where your /boot partition resides)
-  grub> setup (hd0)     (Install GRUB in the MBR)
-  grub> quit            (Exit the GRUB shell)
-
-  grub-install
+  * Latest RedHat/CentOS, Debian, Ubuntu and Fedora use v2
 
 GRUB Configuration
 ------------------
 
-* CentOS 6 (your VMs) use GRUB 0.97
-* Main configuration is in ``/boot/grub/menu.lst``
+* CentOS 7 (your VMs) use GRUB 2
+* Main configuration is in ``/boot/grub2/grub.cfg``
 * kernels and initrds live in ``/boot``
+* Configured via ``/etc/sysconfig/grub``
+* Config generated via ``grub2-mkconfig``
 
 ::
 
-  default=0
-  timeout=0
-  splashimage=(hd0,0)/boot/grub/splash.xpm.gz
-  hiddenmenu
-  title CentOS 6 (2.6.32-504.3.3.el6.x86_64)
-    root (hd0,0)
-    kernel /boot/vmlinuz-2.6.32-504.3.3.el6.x86_64 ro \
-      root=UUID=bf569295-826b-4abd-8519-bd5ff29708c9 rd_NO_LUKS \
-      rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 \
-      crashkernel=auto KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM \
-      console=ttyS0,115200n8 console=tty0 quiet
-    initrd /boot/initramfs-2.6.32-504.3.3.el6.x86_64.img
+    menuentry 'CentOS Linux (3.10.0-123.13.2.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-123.9.3.el7.x86_64-advanced-7c6fc4d5-965b-4824-80d6-d93dc649c4d9' {
+      load_video
+      set gfxpayload=keep
+      insmod gzio # also part_msdos, ext2
+      set root='hd0,msdos1'
+      search --no-floppy --fs-uuid --set=root 782935aa-7e68-4087-a50a-3aebacbb0277
+      linux16 /vmlinuz-3.10.0-123.13.2.el7.x86_64 root=/dev/mapper/centos_util-root ro rd.lvm.lv=centos_util/root rd.lvm.lv=centos_util/swap vconsole.keymap=us crashkernel=auto  vconsole.font=latarcyrheb-sun16 biosdevname=0 rhgb quiet LANG=en_US.UTF-8
+      initrd16 /initramfs-3.10.0-123.13.2.el7.x86_64.img
+    }
 
 GRUB Configuration
 ------------------
 
-* ``root`` -- boot partition
-* ``kernel`` -- your linux kernel!
-* ``initrd`` -- initial ram disk which is mounted to help you boot
+* ``root`` -- boot partition, must be readable by grub
+* ``kernel`` -- your linux kernel! (filename of kernel on boot partition)
+* ``initrd`` -- initial ram disk which is mounted to help you boot (again, filename)
 
 Bootstrapping
 -------------
@@ -544,7 +560,7 @@ real init
 * Most linuces are settling on ``systemd`` as their init system
 
   * alternatives: systemv, openrc, bsd-style, upstart
-  * your Centos 6 VM uses upstart, Centos 7 uses systemd
+  * your Centos 7 vms use systemd
 
 Single User Mode
 ----------------
@@ -684,21 +700,10 @@ Shutting Down
   * load new kernel
   * new hardware
   * system-wide configuration changes
-* ``shutdown``, ``reboot``, ``halt``, ``init``
-* ``wall`` - send system-wide message to all users
-
-.. code-block:: bash
-
-  $ wall hello world
-  Broadcast message from root@localhost (pts/0) (Fri Jan 31 00:40:29 2014):
-
-  hello world
+  * ``shutdown``, ``reboot``, ``halt``, ``init``
 
 Readings
 --------
 
-* Jan 14th, Ch. 6, 8.9, 12.1
-* Jan 16th Ch. 8.1-8.8
-* Friday -- **Bring your laptop!**
-
-  * Install Virtualbox (we'll go over this on Wed)
+* Jan 13th, Ch. 5,6, 8, 12.6 & 12.9
+* Jan 15th Ch. 14.7, 17
