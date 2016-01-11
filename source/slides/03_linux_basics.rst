@@ -43,9 +43,8 @@ The File System
 .. code-block:: bash
 
   $ ls /
-  bin     dev   lib         media  proc  sbin     sys  var
-  boot    etc   lib64       mnt    root  selinux  tmp
-  cgroup  home  lost+found  opt    run   srv      usr
+  bin  boot  data  dev  etc  home  lib  lib64  lost+found  media  
+  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  util  var
 
 Installed programs and utilities
 --------------------------------
