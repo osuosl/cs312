@@ -23,12 +23,15 @@ What's a filesystem?
 Which Filesystem to choose
 --------------------------
 
-* ext4 -- pretty standard now, rock solid, medium performance
-* ext3 -- Still ok, but not good for large filesystems
-* ext2 -- Legacy, only useful in special use cases (i.e. use drives, /boot)
-* xfs -- Great performance (multi-threaded, great for large filesystems)
-* brtfs -- ZFS-like filesystem for Linux. Has lots of potential but not quite
-  ready for production
+.. csv-table::
+  :widths: 5, 30
+
+  ext4, "pretty standard now, rock solid, medium performance"
+  ext3, "Still ok, but not good for large filesystems"
+  ext2, "Legacy, only useful in special use cases (i.e. use drives, /boot)"
+  xfs, "Great performance (multi-threaded, great for large filesystems)"
+  brtfs, "ZFS-like filesystem for Linux. Has lots of potential but not quite
+  ready for production"
 
 The File System
 ---------------
@@ -72,18 +75,18 @@ Where are drives mounted?
 
 * Raw device appears under ``/dev``.
 
-.. code-block:: bash
+::
 
   $ dmesg | tail
-  [260930.208715]  sdb: sdb1
-  [260930.320756] sd 6:0:0:0: >[sdb] Asking for cache data failed
-  [260930.320765] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
-  [260930.320771] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
+  [260930.20]  sdb: sdb1
+  [260930.32] sd 6:0:0:0: >[sdb] Asking for cache data failed
+  [260930.32] sd 6:0:0:0: >[sdb] Assuming drive cache: write through
+  [260930.32] sd 6:0:0:0: >[sdb] Attached SCSI removable disk
 
 * USB filesystem under ``/media``, main disk ``/``
 * You can manually mount devices with ``mount``
 
-  * "Everything's a file"
+  * *"Everything's a file"*
   * ``umount`` to unmount
 
 * ``/etc/fstab`` tells things where to mount
@@ -101,6 +104,8 @@ Three Tiers of Filesystem Hierarchy
 * ``/usr/local``, locally-installed software.
 
   * Package managers usually install under ``/`` and ``/usr``.
+
+See also ``man hier``
 
 \/bin & \/sbin
 --------------
@@ -134,6 +139,7 @@ People were running out of disk space so:
 
 .. csv-table::
   :header: Location, Description
+  :widths: 10, 30
 
   /usr/bin,Packages installed by package manager
   /usr/sbin,Packages installed by package manager
@@ -145,19 +151,13 @@ People were running out of disk space so:
 
 .. csv-table::
   :header: Location, Description
+  :widths: 10, 30
 
   /usr/include,Include files for the C compiler
   /usr/lib,Object libraries (including dynamic libs); some unusual binaries
   /usr/lib64,64-bit libraries
   /usr/libexec,Executables used with libraries; not used much
   /usr/local,Programs (and their configuration) locally installed by user go here
-
-\/usr (Modern Context)
-----------------------
-
-.. csv-table::
-  :header: Location, Description
-
   /usr/share,Application data; typically examples and documentation
   /usr/src/linux,Kernel source goes here
 
