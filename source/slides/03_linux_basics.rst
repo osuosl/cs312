@@ -416,7 +416,12 @@ Steps in boot process
     :align: right
     :scale: 70%
 
-#. Kernel initialization
+#. Hardware (POST)
+#. Bootloader (GRUB, NTLDR, etc)
+
+As far as Linux cares:
+
+3. Kernel initialization
 #. Hardware configuration
 #. System processes
 #. Operator intervention (single-user)
@@ -492,31 +497,28 @@ Boot Loaders (Grub)
 GRUB Configuration
 ------------------
 
-* CentOS 6 (your VMs) use GRUB 0.97
-* Main configuration is in ``/boot/grub/menu.lst``
+* CentOS 7 (your VMs) use GRUB 2
+* Main configuration is in ``/boot/grub2/grub.cfg``
 * kernels and initrds live in ``/boot``
 
 ::
 
-  default=0
-  timeout=0
-  splashimage=(hd0,0)/boot/grub/splash.xpm.gz
-  hiddenmenu
-  title CentOS 6 (2.6.32-504.3.3.el6.x86_64)
-    root (hd0,0)
-    kernel /boot/vmlinuz-2.6.32-504.3.3.el6.x86_64 ro \
-      root=UUID=bf569295-826b-4abd-8519-bd5ff29708c9 rd_NO_LUKS \
-      rd_NO_LVM LANG=en_US.UTF-8 rd_NO_MD SYSFONT=latarcyrheb-sun16 \
-      crashkernel=auto KEYBOARDTYPE=pc KEYTABLE=us rd_NO_DM \
-      console=ttyS0,115200n8 console=tty0 quiet
-    initrd /boot/initramfs-2.6.32-504.3.3.el6.x86_64.img
+    menuentry 'CentOS Linux (3.10.0-123.13.2.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-123.9.3.el7.x86_64-advanced-7c6fc4d5-965b-4824-80d6-d93dc649c4d9' {
+    	load_video
+    	set gfxpayload=keep
+    	insmod gzio # also part_msdos, ext2
+    	set root='hd0,msdos1'
+	search --no-floppy --fs-uuid --set=root 782935aa-7e68-4087-a50a-3aebacbb0277
+    	linux16 /vmlinuz-3.10.0-123.13.2.el7.x86_64 root=/dev/mapper/centos_util-root ro rd.lvm.lv=centos_util/root rd.lvm.lv=centos_util/swap vconsole.keymap=us crashkernel=auto  vconsole.font=latarcyrheb-sun16 biosdevname=0 rhgb quiet LANG=en_US.UTF-8
+    	initrd16 /initramfs-3.10.0-123.13.2.el7.x86_64.img
+    }
 
 GRUB Configuration
 ------------------
 
-* ``root`` -- boot partition
-* ``kernel`` -- your linux kernel!
-* ``initrd`` -- initial ram disk which is mounted to help you boot
+* ``root`` -- boot partition, must be readable by grub
+* ``kernel`` -- your linux kernel! (filename of kernel on boot partition)
+* ``initrd`` -- initial ram disk which is mounted to help you boot (again, filename)
 
 Bootstrapping
 -------------
@@ -564,7 +566,7 @@ real init
 * Most linuces are settling on ``systemd`` as their init system
 
   * alternatives: systemv, openrc, bsd-style, upstart
-  * your Centos 6 VM uses upstart, Centos 7 uses systemd
+  * your Centos 7 vms use systemd
 
 Single User Mode
 ----------------
@@ -704,21 +706,13 @@ Shutting Down
   * load new kernel
   * new hardware
   * system-wide configuration changes
-* ``shutdown``, ``reboot``, ``halt``, ``init``
-* ``wall`` - send system-wide message to all users
-
-.. code-block:: bash
-
-  $ wall hello world
-  Broadcast message from root@localhost (pts/0) (Fri Jan 31 00:40:29 2014):
-
-  hello world
+  * ``shutdown``, ``reboot``, ``halt``, ``init``
 
 Readings
 --------
 
-* Jan 14th, Ch. 6, 8.9, 12.1
-* Jan 16th Ch. 8.1-8.8
+* Jan 13th, Ch. 6, 8.9, 12.1
+* Jan 15th Ch. 8.1-8.8
 * Friday -- **Bring your laptop!**
 
   * Install Virtualbox (we'll go over this on Wed)
