@@ -103,6 +103,7 @@ Three Tiers of Filesystem Hierarchy
 * ``/usr/local``, locally-installed software.
 
   * Package managers usually install under ``/`` and ``/usr``.
+  * Most distributions with systemd symlink ``/bin`` to ``usr/bin``.
 
 See also ``man hier``
 
