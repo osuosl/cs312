@@ -711,5 +711,5 @@ Shutting Down
 Readings
 --------
 
-* Jan 13th, Ch. 6, 5, 8, 12.6 & 12.9
+* Jan 13th, Ch. 5,6, 8, 12.6 & 12.9
 * Jan 15th Ch. 14.7, 17
