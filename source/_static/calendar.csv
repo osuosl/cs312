@@ -4,9 +4,9 @@ M 1/4,:slides:ref:`00_intro`,
 W 1/6,:slides:ref:`01_linux_basics`
 F 1/8,:slides:ref:`02_linux_basics`,":ref:`Ch. 1, Ch. 2, Ch 22 (SSH) <readings>`"
 ,**Week 2**,
-M 1/11,:slides:ref`03_linux_Basics`,":ref:`Ch. 3-4 & 7 <readings>`, HW #1 Assigned"
-W 1/13,Troubleshooting and Bash,:ref:`Ch 6, 5, 8, 12.6, 12.9 <readings>`
-F 1/15,DNS & DHCP,:ref:`Ch 14.7, 17 <readings>`
+M 1/11,:slides:ref`03_linux_Basics`,":ref:`Ch. 3-4 & 7 <readings>`, :download:`HW #1 Assigned <_static/hw/homework1.pdf>`"
+W 1/13,Troubleshooting and Bash,":ref:`Ch 6, 5, 8, 12.6, 12.9 <readings>`"
+F 1/15,DNS & DHCP,":ref:`Ch 14.7, 17 <readings>`"
 ,**Week 3**,
 M 1/18,No Class / MLK,HW #1 Due
 W 1/20,"Syslog, Cron & Software RAID",Project #1 Assigned
