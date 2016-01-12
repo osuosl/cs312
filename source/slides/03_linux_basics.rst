@@ -30,7 +30,7 @@ Which Filesystem to choose
   ext3, "Still ok, but not good for large filesystems"
   ext2, "Legacy, only useful in special use cases (i.e. use drives, /boot)"
   xfs, "Great performance (multi-threaded, great for large filesystems)"
-  brtfs, "ZFS-like filesystem for Linux. Has lots of potential but not quite
+  btrfs, "ZFS-like filesystem for Linux. Has lots of potential but not quite
   ready for production"
 
 The File System
