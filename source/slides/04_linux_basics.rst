@@ -276,4 +276,4 @@ In particular, `part 5 <http://www.tldp.org/LDP/abs/html/part5.html>`_ contains 
 Readings
 --------
 
-* January 20th - Chapter 9, 11, 10
+* January 20th - Chapter 9, 10, 11
