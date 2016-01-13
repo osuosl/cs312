@@ -7,12 +7,13 @@ Troubleshooting
 ---------------
 
 * This is a lot like debugging a problem in code
+* No hard rules
 
 General Steps
 -------------
 
 #. Understand the problem
-#. Reproduce the problem
+#. Reproduce the problem (this sometimes loops back to step 1)
 #. Isolate the change that created the problem
 #. Test the fix
 #. Automate the fix to your entire infrastructure
@@ -20,26 +21,66 @@ General Steps
 Example Problem
 ---------------
 
-* Nagios alert goes off that SSH isn't working
-* Confirm SSH isn't working
-* Log in over serial via the BMC
+* Users report that a website that generates PDF sends them broken links
+* PDFs are stored on a network storage volume using gluster backed by xfs
+* 
 
 Symptoms
 --------
 
-* Almost all executables return ``Input/Output Error``
-* Only working (useful) utils: ``cat``, ``ssh``, bash builtins
-* Can't read most files (only ones that are already in memory)
-* Ideas..?
+* All monitoring is returning okay
+* Users report 403 Forbidden when trying to download pdf
+* permissions on all files look okay
 
-(Temporary) Fixing
+Reproducing the problem
+-----------------------
+
+* The problem is reproducible for anyone across all pdf links that
+  were reported
+* No changes were made recently
+* a ``ls /data/<snip>/pdfs/`` returns ``Input/Output Error`` on **some** pdfs
+
+Understanding the problem
+-------------------------
+
+* Gluster volume is replicated across two machines: fs3, fs4
+* Both partitions on those machines appear to be just fine.
+* Gluster reports that a large number (15,000+) of files are marked for healing
+* Gluster is unable to automatically heal any of those files
+
+Complications
+-------------
+
+* Earlier that day the webnode's disk filled with logs
+
+  - Another sysadmin removed the logfile, didn't keep a backup
+  - No centralized logging for this service
+
+* Something went wrong with the gluster volume, but no logs remain
+* Both fs machines report something wrong with the other, but no logs as to
+  what happened to cause this behavior
+
+More symptoms
+-------------
+
+* All pdfs readable on webnode observed to be on both fs machines
+* All not-readable pdfs on webnode observed to be on only one fs machine
+  (should be replicated to both)
+* All pdfs not-readable from webnode are readable from fs machine they
+  are found on, no data corruption appears present
+
+Temp Solution
+-------------
+
+* rsync all pdfs from both fs machines
+* do math to verify that none were lost
+* make pdfs available from a different network volume
+
+Permanent Solution
 ------------------
 
-* A reboot (temporarily) fixed the issue
-* No logs (couldn't write to disk)
-* No useful logs went to remote servers
-* No logs in the Server Event Log (BMC log)
-* Raid card reports 1 disk that will fail soon
+* Examine broken volume and figure out why it split-brained and couldn't heal
+* Change things so this won't happen again
 
 Possible Causes
 ---------------
