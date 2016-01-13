@@ -82,21 +82,6 @@ Permanent Solution
 * Examine broken volume and figure out why it split-brained and couldn't heal
 * Change things so this won't happen again
 
-Possible Causes
----------------
-
-* Likely a RAID card lockup
-* Bad controller?
-* Bad disk?
-* Buggy controller?
-* Bad PCIE bridge? (nope)
-
-Real Fix
---------
-
-* Contact vendor and start RMA process for controller
-* See if problem reproduces
-
 Example Problem 2
 -----------------
 
