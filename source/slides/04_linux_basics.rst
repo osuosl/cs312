@@ -23,7 +23,7 @@ Example Problem
 
 * Users report that a website that generates PDF sends them broken links
 * PDFs are stored on a network storage volume using gluster backed by xfs
-* 
+
 
 Symptoms
 --------
