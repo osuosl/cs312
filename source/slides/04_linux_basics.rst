@@ -272,3 +272,8 @@ Advanced Bash Scripting Guide
 The `advanced bash scripting guide <http://www.tldp.org/LDP/abs/html/>`_ is very useful.
 
 In particular, `part 5 <http://www.tldp.org/LDP/abs/html/part5.html>`_ contains a lot of useful information.
+
+Readings
+--------
+
+* January 20th - Chapter 9, 11, 10
