@@ -485,6 +485,31 @@ Bind Zone File Basics
   www   A     192.168.1.10
   foo   CNAME www.example.org
 
+DNSSEC
+------
+
+* Set of DNS extensions that authenticate the origin of zone data
+* Provides a way to verify integrity using public key cryptography
+* Relies on a cascading chain of trust
+* Can be very complicated to setup and maintain
+* Good idea to implement if you can
+
+.. rst-class:: codeblock-very-small
+
+::
+
+  $ dig +dnssec debian.org
+  ;; QUESTION SECTION:
+  ;debian.org.      IN  A
+
+  ;; ANSWER SECTION:
+  debian.org.   13  IN  A 149.20.20.20
+  debian.org.   13  IN  RRSIG A 8 2 300 20160224085546 20160115075546 36840 debian.org. OflWGI9Z6
+    OPknWGELGOYxJg078+//1Yoj4uNtQzQP4JgupiYt1jtMc46 QXeVPoVjcvS0NgfyqJidNP1agFRarevIK3Qo4Na7QST6D
+    pEQ8kVJCtY6 WjYdg6uPdemocU+a+xogOQaWapPrAdMIOq2QcXWM1hD549Zq4BvRQy+q CSpuQ116HegGX2VSCYjzeZWo
+    TTHKRzK832kwb9Tn1XZHjApWTTM8oeXQ peEMAO8oUkdXa+g1CuSODt5tPszIZaIH
+
+
 DHCP
 ====
 
