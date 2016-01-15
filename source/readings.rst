@@ -12,3 +12,4 @@ Readings
     January 13th, "Chapter 5, 6, 8, 12.6, 12.9"
     January 15th, "Chapter 14.7, 17"
     January 20th, "Chapter 9, 10, 11"
+    January 25th, "Chapter 12, 13"

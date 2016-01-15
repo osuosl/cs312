@@ -508,3 +508,11 @@ DNSSEC
     OPknWGELGOYxJg078+//1Yoj4uNtQzQP4JgupiYt1jtMc46 QXeVPoVjcvS0NgfyqJidNP1agFRarevIK3Qo4Na7QST6D
     pEQ8kVJCtY6 WjYdg6uPdemocU+a+xogOQaWapPrAdMIOq2QcXWM1hD549Zq4BvRQy+q CSpuQ116HegGX2VSCYjzeZWo
     TTHKRzK832kwb9Tn1XZHjApWTTM8oeXQ peEMAO8oUkdXa+g1CuSODt5tPszIZaIH
+
+Class Updates
+-------------
+
+* Readings: Ch 12, 13 by Jan 25th
+* HW#1 Due on Monday at 4pm
+* Project #1 assigned on Wed 20th
+* Midterm next Friday
