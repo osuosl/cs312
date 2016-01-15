@@ -442,6 +442,44 @@ DNS Caching
 * Five minutes is good for records you'd like to change quickly
 * Plan ahead if changing or migrating a service!!!
 
+Zonefile Commands
+-----------------
+
+* Zones are typically domains
+* Three standard commands: ``$ORIGIN``, ``$INCLUDE`` and ``$TTL``
+* Zone files are parsed top to bottom
+
+.. csv-table::
+  :widths: 15, 10
+
+  ``$ORIGIN domain-name``, "Default domain for the file"
+  ``$INCLUDE filename [origin]``, "Include a specific file"
+  ``$TTL default-ttl``, "Default time-to-live for all records"
+
+Bind Zone File Basics
+---------------------
+
+::
+
+  $ORIGIN example.org
+  $TTL 600
+  example.org IN SOA ns1.example.org. webmaster.example.org (
+    2015011501    ; serial
+    3600          ; refresh (1 hour)
+    3600          ; retry (1 hour)
+    604800        ; expire (1 week)
+    600           ; TTL (10 minutes )
+    )
+
+        NS    ns1.example.org
+        NS    ns2.example.org
+
+  ns1   A     192.168.1.1
+  ns2   A     192.168.100.1
+  @     A     192.168.1.10
+  www   A     192.168.1.10
+  foo   CNAME www.example.org
+
 DHCP
 ====
 
