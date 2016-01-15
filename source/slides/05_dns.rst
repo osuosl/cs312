@@ -1,4 +1,4 @@
-.. _17_dns:
+.. _05_dns:
 
 Introductory DNS
 ================
@@ -508,56 +508,3 @@ DNSSEC
     OPknWGELGOYxJg078+//1Yoj4uNtQzQP4JgupiYt1jtMc46 QXeVPoVjcvS0NgfyqJidNP1agFRarevIK3Qo4Na7QST6D
     pEQ8kVJCtY6 WjYdg6uPdemocU+a+xogOQaWapPrAdMIOq2QcXWM1hD549Zq4BvRQy+q CSpuQ116HegGX2VSCYjzeZWo
     TTHKRzK832kwb9Tn1XZHjApWTTM8oeXQ peEMAO8oUkdXa+g1CuSODt5tPszIZaIH
-
-
-DHCP
-====
-
-How do you get an address without an address?
----------------------------------------------
-
-* Broadcast::
-
-    # DISCOVER
-    UDP Src=0.0.0.0 sPort=68
-    Dest=255.255.255.255 dPort=67
-
-    # OFFER
-    UDP Src=192.168.1.1 sPort=67
-    Dest=255.255.255.255 dPort=68
-    # Offer message contains clients MAC, offered IP, subnet mask,
-    # and lease duration
-
-
-Broadcast Continued
--------------------
-
-::
-
-    # REQUEST
-    UDP Src=0.0.0.0 sPort=68
-    Dest=255.255.255.255 dPort=67
-    # Client accepts one OFFER. All servers that sent an offer that are
-    # not this offer rescind their offers.
-
-    # ACK
-    UDP Src=192.168.1.1 sPort=67
-    Dest=255.255.255.255 dPort=68
-
-Types of Address Allocations
-----------------------------
-
-* Automatic
-
-  * No lease
-
-* Dynamic
-
-  * "Standard" way, including lease
-
-* Static
-
-  * MAC addresses are known ahead of time
-
-These are often mixed in some fashion, like using **Automatic** with a table
-of static MAC addresses that have been reserved ahead of time.
