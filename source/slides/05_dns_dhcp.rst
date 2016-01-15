@@ -106,8 +106,13 @@ They look like::
 PTR Records
 -----------
 
-* Provides a reverse named mapping to an IP address
-* IPs are shown in reverse order always end with ``in-addr.arpa``
+* Provides a reverse name mapping to an IP address
+* IPv4 are shown in reverse order always end with ``in-addr.arpa``
+* IPv6 are uses ``ip6.arpa``
+* Why ``.arpa``?
+
+  * Infrastructure top-level domain
+  * *Address and Routing Parameter Area*
 
 ::
 
@@ -398,13 +403,13 @@ Types of DNS servers
 * Master or Primary
 * Slave or Secondary
 * Hidden Masters
+* Typically setup as Non-Recursive
 
 **Non-Authoritative**
 
 * Caching
 * Forwarder
-
-Recursive vs. Non-Recursive
+* Typically setup as Recursive
 
 DNS Server Architecture
 -----------------------
