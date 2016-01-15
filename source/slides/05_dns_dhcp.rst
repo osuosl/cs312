@@ -7,20 +7,49 @@ What is DNS?
 ------------
 
 * Domain Name System
-* Translates domains into ip addresses
-
-  * Does many other types of records too
-
+* Hierarchical namespace for hosts and IP addresses
 * Stored as a distributed Tree
 
 Why is it Useful?
 -----------------
 
 * No remembering IP addresses
-* load balancing!
-* mx records for mail
-* decouples domains from their addresses
+* Load balancing!
+* MX routing records for email
+* Decouples domains from their addresses
+* A mechanism for finding services on a network
 * Extensible with new record types (and many have been added)
+
+DNS Delegation
+--------------
+
+* Recursive vs. Non-recursive
+* Authoritative vs. Non-Authoritative
+
+.. figure:: ../_static/dns-delegation.png
+  :align: center
+  :width: 100%
+
+Querying DNS with dig
+---------------------
+
+* Domain Information Groper (dig) -- client tool that comes with Bind
+* CentOS: ``bind-utils`` package
+* Debian: ``dnsutils`` package
+
+.. code-block:: bash
+
+  # Lookup A record
+  $ dig osuosl.org
+
+  # Lookup PTR record
+  $ dig -x 140.210.15.183
+
+  # Lookup a specific record type
+  $ dig TXT osuosl.org
+
+  # Plus options to extend output
+  $ dig +short osuosl.org
 
 A Records
 ---------
@@ -360,6 +389,58 @@ resolv.conf has ``nameserver`` entries which tell which dns servers to use::
     nameserver 140.211.166.131
 
 Most distributions provide a package that manages resolv.conf entries when using dhcp (typically called resolvconf)
+
+Types of DNS servers
+--------------------
+
+**Authoritative**
+
+* Master or Primary
+* Slave or Secondary
+* Hidden Masters
+
+**Non-Authoritative**
+
+* Caching
+* Forwarder
+
+Recursive vs. Non-Recursive
+
+DNS Server Architecture
+-----------------------
+
+.. figure:: ../_static/dns-arch.png
+  :align: center
+  :width: 100%
+
+Authoritative Servers
+---------------------
+
+* Answer authoritatively for your domain
+* Need to be very secure
+* Best to have at least two or more servers
+* Geographically and logically separately
+* Ideally disable recursive requests
+* Hidden master isn't publicly accessible
+* Slaves get zone transfers from master via notifies
+
+Non-Authoritative Servers
+-------------------------
+
+* Does a recursive lookup going through the DNS hierarchy
+* Typically caching or recursive servers *(What you tell your clients to use)*
+* Forwarders pass requests to other dns servers
+* Limit access and use of caching server to only your subnets!
+
+DNS Caching
+-----------
+
+* Time To Live (TTL) tells caching servers how long to keep the record
+* Not all DNS servers follow the RFC properly, so use with care
+* Lower TTL typically means more traffic to your authoritative server
+* Good default is for 1 day for records that don't change
+* Five minutes is good for records you'd like to change quickly
+* Plan ahead if changing or migrating a service!!!
 
 DHCP
 ====
