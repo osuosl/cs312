@@ -29,8 +29,14 @@ They look like::
 
     osuosl.org.     300 IN  A   140.211.15.183
 
-``osuosl.org.`` being the query, and ``140.211.15.183`` being the 'answer'
-``300`` is the TTL (expiration time), ``IN A`` the type
+
+.. csv-table::
+  :widths: 5, 30
+
+  ``osuosl.org.``, Record being queried
+  ``140.211.15.183``, The 'answer'
+  ``300``, Time to Live (TTL) (expiration time)
+  ``IN A``, DNS record type
 
 * One can have more than one A record per domain
 
