@@ -59,6 +59,7 @@ They look like::
 
 * MX records have priority (in this example they are all the same)
 * When sending email, the relay looks up the MX record and sends mail there.
+* Lower number means higher priority
 
 NS Records
 ----------
@@ -71,6 +72,73 @@ They look like::
 
 * They inform where to direct DNS queries for a domain
 * Point to other domains (which have A records)
+* Glue records are sometimes needed and provided to registrar
+
+PTR Records
+-----------
+
+* Provides a reverse named mapping to an IP address
+* IPs are shown in reverse order always end with ``in-addr.arpa``
+
+::
+
+  $ dig -x 140.211.15.183
+  ;; QUESTION SECTION:
+  ;183.15.211.140.in-addr.arpa. IN  PTR
+
+  ;; ANSWER SECTION:
+  183.15.211.140.in-addr.arpa. 86400 IN PTR web1.osuosl.org.
+
+PTR Record delegation
+---------------------
+
+* Always come from ISP
+
+
+::
+
+  ;; QUESTION SECTION:
+  ;15.211.140.in-addr.arpa. IN  NS
+
+  ;; ANSWER SECTION:
+  15.211.140.in-addr.arpa. 86400  IN  NS  ns1.auth.osuosl.org.
+  15.211.140.in-addr.arpa. 86400  IN  NS  ns2.auth.osuosl.org.
+  15.211.140.in-addr.arpa. 86400  IN  NS  ns3.auth.osuosl.org.
+  15.211.140.in-addr.arpa. 86400  IN  NS  ns1.nero.net.
+
+Classless PTR delegation
+------------------------
+
+* Delegating networks smaller than /24 require `RFC2317`_
+
+.. _RFC2317: https://www.ietf.org/rfc/rfc2317.txt
+
+.. rst-class:: codeblock-very-small
+
+::
+
+  ;; QUESTION SECTION:
+  ;10.169.211.140.in-addr.arpa. IN  NS
+
+  ;; ANSWER SECTION:
+  10.169.211.140.in-addr.arpa. 3600 IN  CNAME 10.0-63.169.211.140.in-addr.arpa.
+
+  ;; QUESTION SECTION:
+  ;0-63.169.211.140.in-addr.arpa. IN  NS
+
+  ;; ANSWER SECTION:
+  0-63.169.211.140.in-addr.arpa. 10800 IN NS  ns1.linux-foundation.org.
+  0-63.169.211.140.in-addr.arpa. 10800 IN NS  ns2.linux-foundation.org.
+  0-63.169.211.140.in-addr.arpa. 10800 IN NS  ns1.auth.osuosl.org.
+  0-63.169.211.140.in-addr.arpa. 10800 IN NS  ns2.auth.osuosl.org.
+  0-63.169.211.140.in-addr.arpa. 10800 IN NS  ns3.auth.osuosl.org.
+
+  ;; QUESTION SECTION:
+  ;10.169.211.140.in-addr.arpa. IN  PTR
+
+  ;; ANSWER SECTION:
+  10.169.211.140.in-addr.arpa. 3577 IN  CNAME 10.0-63.169.211.140.in-addr.arpa.
+  10.0-63.169.211.140.in-addr.arpa. 86400 IN PTR  ns1.linux-foundation.org.
 
 NXDOMAIN Records
 ----------------
@@ -110,8 +178,8 @@ The Thirteen
 Thirteen Nameservers
 
 * ``[a-m].root-servers.net``
-* Information at `http://www.root-servers.org`
-* a, j are run by Verisign
+* Information at http://www.root-servers.org
+* ``a``, ``j`` are run by Verisign
 
 The Thirteen
 ------------
@@ -263,6 +331,25 @@ CNAME Records
 
 * Query for CNAME, get the canonical name (NOT the ip address)
 * CNAME records can be problematic
+
+
+TXT Records
+-----------
+
+* Arbitrary text record
+* Used by some applications for specific purposes
+
+::
+
+  ;; QUESTION SECTION:
+  ;oregonstate.edu.   IN  TXT
+
+  ;; ANSWER SECTION:
+  oregonstate.edu.  3600  IN  TXT "MS=ms62624237"
+  oregonstate.edu.  3600  IN  TXT "adobe-idp-site-verification=fe492d09-19f1-47e9-9d04-30fe92a03e4f"
+  oregonstate.edu.  3600  IN  TXT "c6PyBr5dTRwVyn5t8h0JUm5vIh/+dL1yECXbGzwMb5D9pq9w02DSh81vaWJyg8ulAX4ZaEkMXQymvdMIZYvUvQ=="
+  oregonstate.edu.  3600  IN  TXT "v=spf1 include:_spf.oregonstate.edu include:_spf.google.com include:spf.protection.outlook.com ?all"
+
 
 resolv.conf
 -----------
