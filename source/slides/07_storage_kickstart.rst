@@ -83,11 +83,11 @@ LVM commands
   $ yum install lvm2
 
   # Note: I created loop1/2 using dd and losetup
-  $ pvcreate /dev/loop1 /dev/loop2
+  $ pvcreate /dev/loop0 /dev/loop1
+    Physical volume "/dev/loop0" successfully created
     Physical volume "/dev/loop1" successfully created
-    Physical volume "/dev/loop2" successfully created
 
-  $ vgcreate lvm /dev/loop1 /dev/loop2
+  $ vgcreate lvm /dev/loop0 /dev/loop1
     Volume group "lvm" successfully created
 
   $ lvcreate -n home -L 1G lvm
@@ -111,10 +111,11 @@ All commands start with ``pv``, ``vg`` or ``lv``
   vgchange       vgdisplay      vgimportclone  vgremove       vgsplit
   vgck           vgexport       vgmerge        vgrename
 
-  lvchange     lvextend     lvmdiskscan  lvmsar       lvresize
-  lvconvert    lvm          lvmdump      lvreduce     lvs
-  lvcreate     lvmchange    lvmetad      lvremove     lvscan
-  lvdisplay    lvmconf      lvmsadc      lvrename
+  lvchange     lvm          lvmdump      lvreduce     lvscan
+  lvconvert    lvmchange    lvmetad      lvremove
+  lvcreate     lvmconf      lvmpolld     lvrename
+  lvdisplay    lvmconfig    lvmsadc      lvresize
+  lvextend     lvmdiskscan  lvmsar       lvs
 
 Useful tricks with LVM
 ----------------------
@@ -128,7 +129,8 @@ Useful tricks with LVM
 Issues with LVM
 ---------------
 
-* Requires an initrd if the rootfs is in lvm
+* Requires an initrd if the rootfs is in lvm (although this is default these
+  days)
 
   * Can be make troubleshooting difficult sometimes
 
