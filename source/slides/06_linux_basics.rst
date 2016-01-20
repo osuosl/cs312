@@ -3,35 +3,28 @@
 Syslog, Cron & Software RAID
 ============================
 
-Class reminders
----------------
-
-* HW #1 due THIS Friday at start of class
-* Midterm week from Friday (1/30)
-
-Automated OS Install followup
------------------------------
-
-* How did you do?
-* Do we need to walk through it today again?
-* HW #2 will cover this
-
 Syslog
 ======
 
 Syslog architecture
 -------------------
 
-* Syslog daemon (rsyslog is popular)
+* Syslog daemon
+
+  * ``rsyslog`` - traditional, persistent logging
+  * ``journald`` - systemd binary log
+  * Both exist on CentOS 7 at the same time
+
 * ``/dev/log`` UNIX domain socket
 
   * Applications write to socket
-  * Syslog listens to socket
+  * Syslog daemons listens to socket
 
 * Log rotation
 
   * ``logrotate`` application
   * Properly sends ``HUP`` commands to release file handles
+
 
 Typical log files
 -----------------
@@ -40,6 +33,7 @@ Typical log files
 
 .. csv-table::
   :header: File, Contents
+  :widths: 10, 20
 
   auth.log/secure, "Auth, sudo, sshd, user adds"
   boot.log, Output from init scripts
@@ -171,6 +165,29 @@ Rsyslog remote logging
 Rsyslog also supports `TLS/SSL over TCP`_.
 
 .. _TLS/SSL over TCP: http://www.rsyslog.com/doc/rsyslog_tls.html
+
+Accessing logs with systemd
+---------------------------
+
+* Systemd provides its own logging daemon which can be accessed using
+  ``journalctl``
+* Systemd stores all of its logs in a binary format
+* A few useful commands:
+
+.. code-block:: bash
+
+  # Tail the log and watch it live
+  $ journalctl -f
+  # Filter by priority
+  $ journalctl -p err
+  # Filter by time
+  $ journalctl --since="2016-01-20 05:00:00"
+  # Filter by unit (service)
+  $ journalctl -u crond
+
+`RedHat journalctl Documentation`_
+
+.. _RedHat journalctl Documentation: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/s1-Using_the_Journal.html
 
 Userspace tools: logger
 -----------------------
@@ -338,10 +355,10 @@ Creating a RAID1
 
   $ yum install mdadm
 
-  # Note: I created loop1/2 using dd and losetup
-  $ fdisk /dev/loop1
+  # Note: I created loop0/1 using dd and losetup
+  $ fdisk /dev/loop0
 
-  $ mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/loop1 /dev/loop2
+  $ mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/loop0 /dev/loop1
   mdadm: Note: this array has metadata at the start and
       may not be suitable as a boot device.  If you plan to
       store '/boot' on this device please ensure that
@@ -353,7 +370,7 @@ Creating a RAID1
 
   $ cat /proc/mdstat
   Personalities : [raid1]
-  md0 : active raid1 loop2[1] loop1[0]
+  md0 : active raid1 loop1[1] loop0[0]
         20416 blocks super 1.2 [2/2] [UU]
 
   unused devices: <none>
@@ -392,17 +409,29 @@ Monitoring mdadm
 Dealing with failures
 ---------------------
 
-.. rst-class:: codeblock-sm
-
 .. code-block:: bash
 
   # Simulate a disk failure
   $ mdadm /dev/md0 -f /dev/loop1
   mdadm: set /dev/loop1 faulty in /dev/md0
 
-  $ tail /var/log/messages
-  Jan 21 22:27:05 mdadm kernel: md/raid1:md0: Disk failure on loop1, disabling device.
-  Jan 21 22:27:05 mdadm kernel: md/raid1:md0: Operation continuing on 1 devices.
+  $ journalctl -n 10 -k
+  Jan 20 21:52:33 kernel: md0: detected capacity change from 0 to 4
+  Jan 20 21:52:33 kernel:  md0: unknown partition table
+  Jan 20 21:53:29 kernel: md/raid1:md0: Disk failure on loop1, disa
+                          md/raid1:md0: Operation continuing on 1 d
+  Jan 20 21:53:29 kernel: RAID1 conf printout:
+  Jan 20 21:53:29 kernel:  --- wd:1 rd:2
+  Jan 20 21:53:29 kernel:  disk 0, wo:0, o:1, dev:loop0
+  Jan 20 21:53:29 kernel:  disk 1, wo:1, o:0, dev:loop1
+  Jan 20 21:53:29 kernel: RAID1 conf printout:
+  Jan 20 21:53:29 kernel:  --- wd:1 rd:2
+  Jan 20 21:53:29 kernel:  disk 0, wo:0, o:1, dev:loop0
+
+Dealing with failures
+---------------------
+
+.. code-block:: bash
 
   # Hot remove the disk
   $ mdadm /dev/md0 -r /dev/loop1
@@ -411,7 +440,7 @@ Dealing with failures
   # Check the status of the array
   $ cat /proc/mdstat
   Personalities : [raid1]
-  md0 : active raid1 loop2[1]
+  md0 : active raid1 loop0[0]
         20416 blocks super 1.2 [2/1] [_U]
 
   unused devices: <none>
@@ -425,39 +454,39 @@ More information about an md device
 
 .. rst-class:: codeblock-sm
 
-.. code-block:: bash
+::
 
   $ mdadm -D /dev/md0
   /dev/md0:
           Version : 1.2
-    Creation Time : Wed Jan 21 22:13:57 2015
+    Creation Time : Wed Jan 20 16:56:25 2016
        Raid Level : raid1
-       Array Size : 20416 (19.94 MiB 20.91 MB)
-    Used Dev Size : 20416 (19.94 MiB 20.91 MB)
+       Array Size : 409024 (399.50 MiB 418.84 MB)
+    Used Dev Size : 409024 (399.50 MiB 418.84 MB)
      Raid Devices : 2
     Total Devices : 2
       Persistence : Superblock is persistent
-      Update Time : Wed Jan 21 22:28:43 2015
+      Update Time : Wed Jan 20 22:01:02 2016
             State : clean
    Active Devices : 2
   Working Devices : 2
    Failed Devices : 0
     Spare Devices : 0
-
              Name : mdadm:0  (local to host mdadm)
-             UUID : ead812c6:ee734fb3:fcb6264d:e3a00c40
+             UUID : 87f67b6c:622ca752:4dd25200:6b3f23c5
            Events : 39
 
       Number   Major   Minor   RaidDevice State
-         2       7        1        0      active sync   /dev/loop1
-         1       7        2        1      active sync   /dev/loop2
+         0       7        0        0      active sync   /dev/loop0
+         2       7        1        1      active sync   /dev/loop1
+
 
 Block device metadata
 ---------------------
 
 .. rst-class:: codeblock-sm
 
-.. code-block:: bash
+::
 
   $ mdadm -E /dev/loop1
   /dev/loop1:
