@@ -18,13 +18,12 @@ Syslog architecture
 * ``/dev/log`` UNIX domain socket
 
   * Applications write to socket
-  * Syslog daemons listens to socket
+  * Syslog daemon listens to socket
 
 * Log rotation
 
   * ``logrotate`` application
   * Properly sends ``HUP`` commands to release file handles
-
 
 Typical log files
 -----------------
