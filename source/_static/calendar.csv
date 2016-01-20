@@ -9,11 +9,11 @@ W 1/13,:slides:ref:`04_linux_basics`,":ref:`Ch 5, 6, 8, 12.6, 12.9 <readings>`"
 F 1/15,:slides:ref:`05_dns`,":ref:`Ch 14.7, 17 <readings>`"
 ,**Week 3**,
 M 1/18,No Class / MLK,HW #1 Due
-W 1/20,"Syslog, Cron & Software RAID","Project #1 Assigned, :ref:`Ch 9, 10, 11 <readings>`"
+W 1/20,:slides:ref:`06_linux_basics`,"Project #1 Assigned, :ref:`Ch 9, 10, 11 <readings>`"
 F 1/22,Midterm #1,
 ,**Week 4**,
-M 1/25,Storage & Automated Install,"HW #2 Assigned, :ref:`Ch 12 & 13 <readings>`"
-W 1/27,SystemD,
+M 1/25,Storage & Automated Install,"HW #2 Assigned, **BRING LAPTOPS!**, :ref:`Ch 12 & 13 <readings>`"
+W 1/27,SystemD, "`RedHat SystemD documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
 F 1/29,Linux Networking / Network debugging,HW #2 Due
 ,**Week 5**,
 M 2/1,NFS / Email,Project #1 Due / HW #3 Assigned
