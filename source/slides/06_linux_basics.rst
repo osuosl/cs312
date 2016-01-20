@@ -551,3 +551,15 @@ Block device metadata
            Events : 39
      Device Role : Active device 0
      Array State : AA ('A' == active, '.' == missing, 'R' == replacing)
+
+Class Announcements
+-------------------
+
+* Homework #1 Answers
+* Midterm on Friday: Covers everything up through today
+* Please bring laptops next Monday 1/25
+* Please install VirtualBox, VMWare, or Parallels on your laptops before class
+  and make sure it works
+* Download the `CentOS 7 Minimal ISO`_ before class
+
+.. _CentOS 7 Minimal ISO: http://centos.osuosl.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
