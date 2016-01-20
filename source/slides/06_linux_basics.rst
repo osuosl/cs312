@@ -242,10 +242,39 @@ Other cron-like services
   * A lot more features
   * Doesn't use traditional crontabs
 
+
+Crontab fields
+---------------------------
+
+*minute hour dom month weekday command*
+
+.. csv-table::
+  :header: Field, Description, Range
+
+  minute, "Minute of the hour", "0 to 59"
+  hour, "Hour of the day", "0 to 23"
+  dom, "Day of the month", "1 to 31"
+  month, "Month of the year", "1 to 12"
+  weekday, "Day of the week", "0 to 6 (0= Sunday)"
+
+Crontab Time Fields
+-------------------
+
+.. csv-table::
+  :widths: 18, 10
+
+  "A star, which matches everything", "``* * * * *``"
+  "A single integer, which matches exactly", "``10 * * * *``"
+  "Two integers separated by a dash, matching a range of values", "``0 0 * *
+  1-5``"
+  "A range followed by a slash and a step value", "``23 0-23/2 * * *``"
+  "A comma-separated list of integers or ranges, matching any value", "``15,45 *
+  * * *``"
+
 Crontab format
 --------------
 
-*Taken from 'man 5 crontab'*
+Taken from ``man 5 crontab``
 
 .. rst-class:: codeblock-sm
 
@@ -314,6 +343,16 @@ Can set any arbitrary environment variables in crontab
 * Likely not sourcing ``~/.{shell}rc`` files
 * ``$PATH`` can be different depending on the user
 * Generally safer to use absolute paths
+
+Crontab Tips
+------------
+
+*(From a 'seasoned' sysadmin)*
+
+* Don't make complicated one-liners inside a crontab
+* Always double check time fields
+* Use locking tools (i.e. ``flock``) for long running jobs
+* Make sure you periodically check your cron mail
 
 Software RAID (mdadm)
 =====================
