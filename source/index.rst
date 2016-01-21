@@ -48,5 +48,6 @@ Class pages:
    syllabus
    calendar
    assignments
+   projects
    resources
    readings
