@@ -474,8 +474,11 @@ Resources
 
 * http://tldp.org/HOWTO/LVM-HOWTO/
 * http://fedoraproject.org/wiki/Anaconda
-* http://fedoraproject.org/wiki/Anaconda_Boot_Options
-* http://fedoraproject.org/wiki/Anaconda/Kickstart
+* `Anaconda Boot Options`_
+* `Kickstart Documentation`_
+
+.. _Anaconda Boot Options: https://rhinstaller.github.io/anaconda/boot-options.html
+.. _Kickstart Documentation: https://github.com/rhinstaller/pykickstart/blob/master/docs/kickstart-docs.rst
 
 Class Announcements
 -------------------
