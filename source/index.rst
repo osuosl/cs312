@@ -51,3 +51,4 @@ Class pages:
    projects
    resources
    readings
+   videos
