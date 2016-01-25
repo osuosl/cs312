@@ -12,7 +12,7 @@ M 1/18,No Class / MLK,HW #1 Due
 W 1/20,:slides:ref:`06_linux_basics`,":download:`Project #1 Assigned <_static/hw/project1.pdf>`, :ref:`Ch 9, 10, 11 <readings>`"
 F 1/22,Midterm #1,
 ,**Week 4**,
-M 1/25,Storage & Automated Install,"**BRING LAPTOPS!**, :ref:`Ch 12 & 13 <readings>`"
+M 1/25,:slides:ref:07_storage_kickstart`,"**BRING LAPTOPS!**, :ref:`Ch 12 & 13 <readings>`"
 W 1/27,SystemD, "`RedHat SystemD documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
 F 1/29,Linux Networking / Network debugging,"HW #2 Assigned, :ref:`Ch 14-16 & 21 <readings>`"
 ,**Week 5**,
