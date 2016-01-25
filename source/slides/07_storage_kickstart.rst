@@ -462,7 +462,7 @@ Exercise #2
 .. _Github Gists: https://gist.github.com/
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
 
-Exercise #3 Video
+Exercise #2 Video
 -----------------
 
 .. raw:: html
