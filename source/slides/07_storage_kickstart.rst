@@ -436,6 +436,13 @@ Exercise #1
 
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
 
+Exercise #1 Video
+-----------------
+
+.. raw:: html
+
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/GP3u4Cs3r4w?rel=0" frameborder="0" allowfullscreen></iframe>
+
 Exercise #2
 -----------
 
@@ -454,6 +461,13 @@ Exercise #2
 
 .. _Github Gists: https://gist.github.com/
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
+
+Exercise #3 Video
+-----------------
+
+.. raw:: html
+
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/zcjNPhVwRZU?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Resources
 ---------
