@@ -42,6 +42,7 @@ Components of LVM
 
 .. csv-table::
   :header: Name, Description
+  :widths: 10,15
 
   Physical Volume (PV), physical device (typically a hdd)
   Volume Group (VG), Collection of PV's
@@ -83,11 +84,11 @@ LVM commands
   $ yum install lvm2
 
   # Note: I created loop1/2 using dd and losetup
-  $ pvcreate /dev/loop1 /dev/loop2
+  $ pvcreate /dev/loop0 /dev/loop1
+    Physical volume "/dev/loop0" successfully created
     Physical volume "/dev/loop1" successfully created
-    Physical volume "/dev/loop2" successfully created
 
-  $ vgcreate lvm /dev/loop1 /dev/loop2
+  $ vgcreate lvm /dev/loop0 /dev/loop1
     Volume group "lvm" successfully created
 
   $ lvcreate -n home -L 1G lvm
@@ -111,10 +112,11 @@ All commands start with ``pv``, ``vg`` or ``lv``
   vgchange       vgdisplay      vgimportclone  vgremove       vgsplit
   vgck           vgexport       vgmerge        vgrename
 
-  lvchange     lvextend     lvmdiskscan  lvmsar       lvresize
-  lvconvert    lvm          lvmdump      lvreduce     lvs
-  lvcreate     lvmchange    lvmetad      lvremove     lvscan
-  lvdisplay    lvmconf      lvmsadc      lvrename
+  lvchange     lvm          lvmdump      lvreduce     lvscan
+  lvconvert    lvmchange    lvmetad      lvremove
+  lvcreate     lvmconf      lvmpolld     lvrename
+  lvdisplay    lvmconfig    lvmsadc      lvresize
+  lvextend     lvmdiskscan  lvmsar       lvs
 
 Useful tricks with LVM
 ----------------------
@@ -128,15 +130,14 @@ Useful tricks with LVM
 Issues with LVM
 ---------------
 
-* Requires an initrd if the rootfs is in lvm
+* Requires an initrd if the rootfs is in lvm (although this is default these
+  days)
 
   * Can be make troubleshooting difficult sometimes
 
 * Can't move LV's between VG's
 * If a disk dies, all the PE's are gone (unless RAID is used in LVM)
 * Using LVM inside of LVM can be hard to troubleshoot
-
-  * Ganeti VMs
 
 RAID
 -----
@@ -159,13 +160,14 @@ RAID Levels
 -----------
 
 .. csv-table::
-  :header: Level, Minimum disks, Description
+  :header: Level, Min disks, Description
+  :widths: 10, 8, 25
 
   RAID0, 2, Striping
   RAID1, 2, Mirroring
   RAID5, 3, Block-level striping with distributed parity
   RAID6, 4, Block-level striping with double distributed parity
-  RAID10/RAID1+0, 4, Striped set from a series of mirrored drives
+  RAID10 / RAID1+0, 4, Striped set from a series of mirrored drives
 
 *Hot spares can automate rebuilds (i.e. RAID5+1 & RAID6+1)*
 
@@ -178,48 +180,81 @@ RAID Issues
 * Multiple disk failures during rebuild
 * Performance
 
-Automate OS Installation
-========================
+Automated Linux Installation
+============================
 
-Ideal Requirements
-------------------
+Typical Installation
+--------------------
 
-*These are not entirely required, but makes it a lot easier*
+.. rst-class:: build
 
-* Working DHCP environment
-* Network booting capable hardware (i.e. PXE)
-* TFTP boot server
-* HTTP or NFS server for serving kickstart files
+* Download ISO
+* Boot up using a ISO
+* Walk through installation questions
+* Wait for the install to finish, reboot
+* Wait for Linux to boot up on its own
 
-.. image:: ../_static/pxelinux-boot.png
+What if...
+==========
+
+.. rst-class:: build
+
+* You need to do this on hundreds if not thousands of machines?
+* Solution:
+
+  * Network Booting
+  * Kickstart / Preseed
+
+Netboot / PXE
+-------------
+
+.. rst-class:: build
+
+* Ability to boot a machine over the network
+* Most modern hardware supports network booting via PXE
+
+  * **P**\ reboot e\ **X**\ ecution **E**\ nvironment
+  * ROM OS sitting on the network card(s)
+
+* DHCP: Tells server where the TFTP server is
+* TFTP (Trivial File Transfer Protocol)
+
+  * Serves PXELINUX/Kernel/initrd images
+
+* PXELINUX: Minimal bootloader
+
+  * Instructs server how to boot
+
+* HTTP or NFS server for serving Kickstart files
+
+Netbooting in Action
+--------------------
+
+.. figure:: ../_static/pxelinux-boot.png
   :align: center
-  :width: 60%
+  :width: 100%
 
-Automated install steps
------------------------
+Use cases for Netboot
+---------------------
+
+.. rst-class:: build
+
+* Automate physical server OS installation
+* Provide an easy recovery boot environment
+* Easily rebuild machines
+* What else?
+
+Netboot install steps
+---------------------
 
 #. System start up, BIOS check
 #. Boot from network device (i.e. `PXE`_)
-#. Gets an IP address and information on where the boot server is
-#. Grabs the initial boot image (i.e. `syslinux`_)
-#. Downloads Linux kernel/initrd image
-#. The boot command includes a pointer to a kickstart (ks) file
-
-Automated install steps
------------------------
-
-.. image:: ../_static/centos-install.png
-  :align: right
-  :width: 55%
-
-#. System boots up, tries to get an IP address and attempts to download the ks
-   file.
-#. Using the ks file, installs the systems. If the ks file doesn't answer all
-   needed questions, installation will stop for user interaction.
-#. Install with finish and may reboot or shutdown depending on the ks file
+#. Gets an IP address and information on where the TFTP server is
+#. Grabs the initial boot image (i.e. `pxelinux`_)
+#. PXELINUX downloads Linux kernel/initrd image and sends any kernel arguments
 
 .. _PXE: http://en.wikipedia.org/wiki/Preboot_Execution_Environment
-.. _syslinux: http://en.wikipedia.org/wiki/SYSLINUX
+.. _pxelinux: http://en.wikipedia.org/wiki/SYSLINUX
 
 Anaconda / Kickstart
 --------------------
@@ -238,10 +273,19 @@ Anaconda / Kickstart
 .. _Anaconda: http://fedoraproject.org/wiki/Anaconda
 .. _Kickstart: http://fedoraproject.org/wiki/Anaconda/Kickstart
 
-ks.cfg
-------
+Kickstart Config File
+---------------------
 
-.. rst-class:: codeblock-sm
+*Comprised of three sections*
+
+.. rst-class:: build
+
+* Command configuration
+* Package installation/removal
+* Arbitrary shell commands
+
+ks.cfg: Command configuration
+-----------------------------
 
 ::
 
@@ -266,14 +310,68 @@ ks.cfg
   poweroff
   user --name=cs312 --plaintext --password cs312
 
-  %packages --nobase
+ks.cfg: Package to installation/removal
+---------------------------------------
+
+* Package names must exist in configured repositories
+* Prepending a dash (``-``) to a package name means to remove the package
+
+::
+
+  %packages
   sudo
+  -vim
   %end
+
+ks.cfg: Arbitrary Shell Commands
+--------------------------------
+
+* Be careful about how complicated the scripts are
+* Default interpreter is ``sh``
+* Post scripts run inside a chroot environment
+* Pre scripts are run on the install environment
+
+::
+
+  %pre --interpreter /bin/bash
+  echo "This is run before the install phase begins"
+  %end
+
+  %post --interpreter /bin/bash
+  echo "This is run in a chroot of the installed system"
+  %end
+
+
+Kickstart install steps
+-----------------------
+
+.. image:: ../_static/centos-install.png
+  :align: right
+  :width: 55%
+
+#. System boots from PXELINUX with ``ks=<URL>`` set as a kernel argument.
+#. System boots up, tries to get an IP address and attempts to download the ks
+   file using the URL above.
+#. Using the ks file, installs the systems. If the ks file doesn't answer all
+   needed questions, installation will stop for user interaction.
+#. Install with finish and may reboot or shutdown depending on the ks file
+
+DEMO Time!
+==========
+
+Time to install CentOS with a Kickstart file!
+
+Demo requirements
+-----------------
+
+* VirtualBox / VMWare / or Parallels installed
+* `CentOS 7 Minimal ISO`_
+
+.. _CentOS 7 Minimal ISO: http://centos.osuosl.org/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
 
 Boot using the ks.cfg
 ---------------------
 
-* Download `CentOS 6.6 Minimal ISO`_ (we also have USB sticks with it)
 * Setup a VM using defaults
 * Boot it up using the ISO image
 * Press ``ESC`` to get the boot prompt
@@ -283,10 +381,9 @@ Boot using the ks.cfg
 
   linux ks=http://cs312.osuosl.org/_static/ks.cfg
 
+* Watch CentOS install
 * Change boot order to hard disk
-* Boot up!
-
-.. _CentOS 6.6 Minimal ISO: http://centos.osuosl.org/6/isos/x86_64/CentOS-6.6-x86_64-minimal.iso
+* Boot up to a freshly installed Linux
 
 LVM and Kickstart
 -----------------
@@ -339,6 +436,13 @@ Exercise #1
 
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
 
+Exercise #1 Video
+-----------------
+
+.. raw:: html
+
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/GP3u4Cs3r4w?rel=0" frameborder="0" allowfullscreen></iframe>
+
 Exercise #2
 -----------
 
@@ -353,15 +457,35 @@ Exercise #2
 * Feel free to use a URL shortener service such as http://goo.gl to make it
   easier to type
 
-**NOTE: You need to add noverifyssl to the ks line when using gists**
+**NOTE: You need to add** ``noverifyssl`` **to the ks line when using gists**
 
 .. _Github Gists: https://gist.github.com/
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
+
+Exercise #2 Video
+-----------------
+
+.. raw:: html
+
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/zcjNPhVwRZU?rel=0" frameborder="0" allowfullscreen></iframe>
 
 Resources
 ---------
 
 * http://tldp.org/HOWTO/LVM-HOWTO/
 * http://fedoraproject.org/wiki/Anaconda
-* http://fedoraproject.org/wiki/Anaconda_Boot_Options
-* http://fedoraproject.org/wiki/Anaconda/Kickstart
+* `Anaconda Boot Options`_
+* `Kickstart Documentation`_
+
+.. _Anaconda Boot Options: https://rhinstaller.github.io/anaconda/boot-options.html
+.. _Kickstart Documentation: https://github.com/rhinstaller/pykickstart/blob/master/docs/kickstart-docs.rst
+
+Class Announcements
+-------------------
+
+* Readings: Chapters 14-16 & 21 by Friday, Jan 29th
+* HW #2 will be assigned on Friday (due date will be pushed back as
+  well)
+* Midterm #1:Hopefully graded and returned by Wed or Fri
+* Midterm #2: **DATE CHANGE: Mon, Feb 15**
+* Guest Speaker on Fri, Feb 12 from CoreOS
