@@ -14,3 +14,4 @@ Readings
     January 20th, "Chapter 9, 10, 11"
     January 25th, "Chapter 12, 13"
     January 27th, "`RedHat systemd documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
+    Janurary 29th, "Chapter 14-16 & 21"

@@ -450,7 +450,7 @@ Exercise #2
 * Feel free to use a URL shortener service such as http://goo.gl to make it
   easier to type
 
-**NOTE: You need to add noverifyssl to the ks line when using gists**
+**NOTE: You need to add** ``noverifyssl`` **to the ks line when using gists**
 
 .. _Github Gists: https://gist.github.com/
 .. _ks.cfg: http://cs312.osuosl.org/_static/ks.cfg
@@ -462,3 +462,13 @@ Resources
 * http://fedoraproject.org/wiki/Anaconda
 * http://fedoraproject.org/wiki/Anaconda_Boot_Options
 * http://fedoraproject.org/wiki/Anaconda/Kickstart
+
+Class Announcements
+-------------------
+
+* Readings: Chapters 14-16 & 21 by Friday, Jan 29th
+* HW #2 will be assigned tomorrow or Wednesday (due date will be pushed back as
+  well)
+* Midterm #1:Hopefully graded and returned by Wed or Fri
+* Midterm #2: **DATE CHANGE: Mon, Feb 15**
+* Guest Speaker on Fri, Feb 12 from CoreOS

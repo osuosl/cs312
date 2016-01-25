@@ -14,7 +14,7 @@ F 1/22,Midterm #1,
 ,**Week 4**,
 M 1/25,Storage & Automated Install,"**BRING LAPTOPS!**, :ref:`Ch 12 & 13 <readings>`"
 W 1/27,SystemD, "HW #2 Assigned, `RedHat SystemD documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
-F 1/29,Linux Networking / Network debugging,HW #2 Due
+F 1/29,Linux Networking / Network debugging,"HW #2 Due, :ref:`Ch 14-16 & 21 <readings>`"
 ,**Week 5**,
 M 2/1,NFS / Email,Project #1 Due / HW #3 Assigned
 W 2/3,Continuous Integration,
