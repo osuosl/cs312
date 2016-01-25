@@ -484,7 +484,7 @@ Class Announcements
 -------------------
 
 * Readings: Chapters 14-16 & 21 by Friday, Jan 29th
-* HW #2 will be assigned tomorrow or Wednesday (due date will be pushed back as
+* HW #2 will be assigned on Friday (due date will be pushed back as
   well)
 * Midterm #1:Hopefully graded and returned by Wed or Fri
 * Midterm #2: **DATE CHANGE: Mon, Feb 15**
