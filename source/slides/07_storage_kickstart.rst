@@ -1,4 +1,4 @@
-.. _05_linux_basics:
+.. _07_storage_kickstart:
 
 Storage & Automated OS Install
 ==============================
