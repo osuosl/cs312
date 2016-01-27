@@ -1,10 +1,17 @@
-.. _systemd_slides:
+.. _08_systemd:
 
-SystemD
+systemd
 =======
 
+Topics
+------
 
-SystemD
+* systemd basics
+* systemd vs. sysv
+* cgroups primer
+* Resource management
+
+systemd
 ~~~~~~~
 
 * Relatively new init system
@@ -33,3 +40,11 @@ Dependencies
 * Defining ordering
 
   * ``Before``, ``After`` define ordering.
+
+Resources
+---------
+
+* http://www.freedesktop.org/wiki/Software/systemd/
+* https://en.wikipedia.org/wiki/Systemd
+* https://fedoraproject.org/wiki/Systemd
+* https://rhsummit.files.wordpress.com/2014/04/summit_demystifying_systemd1.pdf
