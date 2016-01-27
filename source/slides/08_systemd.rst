@@ -383,9 +383,11 @@ Instantiated Units: Specifiers
   :widths: 5, 10
 
   ``%n``, Full unit name (i.e. getty@ttyS1.service)
-  ``%p``, Prefix name (i.e. ``template_name``)
-  ``%i``, Instance name (i.e. ``instance_name``)
+  ``%p``, Prefix name (i.e. ``getty``)
+  ``%i``, Instance name (i.e. ``ttyS1``)
   ``%H``, Host name
+
+See ``man systemd.unit`` for more information.
 
 ::
 
@@ -411,7 +413,9 @@ Enable via a symlink:
     /etc/systemd/system/default.target.wants/getty@tty1.service
 
 Anything in the ``.wants`` directory automatically added as dependencies for
-that target.
+that target. Keep in mind this gets merged into other ``Wants`` in that target::
+
+  systemctl show default.target
 
 Resources
 ---------
