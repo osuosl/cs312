@@ -408,14 +408,14 @@ Enable via a symlink:
   ln -s /usr/lib/systemd/system/getty@.service \
     /etc/systemd/system/getty@tty1.service
 
-  # Add to the default.target
+  # Add to the getty.target
   ln -s /usr/lib/systemd/system/getty@.service \
-    /etc/systemd/system/default.target.wants/getty@tty1.service
+    /etc/systemd/system/getty.target.wants/getty@tty1.service
 
 Anything in the ``.wants`` directory automatically added as dependencies for
 that target. Keep in mind this gets merged into other ``Wants`` in that target::
 
-  systemctl show default.target
+  systemctl list-dependencies getty.target
 
 Resources
 ---------
