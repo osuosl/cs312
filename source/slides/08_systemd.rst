@@ -380,9 +380,9 @@ Instantiated Units: Specifiers
 
 .. csv-table::
   :header: Unit Specifier, Description
-  :widths: 5, 10
+  :widths: 5, 15
 
-  ``%n``, Full unit name (i.e. getty@ttyS1.service)
+  ``%n``, Full unit name (i.e. ``getty@ttyS1.service``)
   ``%p``, Prefix name (i.e. ``getty``)
   ``%i`` or ``%I``, Instance name (i.e. ``ttyS1``)
   ``%H``, Host name
