@@ -384,7 +384,7 @@ Instantiated Units: Specifiers
 
   ``%n``, Full unit name (i.e. getty@ttyS1.service)
   ``%p``, Prefix name (i.e. ``getty``)
-  ``%i``, Instance name (i.e. ``ttyS1``)
+  ``%i`` or ``%I``, Instance name (i.e. ``ttyS1``)
   ``%H``, Host name
 
 See ``man systemd.unit`` for more information.
