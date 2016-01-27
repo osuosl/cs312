@@ -8,8 +8,8 @@ Topics
 
 * systemd basics
 * systemd vs. sysv
-* cgroups primer
 * Resource management
+* systemd Unit files
 
 systemd
 -------
@@ -313,35 +313,119 @@ Service Types
   ExecReload=/usr/sbin/postfix reload
   ExecStop=/usr/sbin/postfix stop
 
-How does it work?
-~~~~~~~~~~~~~~~~~
+``[Install]`` Section Options
+-----------------------------
 
-* Composed of and controls units with varying types rather than daemons
+.. csv-table::
+  :header: Option, Description
+  :widths: 5, 10
 
-  - service, socket, device, mount, automount, swap, target, path, timer, slice,
-    scope
+  ``Alias``, Provides a space-separated list of additional names for the unit.
+  ``RequiredBy``, A list of units that depend on the unit.
+  ``WantedBy``, "A list of units that weakly depend on the unit. When this unit
+  is enabled, the units listed in ``WantedBy`` gain a ``Want`` dependency on the
+  unit."
+  ``Also``, "Specifies a list of units to be installed or uninstalled along with
+  the unit."
 
-* Generic ``[Unit]`` and ``[Install]`` configurations, in addition to
-  type-specific configuration
-* Units may not be empty, but have no other generic requirements
-* Default behavior is to start the target named ``default``
+``[Install]`` Section Example: Postfix
+--------------------------------------
 
-Dependencies
-~~~~~~~~~~~~
+::
 
-* Defining deps
+  [Install]
+  WantedBy=multi-user.target
 
-  * ``Requires`` means a unit file must exist for the required unit (+ ``Wants`` behavior)
-  * ``Wants`` means a unit file should be started with this unit, if it exists (Does not imply ordering)
+Creating your own Units
+-----------------------
 
-* Defining ordering
+``/etc/systemd/system/hello-world.service``
 
-  * ``Before``, ``After`` define ordering.
+::
+
+  [Unit]
+  Description=Hello World
+
+  [Service]
+  ExecStart=/bin/sh -c 'echo Hello World; sleep 5'
+  StandardOutput=syslog
+  StandardError=syslog
+
+  [Install]
+  WantedBy=multi-user.target
+
+Instantiated (Parameterized) Units
+----------------------------------
+
+* Possible to to instantiate multiple units from a single template config
+* The ``@`` character is used to mark the template
+
+Named the following way::
+
+  # Unit service name
+  template_name@instance_name.service
+
+  # Template file name
+  template_name@.service
+
+``template_name``
+  Name of the template config file
+``instance_name``
+  Name of the unit instance
+
+Example: Login Prompts (getty)
+
+Instantiated Units: Specifiers
+------------------------------
+
+.. csv-table::
+  :header: Unit Specifier, Description
+  :widths: 5, 10
+
+  ``%n``, Full unit name (i.e. getty@ttyS1.service)
+  ``%p``, Prefix name (i.e. ``template_name``)
+  ``%i``, Instance name (i.e. ``instance_name``)
+  ``%H``, Host name
+
+::
+
+  [Unit]
+  Description=Getty on %I
+  ...
+  [Service]
+  ExecStart=-/sbin/agetty --noclear %I $TERM
+  ...
+
+Enabling and using instantiated units
+-------------------------------------
+
+Enable via a symlink:
+
+.. code-block:: bash
+
+  ln -s /usr/lib/systemd/system/getty@.service \
+    /etc/systemd/system/getty@tty1.service
+
+  # Add to the default.target
+  ln -s /usr/lib/systemd/system/getty@.service \
+    /etc/systemd/system/default.target.wants/getty@tty1.service
+
+Anything in the ``.wants`` directory automatically added as dependencies for
+that target.
 
 Resources
 ---------
 
-* http://www.freedesktop.org/wiki/Software/systemd/
-* https://en.wikipedia.org/wiki/Systemd
-* https://fedoraproject.org/wiki/Systemd
-* https://rhsummit.files.wordpress.com/2014/04/summit_demystifying_systemd1.pdf
+* `Upstream systemd project page`__
+* `RHEL systemd documentation`__
+* `Wikipedia systemd page`__
+* `Fedora systemd documentation`__
+* `Red Hat Summit systemd presentation`__
+* `Digital Ocean systemd documentation`__
+
+.. __: http://www.freedesktop.org/wiki/Software/systemd/
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html
+.. __: https://en.wikipedia.org/wiki/Systemd
+.. __: https://fedoraproject.org/wiki/Systemd
+.. __: https://rhsummit.files.wordpress.com/2014/04/summit_demystifying_systemd1.pdf
+.. __: https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files
