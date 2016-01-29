@@ -14,7 +14,7 @@ F 1/22,Midterm #1,
 ,**Week 4**,
 M 1/25,:slides:ref:`07_storage_kickstart`,"**BRING LAPTOPS!**, :ref:`Ch 12 & 13 <readings>`"
 W 1/27,:slides:ref:`08_systemd`, "`RedHat SystemD documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
-F 1/29,Linux Networking / Network debugging,"HW #2 Assigned, :ref:`Ch 14-16 & 21 <readings>`"
+F 1/29,:slides:ref:`09_linux_networking`,"HW #2 Assigned, :ref:`Ch 14-16 & 21 <readings>`"
 ,**Week 5**,
 M 2/1,NFS / Email,"Project #1 Due / HW #3 Assigned, :ref:`Ch 18-20 <readings>`"
 W 2/3,Continuous Integration,
