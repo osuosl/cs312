@@ -338,6 +338,26 @@ LDAP Client utility application
   Allows you to add entries to an LDAP directory, either from a file, or from
   standard input. It is a symbolic link to ``ldapmodify -a``.
 
+Configuring a system to use LDAP
+--------------------------------
+
+.. code-block:: bash
+
+  $ yum install openldap openldap-clients nss-pam-ldapd
+
+  # Using authconfig
+  $ authconfig --enableldap --enableldapauth \
+    --ldapserver="ldap.example.com" \
+    --ldapbasedn="dc=example,dc=com" --update
+
+* Configures and starts ``nslcd`` (local LDAP name service daemon) to use the
+  provided LDAP server.
+* Configures ``/etc/nsswitch.conf`` (Name Service Switch configuration file) to
+  also use LDAP
+* Configures PAM configuration files in ``/etc/pam.d/`` to use ``pam_ldap`` in
+  addition to ``pam_unix``
+* Best to enable and start ``nscd`` (name service cache daemon)
+
 Email Servers
 =============
 
