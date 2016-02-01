@@ -221,6 +221,123 @@ Second, on any server that supports NFSv4, mount / and look around:
 LDAP: Lightweight Directory Access Protocol
 ===========================================
 
+LDAP
+----
+
+Database service that makes a few assumptions:
+
+* Data objects are small
+* Database will be widely replicated and cached
+* The information is attribute based
+* Data is read often, but rarely written
+* Searching is a common operation
+
+LDAP Use Cases
+--------------
+
+* Central information about your users
+* Distribute configuration details (i.e. email)
+* Application authentication
+* Changes take effect immediately and instantly visible
+* Excellent CLI and web tools available
+* Well supported public directory service
+* Microsoft Active Directory uses LDAP as a base for its service
+
+LDIF: LDAP Data Interchange Format
+----------------------------------
+
+Simplified example which expresses ``/etc/passwd``:
+
+::
+
+  uid: john
+  cn: John Doe
+  userPassword: {crypt}$sa3tHJ3/KuYvI
+  loginShell: /bin/bash
+  uidNumber: 1000
+  gidNumber: 1000
+  homeDirectory: /home/john
+
+LDAP Hierarchy
+--------------
+
+::
+
+  dn: uid=john,ou=People,dc=oregonstate,dc=edu
+
+* Distinguished Name (dn) is the unique search path for an entry
+* Data can be organized in a hierarchy similar to DNS
+* *"most significant bit"* goes on the right
+* Entries are typically schematized through the use of the ``objectClass``
+  attribute
+
+LDAP Packages
+-------------
+
+``openldap``
+  A package containing the libraries necessary to run the OpenLDAP server and
+  client applications.
+``openldap-clients``
+  A package containing the command line utilities for viewing and modifying
+  directories on an LDAP server.
+``openldap-servers``
+  A package containing both the services and utilities to configure and run an
+  LDAP server. This includes the Standalone LDAP Daemon, ``slapd``.
+``nss-pam-ldapd``
+  A package containing ``nslcd``, a local LDAP name service that allows a user
+  to perform local LDAP queries.
+
+LDAP Server
+-----------
+
+.. code-block:: bash
+
+  # Install server package
+  $ yum install openldap-servers
+
+  # Start the service
+  $ systemctl slapd start
+
+  # Do a simple search
+  $ ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts
+
+* ``slapd`` -- Stand-alone LDAP Daemon
+* Next steps are to import initial entries and schemas into LDAP
+* LDAP Server setup can be complicated, so read the docs!
+
+LDAP Server utility applications
+--------------------------------
+
+::
+
+  slapacl     slapauth    slapd       slapindex   slapschema
+  slapadd     slapcat     slapdn      slappasswd  slaptest
+
+``slapcat``
+  Output entire LDAP tree in LDIF output
+``slapadd``
+  Allows you to add entries from an LDIF file to an LDAP directory
+``slappasswd``
+  Allows you to create an encrypted user password to be used with the
+  ``ldapmodify`` utility, or in the ``slapd`` configuration file.
+
+LDAP Client utility application
+-------------------------------
+
+::
+
+  ldapadd      ldapdelete   ldapmodify   ldappasswd   ldapurl
+  ldapcompare  ldapexop     ldapmodrdn   ldapsearch   ldapwhoami
+
+``ldapmodify``
+  Allows you to modify entries in an LDAP directory, either from a file, or from
+  standard input.
+``ldapsearch``
+  Allows you to search LDAP directory entries.
+``ldapadd``
+  Allows you to add entries to an LDAP directory, either from a file, or from
+  standard input. It is a symbolic link to ``ldapmodify -a``.
+
 Email Servers
 =============
 
