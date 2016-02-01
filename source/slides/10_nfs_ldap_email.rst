@@ -341,6 +341,219 @@ LDAP Client utility application
 Email Servers
 =============
 
+Mail system components
+----------------------
+
+**Mail User Agent (MUA)**
+  Allows users to read and compose email. (i.e. Thunderbird, Outlook, etc)
+**Mail Submission Agent (MSA)**
+  Accepts outgoing mail from a MUA and submits it to the transport system.
+**Mail Transport Agent (MTA)**
+  Routes messages among machines.
+**Local Delivery Agent (LDA)**
+  Places the messages in a local store
+**Access Agent (AA)**
+  Connect the user agent to the message store (i.e. IMAP or POP)
+
+Mail system components
+----------------------
+
+.. figure:: ../_static/email-components.png
+  :width: 100%
+
+Mail Submission Agents (MSA)
+----------------------------
+
+* Typically only concerns outbound email and runs on port 587
+* Can run on the same machines that run inbound email
+* Just an MTA with a slightly different config
+* Implements secure encrypted authentication
+
+Mail Transport Agents (MTA)
+---------------------------
+
+A mail sender and receiver
+
+  * Receiving email messages from remote mail servers
+  * Understanding the recipients' addresses
+  * Rewriting addresses to a form understood by the delivery agent
+  * Forwarding the message to the next responsible mail server OR passing it to a
+    local delivery agent
+
+MTA's do the bulk of the work
+
+Examples: postfix, email, sendmail
+
+Local Delivery Agents (LDA)
+---------------------------
+
+* Accepts mail from an MTA and delivers it to the recipents' mailboxes on the
+  local machine
+* Can be delivered to one of the following:
+
+  * User (person)
+  * Mailing list
+  * File
+  * Piped to a program
+
+* ``procmail`` is a popular LDA which offers advanced filtering
+
+Message Stores
+--------------
+
+Final resting place for an email message
+
+* ``mbox`` format
+
+  * Single file typically stored in ``/var/mail/username``
+  * Had problems with locking
+
+* ``Maildir`` format
+
+  * Each email is a file
+  * Had no problem with locking
+  * The amount of files would provide a scaling challenge
+
+* Other
+
+  * Database backed
+
+Access Agents
+-------------
+
+IMAP (Internet Message Access Protocol)
+
+  * Most popular
+  * Best to use IMAPS
+  * Delivers the mail one message at a time
+
+POP (Post Office Protocol)
+
+  * Assumes all email is downloaded from the server to the client
+  * Typically configured to delete or archive on server after retrieval
+  * Best to use POP3S
+
+Anatomy of a Mail Message
+-------------------------
+
+Contains three parts:
+
+**The envelope**
+  Determines where the message will be delivered, or where to be returned if it
+  can't be delivered. ``Delivered-To`` and ``Return-Path`` headers.
+**The headers**
+  Collection of property/value pairs. Contains a record of when and where the
+  message went to get delivered.
+**The body of the message**
+  Content to be sent to the recipient, usually plain text but can contain HTML
+  and other content.
+
+Reading Mail Headers
+--------------------
+
+* Start from the bottom and work your way up.
+* Look for each ``Received`` header
+
+::
+
+  Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+    by ash.osuosl.org (Postfix) with ESMTP id 7D6221C0FB2
+    for <lance@osuosl.org>; Mon,  1 Feb 2016 20:16:38 +0000 (UTC)
+
+* ``by hostname`` is the host that received it
+* ``with ESMTP id 7D6221C0FB2`` is the queue ID (format depends on MTA)
+* :download:`Example full email <../_static/email-header.txt>`
+
+Troubleshooting Email
+---------------------
+
+.. rst-class:: codeblock-sm
+
+::
+
+  ash $ grep 7D6221C0FB2 /var/log/mail.log
+  Feb  1 20:16:38 ash.osuosl.org postfix/smtpd[3857]: 7D6221C0FB2:
+    client=smtp1.osuosl.org[140.211.166.138]
+  Feb  1 20:16:38 ash.osuosl.org postfix/cleanup[1466]: 7D6221C0FB2:
+    message-id=<CACiY3GCPQ1BtALutZke0Un-PX18SqAFeyebhSvF14LyF9wnbXg@mail.gmail.com>
+  Feb  1 20:16:38 ash.osuosl.org postfix/qmgr[9680]: 7D6221C0FB2:
+    from=<ramereth@gmail.com>, size=3442, nrcpt=1 (queue active)
+  Feb  1 20:16:38 ash.osuosl.org postfix/qmgr[9680]: 7D6221C0FB2: removed
+  Feb  1 20:16:38 ash.osuosl.org postfix/local[1420]: 7D6221C0FB2:
+    to=<ramereth@osuosl.org>, orig_to=<lance@osuosl.org>, relay=local, delay=0.03,
+    delays=0.01/0/0/0.02, dsn=2.0.0, status=sent (delivered to command: IFS=' ' &&
+    exec /usr/bin/procmail -f- || exit 75)
+
+* Sometimes email doesn't get delivered, or bounces
+* Use queue ID's to track progress
+
+SMTP Authentication
+-------------------
+
+#. Client says ``EHLO``, announcing it speaks ESMTP
+#. The server responds and advertises its authentication mechanisms
+#. The clients says ``AUTH`` and names the specific mechanism that it wants to
+   use
+#. The server accepts the data sent with ``AUTH`` or starts a challenge/response
+   sequent with the client
+#. The server either accepts or denies the authentication attempt
+
+*Usually this is done over SSL or TLS*
+
+Functions of an email system
+----------------------------
+
+#. To accept outgoing mail from MSAs or user agents
+#. To receive incoming mail from the outside world
+#. To filter mail for spam, viruses, and other malware
+#. To deliver mail to end-users’ mailboxes
+#. To allow users to access their mailboxes with IMAP or POP
+
+Mail System Design
+------------------
+
+Split between internet-facing and internal servers
+
+.. figure:: ../_static/email-arch.png
+  :width: 100%
+
+Mail aliases
+------------
+
+* Virtualized email addresses that can reroute mail
+* Simple email list, or just a catch-all
+
+``/etc/aliases``
+
+::
+
+  root:           foobar@gmail.com
+  mailer-daemon:  root
+
+Spam filtering
+--------------
+
+* **Greylisting:** temporary deferrals
+* **SpamAssassin:** heuristic, pattern-matching spam recognition tool
+* **Blacklists:** list of known bad guys in the spamworld, often DNS-based
+* **Whitelists:** list of known good guys, DNS-based, avoid false positives
+* **Mail filters:** "milters" that scan both the header and body of a message
+* **SPF & DKIM**: DNS records to identify senders' domains and policies
+* ``amavisd-new``: Anti-virus/spam filtering systems
+
+Choosing an MTA
+---------------
+
+**Postfix**
+  Simple to use and configure. Decent performance overall
+**Exim**
+  Default MTA on Debian, also simple and easy to use.
+**Sendmail**
+  Highly configurable, high performance but can be complicated to configure and
+  maintain.
+**qmail**
+  Just stay away from this one :)
+
 Resources
 ---------
 
