@@ -20,12 +20,13 @@ NFS versions
 .. rst-class:: build
 
 **NFSv2**
-  Released in 1989 and only used UDP. In addition had 32bit filesize
+  Released in 1989 and only used UDP. Had several issues include 32bit filesize
   limitations as well as performance & security issues. Should not be used
   today.
 **NFSv3**
   Released in 1995, has support for either UDP or TCP and improves performance,
-  large file support and other various fixes on the protocol.
+  large file support and other various fixes on the protocol. Still in use
+  today.
 **NFSv4**
   Released in 2000, only supports TCP and was a major overhaul of the protocol.
   Version 4.1 was released in 2010 to provide support for clustered deployments.
@@ -368,6 +369,8 @@ Configuring a system to use LDAP
   $ authconfig --enableldap --enableldapauth \
     --ldapserver="ldap.example.com" \
     --ldapbasedn="dc=example,dc=com" --update
+
+.. rst-class:: build
 
 * Configures and starts ``nslcd`` (local LDAP name service daemon) to use the
   provided LDAP server.
