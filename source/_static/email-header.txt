@@ -1,0 +1,99 @@
+Delivered-To: ramereth@gapps.osuosl.org
+Received: by 10.194.70.103 with SMTP id l7csp183761wju;
+        Mon, 1 Feb 2016 12:16:39 -0800 (PST)
+X-Received: by 10.98.67.153 with SMTP id l25mr41390938pfi.111.1454357799362;
+        Mon, 01 Feb 2016 12:16:39 -0800 (PST)
+Return-Path: <ramereth@osuosl.org>
+Received: from whitealder.osuosl.org (smtp1.osuosl.org. [140.211.166.138])
+        by mx.google.com with ESMTP id rl9si26152457pab.109.2016.02.01.12.16.38
+        for <ramereth@gapps.osuosl.org>;
+        Mon, 01 Feb 2016 12:16:39 -0800 (PST)
+Received-SPF: pass (google.com: domain of ramereth@osuosl.org designates 140.211.166.138 as permitted sender) client-ip=140.211.166.138;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of ramereth@osuosl.org designates 140.211.166.138 as permitted sender) smtp.mailfrom=ramereth@osuosl.org;
+       dkim=pass header.i=@gmail.com;
+       dmarc=pass (p=NONE dis=NONE) header.from=gmail.com
+Received: from localhost (localhost [127.0.0.1])
+    by whitealder.osuosl.org (Postfix) with ESMTP id E6A2C91EFE
+    for <ramereth@gapps.osuosl.org>; Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+X-Spam-Flag: NO
+X-Spam-Score: -2.778
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.778 required=5 tests=[BAYES_05=-0.5,
+    DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+    FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_MED=-2.3,
+    RP_MATCHES_RCVD=-0.545, SPF_SOFTFAIL=0.665] autolearn=ham
+Received: from whitealder.osuosl.org ([127.0.0.1])
+    by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+    with ESMTP id mb5rJjxgCvge for <ramereth@gapps.osuosl.org>;
+    Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+Received: from ash.osuosl.org (ash.osuosl.org [140.211.166.34])
+    by whitealder.osuosl.org (Postfix) with ESMTP id 93D4291EE7
+    for <ramereth@gapps.osuosl.org>; Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+Received: by ash.osuosl.org (Postfix, from userid 1065)
+    id 85A121C0FB2; Mon,  1 Feb 2016 20:16:38 +0000 (UTC)
+X-Original-To: lance@osuosl.org
+Delivered-To: lance@osuosl.org
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+    by ash.osuosl.org (Postfix) with ESMTP id 7D6221C0FB2
+    for <lance@osuosl.org>; Mon,  1 Feb 2016 20:16:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+    by whitealder.osuosl.org (Postfix) with ESMTP id 822C791EFE
+    for <lance@osuosl.org>; Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+    by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+    with ESMTP id U4udjizO8VzJ for <lance@osuosl.org>;
+    Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com [209.85.213.182])
+    by whitealder.osuosl.org (Postfix) with ESMTPS id 0371891EE7
+    for <lance@osuosl.org>; Mon,  1 Feb 2016 20:16:45 +0000 (UTC)
+Received: by mail-ig0-f182.google.com with SMTP id z14so44812602igp.0
+        for <lance@osuosl.org>; Mon, 01 Feb 2016 12:16:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:date:message-id:subject:from:to:content-type;
+        bh=MHa4yGhQZ8g4EsDYhBPtpCT0Pg2/xE79DA9ZL+NDgls=;
+        b=XhUXTBalnFrDSgwCj3t7Ea+Zm/Ffa/80ZE55FnUthpHWJRktUCB0PKUXQriDn6Loul
+         YEruax+JE+mj5IJi4F2BrkMBCm43bHPXRe+6f31RpU77BbPefgvMm1CZA+bqGj3C8xmu
+         xAU3yAKVfpG1Ely4DJKHPXE9/2SOpjNxmcG2IjoxFtlr86YoyCdF2noYynSrTr9zmEJM
+         vDKipvIpFm9yEWrP15mcBB+udIFp5Vp2znCppYuqDI9rfJ79fIbi+u2XL5BzU/4lEYru
+         mYbo366mMasHlJ3gno+j4X6cpdao96HvxgmgSvkwjRhF6C3lXJakEj1EgGwaGP5QKKTw
+         jWNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20130820;
+        h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+         :content-type;
+        bh=MHa4yGhQZ8g4EsDYhBPtpCT0Pg2/xE79DA9ZL+NDgls=;
+        b=GDI+ZXXnGg3b7GD9iMkxYccrosGl6pyo9f30YvylsguDIhr6IclwKgXVU6UMsJekyr
+         Wu73cJsPdkw+vkqH9zJ3rAkEauC6WqEMqNA6Hr1ozInEwkCk9WpEevbtGeqtoxFD+Bmq
+         XB2SzrBeAm4udXnmuGwgcddPkNv1FjYtcIe2iryQDxic/fGx3ioeVl86A8YOO5R+HSYF
+         JZJILocx8II4byVLEWbm2h2X6f1bLvTnlBDOgYVTnfRs7HNVF6Yi6JZzCQ67GRA+IbnW
+         4ThlnnDYJxhnPKDRkiDTH6WaRyhKO0s0W4SHB+3R5e42mEmjJiR4RPnKvffoJNLoxRnG
+         aD3Q==
+X-Gm-Message-State: AG10YOQSw3YOzT/bMBFyr/qHJfc1uLbpe3STvNaSIjfAw8EUk5yBk3fr7D3/hJ53JJBO7U20zu6ufxM5aQPPsQ==
+MIME-Version: 1.0
+X-Received: by 10.50.13.102 with SMTP id g6mr13633612igc.77.1454357797409;
+ Mon, 01 Feb 2016 12:16:37 -0800 (PST)
+Received: by 10.64.245.105 with HTTP; Mon, 1 Feb 2016 12:16:37 -0800 (PST)
+Date: Mon, 1 Feb 2016 12:16:37 -0800
+Message-ID: <CACiY3GCPQ1BtALutZke0Un-PX18SqAFeyebhSvF14LyF9wnbXg@mail.gmail.com>
+Subject: Test email
+From: Lance Albertson <ramereth@gmail.com>
+To: Lance Albertson <lance@osuosl.org>
+Content-Type: multipart/alternative; boundary=089e013c66d6e44582052abb0fb9
+
+--089e013c66d6e44582052abb0fb9
+Content-Type: text/plain; charset=UTF-8
+
+foo bar
+
+--089e013c66d6e44582052abb0fb9
+Content-Type: text/html; charset=UTF-8
+
+<div dir="ltr">foo bar</div>
+
+--089e013c66d6e44582052abb0fb9--
+

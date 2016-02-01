@@ -16,13 +16,13 @@ M 1/25,:slides:ref:`07_storage_kickstart`,"**BRING LAPTOPS!**, :ref:`Ch 12 & 13 
 W 1/27,:slides:ref:`08_systemd`, "`RedHat SystemD documentation <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Managing_Services_with_systemd.html>`_"
 F 1/29,:slides:ref:`09_linux_networking`,":download:`HW #2 Assigned <_static/hw/homework2.pdf>`, :ref:`Ch 14-16 & 21 <readings>`"
 ,**Week 5**,
-M 2/1,NFS / Email,"Project #1 Due / HW #3 Assigned, :ref:`Ch 18-20 <readings>`"
-W 2/3,Continuous Integration, ":ref:`Ch 22-23 <readings>`"
-F 2/5,Config Management, HW #2 Due
+M 2/1,:slides:ref:`10_nfs_ldap_email`,"Project #1 Due, :ref:`Ch 18-20 <readings>`"
+W 2/3,Linux Kernel, ":ref:`Ch 22-23 <readings>`"
+F 2/5,Config Management, "HW #2 Due; HW #3 Assigned"
 ,**Week 6**,
-M 2/8,Config Management,HW #3 Due
+M 2/8,Config Management,
 W 2/10,Config Management,Project #2 Assigned
-F 2/12,Guest Speaker: TBA,HW #4 Assigned
+F 2/12,Guest Speaker: TBA,"HW #3 Due; HW #4 Assigned"
 ,**Week 7**,
 M 2/12,Midterm #2,
 W 2/17,Monitoring: Nagios
