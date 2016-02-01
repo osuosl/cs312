@@ -17,9 +17,12 @@ NFS Basics
 NFS versions
 ------------
 
+.. rst-class:: build
+
 **NFSv2**
   Released in 1989 and only used UDP. In addition had 32bit filesize
-  limitations as well as performance issues. Should not be used today.
+  limitations as well as performance & security issues. Should not be used
+  today.
 **NFSv3**
   Released in 1995, has support for either UDP or TCP and improves performance,
   large file support and other various fixes on the protocol.
@@ -42,6 +45,8 @@ NFS v4 major improvements
 NFS: Stateless vs. Stateful
 ---------------------------
 
+.. rst-class:: build
+
 **Version 2 & 3**
   * Stateless
   * Server cannot track which clients have a volume mounted
@@ -57,13 +62,13 @@ NFS: Security
 -------------
 
 * V2/V3 are generally viewed as inherently insecure
-* Originally designed with no security in mind
+* NFS originally designed with no security in mind
 * V4 introduced much improvements
 
 .. csv-table::
   :widths: 5, 10
 
-  ``AUTH_NONE``, non authentication
+  ``AUTH_NONE``, no authentication
   ``AUTH_SYS``, UNIX-style user and group access control
   ``RPCSEC_GSS``, "a powerful flavor that ensures integrity and privacy in
   addition to authentication"
@@ -74,6 +79,8 @@ NFS: Server-side daemons
 ------------------------
 
 *On CentOS 7 machines*
+
+.. rst-class:: build
 
 ``nfs``
   NFS server and appropriate RPC services
@@ -89,6 +96,8 @@ NFS: Server-side daemons
 NFS: Server-side daemons
 ------------------------
 
+.. rst-class:: build
+
 ``rpc.nfsd``
   Allows explicit NFS versions and protocols the server advertises to be defined
 ``lockd``
@@ -101,6 +110,8 @@ NFS: Server-side daemons
 NFS: Server-side daemons
 ------------------------
 
+.. rst-class:: build
+
 ``rpc.rquotad``
   Provides user quota information for remote users
 ``rpc.idmapd``
@@ -112,6 +123,8 @@ The ``/etc/exports`` Configuration file
 
 Controls which file systems are exported to remote hosts and specifies options.
 It follows the following syntax rules:
+
+.. rst-class:: build
 
 * Blank lines are ignored
 * To add a comment, start a line with the hash mark (``#``)
@@ -131,6 +144,8 @@ It follows the following syntax rules:
   export host(options)
   # multiple hosts
   export host1(options) host2(options) host3(options)
+
+.. rst-class:: build
 
 ``export``
   The directory being exported
@@ -177,8 +192,8 @@ See ``man exports`` for more options
   having root privileges; instead, the NFS server will assign them the user ID
   ``nfsnobody``.
 
-``/etc/exports`` -- Gotcha
---------------------------
+``/etc/exports`` -- Gotchas
+---------------------------
 
 These do not mean the same thing!
 
@@ -200,6 +215,8 @@ Discovering NFS Exports
 First, on any server that supports NFSv2 or NFSv3, use the ``showmount``
 command:
 
+.. rst-class:: build
+
 .. code-block:: bash
 
   $ showmount -e foo.example.com
@@ -208,6 +225,8 @@ command:
   /data/bar
 
 Second, on any server that supports NFSv4, mount / and look around:
+
+.. rst-class:: build
 
 .. code-block:: bash
 
@@ -314,7 +333,7 @@ LDAP Server utility applications
   slapadd     slapcat     slapdn      slappasswd  slaptest
 
 ``slapcat``
-  Output entire LDAP tree in LDIF output
+  Output entire LDAP tree in LDIF output. Useful for simple backups.
 ``slapadd``
   Allows you to add entries from an LDIF file to an LDAP directory
 ``slappasswd``
@@ -364,14 +383,16 @@ Email Servers
 Mail system components
 ----------------------
 
+.. rst-class:: build
+
 **Mail User Agent (MUA)**
   Allows users to read and compose email. (i.e. Thunderbird, Outlook, etc)
 **Mail Submission Agent (MSA)**
   Accepts outgoing mail from a MUA and submits it to the transport system.
 **Mail Transport Agent (MTA)**
-  Routes messages among machines.
+  Routes messages among machines. (i.e. postfix, sendmail)
 **Local Delivery Agent (LDA)**
-  Places the messages in a local store
+  Places the messages in a local store (i.e. procmail)
 **Access Agent (AA)**
   Connect the user agent to the message store (i.e. IMAP or POP)
 
@@ -407,6 +428,8 @@ Examples: postfix, email, sendmail
 Local Delivery Agents (LDA)
 ---------------------------
 
+.. rst-class:: build
+
 * Accepts mail from an MTA and delivers it to the recipents' mailboxes on the
   local machine
 * Can be delivered to one of the following:
@@ -422,6 +445,8 @@ Message Stores
 --------------
 
 Final resting place for an email message
+
+.. rst-class:: build
 
 * ``mbox`` format
 
@@ -458,6 +483,8 @@ Anatomy of a Mail Message
 
 Contains three parts:
 
+.. rst-class:: build
+
 **The envelope**
   Determines where the message will be delivered, or where to be returned if it
   can't be delivered. ``Delivered-To`` and ``Return-Path`` headers.
@@ -473,6 +500,8 @@ Reading Mail Headers
 
 * Start from the bottom and work your way up.
 * Look for each ``Received`` header
+
+.. rst-class:: codeblock-sm
 
 ::
 
@@ -509,6 +538,8 @@ Troubleshooting Email
 
 SMTP Authentication
 -------------------
+
+.. rst-class:: build
 
 #. Client says ``EHLO``, announcing it speaks ESMTP
 #. The server responds and advertises its authentication mechanisms
@@ -553,6 +584,8 @@ Mail aliases
 Spam filtering
 --------------
 
+.. rst-class:: build
+
 * **Greylisting:** temporary deferrals
 * **SpamAssassin:** heuristic, pattern-matching spam recognition tool
 * **Blacklists:** list of known bad guys in the spamworld, often DNS-based
@@ -563,6 +596,8 @@ Spam filtering
 
 Choosing an MTA
 ---------------
+
+.. rst-class:: build
 
 **Postfix**
   Simple to use and configure. Decent performance overall
@@ -577,4 +612,8 @@ Choosing an MTA
 Resources
 ---------
 
-* https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/Storage_Administration_Guide/index.html#ch-nfs
+* `RHEL 7 Storage Administration Guide (NFS)`__
+* `RHEL 7 LDAP Guide`__
+
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/Storage_Administration_Guide/index.html#ch-nfs
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/ch-Directory_Servers.html
