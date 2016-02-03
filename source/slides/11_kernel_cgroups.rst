@@ -1,7 +1,7 @@
-.. _11_kernel_firewalls:
+.. _11_kernel_cgroups:
 
-Kernel / Firewalls
-==================
+Kernel / CGroups
+================
 
 Linux Kernel
 ============
