@@ -247,11 +247,234 @@ Dracut
 Control Groups
 ==============
 
+Control Groups (cgroups)
+------------------------
+
+* Kernel feature that allows you to allocate resources
+
+  * CPU Time, system memory, network bandwidth, or combinations of these
+    resources
+
+* Allows you to have fine-grained control over allocating, prioritizing,
+  denying, managing and monitoring system resources.
+* Provides a way to hierarchically group and label processes and apply resource
+  limits on them
+* Old method was using a process *niceness* value
+* systemd uses cgroups heavily internally
+
+Default cgroup hierarchies
+--------------------------
+
+systemd automatically creates a hierarchy of *slice*, *scope* and *service*
+units.
+
+.. rst-class:: codeblock-very-small
+
+**Service**
+  A process or a group of processes, which systemd started based on a unit
+  configuration file. Services encapsulate the specified processes so that they
+  can be started and stopped as a one set.
+**Scope**
+  A group of externally created processes. Scopes encapsulate processes that are
+  started and stopped by arbitrary processes via the ``fork()`` function and
+  then registered by systemd at runtime. For instance, user sessions,
+  containers, and virtual machines are treated as scopes.
+**Slice**
+  A group of hierarchically organized units. Slices do not contain processes,
+  they organize a hierarchy in which scopes and services are placed. The actual
+  processes are contained in scopes or in services.
+
+Default slices
+--------------
+
+**-.slice**
+  The root slice
+**system.slice**
+  The default place for all system services
+**user.slice**
+  The default place for all user sessions
+**machine.slice**
+  The default place for all virtual machines and Linux containers
+
+Visualizing systemd cgroups
+---------------------------
+
+.. rst-class:: codeblock-very-small
+
+::
+
+  $ systemd-cgls
+  ├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 21
+  ├─user.slice
+  │ └─user-1000.slice
+  │   └─session-24.scope
+  │     ├─16767 sshd: centos [priv]
+  │     ├─16770 sshd: centos@pts/0
+  │     ├─16771 -bash
+  │     ├─16790 sudo su -
+  │     ├─16791 su -
+  │     ├─16792 -bash
+  │     ├─21231 systemd-cgls
+  │     └─21232 systemd-cgls
+  └─system.slice
+    ├─sshd.service
+    │ └─2013 /usr/sbin/sshd -D
+    ├─postfix.service
+    │ ├─ 1106 /usr/libexec/postfix/master -w
+    │ ├─ 1116 qmgr -l -t unix -u
+    │ └─20585 pickup -l -t unix -u
+    ├─crond.service
+    │ └─484 /usr/sbin/crond -n
+    ├─rsyslog.service
+    │ └─461 /usr/sbin/rsyslogd -n
+    └─systemd-journald.service
+      └─328 /usr/lib/systemd/systemd-journald
+
+systemd-cgtop
+-------------
+
+.. rst-class:: codeblock-sm
+
+::
+
+  Path                                     Tasks   %CPU   Memory  Input/s Output/s
+
+  /                                           76    0.3   318.4M        -        -
+  /system.slice/NetworkManager.service         2      -        -        -        -
+  /system.slice/auditd.service                 1      -        -        -        -
+  /system.slice/crond.service                  1      -        -        -        -
+  /system.slice/dbus.service                   1      -        -        -        -
+  /system.slice/gssproxy.service               1      -        -        -        -
+  /system.slice/polkit.service                 1      -        -        -        -
+  /system.slice/postfix.service                3      -        -        -        -
+  /system.slice/rsyslog.service                1      -        -        -        -
+  /system.slice/sshd.service                   1      -        -        -        -
+  /system.slic...lice/getty@tty1.service       1      -        -        -        -
+  /system.slic...ial-getty@ttyS0.service       1      -        -        -        -
+  /system.slice/systemd-journald.service       1      -        -        -        -
+  /system.slice/systemd-logind.service         1      -        -        -        -
+  /system.slice/systemd-udevd.service          1      -        -        -        -
+  /system.slice/tuned.service                  1      -        -        -        -
+  /system.slice/wpa_supplicant.service         1      -        -        -        -
+  /user.slice/....slice/session-24.scope       7      -        -        -        -
+
+Cgroup Resource Controllers
+---------------------------
+
+See ``/proc/cgroups`` for all enabled controllers
+
+.. rst-class:: codeblock-sm
+
+.. csv-table::
+  :widths: 5, 15
+
+  ``blkio``, sets limits on input/output access to and from block devices
+  ``cpu``, "uses the CPU scheduler to provide cgroup tasks an access to the CPU. It is
+  mounted together with the ``cpuacct`` controller on the same mount."
+  ``cpuacct``, creates automatic reports on CPU resources used by tasks in a cgroup
+  ``cpuset``, "assigns individual CPUs (on a multicore system) and memory nodes to tasks in a
+  cgroup"
+  ``memory``, "sets limits on memory use by tasks in a cgroup, and generates automatic
+  reports on memory resources used by those tasks."
+
+Creating transient cgroups
+--------------------------
+
+The ``systemd-run`` command allows you to create and start a transient service
+or scope unit::
+
+  systemd-run --unit=name --scope --slice=slice_name command
+
+.. csv-table::
+
+  ``--remain-after-exit``, Leave service around until explicitly stopped
+  ``--machine``, Operate on local container
+
+Example::
+
+  $ systemd-run --unit=toptest --slice=test top -b
+  Running as unit toptest.service.
+
+Setting parameters on cgroups
+-----------------------------
+
+The ``systemctl set-property`` command allows you to persistently change
+resource control settings during application runtime::
+
+  systemctl set-property name parameter=value
+
+Example, limit CPU and memory usage on ``httpd.service``:
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  # Persistent change
+  $ systemctl set-property httpd.service CPUShares=600 MemoryLimit=500M
+
+  # Temporary change
+  $ systemctl set-property --runtime httpd.service CPUShares=600 MemoryLimit=500M
+
+Cgroups & systemd: CPU
+----------------------
+
+* The ``CPUShares`` parameter controls the ``cpu.shares`` control group parameter.
+* The default value is 1024, by increasing this number you assign more CPU to
+  the unit.
+* Example: setting it to 2048 means that process will have 200% more cpu time
+  than any other process
+
+::
+
+  [Service]
+  CPUShares=1500
+
+Cgroups & systemd: Memory
+-------------------------
+
+* The ``MemoryLimit`` parameter controls the ``memory.limit_in_bytes`` control
+  group parameter
+* Set a maximum memory using suffixes such as K, M, G T
+* No default setting
+
+::
+
+  [Service]
+  MemoryLimit=1G
+
+Cgroups & systemd: Block I/O
+----------------------------
+
+``BlockIOWeight=value``
+  Replace *value* with a new overall block IO weight for the executed processes.
+  Choose a single value between 10 and 1000, the default setting is 1000.
+
+``BlockIODeviceWeight=device_name value``
+  Replace *value* with a block IO weight for a device specified with
+  *device_name*.  Replace *device_name* either with a name or with a path to a
+  device. As with ``BlockIOWeight``, it is possible to set a single weight value
+  between 10 and 1000.
+
+::
+
+  [Service]
+  BlockIODeviceWeight=/home/jdoe 750
+  BlockIOReadBandwith=/var/log 5M
+
+Cgroups & systemd: Block I/O
+----------------------------
+
+``BlockIOReadBandwidth=device_name value``
+  This directive allows to limit a specific bandwidth for a unit. Replace
+  *device_name* with the name of a device or with a path to a block device node,
+  *value* stands for a bandwidth rate. Use K, M, G, T suffixes to specify units
+  of measurement, value with no suffix is interpreted as bytes per second.
+``BlockIOWriteBandwidth=device_name value``
+  Limits the write bandwidth for a specified device. Accepts the same arguments
+  as ``BlockIOReadBandwidth``.
+
 Performance Tuning
 ==================
-
-Firewalls
-=========
 
 Resources
 ---------
