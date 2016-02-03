@@ -41,6 +41,8 @@ Listing modules
   virtio_ring            21524  4 virtio_blk,virtio_net,virtio_pci,virtio_balloon
   virtio                 15008  4 virtio_blk,virtio_net,virtio_pci,virtio_balloon
 
+.. rst-class:: build
+
 * Name of the kernel module currently loaded into memory
 * Amount of memory the modules uses
 * Sum total of processes that are using the module and the other modules that
@@ -104,6 +106,8 @@ Unloading a module
 
 Will fail if:
 
+.. rst-class:: build
+
 * A process is using the ``fcoe`` module
 * A module that ``fcoe`` directly depends on
 * Any module that ``fcoe``, through the dependency tree, depends on indirectly
@@ -116,6 +120,8 @@ Setting module parameters
   modprobe module_name [parameter=value]
 
 Some notes to consider:
+
+.. rst-class:: build
 
 * You need to unload the module to update module parameters
 * **Most** parameters aren't dynamically changeable
@@ -241,14 +247,13 @@ Persistent sysctl settings:
 * Save in either ``/etc/sysctl.conf`` or in ``/etc/sysctl.d/<name>.conf``
 * Managed via ``systemd-sysctl.service`` on CentOS 7
 
-Dracut
-------
-
 Control Groups
 ==============
 
 Control Groups (cgroups)
 ------------------------
+
+.. rst-class:: build
 
 * Kernel feature that allows you to allocate resources
 
@@ -269,6 +274,8 @@ systemd automatically creates a hierarchy of *slice*, *scope* and *service*
 units.
 
 .. rst-class:: codeblock-very-small
+
+.. rst-class:: build
 
 **Service**
   A process or a group of processes, which systemd started based on a unit
@@ -445,6 +452,8 @@ Cgroups & systemd: Memory
 Cgroups & systemd: Block I/O
 ----------------------------
 
+.. rst-class:: build
+
 ``BlockIOWeight=value``
   Replace *value* with a new overall block IO weight for the executed processes.
   Choose a single value between 10 and 1000, the default setting is 1000.
@@ -455,6 +464,8 @@ Cgroups & systemd: Block I/O
   device. As with ``BlockIOWeight``, it is possible to set a single weight value
   between 10 and 1000.
 
+.. rst-class:: build
+
 ::
 
   [Service]
@@ -463,6 +474,8 @@ Cgroups & systemd: Block I/O
 
 Cgroups & systemd: Block I/O
 ----------------------------
+
+.. rst-class:: build
 
 ``BlockIOReadBandwidth=device_name value``
   This directive allows to limit a specific bandwidth for a unit. Replace
@@ -480,6 +493,8 @@ Tools
 -----
 
 .. rst-class:: codeblock-very-small
+
+.. rst-class:: build
 
 ``vmstat``
   Virtual Memory Statistics tool, vmstat, provides instant reports on your
