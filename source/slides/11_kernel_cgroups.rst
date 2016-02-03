@@ -476,12 +476,93 @@ Cgroups & systemd: Block I/O
 Performance Tuning
 ==================
 
+Tools
+-----
+
+.. rst-class:: codeblock-very-small
+
+``vmstat``
+  Virtual Memory Statistics tool, vmstat, provides instant reports on your
+  system's processes, memory, paging, block input/output, interrupts, and CPU
+  activity.
+``tuned`` and ``tuned-adm``
+  tuned-adm is a command line tool that provides a number of different profiles
+  to improve performance in a number of specific use cases. Profiles include:
+  throughput-performance, latency-performance, network-latency
+  network-throughput, virtual-guest, virtual-host
+``perf``
+  The perf tool uses hardware performance counters and kernel tracepoints to
+  track the impact of other commands and applications on your system.
+``iostat``
+  Provided by the ``sysstat`` package, it monitors and reports on system
+  input/output device loading to help administrators make decisions about how to
+  balance input/output load between physical disks.
+
+I/O Schedulers
+--------------
+
+The I/O scheduler determines when and for how long I/O operations run on a
+storage device. It is also known as the I/O elevator.
+
+**deadline**
+  The default I/O scheduler for all block devices except SATA disks.
+  ``Deadline`` attempts to provide a guaranteed latency for requests from the
+  point at which requests reach the I/O scheduler. This scheduler is suitable
+  for most use cases, but particularly those in which read operations occur more
+  often than write operations.
+
+I/O Schedulers
+--------------
+
+**cfq**
+  The default scheduler only for devices identified as SATA disks. The
+  Completely Fair Queueing scheduler, ``cfq``, divides processes into three
+  separate classes: real time, best effort, and idle.
+**noop**
+  The ``noop`` I/O scheduler implements a simple FIFO (first-in first-out)
+  scheduling algorithm. Requests are merged at the generic block layer through a
+  simple last-hit cache. This can be the best scheduler for CPU-bound systems
+  using fast storage.
+
+Setting the I/O Scheduler
+-------------------------
+
+* By adding as a kernel argument at boot via ``elevator=scheduler_name`` OR
+* Set it for a particular storage device via ``echo cfq >
+  /sys/block/hda/queue/scheduler``
+
+TCP tuning
+----------
+
+The default maximum Linux TCP buffer sizes are usually set too small. Here are
+some saner ``sysctl`` defaults for a host with a 10G NIC:
+
+.. code-block:: bash
+
+  # allow testing with buffers up to 64MB
+  net.core.rmem_max = 67108864
+  net.core.wmem_max = 67108864
+  # increase Linux autotuning TCP buffer limit to 32MB
+  net.ipv4.tcp_rmem = 4096 87380 33554432
+  net.ipv4.tcp_wmem = 4096 65536 33554432
+  # increase the length of the processor input queue
+  net.core.netdev_max_backlog = 30000
+  # recommended default congestion control is htcp
+  net.ipv4.tcp_congestion_control=htcp
+  # recommended for hosts with jumbo frames enabled
+  net.ipv4.tcp_mtu_probing=1
+
 Resources
 ---------
 
-* https://wiki.centos.org/HowTos/Network/IPTables
-* https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/index.html
-* https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_Guide/index.html
-* https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/part-Kernel_Module_and_Driver_Configuration.html
-* http://people.ee.ethz.ch/~arkeller/linux/multi/kernel_user_space_howto-2.html
-* https://www.kernel.org/doc/Documentation/sysctl/README
+* `RHEL 7 Performance Tuning Guide`__
+* `RHEL 7 Resource Management Guide`__
+* `RHEL 7 Kernel Management Guide`__
+* `Kernel user space HOWTO`__
+* `Linux Kernel sysctl documentation`__
+
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/index.html
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Resource_Management_Guide/index.html
+.. __: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/part-Kernel_Module_and_Driver_Configuration.html
+.. __: http://people.ee.ethz.ch/~arkeller/linux/multi/kernel_user_space_howto-2.html
+.. __: https://www.kernel.org/doc/Documentation/sysctl/README
