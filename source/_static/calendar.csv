@@ -20,7 +20,7 @@ M 2/1,:slides:ref:`10_nfs_ldap_email`,"Project #1 Due, :ref:`Ch 18-20 <readings>
 W 2/3,:slides:ref:`11_kernel_cgroups`, ":ref:`Ch 22-23 <readings>`"
 F 2/5,No Class, "HW #2 Due; :download:`HW #3 Assigned <_static/hw/homework3.pdf>`"
 ,**Week 6**,
-M 2/8,Config Management,
+M 2/8,:slides:ref:`12_config_mgt`,
 W 2/10,Config Management,Project #2 Assigned
 F 2/12,Guest Speaker: TBA,"HW #3 Due; HW #4 Assigned"
 ,**Week 7**,
