@@ -24,7 +24,7 @@ M 2/8,Config Management,
 W 2/10,Config Management,Project #2 Assigned
 F 2/12,Guest Speaker: TBA,"HW #3 Due; HW #4 Assigned"
 ,**Week 7**,
-M 2/12,Midterm #2,
+M 2/15,Midterm #2,
 W 2/17,Monitoring: Nagios
 F 2/19,Monitoring Concepts, HW#4 Due
 ,**Week 8**,
@@ -32,12 +32,12 @@ M 2/22,High Availability / Load Balancers,Project #2 Due
 W 2/24,HAProxy,Project #3 Assigned
 F 2/26,Virtualization,HW #5 Assigned
 ,**Week 9**,
-M 3/1,Virtualization,
-W 3/3,Containers,
-F 3/5,Distributed Systems,HW #5 Due
+M 2/29,Virtualization,
+W 3/1,Containers,
+F 3/4,Distributed Systems,HW #5 Due
 ,**Week 10 (Dead week)**,
-M 3/8,TBA,Project #3 Due
-W 3/10,Review,
-F 3/12,Review,
+M 3/7,TBA,Project #3 Due
+W 3/9,Review,
+F 3/11,Review,
 ,**Week 11 (Finals Week)**,
 R 3/17,Final at 2-4pm in KEC 1001 (Tentative),
