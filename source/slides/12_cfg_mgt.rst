@@ -8,11 +8,13 @@ Configuration Management
 
 What is it?
 
-    *"Configuration management is the process of standardizing resource
+    *Configuration management is the process of standardizing resource
     configurations and enforcing their state across IT infrastructure in an
-    automated yet agile manner."* [PuppetLabs]
+    automated yet agile manner.*
 
-.. [PuppetLabs] http://puppetlabs.com/solutions/configuration-management
+    -- `Puppet Labs`_
+
+.. _Puppet Labs: http://puppetlabs.com/solutions/configuration-management
 
 History of CM
 -------------
@@ -143,6 +145,8 @@ Push vs. Pull
 Config Management Tool Comparisions
 ===================================
 
+.. rst-class:: build
+
 CFEngine
 --------
 
@@ -173,6 +177,8 @@ CFEngine: Pros
 
 CFEngine: Cons
 --------------
+
+.. rst-class:: build
 
 * Doesn't fit as well with current DevOps culture
 * Configuration format language is unique and difficult to understand
@@ -220,6 +226,8 @@ Puppet: Cons
   Puppet code base can grow large, unwieldy, and hard to pick up for new people
   in your organization at higher scale
 * Model-driven approach means less control compared to code-driven approaches
+
+.. rst-class:: build
 
 Chef
 ----
