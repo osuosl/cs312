@@ -41,6 +41,26 @@ Infrastructure as code
 - Repeatable way of rebuild a system
 - Orchestrate a cluster of services together
 
+Common Features for CM
+----------------------
+
+.. rst-class:: build
+
+Idempotent
+  Running the CM tool multiple times shouldn't change the state each time, only
+  if a change is needed.
+
+System *"facts"*
+  Specific information about a machine which may include things like machine
+  hardware, software installed, network information, etc
+
+Use of templates
+  Building dynamic config files by using templates and variables.
+
+Community code
+  Many CM platforms have user contributed "modules" that can be shared and used
+  globally.
+
 CM Platforms
 ------------
 
@@ -326,4 +346,11 @@ Resources
 
 * `Takipi Blog on CM comparisions`__
 
+**Readings**
+
+* `Ansible Intro`__ -- Wed, Feb 10
+* `Ansible Playbooks`__ -- Wed, Feb 10
+
 .. __: http://blog.takipi.com/deployment-management-tools-chef-vs-puppet-vs-ansible-vs-saltstack-vs-fabric/
+.. __: http://docs.ansible.com/ansible/intro.html
+.. __: http://docs.ansible.com/ansible/playbooks.html
