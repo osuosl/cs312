@@ -19,9 +19,9 @@ Announcements
 What is a Linux Distribution?
 -----------------------------
 
-  *"A Linux distribution (often called a distro for short) is an operating
+  *A Linux distribution (often called a distro for short) is an operating
   system made as a collection of software based around the Linux kernel and
-  often around a package management system."* [Wikipedia-distro]
+  often around a package management system.* [Wikipedia-distro]
 
 * Assortment of application and utility software packaged in a way that it meets
   users' needs

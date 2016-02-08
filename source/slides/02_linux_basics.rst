@@ -46,14 +46,14 @@ Emacs
     Originally released 1976
     name from Editor MACros for TECO editor, originally Tape Editor and
     COrrector at MIT in the '60s
+..
 
-*But, along the way, I wrote a text editor, Emacs. The interesting idea about
-Emacs was that it had a programming language, and the user's editing commands
-would be written in that interpreted programming language, so that you could
-load new commands into your editor while you were editing. You could edit the
-programs you were using and then go on editing with them.*
-
- -- Richard Stallman, http://www.gnu.org/gnu/rms-lisp.html
+  *But, along the way, I wrote a text editor, Emacs. The interesting idea about
+  Emacs was that it had a programming language, and the user's editing commands
+  would be written in that interpreted programming language, so that you could
+  load new commands into your editor while you were editing. You could edit the
+  programs you were using and then go on editing with them.* -- Richard
+  Stallman, http://www.gnu.org/gnu/rms-lisp.html
 
 Vim
 ---

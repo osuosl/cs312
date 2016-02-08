@@ -13,8 +13,20 @@ table.citation {
     margin-top: 30px;
 }
 
+q {
+    font-size: 1em;
+    line-height: 40px;
+    margin-top: 30px;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+q::before, q::after {
+    font-size: 2em;
+}
+
 img {
-    margin-top: 1em;
+    margin-top: 10px;
 }
 
 .codeblock-sm {

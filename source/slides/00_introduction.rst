@@ -188,9 +188,9 @@ Devops Introduction
 
 What is it?
 
-  *"A software development method that stresses communication, collaboration and
+  *A software development method that stresses communication, collaboration and
   integration between software developers and information technology (IT)
-  operations professionals."* [Wikipedia]
+  operations professionals.* [Wikipedia]
 
 .. [Wikipedia] http://en.wikipedia.org/wiki/DevOps
 
