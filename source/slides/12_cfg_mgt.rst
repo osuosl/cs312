@@ -46,18 +46,18 @@ Common Features for CM
 
 .. rst-class:: build
 
-Idempotent
+**Idempotent**
   Running the CM tool multiple times shouldn't change the state each time, only
   if a change is needed.
 
-System *"facts"*
+**System** *"facts"*
   Specific information about a machine which may include things like machine
   hardware, software installed, network information, etc
 
-Use of templates
+**Use of templates**
   Building dynamic config files by using templates and variables.
 
-Community code
+**Community code**
   Many CM platforms have user contributed "modules" that can be shared and used
   globally.
 
@@ -120,12 +120,12 @@ Chef Example
 
 .. code-block:: ruby
 
-  package "apache" do
-    package_name "httpd"
+  package 'apache' do
+    package_name 'httpd'
     action :install
   end
 
-  service "apache" do
+  service 'apache' do
     action [:enable, :start]
   end
 
