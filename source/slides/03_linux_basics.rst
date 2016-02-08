@@ -16,9 +16,8 @@ What's a filesystem?
     *In computing, a file system is used to control how information is stored and
     retrieved. Without a file system, information placed in a storage area would
     be one large body of information with no way to tell where one piece of
-    information stops and the next begins.*
-
-    -- (http://en.wikipedia.org/wiki/Filesystem)
+    information stops and the next begins.* --
+    (http://en.wikipedia.org/wiki/Filesystem)
 
 Which Filesystem to choose
 --------------------------
