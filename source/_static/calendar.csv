@@ -21,7 +21,7 @@ W 2/3,:slides:ref:`11_kernel_cgroups`, ":ref:`Ch 22-23 <readings>`"
 F 2/5,No Class, "HW #2 Due; :download:`HW #3 Assigned <_static/hw/homework3.pdf>`"
 ,**Week 6**,
 M 2/8,:slides:ref:`12_cfg_mgt`,
-W 2/10,"Config Management (Ansible)","**BRING LAPTOPS!**; :ref:`Ansible <readings>`; Project #2 Assigned"
+W 2/10,:slides:ref:`13_ansible`,"**BRING LAPTOPS!**; :ref:`Ansible <readings>`; Project #2 Assigned"
 F 2/12,"CoreOS (Alex Crawford and Matthew Garrett)","HW #3 Due"
 ,**Week 7**,
 M 2/15,Midterm #2,
