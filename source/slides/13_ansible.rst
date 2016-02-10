@@ -24,7 +24,7 @@ Ansible Commands
 ``ansible-playbook``
   Tool to run Ansible Playbooks
 ``ansible-pull``
-  Tool to pull remote Ansible configurations and run the playbooks
+  Tool to pull remote Ansible configurations and run the playbooks locally
 ``ansible-doc``
   Tool to show documentation on Ansible modules
 ``ansible-galaxy``
@@ -41,19 +41,21 @@ Ansible Components
   remote host.
 **Inventory**
   Defines how Ansible with interact with remote hosts and defines hosts, groups
-  of hosts in a logical manner.
+  of hosts in a logical manner. You also define host and group variables inside
+  the inventory.
 **Playbooks**
   Ansible's configuration, deployment and orchestration language that uses the
   YAML format.
 **Roles**
-  Reusable list of tasks and playbooks typically centered in a specific task.
+  Reusable list of tasks and playbooks typically centered in a specific task,
+  such as deploying a web service
 
 Modules
 -------
 
 * Python code that is executed on the remote host
 * Always returns JSON data
-* Controls system resources, executing system commands
+* Controls and manage system resources
 * Core Modules: Shipped and maintained by Ansible
 * Extras Modules: Shipped with Ansible, but maintained by the community
 
@@ -109,6 +111,32 @@ Source Control Module: git
   - git: repo=git://foosball.example.org/path/to/repo.git
          dest=/srv/checkout
          version=release-0.22
+
+Facts
+-----
+
+* `Facts`__ is a core module that gathers useful variables about remote hosts
+* All Ansible facts are prefixed with ``ansible_``
+* If factor (Puppet) or ohai (Chef) is installed, Ansible will gather those
+  folks too and prefix them respectively
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: bash
+
+  # Display facts from all hosts and store them indexed by I(hostname) at C(/tmp/facts).
+  ansible all -m setup --tree /tmp/facts
+
+  # Display only facts regarding memory found by ansible on all hosts and output them.
+  ansible all -m setup -a 'filter=ansible_*_mb'
+
+  # Display only facts returned by facter.
+  ansible all -m setup -a 'filter=facter_*'
+
+  # Display only facts about certain interfaces.
+  ansible all -m setup -a 'filter=ansible_eth[0-2]'
+
+.. __: https://docs.ansible.com/ansible/setup_module.html
 
 Inventory
 ---------
