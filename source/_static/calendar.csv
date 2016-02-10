@@ -21,16 +21,16 @@ W 2/3,:slides:ref:`11_kernel_cgroups`, ":ref:`Ch 22-23 <readings>`"
 F 2/5,No Class, "HW #2 Due; :download:`HW #3 Assigned <_static/hw/homework3.pdf>`"
 ,**Week 6**,
 M 2/8,:slides:ref:`12_cfg_mgt`,
-W 2/10,"Config Management (Ansible)","**BRING LAPTOPS!**; :ref:`Ansible <readings>`; Project #2 Assigned"
-F 2/12,"CoreOS (Alex Crawford and Matthew Garrett)","HW #3 Due"
+W 2/10,:slides:ref:`13_ansible`,"**BRING LAPTOPS!**; :ref:`Ansible <readings>`"
+F 2/12,CoreOS for Sysadmins,"Project #2 Assigned; HW #3 Due"
 ,**Week 7**,
 M 2/15,Midterm #2,
-W 2/17,Monitoring: Nagios
-F 2/19,Monitoring Concepts, HW#4 Assigned
+W 2/17,Config Management: Ansible, "**BRING LAPTOPS!**"
+F 2/19,Monitoring: Nagios, HW#4 Assigned
 ,**Week 8**,
-M 2/22,High Availability / Load Balancers,Project #2 Due
-W 2/24,HAProxy,Project #3 Assigned
-F 2/26,Virtualization,"HW#4 Due; HW #5 Assigned"
+M 2/22,Monitoring Concepts,
+W 2/24,High Availability / Load Balancers,"Project #2 Due; Project #3 Assigned"
+F 2/26,HAProxy,"HW#4 Due; HW #5 Assigned"
 ,**Week 9**,
 M 2/29,Virtualization,
 W 3/1,Containers,
