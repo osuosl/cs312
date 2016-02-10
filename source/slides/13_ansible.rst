@@ -17,6 +17,8 @@ What is Ansible?
 Ansible Commands
 ----------------
 
+.. rst-class:: build
+
 ``ansible``
   Low level command to execute simple Ansible resources
 ``ansible-playbook``
@@ -31,6 +33,8 @@ Ansible Commands
 
 Ansible Components
 ------------------
+
+.. rst-class:: build
 
 **Modules**
   Python-driven code that actually does the work in Ansible and executed on the
@@ -200,6 +204,56 @@ Using the ``:children`` suffix allows for groups of groups.
   northeast
   southwest
   northwest
+
+Patterns
+--------
+
+`Patterns`__ in Ansible decide which hosts to manage
+
+* All hosts in the inventory: ``all`` or ``*``
+* Specific host or group: ``host1``, ``webservers``
+* Wildcard: ``192.168.1.*``
+* OR: ``host1:host2``, ``webservers:dbservers``
+* NOT: ``webservers:dbservers:!production``
+* AND: ``webservers:dbservers:&staging``
+* REGEX: ``~(web|db).*\.example\.com``
+
+.. __: http://docs.ansible.com/ansible/intro_patterns.html
+
+Pattern Examples
+----------------
+
+.. code-block:: bash
+
+  # Run this on the webservers group
+  ansible webservers -m service -a "name=httpd state=restarted"
+
+  # Target all hosts
+  all
+  *
+
+  # Target specific host or a set of hosts
+  one.example.com
+  one.example.com:two.example.com
+  192.168.1.50
+  192.168.1.*
+
+  # Target groups or one or more groups. Colon indicates OR
+  webservers
+  webservers:dbservers
+
+  # Exclude groups
+  webservers:!phoenix
+
+  # Intersection of two groups. Hosts would need to be in both groups
+  # to run.
+  webservers:&staging
+
+  # Combo!
+  # All machines in the groups ‘webservers’ and ‘dbservers’ are to be
+  # managed if they are in the group ‘staging’ also, but the machines
+  # are not to be managed if they are in the group ‘phoenix
+  webservers:dbservers:&staging:!phoenix
 
 Dynamic Inventory
 -----------------
@@ -390,56 +444,6 @@ Best Practices
                           # above, done for the webtier role
       monitoring/         # ""
       fooapp/             # ""
-
-Patterns
---------
-
-`Patterns`__ in Ansible decide which hosts to manage
-
-* All hosts in the inventory: ``all`` or ``*``
-* Specific host or group: ``host1``, ``webservers``
-* Wildcard: ``192.168.1.*``
-* OR: ``host1:host2``, ``webservers:dbservers``
-* NOT: ``webservers:dbservers:!production``
-* AND: ``webservers:dbservers:&staging``
-* REGEX: ``~(web|db).*\.example\.com``
-
-.. __: http://docs.ansible.com/ansible/intro_patterns.html
-
-Pattern Examples
-----------------
-
-.. code-block:: bash
-
-  # Run this on the webservers group
-  ansible webservers -m service -a "name=httpd state=restarted"
-
-  # Target all hosts
-  all
-  *
-
-  # Target specific host or a set of hosts
-  one.example.com
-  one.example.com:two.example.com
-  192.168.1.50
-  192.168.1.*
-
-  # Target groups or one or more groups. Colon indicates OR
-  webservers
-  webservers:dbservers
-
-  # Exclude groups
-  webservers:!phoenix
-
-  # Intersection of two groups. Hosts would need to be in both groups
-  # to run.
-  webservers:&staging
-
-  # Combo!
-  # All machines in the groups ‘webservers’ and ‘dbservers’ are to be
-  # managed if they are in the group ‘staging’ also, but the machines
-  # are not to be managed if they are in the group ‘phoenix
-  webservers:dbservers:&staging:!phoenix
 
 Variables
 ---------
