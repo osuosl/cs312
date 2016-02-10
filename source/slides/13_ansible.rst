@@ -150,6 +150,57 @@ Inventory communication variables
 Inventory Examples
 ------------------
 
+.. code-block:: bash
+
+  # Range of hosts using patterns
+  [webservers]
+  www[01:50].example.com
+
+  # Host variables
+  [atlanta]
+  host1 http_port=80 maxRequestsPerChild=808
+  host2 http_port=303 maxRequestsPerChild=909
+
+  # Group Variables
+  [atlanta]
+  host1
+  host2
+
+  [atlanta:vars]
+  ntp_server=ntp.atlanta.example.com
+  proxy=proxy.atlanta.example.com
+
+Groups of groups, and group variables
+-------------------------------------
+
+Using the ``:children`` suffix allows for groups of groups.
+
+::
+
+  [atlanta]
+  host1
+  host2
+
+  [raleigh]
+  host2
+  host3
+
+  [southeast:children]
+  atlanta
+  raleigh
+
+  [southeast:vars]
+  some_server=foo.southeast.example.com
+  halon_system_timeout=30
+  self_destruct_countdown=60
+  escape_pods=2
+
+  [usa:children]
+  southeast
+  northeast
+  southwest
+  northwest
+
 Dynamic Inventory
 -----------------
 
@@ -213,7 +264,7 @@ Playbook Example
     vars:
      in_ports:
      - 80
-     tasks:
+   tasks:
      - name: install httpd
        action: yum name=httpd state=latest
 
@@ -229,6 +280,27 @@ Playbook Example
           backup=yes
        notify:
        - restart httpd
+
+Handlers
+--------
+
+* Basic event system that can be triggered from tasks
+* Events can only be triggered once
+* Handlers usually be used to restart services
+
+.. code-block:: yaml
+
+  - name: template configuration file
+    template: src=template.j2 dest=/etc/foo.conf
+    notify:
+       - restart memcached
+       - restart apache
+
+  # Handlers
+  - name: restart memcached
+    service: name=memcached state=restarted
+  - name: restart apache
+    service: name=apache state=restarted
 
 Roles
 -----
@@ -322,14 +394,99 @@ Best Practices
 Patterns
 --------
 
-Ansible Config File
--------------------
+`Patterns`__ in Ansible decide which hosts to manage
+
+* All hosts in the inventory: ``all`` or ``*``
+* Specific host or group: ``host1``, ``webservers``
+* Wildcard: ``192.168.1.*``
+* OR: ``host1:host2``, ``webservers:dbservers``
+* NOT: ``webservers:dbservers:!production``
+* AND: ``webservers:dbservers:&staging``
+* REGEX: ``~(web|db).*\.example\.com``
+
+.. __: http://docs.ansible.com/ansible/intro_patterns.html
+
+Pattern Examples
+----------------
+
+.. code-block:: bash
+
+  # Run this on the webservers group
+  ansible webservers -m service -a "name=httpd state=restarted"
+
+  # Target all hosts
+  all
+  *
+
+  # Target specific host or a set of hosts
+  one.example.com
+  one.example.com:two.example.com
+  192.168.1.50
+  192.168.1.*
+
+  # Target groups or one or more groups. Colon indicates OR
+  webservers
+  webservers:dbservers
+
+  # Exclude groups
+  webservers:!phoenix
+
+  # Intersection of two groups. Hosts would need to be in both groups
+  # to run.
+  webservers:&staging
+
+  # Combo!
+  # All machines in the groups ‘webservers’ and ‘dbservers’ are to be
+  # managed if they are in the group ‘staging’ also, but the machines
+  # are not to be managed if they are in the group ‘phoenix
+  webservers:dbservers:&staging:!phoenix
 
 Variables
 ---------
 
-Hands-on
-========
+* `Variables`__ allow you to deal with differences between systems
+* Valid names should be letters, numbers, and underscores and always start with
+  a letter
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: yaml
+  :caption: playbook.yml
+
+  - hosts: webservers
+    template: src=foo.cfg.j2 dest={{ remote_install_path }}/foo.cfg
+    vars:
+      http_port: 80
+
+.. code-block:: jinja
+  :caption: Templates
+
+  My amp goes to {{ max_amp_value }}
+
+.. __: http://docs.ansible.com/ansible/playbooks_variables.html
+
+YAML Gotchas
+------------
+
+Sometimes YAML is quirky so read up on the `YAML Syntax`__
+
+For example, this won't work:
+
+.. code-block:: yaml
+
+  - hosts: app_servers
+    vars:
+        app_path: {{ base_path }}/22
+
+However this will work fine:
+
+.. code-block:: yaml
+
+  - hosts: app_servers
+    vars:
+         app_path: "{{ base_path }}/22"
+
+.. __: http://docs.ansible.com/ansible/YAMLSyntax.html
 
 Installing Ansible
 ------------------
@@ -348,10 +505,12 @@ Installing Ansible
 Resources
 ---------
 
+* `Ansible Examples repo`__
 * `Ansible: an introduction (Jan-Pet Mens)`__
 * `Ansible - introduction (Stephane Manciot)`__
 * `Introduction to Ansible (Mattias Gees)`__
 
+.. __: https://github.com/ansible/ansible-examples
 .. __: https://speakerdeck.com/jpmens/ansible-an-introduction
 .. __: http://www.slideshare.net/StephaneManciot/ansible-44734246
 .. __: http://blog.mattiasgees.be/presentations/ansible_introduction/
