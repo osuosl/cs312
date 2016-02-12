@@ -408,9 +408,11 @@ Roles
 Templates
 ---------
 
-* Jinas2 templating engine
+* `Jinja2 templating engine`__
 * Use of variables
 * Loops, conditionals, filters, etc
+
+.. __: http://jinja.pocoo.org/
 
 .. code-block:: jinja
 
