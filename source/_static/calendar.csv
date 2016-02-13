@@ -22,7 +22,7 @@ F 2/5,No Class, "HW #2 Due; :download:`HW #3 Assigned <_static/hw/homework3.pdf>
 ,**Week 6**,
 M 2/8,:slides:ref:`12_cfg_mgt`,
 W 2/10,:slides:ref:`13_ansible`,"**BRING LAPTOPS!**; :ref:`Ansible <readings>`"
-F 2/12,":download:`CoreOS for Sysadmins <_static/14_coreos.pdf>`","Project #2 Assigned; HW #3 Due"
+F 2/12,":download:`CoreOS for Sysadmins <_static/14_coreos.pdf>`",":download:`Project #2 Assigned <_static/hw/project2.pdf>`; HW #3 Due"
 ,**Week 7**,
 M 2/15,Midterm #2,
 W 2/17,Config Management: Ansible, "**BRING LAPTOPS!**"
