@@ -1,4 +1,4 @@
-.. _ansible_demo:
+.. _15_ansible_demo:
 
 Ansible Demo
 ============
@@ -31,7 +31,7 @@ Setup the Inventory
 * Spin up a new VM on OpenStack
 * Setup an inventory file called ``hosts``
 
-.. code-block:: bash
+::
 
   [cs312]
   cs312 ansible_ssh_host=<ip address> ansible_ssh_user=centos
@@ -312,10 +312,32 @@ Integration Testing with ServerSpec
   playbooks
 * You can test multiple roles and multiple hosts
 * `ServerSpec`__ is RSpec tests for servers
+* `ServerSpec Resource Types`__
 
 ::
 
   gem install ansible_spec
+
+.. __: https://github.com/volanja/ansible_spec
+.. __: http://serverspec.org/
+.. __: http://serverspec.org/resource_types.html
+
+Installing AnsibleSpec on flip
+------------------------------
+
+Install using `RVM`__ (RVM is like ``virtualenv`` for Ruby)
+
+.. __: https://rvm.io/rvm/install
+
+.. code-block:: console
+
+  $ gpg --keyserver hkp://keys.gnupg.net --recv-keys \
+    409B6B1796C275462A1703113804BB82D39DC0E3
+  $ curl -sSL https://get.rvm.io | bash
+  $ source .profile
+  $ rvm install ruby-2.2.1
+  $ gem install ansible_spec
+
 
 AnsibleSpec Setup
 -----------------
@@ -352,6 +374,7 @@ ServerSpec on Ansible
       create  spec/spec_helper.rb
       create  Rakefile
       create  .ansiblespec
+  $ mkdir roles/ntp/spec
 
 ``roles/ntp/spec/ntp_spec.rb``
 
@@ -367,9 +390,6 @@ ServerSpec on Ansible
     it { should be_running }
     it { should be_enabled }
   end
-
-.. __: https://github.com/volanja/ansible_spec
-.. __: http://serverspec.org/
 
 Run the tests
 -------------
@@ -407,11 +427,11 @@ Construct a role that passes this ServerSpec File:
     end
   end
 
-  describe('emacs') do
+  describe package('emacs') do
     it { should_not be_installed }
   end
 
-  describe file('/root/.bashrc/) do
+  describe file('/root/.bashrc') do
     it { should be_file }
     its(:content){ should match /export EDITOR=vim/ }
   end
