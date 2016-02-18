@@ -26,18 +26,18 @@ F 2/12,":download:`CoreOS for Sysadmins <_static/14_coreos.pdf>`",":download:`Pr
 ,**Week 7**,
 M 2/15,Midterm #2,
 W 2/17,:slides:ref:`15_ansible_demo`, "**BRING LAPTOPS!**"
-F 2/19,Monitoring: Nagios, HW#4 Assigned
+F 2/19,Monitoring: Nagios,
 ,**Week 8**,
-M 2/22,Monitoring Concepts,
+M 2/22,Monitoring Concepts,HW#4 Assigned
 W 2/24,High Availability / Load Balancers,"Project #2 Due; Project #3 Assigned"
-F 2/26,HAProxy,"HW#4 Due; HW #5 Assigned"
+F 2/26,HAProxy,
 ,**Week 9**,
-M 2/29,Virtualization,
-W 3/1,Containers,
-F 3/4,Distributed Systems,HW #5 Due
+M 2/29,Virtualization,HW#4 Due
+W 3/1,Containers,HW #5 Assigned
+F 3/4,Distributed Systems,
 ,**Week 10 (Dead week)**,
 M 3/7,TBA,Project #3 Due
-W 3/9,Review,
+W 3/9,Review,HW#5 Due
 F 3/11,Review,
 ,**Week 11 (Finals Week)**,
 R 3/17,Final at 2-4pm in KEC 1001 (Tentative),
