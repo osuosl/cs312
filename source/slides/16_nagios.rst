@@ -226,20 +226,128 @@ Nagios Configuration Overview
 Nagios Config components
 ------------------------
 
-* Main configuration file: ``/etc/nagios/nagios.cfg``
+.. rst-class:: build
 
+**Main configuration file**
   * Configures how the daemon operates
-
-* Resource file(s): User defined macros (i.e. notification commands)
-* Object definition files
-
+**Resource file(s)**
+  * User defined macros (i.e. notification commands)
+**Object definition files**
   * Define ``hosts``, ``services``, ``hostgroups``, ``contacts``,
     ``contactgroups``, ``commands``
+**CGI configuration file**
+  * How the web interface is setup
 
-* CGI configuration file: How the web interface is setup
+Main configuration file
+-----------------------
 
-Object definitions
-------------------
+``/etc/nagios/nagios.cfg``
+
+`Main configuration file options`__
+
+.. __: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/configmain.html
+
+.. code-block:: ini
+
+  log_file=/var/log/nagios/nagios.log
+  cfg_file=/etc/nagios/objects/commands.cfg
+  cfg_file=/etc/nagios/objects/contacts.cfg
+  cfg_file=/etc/nagios/objects/timeperiods.cfg
+  cfg_file=/etc/nagios/objects/templates.cfg
+  cfg_file=/etc/nagios/objects/localhost.cfg
+  cfg_dir=/etc/nagios/conf.d
+  status_update_interval=10
+
+Resource configuration file(s)
+------------------------------
+
+``/etc/nagios/private/resource.cfg``
+
+* Define ``$USERx$`` `macros`__ which can be used in command definitions
+* Useful for storing sensitive information such as usernames/passwords
+* Also useful for storing frequently used paths
+* Support up to 32 macros (``$USER1$`` through ``$USER32$``)
+
+.. __: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/macros.html
+
+.. code-block:: ini
+
+  # Sets $USER1$ to be the path to the plugins
+  $USER1$=/usr/lib64/nagios/plugins
+  # Sets $USER2$ to be the path to event handlers
+  #$USER2$=/usr/lib64/nagios/plugins/eventhandlers
+  # Store some usernames and passwords (hidden from the CGIs)
+  #$USER3$=someuser
+  #$USER4$=somepassword
+
+Object Configuration Overview
+-----------------------------
+
+``/etc/nagios/objects``
+
+* Objects in Nagios are elements that are involved in the monitoring and
+  notification logic
+* Types of objects include:
+
+  * Services, Service Groups, Hosts, Host Groups, Contacts, Contact Groups,
+    Commands, Time Periods, Notification Escalations, Notification and Execution
+    Dependencies
+
+* Objects are defined using a flexible template format
+* `Object Configuration Overview Docs`__
+
+.. __: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/configobject.html
+
+Objects Defined
+---------------
+
+.. rst-class:: build
+
+**Hosts**
+  Central object in monitoring logic and are usually physical devices, have an
+  IP address, have one more services assigned to it and can have a parent/child
+  relationship with other hosts configured.
+**Host Groups**
+  Groups of one or more hosts. Groups can make it easier to view the status of
+  related hosts from the web interface and simplify the configuration.
+**Services**
+  Another central object in monitoring logic and are associated with hosts. They
+  can be attributes of a host (CPU load, disk usage, etc.), services provided by
+  the host (HTTP, SSH, etc.), and other things associated with the host (DNS
+  records, etc.)
+
+Objects Defined
+---------------
+
+.. rst-class:: build
+
+**Service Groups**
+  Groups of one ore more services. Service groups can make it easier to view
+  status of related services in the web interface and simplify the
+  configuration.
+**Contacts**
+  People involved in the notification process. Contacts have one or more
+  notification methods (cell phone, pager, email, etc.), and receive
+  notifications for hosts and services they are responsible for.
+**Contact Groups**
+  Groups of one or more contacts.  Contact groups can make it easier to define
+  all the people who get notified when certain host or service problems occur.
+
+Objects Defined
+---------------
+
+.. rst-class:: build
+
+**Time Periods**
+  Used to control when hosts and services can be monitored and when contacts can
+  receive notifications.
+**Commands**
+  Used to tell Nagios what programs, scripts, etc. it should execute to perform
+  its tasks. Tasks may include host and service checks, notifications, event
+  handlers and much more.
+
+Object Definition Examples
+--------------------------
 
 .. code-block:: console
 
@@ -253,6 +361,13 @@ Object definitions
     contact_groups admins
   }
 
+  # Host Group definition
+  define hostgroup {
+    hostgroup_name  example-servers
+    alias           Example Servers
+    members         foo,bar
+  }
+
   # Service definition
   define service {
     use                 generic-service
@@ -261,9 +376,80 @@ Object definitions
     check_command       check_ssh
   }
 
+  # Contact definition
+  define contact {
+    contact_name  nagiosadmin
+    use           generic-contact
+    alias         Nagios Admin
+    email         nagios@example.org
+  }
+
+  # Contact group definition
+  define contactgroup {
+    contactgroup_name admins
+    alias             Nagios Admins
+    members           nagiosadmin
+  }
+
+  # 'workhours' Time Period definition
+  define timeperiod {
+    timeperiod_name workhours
+    alias           Normal Work Hours
+    monday          09:00-17:00
+    tuesday         09:00-17:00
+    wednesday       09:00-17:00
+    thursday        09:00-17:00
+    friday          09:00-17:00
+  }
+
+  # Command definition
+  define command {
+    command_name    check_ping
+    command_line    $USER1$/check_ping -H $HOSTADDRESS$ -w \
+      $ARG1$ -c $ARG2$ -p 5
+  }
+
+CGI Configuration File
+----------------------
+
+``/etc/nagios/cgi.cfg``
+
+* Uses HTAuth (Simple authentication)
+* Users need to be added to the ``authorized_for_*`` options
+
+.. code-block:: ini
+
+  main_config_file=/etc/nagios/nagios.cfg
+  physical_html_path=/usr/share/nagios/html
+  url_html_path=/nagios
+  use_authentication=1
+  authorized_for_system_information=nagiosadmin
+  authorized_for_configuration_information=nagiosadmin
+  authorized_for_system_commands=nagiosadmin
+  authorized_for_all_services=nagiosadmin
+  authorized_for_all_hosts=nagiosadmin
+  authorized_for_all_service_commands=nagiosadmin
+  authorized_for_all_host_commands=nagiosadmin
+
+Installing Nagios
+-----------------
+
+.. code-block:: console
+
+  $ yum install epel-release
+  $ yum install nagios
+  $ systemctl start nagios httpd
+
+* Log into http://140.211.168.XXX/nagios
+* user: ``nagiosadmin`` password: ``nagiosadmin``
+
 Resources
 ---------
 
 * `Nagios Core Documentation`__
+* `CGI Configuration File Options`__
+* `Authentication And Authorization In The CGIs`__
 
-.. __: http://nagios.sourceforge.net/docs/nagioscore/3/en/toc.html
+.. __: http://nagios.sourceforge.net/docs/nagioscore/4/en/toc.html
+.. __: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/configcgi.html
+.. __: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/cgiauth.html
