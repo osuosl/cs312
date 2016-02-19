@@ -154,7 +154,7 @@ servers.
   Core
 * Offers Rule-based configuration and auto detection of servers
 * Scales extremely well
-* Excellent web frontend
+* Excellent web front-end
 
 .. _Check_MK: http://mathias-kettner.com/check_mk.html
 
