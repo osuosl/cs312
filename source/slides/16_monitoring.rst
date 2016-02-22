@@ -89,7 +89,7 @@ in ``/proc``!
     65535
     $ wc -l /proc/net/nf_conntrack
     65535
-    $ netstat -i -a | tail -n +3 | wc -l
+    $ netstat --inet -a | tail -n +2 | wc -l
     75
 
 Example
@@ -162,6 +162,13 @@ Kinds of Analysis
 * mean, median, mode
 * Holt-Winters (triple exp. smoothing)
 * anomaly detection (often using ESD)
+
+What is Analysis Used For
+-------------------------
+
+* Monitoring
+* Orchestration
+* Correlation of events
 * 
 
 Learning More
