@@ -56,7 +56,7 @@ Thinking ahead, you bumped **nf_conntrack_max**, and have a nagios check
 that determines if you can open a new connection.
 
 Additionally, you have monitoring that graphs
-``netstat -i -a | tail -n +3 | wc -l`` so
+``ss -4 -a | tail -n +2 | wc -l`` so
 you know the number of connections over time.
 
 Example
@@ -77,9 +77,9 @@ What you know
 Example
 -------
 
-It turns out that your monitoring via ``netstat`` was incorrect
+It turns out that your monitoring via ``ss`` was incorrect
 
-``netstat`` doesn't list all connections! It doesn't list NAT or
+``ss`` doesn't list all connections! It doesn't list NAT or
 routed connections at all. Instead, lets look at the routing table
 in ``/proc``!
 
@@ -89,7 +89,7 @@ in ``/proc``!
     65535
     $ wc -l /proc/net/nf_conntrack
     65535
-    $ netstat --inet -a | tail -n +2 | wc -l
+    $ ss -4 -a | tail -n +2 | wc -l
     75
 
 Example
@@ -169,7 +169,6 @@ What is Analysis Used For
 * Monitoring
 * Orchestration
 * Correlation of events
-* 
 
 Learning More
 -------------
