@@ -1,7 +1,7 @@
 .. _17_monitoring:
 
-Monitoring
-==========
+Monitoring Concepts
+===================
 
 Definitions
 -----------
