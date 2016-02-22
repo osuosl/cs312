@@ -30,27 +30,22 @@ Car Alarms
 * Car alarms have a low sensitivity rate (They don't go off when they should)
 * They also have a low specificity rate (They go off when they shouldn't)
 
+**Nobody** likes car alarms.
+
 Smoke Alarms
 ------------
 
-* Smoke alarms have a high sensitivity rate (they go off when there is smoke)
-* Smoke alarms have a high specificity rate (there is usually smoke when
-  they go off)
+.. image:: ../_static/160209+smoke+alarms.png
 
-Expected Value
---------------
+Smoke Alarms
+------------
 
-Let **X** be a random variable, then **E(X)** is the mean of X.
-**E(i)** for some **i** in **X** is the probability of **i** occurring
-multiplied by the value of **i**
+* Smoke alarms go off frequently (low Sensitivity)
+* Smoke alarms almost always go off when there is smoke (high Specificity)
 
-Suppose **X** is the results of a fair 6-sided die, then **E(X)** is
-**3.5**. **E(1) = 1/6**, **E(2) = 2/6 = 1/3**, and so on.
+Despite the fact that Smoke Alarms don't score great, we're okay with this.
 
-Note that **E(X) = sum(E(i) for all i in X)**, or
-
-**1/6 + 2/6 + 3/6 + 4/6 + 5/6 + 6/6 = 21/6 = 3 and 3/6 = 3.5**
-
+**Why?**
 
 Example
 -------
@@ -84,7 +79,7 @@ Example
 
 It turns out that your monitoring via ``netstat`` was incorrect
 
-``netstat`` doesn't list all connections! It doesn't list NAT'd or
+``netstat`` doesn't list all connections! It doesn't list NAT or
 routed connections at all. Instead, lets look at the routing table
 in ``/proc``!
 
@@ -92,13 +87,35 @@ in ``/proc``!
 
     $ cat /proc/net/nf_conntrack_max
     65535
+    $ wc -l /proc/net/nf_conntrack
+    65535
+    $ netstat -i -a | tail -n +3 | wc -l
+    75
+
+Example
+-------
+
+* This test has a bad specificity (there are false-negatives)
+* But its sensitivity is okay (low false-positives)
+* How bad is this test?
+
+Tests
+-----
+
+Possibilities:
+
+1. low sensitivity and low specificity
+2. low sensitivity, high specificity
+3. high sensitivity, low specificity
+4. high sensitivity, high specificity
+
+Is 2 or 3 worse?
 
 Example
 -------
 
 How does this matter?
 
-* If **E(i)** is relatively large, that is bad
 * Even when you can monitor problems, you can't monitor always
   monitor all causal events, both due to realism and human error
 * When your monitoring fails to alert, or even measure an event,
@@ -137,6 +154,15 @@ Why Time Series Data is Important
 * Can be used to correlate events
 * Performance monitoring and long-term performance gains
 * Discovering trends in data
+
+
+Kinds of Analysis
+-----------------
+
+* mean, median, mode
+* Holt-Winters (triple exp. smoothing)
+* anomaly detection (often using ESD)
+* 
 
 Learning More
 -------------
