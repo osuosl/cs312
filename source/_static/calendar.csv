@@ -28,7 +28,7 @@ M 2/15,Midterm #2,
 W 2/17,:slides:ref:`15_ansible_demo`, "**BRING LAPTOPS!**"
 F 2/19,:slides:ref:`16_nagios`,
 ,**Week 8**,
-M 2/22,Monitoring Concepts,HW#4 Assigned
+M 2/22,:slides:ref:`17_monitoring`,HW#4 Assigned
 W 2/24,High Availability / Load Balancers,"Project #2 Due; Project #3 Assigned"
 F 2/26,HAProxy,
 ,**Week 9**,
