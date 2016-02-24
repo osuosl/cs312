@@ -105,6 +105,17 @@ Reliability
   *Reliability can be defined as the probability that a system will produce
   correct outputs up to some given time.* -- Wikipedia
 
+Testing reliability:
+
+.. rst-class:: build
+
+**Feature Testing**
+  Checks the features provided by the software or system
+**Load Testing**
+  Check the performance of the software or system under load
+**Regression Testing**
+  Check to see if any new bugs have been introduced with previous bug fixes
+
 Single Point of Failure
 -----------------------
 
@@ -119,6 +130,8 @@ Examples:
 * Single database node
 * Network switch
 * Non-redundant power
+* Power distribution and configuration
+* Geo-location
 
 Single Point of Failure
 -----------------------
@@ -151,6 +164,15 @@ Example:
 Examples of HA Systems
 ----------------------
 
+.. rst-class:: build
+
+* Resource Manager -- Pacemaker
+* Messaging Layer -- Corosync or Heartbeat
+* Resource Agents
+* Data replication -- DRBD, GlusterFS, etc
+* Database Replication
+* Load balancers -- HAproxy, Varnish, etc
+
 Scaling
 =======
 
@@ -166,6 +188,10 @@ Two forms:
 
 * Horizontal
 * Vertical
+
+.. image:: ../_static/hori-vert.png
+  :align: right
+  :width: 60%
 
 Horizontal Scaling
 ------------------
@@ -274,8 +300,12 @@ Scalability
 Truths about Scalability
 ------------------------
 
+.. rst-class:: build
+
 #. It won't scale if it's not designed to scale
 #. Even if its designed to scale, there's going to be pain
+
+.. image:: ../_static/scaling.jpg
 
 CAP Theorem
 -----------
