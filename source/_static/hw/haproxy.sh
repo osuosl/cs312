@@ -1,7 +1,7 @@
 #!/bin/bash
-# HW6 - Setup some simple python HTTP servers to simulate various applications
+# PROJ3 - Setup some simple python HTTP servers to simulate various applications
 
-WORKDIR="/tmp/hw6"
+WORKDIR="/tmp/proj3"
 LOGS="${WORKDIR}/logs"
 SITES="${WORKDIR}/sites"
 mkdir -p $LOGS
