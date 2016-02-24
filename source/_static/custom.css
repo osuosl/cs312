@@ -42,3 +42,10 @@ pre {
     max-height: 500px;
     overflow-x: hidden;
 }
+
+.math {
+    font-size: .8em;
+}
+.MathJax_Display {
+    text-align: left !important;
+}
