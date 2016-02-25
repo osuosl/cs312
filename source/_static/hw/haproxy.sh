@@ -2,29 +2,51 @@
 # PROJ3 - Setup some simple python HTTP servers to simulate various applications
 
 WORKDIR="/tmp/proj3"
-LOGS="${WORKDIR}/logs"
 SITES="${WORKDIR}/sites"
-mkdir -p $LOGS
 
 # Blog
 mkdir -p ${SITES}/blog/
 echo "<html><body>Blog Page</body></html>" > ${SITES}/blog/index.html
-cd ${SITES}/blog/
-python -m SimpleHTTPServer 8000 2> ${LOGS}/blog-8000.log > /dev/null &
-python -m SimpleHTTPServer 8001 2> ${LOGS}/blog-8001.log > /dev/null &
-
 # Admin page
-mkdir -p ${SITES}/admin/
-echo "<html><body>Admin Page</body></html>" > ${SITES}/admin/index.html
-cd ${SITES}/admin/
-python -m SimpleHTTPServer 8002 2> ${LOGS}/admin-8002.log > /dev/null &
-
+mkdir -p ${SITES}/intranet/
+echo "<html><body>Intranet Page</body></html>" > ${SITES}/intranet/index.html
 # www site
 mkdir -p ${SITES}/www/
 echo "<html><body>WWW Page</body></html>" > ${SITES}/www/index.html
-cd ${SITES}/www/
-python -m SimpleHTTPServer 8003 2> ${LOGS}/www-8003.log > /dev/null &
-python -m SimpleHTTPServer 8004 2> ${LOGS}/www-8004.log > /dev/null &
-python -m SimpleHTTPServer 8005 2> ${LOGS}/www-8005.log > /dev/null &
-python -m SimpleHTTPServer 8006 2> ${LOGS}/www-8006.log > /dev/null &
-python -m SimpleHTTPServer 8007 2> ${LOGS}/www-8007.log > /dev/null &
+
+for i in blog intranet www ; do
+  cat << EOF > /etc/systemd/system/cs312-${i}@.service
+[Unit]
+Description=cs312-${i} %I
+
+[Service]
+ExecStart=/usr/bin/python -m SimpleHTTPServer %I
+WorkingDirectory=/tmp/proj3/sites/${i}
+Type=simple
+User=nobody
+Group=nobody
+
+[Install]
+WantedBy=multi-user.target
+EOF
+done
+
+systemd_path=/etc/systemd/system
+ln -sf ${systemd_path}/cs312-blog@.service ${systemd_path}/cs312-blog@8000.service
+ln -sf ${systemd_path}/cs312-blog@.service ${systemd_path}/cs312-blog@8001.service
+ln -sf ${systemd_path}/cs312-intranet@.service ${systemd_path}/cs312-intranet@8002.service
+ln -sf ${systemd_path}/cs312-www@.service ${systemd_path}/cs312-www@8003.service
+ln -sf ${systemd_path}/cs312-www@.service ${systemd_path}/cs312-www@8004.service
+ln -sf ${systemd_path}/cs312-www@.service ${systemd_path}/cs312-www@8005.service
+ln -sf ${systemd_path}/cs312-www@.service ${systemd_path}/cs312-www@8006.service
+ln -sf ${systemd_path}/cs312-www@.service ${systemd_path}/cs312-www@8007.service
+
+systemctl daemon-reload
+systemctl start cs312-blog@8000
+systemctl start cs312-blog@8001
+systemctl start cs312-intranet@8002
+systemctl start cs312-www@8003
+systemctl start cs312-www@8004
+systemctl start cs312-www@8005
+systemctl start cs312-www@8006
+systemctl start cs312-www@8007
