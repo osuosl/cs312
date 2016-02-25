@@ -29,15 +29,15 @@ W 2/17,:slides:ref:`15_ansible_demo`, "**BRING LAPTOPS!**"
 F 2/19,:slides:ref:`16_nagios`,
 ,**Week 8**,
 M 2/22,:slides:ref:`17_monitoring`,":download:`HW#4 Assigned <_static/hw/homework4.pdf>`"
-W 2/24,:slides:ref:`18_high_availability`,"Project #2 Due; Project #3 Assigned"
+W 2/24,:slides:ref:`18_high_availability`,"Project #2 Due; :download:`Project #3 Assigned <_static/hw/project3.pdf>`"
 F 2/26,HAProxy,
 ,**Week 9**,
 M 2/29,Virtualization,HW#4 Due
 W 3/1,Containers,HW #5 Assigned
 F 3/4,Distributed Systems,
 ,**Week 10 (Dead week)**,
-M 3/7,TBA,Project #3 Due
-W 3/9,Review,HW#5 Due
+M 3/7,TBA,
+W 3/9,Review,"HW#5 Due; Project #3 Due"
 F 3/11,Review,
 ,**Week 11 (Finals Week)**,
 R 3/17,Final at 2-4pm in KEC 1001 (Tentative),
