@@ -30,7 +30,7 @@ F 2/19,:slides:ref:`16_nagios`,
 ,**Week 8**,
 M 2/22,:slides:ref:`17_monitoring`,":download:`HW#4 Assigned <_static/hw/homework4.pdf>`"
 W 2/24,:slides:ref:`18_high_availability`,"Project #2 Due; :download:`Project #3 Assigned <_static/hw/project3.pdf>`"
-F 2/26,HAProxy,
+F 2/26,:slides:ref:`19_loadbalancer`,
 ,**Week 9**,
 M 2/29,Virtualization,HW#4 Due
 W 3/1,Containers,HW #5 Assigned
