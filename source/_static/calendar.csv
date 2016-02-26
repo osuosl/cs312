@@ -32,8 +32,8 @@ M 2/22,:slides:ref:`17_monitoring`,":download:`HW#4 Assigned <_static/hw/homewor
 W 2/24,:slides:ref:`18_high_availability`,"Project #2 Due; :download:`Project #3 Assigned <_static/hw/project3.pdf>`"
 F 2/26,:slides:ref:`19_loadbalancer`,
 ,**Week 9**,
-M 2/29,Virtualization,HW#4 Due
-W 3/1,Containers,HW #5 Assigned
+M 2/29,:slides:ref:`20_containers`,HW#4 Due
+W 3/1,Virtualization,HW #5 Assigned
 F 3/4,Distributed Systems,
 ,**Week 10 (Dead week)**,
 M 3/7,TBA,
