@@ -203,8 +203,17 @@ Proprietary Load Balancers
 * BIG-IP (F5 Networks)
 * NetScaler (Citrix)
 
-Pros/Cons
----------
+Load Balancing Diagram
+----------------------
+
+.. figure:: ../_static/ha-diagram-animated.gif
+
+  Figure taken from `DigitalOcean`__
+
+.. __: https://www.digitalocean.com/community/tutorials/how-to-create-a-high-availability-haproxy-setup-with-corosync-pacemaker-and-floating-ips-on-ubuntu-14-04
+
+Load Balancer Pros/Cons
+-----------------------
 
 .. rst-class:: build
 
@@ -494,8 +503,13 @@ Let's send traffic for the sub directory **/www1** to **www1** and **/www2** to
 Rewriting Headers
 -----------------
 
+``reqrep`` replaces a regular expression with a string in an HTTP request line.
 
-.. rst-class:: codeblock-sm
+.. code-block:: console
+
+  reqrep  <search> <string> [{if | unless} <cond>]
+
+Replace ``/www1`` with ``/`` at the beginning of any request path:
 
 .. code-block:: console
   :emphasize-lines: 4,8
@@ -520,7 +534,7 @@ Let's add a health check.
 
   backend servers
     balance roundrobin
-    option httpchk GET /www1/
+    option httpchk GET /index.html
     server www1 localhost:8003 weight 50 check
     server www2 localhost:8004 weight 100 check
 
