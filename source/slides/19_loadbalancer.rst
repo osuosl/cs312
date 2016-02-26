@@ -358,7 +358,7 @@ page using systemd.
 
 .. code-block:: console
 
-  $ wget http://cs312.osuosl.org/_static/hw/haproxy.sh | bash
+  $ wget -O- http://cs312.osuosl.org/_static/hw/haproxy.sh | bash
 
 Add Frontend/Backend
 --------------------
