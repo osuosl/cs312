@@ -318,14 +318,14 @@ Global Config
 ::
 
   global
-      log         /dev/log local0 info
-      chroot      /var/lib/haproxy
-      pidfile     /var/run/haproxy.pid
-      maxconn     4000
-      user        haproxy
-      group       haproxy
-      daemon
-      stats socket /var/lib/haproxy/stats
+    log         /dev/log local0 info
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+    stats socket /var/lib/haproxy/stats
 
 Defaults Config
 ---------------
@@ -333,22 +333,22 @@ Defaults Config
 ::
 
   defaults
-      mode                    http
-      log                     global
-      option                  httplog
-      option                  dontlognull
-      option                  http-server-close
-      option                  forwardfor except 127.0.0.0/8
-      option                  redispatch
-      retries                 3
-      timeout check           2s
-      timeout client          1m
-      timeout connect         10s
-      timeout http-keep-alive 10s
-      timeout http-request    10s
-      timeout queue           1m
-      timeout server          1m
-      maxconn                 3000
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option                  http-server-close
+    option                  forwardfor except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout check           2s
+    timeout client          1m
+    timeout connect         10s
+    timeout http-keep-alive 10s
+    timeout http-request    10s
+    timeout queue           1m
+    timeout server          1m
+    maxconn                 3000
 
 Deploy some web applications
 ----------------------------
@@ -370,12 +370,12 @@ Try accessing the website using your VM's IP, what do you see?
 ::
 
   frontend http
-      bind 0.0.0.0:80
-      default_backend servers
+    bind 0.0.0.0:80
+    default_backend servers
 
   backend servers
-      server www1 localhost:8003 check
-      server www2 localhost:8004 check
+    server www1 localhost:8003 check
+    server www2 localhost:8004 check
 
 Proxies in HAProxy
 ------------------
@@ -408,9 +408,9 @@ It's best to secure this port. It can be used to generate graphs as well.
 ::
 
   listen admin
-      bind 0.0.0.0:22002
-      mode http
-      stats uri /
+    bind 0.0.0.0:22002
+    mode http
+    stats uri /
 
 Testing Backends
 ----------------
@@ -427,10 +427,10 @@ Changing the balancing algorithm
 .. code-block:: console
   :emphasize-lines: 2
 
-   backend servers
-       balance roundrobin
-       server www1 localhost:8003 check
-       server www2 localhost:8004 check
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 check
+    server www2 localhost:8004 check
 
 Adjusting the weighting
 -----------------------
@@ -438,10 +438,10 @@ Adjusting the weighting
 .. code-block:: console
   :emphasize-lines: 3-4
 
-   backend servers
-       balance roundrobin
-       server www1 localhost:8003 weight 50 check
-       server www2 localhost:8004 weight 100 check
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
 
 Creating an ACL
 ---------------
@@ -451,11 +451,11 @@ ACLs enable you to direct traffic based on incoming traffic.
 .. code-block:: console
   :emphasize-lines: 3-4
 
-   frontend http
-       bind 0.0.0.0:80
-       acl url_www1 path_beg /www1
-       acl url_www2 path_beg /www2
-       default_backend servers
+  frontend http
+    bind 0.0.0.0:80
+    acl url_www1 path_beg /www1
+    acl url_www2 path_beg /www2
+    default_backend servers
 
 `HAProxy ACLs`_
 
@@ -470,26 +470,45 @@ Let's send traffic for the sub directory **/www1** to **www1** and **/www2** to
 .. rst-class:: codeblock-sm
 
 .. code-block:: console
-  :emphasize-lines: 5-6,14-18
+  :emphasize-lines: 5-6,14-20
 
-   frontend http
-       bind 0.0.0.0:80
-       acl url_www1 path_beg /www1
-       acl url_www2 path_beg /www2
-       use_backend www1 if url_www1
-       use_backend www2 if url_www2
-       default_backend servers
+  frontend http
+    bind 0.0.0.0:80
+    acl url_www1 path_beg /www1
+    acl url_www2 path_beg /www2
+    use_backend www1 if url_www1
+    use_backend www2 if url_www2
+    default_backend servers
 
-   backend servers
-       balance roundrobin
-       server www1 localhost:8003 weight 50 check
-       server www2 localhost:8004 weight 100 check
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
 
-   backend www1
-     server www1 localhost:8003 weight 50 check
+  backend www1
+    server www1 localhost:8003 weight 50 check
 
-   backend www2
-     server www2 localhost:8004 weight 50 check
+  backend www2
+    server www2 localhost:8004 weight 50 check
+
+Rewriting Headers
+-----------------
+
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: console
+  :emphasize-lines: 4,8
+
+  <snip>
+
+  backend www1
+    reqrep ^([^\ :]*)\ /www1[/]?(.*) \1\ /\2
+    server www1 localhost:8003 weight 50 check
+
+  backend www2
+    reqrep ^([^\ :]*)\ /www2[/]?(.*) \1\ /\2
+    server www2 localhost:8004 weight 50 check
 
 Health Checks
 -------------
@@ -499,10 +518,10 @@ Let's add a health check.
 .. code-block:: console
   :emphasize-lines: 3
 
-   backend servers
-       balance roundrobin
-       option httpchk GET /www1/
-       server www1 localhost:8003 weight 50 check
-       server www2 localhost:8004 weight 100 check
+  backend servers
+    balance roundrobin
+    option httpchk GET /www1/
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
 
 Also read up on ``http-check expect``.
