@@ -1,10 +1,12 @@
-.. _21_loadbalancer:
+.. _19_loadbalancer:
 
-Load Balancers
-==============
+Load Balancers / HAProxy
+========================
 
-Definition
-----------
+Load Balancer Definition
+------------------------
+
+.. rst-class:: build
 
 * Distributes a workload across multiple computing resources
 * Typically used for HTTP/HTTPS sites, but can be used for about anything
@@ -13,6 +15,8 @@ Definition
 
 Types
 -----
+
+.. rst-class:: build
 
 **Round Robin DNS**
   Assign multiple IP addresses to the same domain name. Simple and easy to
@@ -49,7 +53,7 @@ with Round Robin DNS, it can be a simple and useful load balancing tool.
 
 .. rst-class:: codeblock-sm
 
-::
+.. code-block:: console
 
   # Querying on campus gives us one server
   $ host ftp.osuosl.org
@@ -68,6 +72,8 @@ with Round Robin DNS, it can be a simple and useful load balancing tool.
 Layer 4 vs Layer 7 load balancing
 ---------------------------------
 
+.. rst-class:: build
+
 **Linux Virtual Server (LVS)**
   Layer 4 kernel-based load balancing. Typically only works on a connection
   level but can offer fast balancing. More complicated to setup and manage.
@@ -82,6 +88,8 @@ Scheduling Algorithms
 
 *Taken from the HAProxy documentation*
 
+.. rst-class:: build
+
 **Round Robin**
   Each server is used in turns, according to their weights.  This is the
   smoothest and fairest algorithm when the server's processing time remains
@@ -90,6 +98,8 @@ Scheduling Algorithms
 
 Scheduling Algorithms
 ---------------------
+
+.. rst-class:: build
 
 **Least Connection**
   The server with the lowest number of connections receives the connection.
@@ -106,6 +116,8 @@ Scheduling Algorithms
 
 Scheduling Algorithms
 ---------------------
+
+.. rst-class:: build
 
 **Source Connection**
   The source IP address is hashed and divided by the total weight of the running
@@ -160,6 +172,8 @@ Persistence
 Software Load Balancers
 -----------------------
 
+.. rst-class:: build
+
 **HAProxy**
   High performance software based load balancer that uses TCP and can be used
   for multiple protocols. Been around since 2000 and used by Github, Reddit,
@@ -172,6 +186,8 @@ Software Load Balancers
 
 Software Load Balancers
 -----------------------
+
+.. rst-class:: build
 
 **Nginx**
   Webserver that can also act as a load balancer and a caching system. It
@@ -187,8 +203,19 @@ Proprietary Load Balancers
 * BIG-IP (F5 Networks)
 * NetScaler (Citrix)
 
-Pros/Cons
----------
+Load Balancing Diagram
+----------------------
+
+.. figure:: ../_static/ha-diagram-animated.gif
+
+  Figure taken from `DigitalOcean`__
+
+.. __: https://www.digitalocean.com/community/tutorials/how-to-create-a-high-availability-haproxy-setup-with-corosync-pacemaker-and-floating-ips-on-ubuntu-14-04
+
+Load Balancer Pros/Cons
+-----------------------
+
+.. rst-class:: build
 
 **Pros**
   * Helps you scale more easily
@@ -263,9 +290,252 @@ HAProxy Example Configuration
     backend unrecognized_site
       server others 10.0.255.1:80
 
-Monday
-======
+Hands-on HAProxy
+----------------
 
-* Bring your laptops!
-* HW3 will be handed back
+1. Install and setup HAProxy
+2. Setup several backends
+3. Test failover with backends
+4. Configure and test intranet page
 
+Install HAProxy
+---------------
+
+Create a new VM
+
+.. code-block:: console
+
+  $ yum install haproxy
+  $ systemctl start haproxy
+
+Logging on HAProxy
+------------------
+
+HAProxy by default sends logs to localhost so we need to change the config to
+send it directly to systemd.
+
+Add the following to ``/etc/haproxy/haproxy.cfg``
+
+::
+
+  global
+    log /dev/log local0 info
+
+Global Config
+-------------
+
+::
+
+  global
+    log         /dev/log local0 info
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+    stats socket /var/lib/haproxy/stats
+
+Defaults Config
+---------------
+
+::
+
+  defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option                  http-server-close
+    option                  forwardfor except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout check           2s
+    timeout client          1m
+    timeout connect         10s
+    timeout http-keep-alive 10s
+    timeout http-request    10s
+    timeout queue           1m
+    timeout server          1m
+    maxconn                 3000
+
+Deploy some web applications
+----------------------------
+
+This script sets up a set of simple Python web servers that serve a simple web
+page using systemd.
+
+.. code-block:: console
+
+  $ wget -O- http://cs312.osuosl.org/_static/hw/haproxy.sh | bash
+
+Add Frontend/Backend
+--------------------
+
+Append the frontend and backend configuration to the ``haproxy.cfg`` file.
+
+Try accessing the website using your VM's IP, what do you see?
+
+::
+
+  frontend http
+    bind 0.0.0.0:80
+    default_backend servers
+
+  backend servers
+    server www1 localhost:8003 check
+    server www2 localhost:8004 check
+
+Proxies in HAProxy
+------------------
+
+**defaults**
+  Sets default parameters for all other proxy sections.
+
+**frontend**
+  Listening sockets accepting client connections.
+
+**backend**
+  Set of servers to which the proxy will connect to forward incoming connections.
+
+**listen**
+  Defines a complete proxy with its frontend and backend parts combined in one
+  section. Typically useful for TCP only or for the admin port.
+
+`Matrix of proxy keywords`_
+
+.. _Matrix of proxy keywords: http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#4.1
+
+Admin Panel
+-----------
+
+HAProxy provides a nice web page to display stats. To enable it, add the
+following to your config and reload haproxy.
+
+It's best to secure this port. It can be used to generate graphs as well.
+
+::
+
+  listen admin
+    bind 0.0.0.0:22002
+    mode http
+    stats uri /
+
+Testing Backends
+----------------
+
+Let's try taking down the ``www2`` backend and see what happens.
+
+.. code-block:: console
+
+  $ systemctl stop cs312-www@8004
+
+Changing the balancing algorithm
+--------------------------------
+
+.. code-block:: console
+  :emphasize-lines: 2
+
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 check
+    server www2 localhost:8004 check
+
+Adjusting the weighting
+-----------------------
+
+.. code-block:: console
+  :emphasize-lines: 3-4
+
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
+
+Creating an ACL
+---------------
+
+ACLs enable you to direct traffic based on incoming traffic.
+
+.. code-block:: console
+  :emphasize-lines: 3-4
+
+  frontend http
+    bind 0.0.0.0:80
+    acl url_www1 path_beg /www1
+    acl url_www2 path_beg /www2
+    default_backend servers
+
+`HAProxy ACLs`_
+
+.. _HAProxy ACLs: http://cbonte.github.io/haproxy-dconv/configuration-1.5.html#7.1
+
+Redirect traffic using an ACL
+-----------------------------
+
+Let's send traffic for the sub directory **/www1** to **www1** and **/www2** to
+**www2**.
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: console
+  :emphasize-lines: 5-6,14-20
+
+  frontend http
+    bind 0.0.0.0:80
+    acl url_www1 path_beg /www1
+    acl url_www2 path_beg /www2
+    use_backend www1 if url_www1
+    use_backend www2 if url_www2
+    default_backend servers
+
+  backend servers
+    balance roundrobin
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
+
+  backend www1
+    server www1 localhost:8003 weight 50 check
+
+  backend www2
+    server www2 localhost:8004 weight 50 check
+
+Rewriting Headers
+-----------------
+
+``reqrep`` replaces a regular expression with a string in an HTTP request line.
+
+.. code-block:: console
+
+  reqrep  <search> <string> [{if | unless} <cond>]
+
+Replace ``/www1`` with ``/`` at the beginning of any request path:
+
+.. code-block:: console
+  :emphasize-lines: 4,8
+
+  <snip>
+
+  backend www1
+    reqrep ^([^\ :]*)\ /www1[/]?(.*) \1\ /\2
+    server www1 localhost:8003 weight 50 check
+
+  backend www2
+    reqrep ^([^\ :]*)\ /www2[/]?(.*) \1\ /\2
+    server www2 localhost:8004 weight 50 check
+
+Health Checks
+-------------
+
+Let's add a health check.
+
+.. code-block:: console
+  :emphasize-lines: 3
+
+  backend servers
+    balance roundrobin
+    option httpchk GET /index.html
+    server www1 localhost:8003 weight 50 check
+    server www2 localhost:8004 weight 100 check
+
+Also read up on ``http-check expect``.
