@@ -3,10 +3,132 @@
 Containers
 ==========
 
+What are Containers?
+--------------------
+
+  *A method of isolating multiple user-space environments using the system
+  kernel instead of a hypervisor*
+
+* Operating System level virtualization
+* Provides little to know overhead
+* Allows to contain software applications in a secure manner
+* Also allows to limit resources per application easily with cgroups
+* Does not fully emulate the operating system like hypervisors do
+
+Chroot
+------
+
+  *Changes the apparent root directory for the current running process and its
+  children*
+
+* Provides filesystem isolation
+* Restrict process access to the rest of the system
+* Useful for creating testing and development environments
+* Allows you to run software in a separated environment from your system
+* Useful during recovery of a system
+* Fairly easy to break out of chroots
+* Very limited on features
+
+Components of Linux Containers
+------------------------------
+
+Uses integrated features included in the Linux Kernel. Basically chroot on
+steroids.
+
+**Two components are required in Linux to make containers work:**
+
+.. rst-class:: build
+
+**CGroups**
+  Process resource limiting, prioritization, accounting and control
+**Namespace Isolation**
+  Groups of processes are separated in a way which they cannot see resources in
+  other groups
+
+Namespace Isolation
+-------------------
+
+.. rst-class:: build
+
+**PID Namespace**
+  Provides isolation in PIDs, list of processes and their details. The new
+  namespace is isolated from other namespaces with their own different set of
+  PIDs.
+**Network Namespace**
+  Isolates NICs (virtual or physical), iptables firewall rules and routing
+  tables. They are connected using virtual ethernet devices (``veth``).
+**UTS Namespace**
+  Allows changing the hostname.
+
+Namespace Isolation
+-------------------
+
+.. rst-class:: build
+
+**Mount Namespace**
+  Allows creating a different file system layout, or making mount points
+  read-only.
+**IPC Namespace**
+  Isolates the inter-process communication between namespaces.
+**User namespace**
+  Isolates user IDs between namespaces.
+
+Implementations of Containers
+-----------------------------
+
+* Docker
+* LXC
+* FreeBSD jail
+* Solaris Zones
+* Linux-VServer
+* OpenVZ
+
+Docker
+------
+
+  *Open source project that automates deployments of applications inside of
+  Linux containers*
+
+* Started as an internal project within dotCloud, a PaaS company
+* Released as opensource in March 2013
+* First version used LXC for the execution environment
+* Dropped LXC in favor of libcontainer in March of 2014 (now known as runc)
+
+Install and run Docker
+----------------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: console
+
+  $ yum install docker
+  $ systemctl start docker
+
+  # Hello world
+  $ docker run centos /bin/echo 'Hello world'
+
+  # Interactive container
+  $ docker run -t -i ubuntu /bin/bash
+  root@f9a237bdde9f:/#
+
+  # Daemonized Hello World
+  $ docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done"
+  45637cb38ddcfe4b9693fecd956e865167798dab435c55aae712cf6b83f62ecd
+
+  # Show running containers
+  $ docker ps
+
+  # See output from container
+  $ docker logs <container name>
+
+  # Stop container
+  $ docker stop <container name>
+
 Dockerfiles
 -----------
 
-Dockerfiles have a fairly simple syntax of the form:
+``Dockerfiles`` are configuration files for Docker and have a fairly simple
+syntax of the form:
 
 .. code-block:: docker
 
@@ -18,7 +140,7 @@ as a base:
 
 .. code-block:: docker
 
-  FROM ubuntu:latest
+  FROM centos:latest
   # do more stuff
 
 Dockerfiles
@@ -26,159 +148,109 @@ Dockerfiles
 
 .. csv-table::
    :header: Instruction,Explanation
-   :widths: 5, 10
+   :widths: 5, 15
 
-   FROM,The container to build from.
-   MAINTAINER,Lets you set the author metadata.
-   RUN,Runs command inside the docker image that is being built.
-   CMD,The command to run for ``docker run`` after container is built. Only one allowed.
-   EXPOSE,Ports to expose for when docker links are being used. Does not expose ports to the host.
+   ``FROM``,The container to build from the `Docker Hub`__.
+   ``MAINTAINER``,Lets you set the author metadata.
+   ``RUN``,Runs command inside the docker image that is being built.
+   ``CMD``,"The command to run for ``docker run`` after container is built.
+   **Only one allowed**."
+   ``EXPOSE``,"Ports to expose for when docker links are being used. Does not
+   expose ports to the host."
+   ``ENV``,Sets environment variables in the container
 
-Dockerfiles
------------
 
-.. csv-table::
-   :header: Instruction,Explanation
-   :widths: 5,10
-
-   ENV,Sets environment variables in the container
-   ADD,Copies new files into the container. Allows input to be compressed or urls
-   COPY,Like ADD. No use of urls or compressed archives
-   ENTRYPOINT,Command for ``docker run`` to default to; ``CMD`` is appended.
+.. __: https://hub.docker.com/
 
 Dockerfiles
 -----------
 
 .. csv-table::
    :header: Instruction,Explanation
-   :widths: 5,10
+   :widths: 5,15
 
-   USER,User to run all subsequent commands as
-   VOLUME,Used for mount points
-   WORKDIR,Default working dir for other commands
-   ONBUILD,Trigger when container is used as a base for other containers.
+   ``ADD``,"Copies new files into the container. Allows input to be compressed
+   or urls"
+   ``COPY``,Like ``ADD``. No use of urls or compressed archives
+   ``ENTRYPOINT``,"Command for ``docker run`` to default to; ``CMD`` is
+   appended."
+   ``USER``,User to run all subsequent commands as
+   ``VOLUME``,"Creates a mount point with the specified name and marks it as
+   holding externally mounted volumes from native host or other containers"
+   ``WORKDIR``,Default working dir for other commands
+   ``ONBUILD``,Trigger when container is used as a base for other containers.
 
 Example Dockerfile
 ------------------
 
-Lets build an example Dockerfile that installs ``znc``, an IRC bouncer.
+Lets build an example ``Dockerfile`` that serves a simple python-based echo
+server.
+
+.. rst-class:: codeblock-sm
 
 .. code-block:: docker
 
   FROM centos
   MAINTAINER cs312@osuosl.org # Change your email here
 
-  RUN yum update -y
-  RUN yum install -y epel-release
-
-  RUN yum install -y znc
-
-  <snip>
+  ADD http://ilab.cs.byu.edu/python/code/echoserver-simple.py /echoserver-simple.py
 
 Example Dockerfile
 ------------------
 
 This is a good start, but we should also:
 
-* Expose the znc port
-* Allow a user to insert their own znc config
-* Expose the znc dir as a volume
+.. rst-class:: build
+
+* Expose the echo server port
 * Give the container a default cmd to run.
 
-.. code-block:: docker
+.. rst-class:: build
 
-  <snip>
-  USER znc
-  EXPOSE 6667
-  VOLUME ["/var/lib/znc"]
-  CMD ["znc", "-f"]
+.. rst-class:: codeblock-sm
+
+.. code-block:: docker
+  :emphasize-lines: 5-6
+
+  FROM centos
+  MAINTAINER cs312@osuosl.org # Change your email here
+
+  ADD http://ilab.cs.byu.edu/python/code/echoserver-simple.py /echoserver-simple.py
+  EXPOSE 50000
+  CMD ["python", "/echoserver-simple.py"]
 
 Example Dockerfile
 ------------------
-
-Assuming we have a ``.znc`` dir in ``/home/core/znc``, we can build and run our
-Dockerfile!
 
 .. code-block:: console
 
-  $ docker build -t cs312/znc .
-  $ docker run -d -v /home/core/znc:/var/lib/znc -p 6667:6667 cs312/znc
+  $ docker build -t cs312/echo .
+  $ docker run -d -p 50000:50000 cs312/echo
+  $ yum install nc
+  $ nc localhost 50000
+  foo
+  foo
 
-Example Dockerfile
-------------------
+Docker + systemd
+----------------
 
 What happens when our server reboots? We lose our container! Lets fix this by
-adding a systemd unit file and running it with fleet:
-
-.. rst-class:: codeblock-sm
+adding a systemd unit file:
 
 ::
 
   [Unit]
-  Description=znc service
-  BindsTo=znc.service
+  Description=echo service
+  BindsTo=echo.service
 
   [Service]
-  ExecStartPre=-/usr/bin/docker kill cs312/znc
-  ExecStartPre=-/usr/bin/docker rm cs312/znc
-  ExecStart=/usr/bin/docker run --name znc -d -v /home/core/znc:/var/lib/znc \
-  -p 6667:6667 cs312/znc
-  ExecStop=/usr/bin/docker stop cs312/znc
-
-Example Dockerfile
-------------------
-
-Make sure etcd and fleet are running:
-
-.. code-block:: console
-
-  $ systemctl start etcd
-  $ systemctl start fleet
-  $ fleetctl list-machines
-  MACHINE     IP              METADATA
-  200ab8b3... 162.243.132.158 -
-
-Add the service to fleet and start it:
-
-.. code-block:: console
-
-  $ fleetctl submit znc
-  $ fleetctl load znc
-  Unit znc.service loaded on 200ab8b3.../162.243.132.158
-  $ fleetctl start znc
-  Unit znc.service launched on 200ab8b3.../162.243.132.158
-
-Example Dockerfile
-------------------
-
-Check the logs:
-
-.. rst-class:: codeblock-sm
-
-.. code-block:: console
-
-  $ fleetctl journal znc
-  -- Logs begin at Sat 2015-02-21 21:59:02 UTC, end at Wed 2015-02-25 22:08:45 UTC. --
-  Feb 25 21:45:37 zidane systemd[1]: Starting znc service...
-  Feb 25 21:45:37 zidane docker[12896]: znc
-  Feb 25 21:45:38 zidane docker[12904]: znc
-  Feb 25 21:45:38 zidane systemd[1]: Started znc service.
-  Feb 25 21:45:38 zidane docker[12914]: Checking for list of available modules...
-  Feb 25 21:45:38 zidane docker[12914]: Opening config [/var/lib/znc/.znc/configs/znc.conf]...
-  Feb 25 21:45:38 zidane docker[12914]: Binding to port [6667]...
-  Feb 25 21:45:38 zidane docker[12914]: Loading user [cs312]
-  Feb 25 21:45:38 zidane docker[12914]: Staying open for debugging [pid: 1]
-  Feb 25 21:45:38 zidane docker[12914]: ZNC 1.4 - http://znc.in
-
-Fleet & Etcd
-------------
-
-Note that fleetctl doesn't enable the znc service on boot, because
-if this machine goes down, a fleet will start it on a new machine.
-
-Obviously, this is problematic if you only have one machine in your fleet.
+  ExecStartPre=-/bin/docker kill echo
+  ExecStartPre=-/bin/docker rm echo
+  ExecStart=/bin/docker run --name echo -p 50000:50000 cs312/echo
+  ExecStop=/bin/docker stop echo
 
 Resources
 ---------
 
 * https://blog.engineyard.com/2015/linux-containers-isolation
+* https://docs.docker.com/engine/reference/builder/
