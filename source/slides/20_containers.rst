@@ -178,3 +178,7 @@ if this machine goes down, a fleet will start it on a new machine.
 
 Obviously, this is problematic if you only have one machine in your fleet.
 
+Resources
+---------
+
+* https://blog.engineyard.com/2015/linux-containers-isolation
