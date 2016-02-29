@@ -249,6 +249,13 @@ adding a systemd unit file:
   ExecStart=/bin/docker run --name echo -p 50000:50000 cs312/echo
   ExecStop=/bin/docker stop echo
 
+What's next?
+------------
+
+* Managing containers in production
+* The ever-changing trends in containers
+* Talk more about this on Friday
+
 Resources
 ---------
 
