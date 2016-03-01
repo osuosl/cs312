@@ -1,9 +1,242 @@
-.. _24_virtualization:
+.. _21_virtualization:
 
 Virtualization
 ==============
 
+History, KVM and Openstack
+
 IaaS/PaaS/SaaS, Ganeti, Cloud Images and Packer
+
+History of Virtualization
+-------------------------
+
+.. figure:: ../_static/virtualization-history.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Hypervisors
+-----------
+
+  *Software, firmware or hardware that creates and runs virtual machines.*
+
+.. rst-class:: build
+
+* A computer that runs virtual machines are called *host machines*
+* Each virtual machine is typically called a *guest machine*
+* Hypervisor presents the guest machine with a virtual operating platform that
+  resembles a real machine
+
+Types of Hypervisors
+--------------------
+
+.. rst-class:: build
+
+**Type 1 - native or bare-metal hypervisor**
+  * Hypervisors that directly run and control the hardware on the host system and
+    manage the guest systems
+  * Examples include: Xen, VMWare ESX Server and Microsoft Hyper-V
+
+**Type 2 - hosted hypervisor**
+  * Hypervisors run on a conventional operating system and abstract guest
+    operating systems from the host operating system
+  * Examples include: VMWare Workstation and VirtualBox
+
+.. rst-class:: build
+
+*Which hypervisor type does KVM fall under?*
+
+Virtualization Framework Generalized
+------------------------------------
+
+.. figure:: ../_static/virt-framework.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Virtualization Framework - KVM
+------------------------------
+
+.. figure:: ../_static/virt-kvm.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+KVM
+---
+
+Open Source hypervisor based on Linux
+
+**KVM**
+  * Kernel-Based Virtual Machine
+  * Kernel module that turns Linux into a virtual machine monitor
+  * Merged into mainline Linux
+
+**QEMU**
+  * Emulator used for I/O device virtualization
+  * Runs as a user-space process
+  * Avi Kivity began the development of KVM at Qumranet in the mid-2000s
+
+Processors Supported
+--------------------
+
+* x86 with virtualization extensions
+* Intel VT-x
+* AMD (AMD-V)
+* POWER8
+* IBM z Systems
+* ARM64
+
+KVM Visualized
+--------------
+
+.. figure:: ../_static/kvm-layers.png
+  :width: 80%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+KVM Command Line
+----------------
+
+KVM has **a lot** of options
+
+.. code-block:: console
+
+  # Create a virtual disk file
+  $ qemu-img create -f qcow2 disk.img 10g
+
+  # Start a VM up and boot to an ISO
+  $ qemu-system-x86_64 -hda disk.img -cdrom \
+    /path/to/CentOS-6.6-x86_64-minimal.iso -boot d -m 1024m
+
+KVM on OpenStack
+----------------
+
+.. rst-class:: codeblock-sm
+
+.. code-block:: console
+
+  /usr/libexec/qemu-kvm -name instance-00000baa -S -M rhel6.6.0 -cpu
+  Westmere,+rdtscp,+pdpe1gb,+dca,+pcid,+pdcm,+xtpr,+tm2,+est,+smx,+vmx,+ds_cpl,+monitor,+dtes64,+pclmuldq,+pbe,+tm,+ht,+ss,+acpi,+ds,+vme
+  -enable-kvm -m 512 -realtime mlock=off -smp 1,sockets=1,cores=1,threads=1 -uuid
+  96bea55c-6d58-4dcf-bc52-09aed81c0cee -smbios type=1,manufacturer=RDO
+  Project,product=OpenStack
+  Nova,version=2014.1.3-3.el6,serial=44454c4c-3400-1051-8059-c7c04f534b31,uuid=96bea55c-6d58-4dcf-bc52-09aed81c0cee
+  -nodefconfig -nodefaults -chardev
+  socket,id=charmonitor,path=/var/lib/libvirt/qemu/instance-00000baa.monitor,server,nowait
+  -mon chardev=charmonitor,id=monitor,mode=control -rtc base=utc,driftfix=slew
+  -no-kvm-pit-reinjection -no-shutdown -device
+  piix3-usb-uhci,id=usb,bus=pci.0,addr=0x1.0x2 -drive
+  file=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/disk,if=none,id=drive-virtio-disk0,format=qcow2,cache=none
+  -device
+  virtio-blk-pci,scsi=off,bus=pci.0,addr=0x4,drive=drive-virtio-disk0,id=virtio-disk0,bootindex=1
+  -drive
+  file=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/disk.swap,if=none,id=drive-virtio-disk1,format=qcow2,cache=none
+  -device
+  virtio-blk-pci,scsi=off,bus=pci.0,addr=0x5,drive=drive-virtio-disk1,id=virtio-disk1
+  -netdev tap,fd=35,id=hostnet0,vhost=on,vhostfd=39 -device
+  virtio-net-pci,netdev=hostnet0,id=net0,mac=fa:16:3e:35:5f:f4,bus=pci.0,addr=0x3
+  -chardev
+  file,id=charserial0,path=/var/lib/nova/instances/96bea55c-6d58-4dcf-bc52-09aed81c0cee/console.log
+  -device isa-serial,chardev=charserial0,id=serial0 -chardev pty,id=charserial1
+  -device isa-serial,chardev=charserial1,id=serial1 -device usb-tablet,id=input0
+  -vnc 10.1.0.114:11 -k en-us -vga cirrus -device
+  virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x6 -msg timestamp=on
+
+Xen
+---
+
+Micro-kernel hypervisor for Linux or BSD
+
+* Originated as a research project at the University of Cambridge
+* Publicly released in 2003 under the GPLv2
+
+.. rst-class:: build
+
+**Domains**
+  * Dom0 -- Domain that has privileged access to hardware
+  * DomU -- Unprivileged domains (VMs)
+
+**Types of Virtualization**
+  * Paravirtualization -- Simulates real hardware (PV Guests)
+  * Hardware Virtual Machine (HVM) -- uses cpu supported virtualization
+
+Xen Visualized
+---------------
+
+.. figure:: ../_static/xen.png
+  :width: 100%
+  :align: center
+
+KVM vs. Xen
+-----------
+
+.. csv-table::
+  :header: KVM, Xen
+
+  Less mature, More mature
+  Runs like a normal unix app, Blackbox feel for how it works
+  Always been in mainline, Had trouble getting into mainline Linux
+  Requires CPU support, Doesn't require CPU support
+  Development is very active and growing, Development has slowed a bit
+  "Used by newer cloud providers (i.e. GCE, DigitalOcean)", "Used by Amazon EC2"
+
+Libvirt -- KVM management
+-------------------------
+
+Libvirt is an open source API daemon that standardizes management of various
+virtualization platforms.
+
+.. figure:: ../_static/libvirt.png
+  :width: 60%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Libvirt Features
+----------------
+
+* Manages multiple hypervisors
+* Powerful CLI tool, but can be complex to use
+* Provides a network daemon to provide API access and remote access
+* Base tool for other management tools:
+
+  * OpenStack, oVirt, virt-manager, Kimchi to just name a few...
+
+OpenStack
+---------
+
+Open source cloud computing platform
+
+* Started in 2010 as a joint venture with NASA and Rackspace
+* Has a modular architecture
+* Very complicated, but has the potential to scale very well
+* Development ongoing, API's/Architecture changes on each release
+* Open Development, Design and Community governance
+* Combines compute, storage and network into one suite
+* Multi-site
+
+OpenStack Visualized
+--------------------
+
+.. figure:: ../_static/openstack.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
+
+Provision a VM on OpenStack
+----------------------------
+
+.. figure:: ../_static/openstack-provision.png
+  :width: 100%
+  :align: center
+
+  Adam Jollans - IBM - SCALE 13x
 
 <Name> as a Service
 -------------------
@@ -18,8 +251,8 @@ IaaS/PaaS/SaaS, Ganeti, Cloud Images and Packer
 Infrastructure as a Service
 ---------------------------
 
-*Virtual computing platform that typically includes automated methods for
-deploying virtual machines on a set of physical machines*
+  *Virtual computing platform that typically includes automated methods for
+  deploying virtual machines on a set of physical machines*
 
 Examples:
 
@@ -34,9 +267,9 @@ Examples:
 Platform as a Service
 ---------------------
 
-*A platform that provides customers the ability to develop, run and manage web
-applications without the complexity of building and maintaining the underlying
-infrastructure*
+  *A platform that provides customers the ability to develop, run and manage web
+  applications without the complexity of building and maintaining the underlying
+  infrastructure*
 
 Typically layered on top of IaaS
 
@@ -45,15 +278,14 @@ Examples:
 * AWS
 * Salesforce
 * Google App Engine
-* Engine Yard
-* Heroku
+* Engine Yard, Heroku
 * OpenShift
 
 Software as a Service
 ---------------------
 
-*Software delivery model in which software is provided on a subscription basis
-and centrally hosted. Also referred to as "on-demand software".*
+  *Software delivery model in which software is provided on a subscription basis
+  and centrally hosted. Also referred to as "on-demand software".*
 
 * Typically layered on top of PaaS and/or IaaS
 * Software is generally designed to be multi-tenant
@@ -63,18 +295,19 @@ and centrally hosted. Also referred to as "on-demand software".*
 Examples:
 
 * Google Docs, Twitter, Facebook, Flickr, etc
-* Hosted Chef Server
 
 Other IaaS Platforms
 --------------------
 
-.. csv-table::
-  :widths: 30, 50
+.. rst-class:: build
 
-  Ganeti, "Virtual machine cluster management tool developed by Google"
-  oVirt, "Virtualization platform and web interface developed by Red Hat"
-  Apache CloudStack, "Cloud computing platform that interfaces with several
-  HyperVisors"
+**Ganeti**
+  Virtual machine cluster management tool developed by Google
+**oVirt**
+  Virtualization platform and web interface developed by Red Hat
+**Apache CloudStack**
+  Cloud computing platform that interfaces with several
+  HyperVisors
 
 Ganeti
 ------
@@ -133,7 +366,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 KVM Live Migration
 ------------------
@@ -142,7 +377,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 KVM Live Migration
 ------------------
@@ -151,7 +388,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 KVM Live Migration
 ------------------
@@ -160,7 +399,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 KVM Live Migration
 ------------------
@@ -169,7 +410,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 KVM Live Migration
 ------------------
@@ -178,7 +421,9 @@ KVM Live Migration
   :width: 100%
   :align: center
 
-  http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
+  `KVM Forum 2007`__
+
+.. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
 Ganeti Architecture
 -------------------
@@ -191,6 +436,7 @@ Ganeti Daemons
 --------------
 
 .. csv-table::
+  :widths: 5,10
 
   ``ganeti-noded``, "Control hardware resources, runs on all nodes"
   ``ganeti-confd``,  "Only functional on master, runs on all nodes"
@@ -221,8 +467,10 @@ Primary and Secondary Nodes
 Cloud/System Image
 ------------------
 
-*A copy of an operating system including the entire state of the computer system
-stored in a non-volatile form such as a file.*
+  *A copy of an operating system including the entire state of the computer
+  system stored in a non-volatile form such as a file.*
+
+.. rst-class:: build
 
 * A single file represents an entire filesystem
 * Typically support extra features such as Copy-on-Write
@@ -379,16 +627,8 @@ How it works
         "ssh_wait_timeout": "10000s",
         "type": "qemu",
         "vm_name": "packer-centos-7.0-x86_64"
-    }],
-
-How it works
-------------
-
-.. rst-class:: codeblock-very-small
-
-.. code-block:: json
-
-  {
+      }
+    ],
     "provisioners": [
       {
         "environment_vars": [
@@ -419,7 +659,7 @@ Building the Image
 
 .. rst-class:: codeblock-sm
 
-::
+.. code-block:: console
 
   $ packer build centos-7.0-x86_64-openstack.json
   qemu output will be in this color.
@@ -455,3 +695,11 @@ Provisioners
   Puppet Masterless, Run local manifests and modules
   Puppet Server, Connect to a puppet server and run puppet
   Salt, "Using Salt states, deploy a vm using Salt"
+
+References
+----------
+
+* `KVM, OpenStack, and the Open Cloud -- Adam Jollans`__
+
+.. __: http://www.socallinuxexpo.org/scale/13x/presentations/kvm-openstack-and-open-cloud
+
