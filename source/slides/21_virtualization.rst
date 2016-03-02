@@ -70,9 +70,12 @@ KVM
 
 Open Source hypervisor based on Linux
 
+.. rst-class:: build
+
 **KVM**
   * Kernel-Based Virtual Machine
   * Kernel module that turns Linux into a virtual machine monitor
+  * Requires hardware CPU support
   * Merged into mainline Linux
 
 **QEMU**
@@ -84,11 +87,15 @@ Processors Supported
 --------------------
 
 * x86 with virtualization extensions
-* Intel VT-x
-* AMD (AMD-V)
+
+  * Intel VT-x
+  * AMD (AMD-V)
+
+* ARM64
 * POWER8
 * IBM z Systems
-* ARM64
+
+http://www.linux-kvm.org/page/Processor_support
 
 KVM Visualized
 --------------
@@ -152,18 +159,36 @@ Xen
 
 Micro-kernel hypervisor for Linux or BSD
 
-* Originated as a research project at the University of Cambridge
-* Publicly released in 2003 under the GPLv2
-
 .. rst-class:: build
 
-**Domains**
-  * Dom0 -- Domain that has privileged access to hardware
-  * DomU -- Unprivileged domains (VMs)
+* Originated as a research project at the University of Cambridge
+* Publicly released in 2003 under the GPLv2
+* Currently supports IA-32, x86-64 and ARM CPUs
+* Amazon, Linode, Softlayer and Rackspace all use Xen
+* Purchased by Citrix Systems in 2007
+* Moved under the Linux Foundation in 2013
+* Supports virtual machine live migration
 
-**Types of Virtualization**
-  * Paravirtualization -- Simulates real hardware (PV Guests)
-  * Hardware Virtual Machine (HVM) -- uses cpu supported virtualization
+Xen Hypervisor Architecture
+---------------------------
+
+Xen Project runs in a more privileged CPU state than any other software on the
+machine.
+
+**Domains**
+  * Dom0 -- Domain that has privileged access to hardware, or node node
+  * DomU -- Unprivileged domains (VMs), or guests
+
+Types of Xen virtualization
+---------------------------
+
+**Paravirtualization (PV)**
+  * Simulates real hardware (PV Guests)
+  * Guests are run in a modified OS and use a special hypercall ABI
+**Hardware Virtual Machine (HVM)**
+  * Uses hardware assisted virtualization via the CPU
+  * HVM guests with PV drivers (PV-on-HVM or PVH) provide better performance
+    than pure PV
 
 Xen Visualized
 ---------------
@@ -200,12 +225,105 @@ virtualization platforms.
 Libvirt Features
 ----------------
 
-* Manages multiple hypervisors
+.. image:: ../_static/libvirt-support.png
+  :align: right
+  :width: 40%
+
+* Manages multiple hypervisors (KVM, Xen, VMware ESX, QEMU, etc)
 * Powerful CLI tool, but can be complex to use
 * Provides a network daemon to provide API access and remote access
+* Development backed by Red Hat
 * Base tool for other management tools:
 
   * OpenStack, oVirt, virt-manager, Kimchi to just name a few...
+
+<Name> as a Service
+-------------------
+
+.. figure:: ../_static/cloud-computing-layers.png
+  :align: right
+
+  `Wikipedia`__
+
+.. __: https://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29
+
+.. rst-class:: build
+
+**SaaS**
+  Software as a Service
+**Paas**
+  Platform as a Service
+**IaaS**
+  Infrastructure as a Service
+
+Infrastructure as a Service
+---------------------------
+
+  *Virtual computing platform that typically includes automated methods for
+  deploying virtual machines on a set of physical machines*
+
+Examples:
+
+.. rst-class:: build
+
+* EC2
+* OpenStack
+* oVirt
+* Ganeti
+* XenServer, VMWare ESX/ESXi
+* Apache CloudStack, OpenNebula
+* Microsoft Hyper-V
+
+Platform as a Service
+---------------------
+
+  *A platform that provides customers the ability to develop, run and manage web
+  applications without the complexity of building and maintaining the underlying
+  infrastructure*
+
+Typically layered on top of IaaS
+
+Examples:
+
+.. rst-class:: build
+
+* AWS
+* CloudFoundry, OpenShift
+* Salesforce
+* Google App Engine
+* Engine Yard, Heroku
+
+Software as a Service
+---------------------
+
+  *Software delivery model in which software is provided on a subscription basis
+  and centrally hosted. Also referred to as "on-demand software".*
+
+* Typically layered on top of PaaS and/or IaaS
+* Software is generally designed to be multi-tenant
+* Updated by a central provider for all customers
+* Provider deals with scaling up the application for customers
+
+Examples:
+
+* Google Docs, Twitter, Facebook, Flickr, etc
+
+IaaS Platforms
+--------------
+
+.. rst-class:: build
+
+**Private Cloud**
+  * OpenStack
+  * Ganeti
+  * oVirt
+  * Apache CloudStack
+
+**Public Cloud**
+  * Amazon EC2
+  * Linode
+  * DigitalOcean
+  * Rackspace
 
 OpenStack
 ---------
@@ -238,77 +356,6 @@ Provision a VM on OpenStack
 
   Adam Jollans - IBM - SCALE 13x
 
-<Name> as a Service
--------------------
-
-**IaaS**
-  Infrastructure as a Service
-**Paas**
-  Platform as a Service
-**SaaS**
-  Software as a Service
-
-Infrastructure as a Service
----------------------------
-
-  *Virtual computing platform that typically includes automated methods for
-  deploying virtual machines on a set of physical machines*
-
-Examples:
-
-* EC2
-* OpenStack
-* oVirt
-* Ganeti
-* XenServer, VMWare ESX/ESXi
-* Apache CloudStack, OpenNebula
-* Microsoft Hyper-V
-
-Platform as a Service
----------------------
-
-  *A platform that provides customers the ability to develop, run and manage web
-  applications without the complexity of building and maintaining the underlying
-  infrastructure*
-
-Typically layered on top of IaaS
-
-Examples:
-
-* AWS
-* Salesforce
-* Google App Engine
-* Engine Yard, Heroku
-* OpenShift
-
-Software as a Service
----------------------
-
-  *Software delivery model in which software is provided on a subscription basis
-  and centrally hosted. Also referred to as "on-demand software".*
-
-* Typically layered on top of PaaS and/or IaaS
-* Software is generally designed to be multi-tenant
-* Updated by a central provider for all customers
-* Provider deals with scaling up the application for customers
-
-Examples:
-
-* Google Docs, Twitter, Facebook, Flickr, etc
-
-Other IaaS Platforms
---------------------
-
-.. rst-class:: build
-
-**Ganeti**
-  Virtual machine cluster management tool developed by Google
-**oVirt**
-  Virtualization platform and web interface developed by Red Hat
-**Apache CloudStack**
-  Cloud computing platform that interfaces with several
-  HyperVisors
-
 Ganeti
 ------
 
@@ -326,6 +373,13 @@ Ganeti Cluster
 --------------
 
 .. image:: ../_static/ganeti-cluster.png
+  :width: 100%
+  :align: center
+
+Ganeti Architecture
+-------------------
+
+.. image:: ../_static/ganeti-architecture.png
   :width: 100%
   :align: center
 
@@ -425,34 +479,6 @@ KVM Live Migration
 
 .. __: http://www.linux-kvm.org/wiki/images/5/5a/KvmForum2007$Kvm_Live_Migration_Forum_2007.pdf
 
-Ganeti Architecture
--------------------
-
-.. image:: ../_static/ganeti-architecture.png
-  :width: 100%
-  :align: center
-
-Ganeti Daemons
---------------
-
-.. csv-table::
-  :widths: 5,10
-
-  ``ganeti-noded``, "Control hardware resources, runs on all nodes"
-  ``ganeti-confd``,  "Only functional on master, runs on all nodes"
-  ``ganeti-rapi``, "Offers HTTP-based API for cluster, runs on master"
-  ``ganeti-masterd``, "Allows control of cluster, runs on master"
-
-Ganeti Disk Templates
----------------------
-
-**drbd**
-  LVM + DRBD between 2 nodes
-**plain**
-  LVM with no redundancy
-**file**
-  Plain files, no redundancy
-
 Primary and Secondary Nodes
 ---------------------------
 
@@ -479,6 +505,8 @@ Cloud/System Image
 Image Formats
 -------------
 
+.. rst-class:: build
+
 **qcow/qcow2**
   * Used by QEMU/KVM
   * Stands for "QEMU Copy On Write"
@@ -488,6 +516,8 @@ Image Formats
 
 Image Formats
 -------------
+
+.. rst-class:: build
 
 **VMDK (Virtual Machine Disk)**
   * Initially developed by VMWare
@@ -555,9 +585,6 @@ What problem does Packer solve?
 
 * One image building tool to rule them all
 * Single configuration to create images across multiple platforms
-
-  * Cloud? Vagrant? Docker? -- YES!
-
 * Integrates into the cloud/devops model well
 
 Terminology
