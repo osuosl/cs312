@@ -187,6 +187,8 @@ Service Discovery
 
 etcd, zookeeper, consul
 
+.. rst-class:: build
+
 * Typically arbitrary key-value stores (but *not* databases)
 
   * Why not nosql?
@@ -194,7 +196,11 @@ etcd, zookeeper, consul
 * Abstract the bootstrapping problem to just the service-discovery cluster
 * CoreOS attempts to solve bootstrapping with `etcd discovery`_
 
+.. rst-class:: build
+
 Protocols:
+
+.. rst-class:: build
 
 **DNS**
   Legacy friendly, no application changes are required
@@ -262,7 +268,7 @@ CoreOS Cluster Discovery
 Bootstrapping with cloud-init
 -----------------------------
 
-Create a ``cloud-config.yaml`` file with the contents of the discovery URL.
+Create a ``cloud-config.yml`` file with the contents of the discovery URL.
 
 .. rst-class:: codeblock-sm
 
@@ -295,6 +301,8 @@ Bootstrap a three node etcd cluster
 
   $ nova boot --image "CoreOS" --flavor cs312 --key-name ramereth \
     --user-data ./cloud-config.yml --security-groups all etcd1
+  # Wait for first node to start the etcd cluster and now watch the
+  # logs as we spin up new instances
   $ journalctl -u etcd2 -f
   $ nova boot --image "CoreOS" --flavor cs312 --key-name ramereth \
     --user-data ./cloud-config.yml --security-groups all etcd2
@@ -411,7 +419,8 @@ Kubernetes Demo Setup
 
 .. code-block:: console
 
-  # bind local port 8001 to localhost:8001 on remote server
+  # bind local port 8001 to localhost:8001 on remote server, we will use this
+  # later
   $ ssh -L8001:localhost:8001 core@140.211.168.XXX
   # Run etcd
   $ docker run --net=host -d gcr.io/google_containers/etcd:2.0.12 /usr/local/bin/etcd \
@@ -435,10 +444,13 @@ Kubernetes Demo Setup
   # Run service proxy
   $ docker run -d --net=host --privileged gcr.io/google_containers/hyperkube:v1.1.3 \
     /hyperkube proxy --master=http://127.0.0.1:8080 --v=2
+
+  # Download kubectl binary and put it somewhere in our $PATH
   $ mkdir -p /opt/bin
-  $ wget https://storage.googleapis.com/kubernetes-release/release/v1.1.3/bin/linux/amd64/kubectl
-  $ mv kubectl /opt/bin
+  $ wget -O /opt/bin/kubectl https://goo.gl/vkEeer
   $ chmod +x /opt/bin/kubectl
+
+  # Ensure we can see the local node running
   $ kubectl get nodes
   NAME        LABELS                             STATUS    AGE
   127.0.0.1   kubernetes.io/hostname=127.0.0.1   Ready     30s
