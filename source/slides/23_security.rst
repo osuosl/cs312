@@ -120,19 +120,19 @@ IPTables on CentOS 7
   $ systemctl start iptables
   $ iptables -L
   Chain INPUT (policy ACCEPT)
-  target     prot opt source               destination
-  ACCEPT     all  --  anywhere             anywhere             state RELATED,ESTABLISHED
-  ACCEPT     icmp --  anywhere             anywhere
-  ACCEPT     all  --  anywhere             anywhere
-  ACCEPT     tcp  --  anywhere             anywhere             state NEW tcp dpt:ssh
-  REJECT     all  --  anywhere             anywhere             reject-with icmp-host-prohibited
+  target     prot opt source     destination
+  ACCEPT     all  --  anywhere   anywhere     state RELATED,ESTABLISHED
+  ACCEPT     icmp --  anywhere   anywhere
+  ACCEPT     all  --  anywhere   anywhere
+  ACCEPT     tcp  --  anywhere   anywhere     state NEW tcp dpt:ssh
+  REJECT     all  --  anywhere   anywhere     reject-with icmp-host-prohibited
 
   Chain FORWARD (policy ACCEPT)
-  target     prot opt source               destination
-  REJECT     all  --  anywhere             anywhere             reject-with icmp-host-prohibited
+  target     prot opt source     destination
+  REJECT     all  --  anywhere   anywhere     reject-with icmp-host-prohibited
 
   Chain OUTPUT (policy ACCEPT)
-  target     prot opt source               destination
+  target     prot opt source     destination
   $ iptables -S
   -P INPUT ACCEPT
   -P FORWARD ACCEPT
