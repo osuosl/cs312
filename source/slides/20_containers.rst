@@ -10,7 +10,7 @@ What are Containers?
   kernel instead of a hypervisor*
 
 * Operating System level virtualization
-* Provides little to know overhead
+* Provides little to no overhead
 * Allows to contain software applications in a secure manner
 * Also allows to limit resources per application easily with cgroups
 * Does not fully emulate the operating system like hypervisors do
