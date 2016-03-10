@@ -11,3 +11,4 @@ Assignments
 * :download:`Homework 4 <_static/hw/homework4.pdf>` -- Due at 4pm, Mon Feb 29th
 * :download:`Homework 4 Answer Key <_static/hw/homework4-key.pdf>`
 * :download:`Homework 5 <_static/hw/homework5.pdf>` -- Due at 4pm, Wed Mar 9th
+* :download:`Homework 5 Answer Key <_static/hw/homework5-key.pdf>`
